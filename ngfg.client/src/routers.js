@@ -12,12 +12,16 @@ class Routers extends Component {
     render() {
         return(
             <BrowserRouter>
-                <Header />
+                <Header/>
                 <Switch>
                     <Route path='/login'
-                        component={LoginPage}/>
+                        component={LoginPage}
+                        
+                        />
                     <Route path='/'
-                        component={HomePage}/>
+                        component={HomePage}
+                        
+                        />
                 </Switch>
             </BrowserRouter>
         )
