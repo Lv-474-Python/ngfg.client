@@ -39,18 +39,19 @@ class Header extends Component {
         this.props.history.push(`/${newValue}`);
     }
 
+    // handleClick = (event, new) => {
+
+    // }
+
     render() {
         const { classes } = this.props; // classes = this.props.classes
         return (
-            <div style={{ flexGrow: 1 }}>
+            <div>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            <MenuIcon />
-                        </IconButton>
-                        {/* <Typography edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="h6">
+                        <Typography edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="h6">
                             NgFg
-                        </Typography> */}
+                        </Typography>
                         <Typography variant="h6" className={classes.title}>
                             NgFg
                         </Typography>
