@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 
-class IsStrict extends Component {
+class Range extends Component {
     render() {
         return (
             <div>
@@ -27,4 +27,4 @@ class IsStrict extends Component {
     }
 }
 
-export default IsStrict;
+export default Range;
