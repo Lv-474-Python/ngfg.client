@@ -1,0 +1,16 @@
+.card-item {
+    width: 345px;
+    /* height: 140px; */
+    margin: 5px;
+}
+
+.form-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-item-link {
+    text-decoration: none;
+}
