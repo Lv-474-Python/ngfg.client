@@ -5,10 +5,6 @@ import FormItem from './FormItem';
 
 
 class FormList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         'forms': []
     }
