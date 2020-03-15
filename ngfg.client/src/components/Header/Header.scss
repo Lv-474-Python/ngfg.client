@@ -1,0 +1,47 @@
+$navbarColor: #FFFFFF;
+$navbarBackgroundColor: #37474F;
+
+$navbarBtnColor: #000000;
+$navbarBtnBackgroundColor: #F9A825;
+
+.navbar {
+    color: $navbarColor !important;
+    background-color: $navbarBackgroundColor !important;
+
+    &__toolbar {
+        padding-left: 8vw !important;
+        padding-right: 8vw !important;
+    }
+
+    &__logo {
+        margin-right: auto !important;
+    }
+
+    &__link {
+        margin-right: 10vw !important;
+
+        color: $navbarColor !important;
+
+        text-transform: capitalize !important;
+
+        &:hover {
+            color: orange !important;
+            background-color: $navbarBackgroundColor !important;
+        }
+    }
+
+    &__btn {
+        padding: 0.3rem 1.05rem !important;
+        
+        color: $navbarBtnColor !important;
+        background-color: $navbarBtnBackgroundColor !important;
+        border-radius: 0.3rem !important;
+
+        text-transform: capitalize !important;
+
+        &:hover {
+            transition: 0.4s;
+            background-color: $navbarColor !important;
+        }
+    }
+}
