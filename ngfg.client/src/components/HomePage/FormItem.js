@@ -45,8 +45,6 @@ class FormItem extends Component {
         return item;
     }
 
-
-
     render() {
         return (
             <div className="form-item">
