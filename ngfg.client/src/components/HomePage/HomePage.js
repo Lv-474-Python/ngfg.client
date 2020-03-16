@@ -1,14 +1,43 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
-import { Button } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import {Button, Tooltip} from '@material-ui/core';
+
+import FormItemList from './FormItemList';
+import FieldItemList from './FieldItemList';
+import './HomePage.scss';
 
 
-
-import './Home.scss';
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
+const LIMIT_ITEMS_NUMBER = 5;
 
 
 class HomePage extends Component {
+    state = {
+        forms: [],
+        fields: []
+    }
+
+    getData = () => {
+        
+        axios.get(`${API_URL}/${API_VERSION}/forms/`, {
+            withCredentials: true,
+        }).then(res => {
+            const forms = res.data.forms.reverse().slice(0, LIMIT_ITEMS_NUMBER);
+            this.setState({ forms })
+            // console.log(res);
+            
+        })
+
+        axios.get(`${API_URL}/${API_VERSION}/fields/`, {
+            withCredentials: true,
+        }).then(res => {
+            const fields = res.data.fields.reverse().slice(0, LIMIT_ITEMS_NUMBER);
+            this.setState({ fields })
+            // console.log(res);
+        })
+    }
 
     handleViewMoreClick = () => {
         console.log('view more click');
@@ -16,6 +45,18 @@ class HomePage extends Component {
 
     handleShareClick = () => {
         console.log('share click');
+    }
+
+    handleFormsTitleClick = () => {
+        console.log('Forms title click');
+    }
+
+    handleFieldsTitleClick = () => {
+        console.log('Fields title click');
+    }
+
+    componentDidMount() {
+        this.getData();
     }
 
     render() {
@@ -27,45 +68,36 @@ class HomePage extends Component {
                 <div className="home__content">
 
                     <div className="home__forms">
-                        <div className="home__forms__title">
-                            Forms
-                        </div>
-                        <div className="home__forms__list">
-                            <div className="home__forms__list__newitem">
-                                +
-                            </div>
-                            <div className="home__forms__list__newitem">
-                                +
-                            </div>
-                            <div className="home__forms__list__item">
-                                <div className="home__forms__list__item__name">
-                                    Registration Form
-                                </div>
-                                <div className="home__forms__list__item__title">
-                                    Registration form title
-                                </div>
-                                <div className="home__forms__list__item__status">
-                                    Status: Published
-                                </div>
-                                <div className="home__forms__list__item__buttons">
-                                    <Button className="home__forms__list__item__buttons__more"
-                                        onClick={this.handleViewMoreClick}
-                                    >
-                                    View more
-                                    </Button>
+                        {/* Це посиланням має бути */}
+                        <Tooltip title="Check full list" placement="top-end" arrow>
+                            <Button className="home__forms__title" 
+                                    onClick={this.handleFormsTitleClick}
+                            >
+                                Forms
+                            </Button>
+                        </Tooltip>
 
-                                    <Button className="home__forms__list__item__buttons__share"
-                                            endIcon={<SendIcon>send</SendIcon>}
-                                    >
-                                        Share
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
+                        <FormItemList forms={this.state.forms}
+                                      onViewMoreClick={this.handleViewMoreClick}
+                                      onShareClick={this.handleShareClick}
+                                      
+                        />
                     </div>
+
                     <div className="home__fields">
-                        Fields
+                        <Tooltip title="Check full list" placement="top-end" arrow>
+                            <Button className="home__fields__title" 
+                                    onClick={this.handleFieldsTitleClick}
+                            >
+                                Fields
+                            </Button>
+                        </Tooltip>
+                        <FieldItemList fields={this.state.fields}
+                                       onViewMoreClick={this.handleViewMoreClick}
+                                       onShareClick={this.handleShareClick}
+                        />
                     </div>
+
                 </div>
             </div>
         );
