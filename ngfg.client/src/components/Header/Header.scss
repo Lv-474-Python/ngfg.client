@@ -1,8 +1,9 @@
 $navbarColor: #FFFFFF;
 $navbarBackgroundColor: #37474F;
 
-$navbarBtnColor: #000000;
-$navbarBtnBackgroundColor: #F9A825;
+$navbarButtonColor: #000000;
+$navbarButtonBackgroundColor: #F9A825;
+
 
 .navbar {
     color: $navbarColor !important;
@@ -33,15 +34,16 @@ $navbarBtnBackgroundColor: #F9A825;
     &__btn {
         padding: 0.3rem 1.05rem !important;
         
-        color: $navbarBtnColor !important;
-        background-color: $navbarBtnBackgroundColor !important;
+        color: $navbarButtonColor !important;
+        background-color: $navbarButtonBackgroundColor !important;
         border-radius: 0.3rem !important;
 
         text-transform: capitalize !important;
 
         &:hover {
-            transition: 0.4s;
             background-color: $navbarColor !important;
+
+            transition: 0.4s;
         }
     }
 }
