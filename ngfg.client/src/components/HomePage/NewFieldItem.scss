@@ -1,21 +1,7 @@
-$bodyBackgroundColor: #F1F1F1;
-
-$homeTitleColor: #344955;
-$homePrimaryColor: #F9A825;
-$homeSecondaryColor: #455A64;
-$homeTertiaryColor: #37474F;
-
-$itemColor: #000000;
-$itemBackgroundColor: #ffffff;
-
-$whiteColor: #ffffff;
-
-$itemShadowColor: #292727;
+@import "colors";
 
 
-// придумати щось з цими кольорами (може винести оце і типу імпорт зробити)
-
-.newitem {
+.new-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,21 +11,18 @@ $itemShadowColor: #292727;
     margin-right: 4vmin;
     margin-top: 2vmin;
 
-    color: $homeTertiaryColor;
+    color: $newItemColor;
     background-color: $itemBackgroundColor;
     border-radius: 1vmin;
 
     font-size: 7rem;
 
     &:hover {
-        //TODO - тут впорядкувати по тому порядку
-
-        color: $homePrimaryColor;
-
-        transition: 0.4s;
-
+        color: $newItemHoverColor;
         box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
 
         cursor: pointer;
+
+        transition: 0.4s;
     }
 }

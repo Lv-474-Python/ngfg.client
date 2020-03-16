@@ -8,7 +8,7 @@ class NewFormItem extends Component {
 
     render() {
         return (
-            <div className="newitem">
+            <div className="new-item">
                 +
             </div>
         );
