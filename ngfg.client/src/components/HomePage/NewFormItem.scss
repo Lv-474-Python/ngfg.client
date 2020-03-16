@@ -1,0 +1,43 @@
+$bodyBackgroundColor: #F1F1F1;
+
+$homeTitleColor: #344955;
+$homePrimaryColor: #F9A825;
+$homeSecondaryColor: #455A64;
+$homeTertiaryColor: #37474F;
+
+$itemColor: #000000;
+$itemBackgroundColor: #ffffff;
+
+$whiteColor: #ffffff;
+
+$itemShadowColor: #292727;
+
+
+.newitem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24vmin;
+    height: 20vmin;
+    margin-right: 4vmin;
+    margin-top: 2vmin;
+
+    color: $homeTertiaryColor;
+    background-color: $itemBackgroundColor;
+    border-radius: 1vmin;
+
+    font-size: 7rem;
+
+    &:hover {
+        //TODO - тут впорядкувати по тому порядку
+
+        color: $homePrimaryColor;
+
+        transition: 0.4s;
+
+        box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
+
+        cursor: pointer;
+    }
+}

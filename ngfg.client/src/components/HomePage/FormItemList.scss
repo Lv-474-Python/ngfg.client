@@ -1,0 +1,24 @@
+$bodyBackgroundColor: #F1F1F1;
+
+html, body {
+    background-color: $bodyBackgroundColor !important;
+    height: 100% !important; // хз
+}
+
+
+$homeTitleColor: #344955;
+$homePrimaryColor: #F9A825;
+$homeSecondaryColor: #455A64;
+$homeTertiaryColor: #37474F;
+
+$itemColor: #000000;
+$itemBackgroundColor: #ffffff;
+
+$whiteColor: #ffffff;
+
+
+.forms__list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap; // flex-direction, -wrap
+}

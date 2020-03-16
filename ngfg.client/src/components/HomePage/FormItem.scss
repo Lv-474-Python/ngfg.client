@@ -1,0 +1,74 @@
+$homePrimaryColor: #F9A825;
+$homeSecondaryColor: #455A64;
+$homeTertiaryColor: #37474F;
+
+$itemColor: #000000;
+$itemBackgroundColor: #ffffff;
+
+$whiteColor: #ffffff;
+
+$itemShadowColor: #292727;
+
+
+.formitem {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    width: 24vmin;
+    height: 20vmin;
+    margin-right: 4vmin;
+    margin-top: 2vmin;
+    padding: 1.2vmin 1.5vmin 1vmin 1.5vmin;
+
+    color: $itemColor;
+    background-color: $itemBackgroundColor;
+    border-radius: 1vmin;
+
+    text-align: left;
+    line-height: 2.1rem;
+
+    &__name {
+        font-size: 1.5rem;
+    }
+
+    &__title {
+        font-size: 1rem;
+    }
+
+    &__status {
+        font-size: 1rem;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-grow: 1;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &__more, 
+        &__share {
+            padding: 0.4vmin 1.2vmin !important;
+
+            background-color: $homePrimaryColor !important;
+
+            text-transform: capitalize !important;
+        }
+
+        &__more:hover, 
+        &__share:hover {
+            color: $whiteColor !important;
+            background-color: $homeSecondaryColor !important;
+        }
+    }
+
+    &:hover {
+        //TODO - тут впорядкувати по тому порядку
+        transition: 0.4s;
+
+        box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
+
+        cursor: pointer;
+    }
+}
