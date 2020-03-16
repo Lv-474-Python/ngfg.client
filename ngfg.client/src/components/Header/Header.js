@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
 
-import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
 
 import './Header.scss';
 
@@ -18,6 +18,12 @@ class Header extends Component {
         console.log(this.props);
         console.log(this.props.history);
         this.props.history.push(`/${newValue}`);
+    }
+
+    handleLogoClick = () => {
+        console.log('logo click');
+        console.log(this.props.history);
+        this.props.history.push('/');
     }
 
     handleFormsClick = () => {
@@ -46,11 +52,11 @@ class Header extends Component {
                     position="static"
                 >
                     <Toolbar className="navbar__toolbar">
-                        <Typography className="navbar__logo"
-                            variant="h6"
+                        <Button className="navbar__logo"
+                                onClick={this.handleLogoClick}
                         >
                             NgFg
-                        </Typography>
+                        </Button>
 
                         {/* <Link className="navbar__link"
                             component="button">

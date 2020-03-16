@@ -4,6 +4,8 @@ $navbarBackgroundColor: #37474F;
 $navbarButtonColor: #000000;
 $navbarButtonBackgroundColor: #F9A825;
 
+$navbarLogoHoverColor: #F9A825;
+
 
 .navbar {
     color: $navbarColor !important;
@@ -16,6 +18,16 @@ $navbarButtonBackgroundColor: #F9A825;
 
     &__logo {
         margin-right: auto !important;
+
+        color: $navbarColor !important;
+
+        font-size: 1.25rem !important;
+        text-transform: capitalize !important;
+
+        &:hover {
+            color: $navbarLogoHoverColor !important;
+            background-color: $navbarBackgroundColor !important;
+        }
     }
 
     &__link {
