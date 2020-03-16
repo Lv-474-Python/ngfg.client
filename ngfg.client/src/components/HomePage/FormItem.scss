@@ -1,16 +1,9 @@
-$homePrimaryColor: #F9A825;
-$homeSecondaryColor: #455A64;
-$homeTertiaryColor: #37474F;
-
-$itemColor: #000000;
-$itemBackgroundColor: #ffffff;
-
-$whiteColor: #ffffff;
-
-$itemShadowColor: #292727;
+@import "colors";
 
 
-.formitem {
+// додай font-family
+
+.form-item {
     display: flex;
     flex-direction: column;
 
@@ -30,6 +23,7 @@ $itemShadowColor: #292727;
 
     &__name {
         font-size: 1.5rem;
+        text-overflow: ellipsis;
     }
 
     &__title {
@@ -51,24 +45,24 @@ $itemShadowColor: #292727;
         &__share {
             padding: 0.4vmin 1.2vmin !important;
 
-            background-color: $homePrimaryColor !important;
+            color: $formItemButtonColor !important;
+            background-color: $formItemButtonBackgroundColor !important;
 
             text-transform: capitalize !important;
         }
 
         &__more:hover, 
         &__share:hover {
-            color: $whiteColor !important;
-            background-color: $homeSecondaryColor !important;
+            color: $formItemButtonHoverColor !important;
+            background-color: $formItemButtonHoverBackgroundColor !important;
         }
     }
 
     &:hover {
-        //TODO - тут впорядкувати по тому порядку
-        transition: 0.4s;
-
         box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
 
         cursor: pointer;
+
+        transition: 0.4s;
     }
 }

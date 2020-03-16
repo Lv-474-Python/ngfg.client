@@ -1,23 +1,7 @@
-$bodyBackgroundColor: #F1F1F1;
+@import "colors";
 
 
-$homeTitleColor: #344955;
-$homePrimaryColor: #F9A825;
-$homeSecondaryColor: #455A64;
-$homeTertiaryColor: #37474F;
-
-$itemColor: #000000;
-$itemBackgroundColor: #ffffff;
-
-$whiteColor: #ffffff;
-
-$itemShadowColor: #292727;
-
-
-// padding в items тоже винести в змінні (але це коли компоненти буду робити)
-
-
-.fielditem {
+.field-item {
     display: flex;
     flex-direction: column;
 
@@ -29,7 +13,7 @@ $itemShadowColor: #292727;
     padding: 1.2vmin 1.5vmin 1vmin 1.5vmin;
 
     color: $itemColor;
-    background-color: $bodyBackgroundColor;
+    background-color: $itemBackgroundColor;
     border-radius: 1vmin;
 
     text-align: left;
@@ -39,7 +23,7 @@ $itemShadowColor: #292727;
         font-size: 1.5rem;
     }
 
-    &__title {
+    &__type {
         font-size: 1rem;
     }
 
@@ -54,27 +38,26 @@ $itemShadowColor: #292727;
         &__share {
             padding: 0.4vmin 1.2vmin !important;
 
-            color: $whiteColor !important;
-            background-color: $homeSecondaryColor !important;
+            color: $fieldItemButtonColor !important;
+            background-color: $fieldItemButtonBackgroundColor !important;
 
             text-transform: capitalize !important;
         }
 
         &__more:hover, 
         &__share:hover {
-            color: #000 !important;
-            background-color: $homePrimaryColor !important;
+            color: $fieldItemButtonHoverColor !important;
+            background-color: $fieldItemButtonHoverBackgroundColor !important;
 
             transition: 0.2s;
         }
     }
 
     &:hover {
-        //TODO - тут впорядкувати по тому порядку
-        transition: 0.4s;
-
         box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
 
         cursor: pointer;
+
+        transition: 0.4s;
     }
 }

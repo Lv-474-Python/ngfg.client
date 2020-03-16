@@ -8,13 +8,23 @@ import './FieldItemList.scss';
 
 class FieldItemList extends Component {
 
+    renderItems = () => {
+        let fields = this.props.fields.map(elem =>
+            <FieldItem item={elem}
+                       key={elem.id}
+                       onViewMoreClick={this.props.onViewMoreClick}
+                       onShareClick={this.props.onShareClick}
+            />
+        )
+        // console.log(fields);
+        return fields;
+    }
+
     render() {
         return (
-            <div className="fields__list">
+            <div className="fields-list">
                 <NewFieldItem />
-                <FieldItem onViewMoreClick={this.props.onViewMoreClick}
-                           onShareClick={this.props.onShareClick}
-                />
+                {this.renderItems()}
             </div>
         );
     }

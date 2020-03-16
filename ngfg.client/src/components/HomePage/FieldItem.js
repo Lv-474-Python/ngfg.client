@@ -6,27 +6,38 @@ import SendIcon from '@material-ui/icons/Send';
 import './FieldItem.scss';
 
 
+const FIELD_TYPES = {
+    1: 'Number',
+    2: 'Text',
+    3: 'TextArea',
+    4: 'Radio',
+    5: 'Autocomplete',
+    6: 'Checkbox'
+}
+
 class FieldItem extends Component {
 
-    // можна функцію яка перевірятиме довжину і типу якщо перевищує то вертає з крапками і тултіпом
+    getFieldType = () => {
+        return FIELD_TYPES[this.props.item.fieldType];
+    }
 
     render() {
         return (
-            <div className="fielditem">
-                <div className="fielditem__name">
-                    Age
+            <div className="field-item">
+                <div className="field-item__name">
+                    {this.props.item.name}
                 </div>
-                <div className="fielditem__title">
-                    Number
+                <div className="field-item__type">
+                    {this.getFieldType()}
                 </div>
-                <div className="fielditem__buttons">
-                    <Button className="fielditem__buttons__more"
-                        onClick={this.props.onViewMoreClick}
+                <div className="field-item__buttons">
+                    <Button className="field-item__buttons__more"
+                            onClick={this.props.onViewMoreClick}
                     >
-                    View more
+                        View more
                     </Button>
 
-                    <Button className="fielditem__buttons__share"
+                    <Button className="field-item__buttons__share"
                             endIcon={<SendIcon>send</SendIcon>}
                             onClick={this.props.onShareClick}
                     >
