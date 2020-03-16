@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 import { Button, Tooltip } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-
 import './FormItem.scss';
 
-// import Typography from '@material-ui/core/Typography';  
 
 const FORM_NAME_LIMIT = 20;
 const FORM_TITLE_LIMIT = 30;
@@ -73,9 +71,6 @@ class FormItem extends Component {
                         Share
                     </Button>
                 </div>
-                {/* <Typography variant="h5" component="h2">
-                    beadsadas a dsa asd lent
-                </Typography> */}
             </div>
         );
     }
