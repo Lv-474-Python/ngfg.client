@@ -11,55 +11,62 @@ import SearchIcon from '@material-ui/icons/Search';
 
 class Filter extends Component {
 
-    onChange = (event, change)  => {
+    onChange = (event, change) => {
         let filter = this.props.filter;
         filter = Object.assign(filter, change);
         this.setState({
             filter
         }, () => {
-            this.props.filterHandler(filter);
-        } );
+            this.props.handleFilter(filter);
+        });
     };
 
-    render(){
+    render() {
         return (
             <div className="filter-item">
                 <h3 className='filter-category'>Type</h3>
                 <FormGroup className='filter-typo'>
                     <FormControlLabel className='filter-typo'
-                                      control={<Checkbox checked={this.props.filter.showNumber}
-                                                         onChange={(event) => this.onChange(event,
-                                                             {
-                                                                 showNumber: !this.props.filter.showNumber,
-                                                                 showAll: false
-                                                             })}
-                                      />}
+                                      control={
+                                          <Checkbox checked={this.props.filter.showNumber}
+                                                    onChange={(event) => this.onChange(
+                                                        event,
+                                                        {
+                                                            showNumber: !this.props.filter.showNumber,
+                                                            showAll: false
+                                                        })}
+                                          />}
                                       label="Number"
                     />
                     <FormControlLabel className='filter-typo'
-                                      control={<Checkbox checked={this.props.filter.showText}
-                                                         onChange={(event) => this.onChange(event,
-                                                             {
-                                                                 showText: !this.props.filter.showText,
-                                                                 showAll: false
-                                                             })}
-                                      />}
+                                      control={
+                                          <Checkbox checked={this.props.filter.showText}
+                                                    onChange={(event) => this.onChange(
+                                                        event,
+                                                        {
+                                                            showText: !this.props.filter.showText,
+                                                            showAll: false
+                                                        })}
+                                          />}
                                       label="Text"
                     />
                     <FormControlLabel className='filter-typo'
-                                      control={<Checkbox checked={this.props.filter.showTextArea}
-                                                         onChange={(event) => this.onChange(event,
-                                                             {
-                                                                 showTextArea: !this.props.filter.showTextArea,
-                                                                 showAll: false
-                                                             })}
-                                      />}
+                                      control={
+                                          <Checkbox checked={this.props.filter.showTextArea}
+                                                    onChange={(event) => this.onChange(
+                                                        event,
+                                                        {
+                                                            showTextArea: !this.props.filter.showTextArea,
+                                                            showAll: false
+                                                        })}
+                                          />}
                                       label="TextArea"
                     />
                     <FormControlLabel className='filter-typo'
                                       control={
                                           <Checkbox checked={this.props.filter.showCheckbox}
-                                                    onChange={(event) => this.onChange(event,
+                                                    onChange={(event) => this.onChange(
+                                                        event,
                                                         {
                                                             showCheckbox: !this.props.filter.showCheckbox,
                                                             showAll: false
@@ -71,7 +78,8 @@ class Filter extends Component {
                     <FormControlLabel className='filter-typo'
                                       control={
                                           <Checkbox checked={this.props.filter.showRadio}
-                                                    onChange={(event) => this.onChange(event,
+                                                    onChange={(event) => this.onChange(
+                                                        event,
                                                         {
                                                             showRadio: !this.props.filter.showRadio,
                                                             showAll: false
@@ -83,7 +91,8 @@ class Filter extends Component {
                     <FormControlLabel className='filter-typo'
                                       control={
                                           <Checkbox checked={this.props.filter.showAutocomplete}
-                                                    onChange={(event) => this.onChange(event,
+                                                    onChange={(event) => this.onChange(
+                                                        event,
                                                         {
                                                             showAutocomplete: !this.props.filter.showAutocomplete,
                                                             showAll: false
@@ -107,7 +116,7 @@ class Search extends Component {
                 <InputBase
                     className='field-card-content'
                     placeholder="Search"
-                    onChange={this.props.searchHandler}
+                    onChange={this.props.handleSearch}
 
                 />
                 {/*<IconButton type="submit" className={classes.iconButton} aria-label="search">*/}
@@ -118,9 +127,9 @@ class Search extends Component {
     }
 }
 
-class FieldsPage extends Component{
+class FieldsPage extends Component {
 
-        constructor(props) {
+    constructor(props) {
         super(props);
     }
 
@@ -137,11 +146,11 @@ class FieldsPage extends Component{
         search: undefined
     };
 
-    filterHandler = (filter) => {
+    handleFilter = (filter) => {
         this.setState({filter});
     };
 
-    searchHandler = (event) => {
+    handleSearch = (event) => {
         this.setState({search: event.target.value});
     };
 
@@ -151,11 +160,11 @@ class FieldsPage extends Component{
         return (
             <div className="App">
                 <div className="filter-div">
-                    <Filter filterHandler={this.filterHandler}
+                    <Filter handleFilter={this.handleFilter}
                             filter={this.state.filter}/>
                 </div>
                 <div className='field-list'>
-                    <Search searchHandler={this.searchHandler}
+                    <Search handleSearch={this.handleSearch}
                             search={this.state.search}/>
                     <FieldList filter={this.state.filter}
                                search={this.state.search}/>

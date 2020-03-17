@@ -63,7 +63,10 @@ class FormList extends Component {
                     this.state.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}
                                    key={elem.id}/>
-                    )
+                    ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
+                        this.state.fields.filter(this.filterFields).map(elem =>
+                        <FieldItem item={elem}
+                                   key={elem.id}/>)
                 }
             </div>
         );
