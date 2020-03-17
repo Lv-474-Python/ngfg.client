@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import FieldItem from './FieldItem';
 
-
 const fieldTypes = {
     'Number': 1,
     'Text': 2,
@@ -35,6 +34,12 @@ class FormList extends Component {
     };
 
     filterFields = (field) => {
+        if (this.props.search) {
+            if (!field.name.toLowerCase().includes(this.props.search.toLowerCase())) {
+                return false
+            }
+        }
+
         if (this.props.filter.showAll) {
             return true
         }
@@ -53,7 +58,7 @@ class FormList extends Component {
     render() {
         console.log("changes");
         return (
-            <div className='field-list'>
+            <div>
                 {
                     this.state.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}

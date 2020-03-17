@@ -7,14 +7,16 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SendIcon from '@material-ui/icons/Send';
-import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import {FormGroup} from "@material-ui/core";
+import SendIcon from '@material-ui/icons/Send';
+import TextField from "@material-ui/core/TextField";
+import Typography from '@material-ui/core/Typography';
 
 const fieldTypes = {
     'Number': 1,
@@ -27,16 +29,14 @@ const fieldTypes = {
 
 
 class FieldItem extends Component {
-    goToView = () => {
-        this.props.history.push(`/fields/${this.props.item.id}`)
-    };
 
     getNumberField = function() {
         return [
             (<Typography className="field-typo"
                          variant="body2"
                          color="textSecondary"
-                         component="p">
+                         component="p"
+                         key={this.props.item.id}>
                     From { !this.props.item.range || this.props.item.range.min === null ?
                     "Any" : this.props.item.range.min} {"to "}
                     { !this.props.item.range || this.props.item.range.max === null ?
@@ -45,12 +45,12 @@ class FieldItem extends Component {
             (<Typography className="field-typo"
                          variant="body2"
                          color="textSecondary"
-                         component="p">
+                         component="p"
+                         key={this.props.item.name}>
                 <Checkbox
                     className='field-checkbox'
                     checked={this.props.item.isStrict}
-                    disabled={true}
-                    color='#ffffff' />
+                    disabled={true}/>
                 Only integers
             </Typography>)]
     };
@@ -60,7 +60,8 @@ class FieldItem extends Component {
             (<Typography className="field-typo"
                          variant="body2"
                          color="textSecondary"
-                         component="p">
+                         component="p"
+                         key={this.props.item.id}>
                     From { !this.props.item.range || this.props.item.range.min === null ?
                     "0" : this.props.item.range.min} {"to "}
                     { !this.props.item.range || this.props.item.range.max === null ?
@@ -69,33 +70,49 @@ class FieldItem extends Component {
             (<Typography className="field-typo"
                          variant="body2"
                          color="textSecondary"
-                         component="p">
+                         component="p"
+                         key={this.props.item.name}>
                     <Checkbox
                         className='field-checkbox'
                         checked={this.props.item.isStrict}
-                        disabled={true}
-                        color='#ffffff' />
+                        disabled={true}/>
                     Only letters
                 </Typography>)]
     };
 
-    getRadioField = function() {
+     getCheckboxField = function() {
+        return (
+            <Typography className="field-typo"
+                         variant="body2"
+                         color="textSecondary"
+                         component="p">
+                    From { !this.props.item.range || this.props.item.range.min === null ?
+                    "0" : this.props.item.range.min} {"to "}
+                    { !this.props.item.range || this.props.item.range.max === null ?
+                        this.props.item.choiceOptions.length : this.props.item.range.max} choices
+                </Typography>)
+    };
+
+    getChoiceOptions = function() {
         console.log(this.props.item.choiceOptions);
         return (
             <ExpansionPanel className='field-expand'>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1a-content"
-                    id="panel1a-header"
                 >
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                {
+                    <FormGroup className='field-card-content'>
+                        {
 
-                    this.props.item.choiceOptions.map(elem =>
-                        <Typography className='choice-typo' key={elem}>{elem}</Typography>
-                    )
-                }
+                            this.props.item.choiceOptions.map(elem =>
+                                 <TextField className='choice-typo'
+                                            disabled key={elem}
+                                            defaultValue={elem} />
+                            )
+                        }
+                    </FormGroup>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         )
@@ -127,10 +144,14 @@ class FieldItem extends Component {
                             this.props.item.fieldType === 2 &&
                             this.getTextField().map(elem => {return elem})
                         }
+                        {
+                            this.props.item.fieldType === 6 &&
+                            this.getCheckboxField()
+                        }
                     </CardContent>
 
                     <CardActions className='field-card-actions'>
-                        <Button/>
+                        <br/>
                         <Button
                             variant="contained"
                             size="small"
@@ -157,8 +178,8 @@ class FieldItem extends Component {
                         </Button>
                     </CardActions>
                     {
-                            this.props.item.fieldType === 4 &&
-                            this.getRadioField()
+                            [4,6].includes(this.props.item.fieldType) &&
+                            this.getChoiceOptions()
                     }
             </Card>
         );
