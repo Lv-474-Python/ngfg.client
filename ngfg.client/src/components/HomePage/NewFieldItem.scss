@@ -1,0 +1,27 @@
+@import "colors";
+
+
+.new-field-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 24vmin;
+    height: 20vmin;
+    margin-top: 2vmin;
+
+    color: $newItemColor;
+    background-color: $itemBackgroundColor;
+    border-radius: 1vmin;
+
+    font-size: 7rem;
+
+    &:hover {
+        color: $newItemHoverColor;
+        box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
+
+        cursor: pointer;
+
+        transition: 0.4s;
+    }
+}
