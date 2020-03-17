@@ -8,7 +8,7 @@ class Search extends Component {
     render() {
         return (
             <Paper component="div" className='search-bar'>
-                <SearchIcon/>
+                <SearchIcon className='search-icon'/>
                 <InputBase
                     className='field-card-content'
                     placeholder="Search"
