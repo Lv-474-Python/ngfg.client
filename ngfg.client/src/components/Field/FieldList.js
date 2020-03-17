@@ -16,7 +16,7 @@ const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
 
-class FormList extends Component {
+class FieldList extends Component {
     constructor(props) {
         super(props);
     }
@@ -85,4 +85,4 @@ class FormList extends Component {
     }
 }
 
-export default FormList;
+export default FieldList;
