@@ -13,7 +13,7 @@ class FormItem extends Component {
 
     render() {
         return (
-            <Card className='form-item'>
+            <Card className='form-list-item'>
                 <CardContent>
                     <Typography variant="h5"
                                 component="h2"

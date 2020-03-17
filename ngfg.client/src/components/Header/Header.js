@@ -27,10 +27,8 @@ class Header extends Component {
     }
 
     handleFormsClick = () => {
-        console.log('forms click');
-        console.log(this.props.history);
-        // this.props.history.push('/forms/');
-    }
+        this.props.history.push('/forms/');
+    };
 
     handleFieldsClick = () => {
         console.log('fields click');
