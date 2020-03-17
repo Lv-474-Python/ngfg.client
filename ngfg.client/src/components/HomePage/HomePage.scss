@@ -37,6 +37,8 @@
             display: flex !important;
             justify-content: flex-start !important;
 
+            padding-left: 0 !important;
+
             font-size: 1.8rem !important;
             text-align: left !important;
             text-transform: capitalize !important;
@@ -51,7 +53,7 @@
     &__fields {
         padding-top: 2vh;
         padding-left: 2vw;
-        padding-right: 4vw;
+        padding-right: 3.5vw;
 
         width: 50vw;
 
@@ -60,6 +62,8 @@
         &__title {
             display: flex !important;
             justify-content: flex-start !important;
+
+            padding-left: 0 !important;
 
             color: $homeFieldsTitleColor !important;
 
