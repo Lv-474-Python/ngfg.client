@@ -7,7 +7,7 @@
     align-items: normal;
     width: 50vw;
     margin: 5px;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     background-color: #F9A825 !important;
 }
 .field-card-content {
@@ -35,8 +35,8 @@
 }
 
 .field-checkbox {
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .field-expand {
@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     width: 100% !important;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     background-color: #F9A825 !important;
 }
 
@@ -76,7 +76,9 @@
 
 .filter-item {
     display: flex;
-    justify-content: center !important;
+    justify-content: start !important;
+    flex-direction: column;
+    text-align: start;
     width: 20vw;
     background-color: #37474F;
     margin-top: 1vw;
@@ -88,8 +90,17 @@
     color: #F9A825 !important;
 }
 
+.filter-checkbox {
+    margin-left: 3vw !important;
+    padding: 0.1vw !important;
+    color: #F9A825 !important;
+}
+
 .filter-category {
     width: 100%;
+    margin-left: 1vw;
+    margin-bottom: 0 !important;
+    color: #F9A825 !important;
 }
 
 .search-bar {
@@ -100,6 +111,7 @@
     margin-left: 0.5vw;
     width: 50vw;
     height: 3vw;
+    border-radius: 0 !important;
 }
 
 .not-found {

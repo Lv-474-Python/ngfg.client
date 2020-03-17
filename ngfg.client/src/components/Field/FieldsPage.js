@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 class Filter extends Component {
 
-    onChange = (event, change) => {
+    onChangeFilter = (event, change) => {
         let filter = this.props.filter;
         filter = Object.assign(filter, change);
         this.setState({
@@ -21,16 +21,54 @@ class Filter extends Component {
         });
     };
 
+    onChangeShared = (event, change) => {
+        let shared = this.props.shared;
+        shared = Object.assign(shared, change);
+        this.setState({
+            shared
+        }, () => {
+            this.props.handleShared(shared);
+        });
+    };
+
+    onChangeSort = (event, change) => {
+        let sort = this.props.sort;
+        sort = Object.assign(sort, change);
+        this.setState({
+            sort
+        }, () => {
+            this.props.handleSort(sort);
+        });
+    };
+
     render() {
         return (
             <div className="filter-item">
+                <h3 className='filter-category'>Sort</h3>
+                <FormGroup >
+                    <FormControlLabel
+                        className='filter-typo'
+                        control={
+                            <Checkbox checked={this.props.sort.byNameDesc}
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeSort(
+                                          event,
+                                          {
+                                              byNameDesc: !this.props.sort.byNameDesc,
+                                          })}
+                            />}
+                        label="By Name"
+                    />
+
+                </FormGroup>
                 <h3 className='filter-category'>Type</h3>
                 <FormGroup className='filter-typo'>
                     <FormControlLabel
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showNumber}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showNumber: !this.props.filter.showNumber,
@@ -43,7 +81,8 @@ class Filter extends Component {
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showText}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showText: !this.props.filter.showText,
@@ -56,7 +95,8 @@ class Filter extends Component {
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showTextArea}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showTextArea: !this.props.filter.showTextArea,
@@ -69,7 +109,8 @@ class Filter extends Component {
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showCheckbox}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showCheckbox: !this.props.filter.showCheckbox,
@@ -83,7 +124,8 @@ class Filter extends Component {
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showRadio}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showRadio: !this.props.filter.showRadio,
@@ -97,7 +139,8 @@ class Filter extends Component {
                         className='filter-typo'
                         control={
                             <Checkbox checked={this.props.filter.showAutocomplete}
-                                      onChange={(event) => this.onChange(
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeFilter(
                                           event,
                                           {
                                               showAutocomplete: !this.props.filter.showAutocomplete,
@@ -107,6 +150,36 @@ class Filter extends Component {
                         }
                         label="Autocomplete"
                     />
+                </FormGroup>
+                <h3 className='filter-category'>Sort</h3>
+                <FormGroup>
+                    <FormControlLabel
+                        className='filter-typo'
+                        control={
+                            <Checkbox checked={this.props.shared.shared}
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeShared(
+                                          event,
+                                          {
+                                              shared: !this.props.shared.shared
+                                          })}
+                            />}
+                        label="Shared"
+                    />
+                    <FormControlLabel
+                        className='filter-typo'
+                        control={
+                            <Checkbox checked={this.props.shared.my}
+                                      className='filter-checkbox'
+                                      onChange={(event) => this.onChangeShared(
+                                          event,
+                                          {
+                                              my: !this.props.shared.my
+                                          })}
+                            />}
+                        label="My fields"
+                    />
+
                 </FormGroup>
             </div>
         )
@@ -125,9 +198,6 @@ class Search extends Component {
                     onChange={this.props.handleSearch}
 
                 />
-                {/*<IconButton type="submit" className={classes.iconButton} aria-label="search">*/}
-                {/*    */}
-                {/*</IconButton>*/}
             </Paper>
         )
     }
@@ -149,11 +219,26 @@ class FieldsPage extends Component {
             showRadio: false,
             showAutocomplete: false
         },
+        sort: {
+          byNameDesc: true
+        },
+        shared: {
+          shared: true,
+          my: true
+        },
         search: undefined
     };
 
     handleFilter = (filter) => {
         this.setState({filter});
+    };
+
+    handleSort = (sort) => {
+        this.setState({sort});
+    };
+
+    handleShared = (shared) => {
+        this.setState({shared});
     };
 
     handleSearch = (event) => {
@@ -167,13 +252,19 @@ class FieldsPage extends Component {
             <div className="App">
                 <div className="filter-div">
                     <Filter handleFilter={this.handleFilter}
-                            filter={this.state.filter}/>
+                            filter={this.state.filter}
+                            handleSort={this.handleSort}
+                            sort={this.state.sort}
+                            handleShared={this.handleShared}
+                            shared={this.state.shared}/>
                 </div>
                 <div className='field-list'>
                     <Search handleSearch={this.handleSearch}
                             search={this.state.search}/>
                     <FieldList filter={this.state.filter}
-                               search={this.state.search}/>
+                               search={this.state.search}
+                               shared={this.state.shared}
+                               sort={this.state.sort}/>
                 </div>
             </div>
         );

@@ -51,6 +51,15 @@ class FormList extends Component {
 
     };
 
+    sortFields = (field1, field2) => {
+        if (this.props.sort.byNameDesc !== null) {
+            if (this.props.sort.byNameDesc) {
+                return field1.name < field2.name
+            }
+            return field1.name > field2.name
+        }
+    };
+
     componentDidMount() {
         this.getData();
     }
@@ -64,7 +73,7 @@ class FormList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}/>
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
-                        this.state.fields.filter(this.filterFields).map(elem =>
+                        this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
                                    key={elem.id}/>)
                 }
