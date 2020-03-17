@@ -1,14 +1,13 @@
 @import "colors";
 
 
-.new-item {
+.new-form-item {
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 24vmin;
     height: 20vmin;
-    margin-right: 4vmin;
     margin-top: 2vmin;
 
     color: $newItemColor;

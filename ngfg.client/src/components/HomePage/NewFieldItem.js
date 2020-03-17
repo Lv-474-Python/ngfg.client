@@ -8,7 +8,7 @@ class NewFieldItem extends Component {
 
     render() {
         return (
-            <div className="new-item">
+            <div className="new-field-item">
                 +
             </div>
         );
