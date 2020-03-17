@@ -33,6 +33,7 @@ class FormList extends Component {
     };
 
     filterForm = (forms, filter) => {
+        console.log(this.state)
         let filteredForms = [];
         let publishedFilter = filter['Published'];
         let draftFilter = filter['Draft'];
@@ -75,7 +76,7 @@ class FormList extends Component {
     handleSearch = (searchValue) => {
         let filteredForms = this.filterForm(this.state.forms, this.state.filter);
         let searchForms = this.searchForms(filteredForms, searchValue);
-        this.setState({ filteredForms: searchForms })
+        this.setState({filteredForms: searchForms})
     };
 
     sortForms = (forms, sortKey, ascending) => {
@@ -87,7 +88,13 @@ class FormList extends Component {
             return ascending ? forms : forms.reverse()
         }
         if (sortKey === 'Date') {
-            return forms
+            forms.sort((form1, form2) => {
+                let date1 = new Date(form1.created);
+                let date2 = new Date(form2.created);
+                return date2 - date1;
+            });
+
+            return ascending ? forms : forms.reverse()
         }
     };
 
@@ -123,9 +130,9 @@ class FormList extends Component {
                 </div>
                 <div>
                     <SearchBar onChange={(newValue) => {
-                                   this.handleSearch(newValue);
-                                   this.setState({search: newValue});
-                               }}
+                        this.handleSearch(newValue);
+                        this.setState({search: newValue});
+                    }}
                                onRequestSearch={() => {
                                    this.handleSearch(this.state.search)
                                }}
