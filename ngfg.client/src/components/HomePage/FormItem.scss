@@ -1,0 +1,65 @@
+@import "colors";
+
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    width: 24vmin;
+    height: 20vmin;
+    margin-top: 2vmin;
+    padding: 1.2vmin 1.5vmin 1vmin 1.5vmin;
+
+    color: $itemColor;
+    background-color: $itemBackgroundColor;
+    border-radius: 1vmin;
+
+    text-align: left;
+    line-height: 2.1rem;
+
+    &__name {
+        font-size: 1.5rem;
+        text-overflow: ellipsis;
+    }
+
+    &__title {
+        font-size: 1rem;
+    }
+
+    &__status {
+        font-size: 1rem;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-grow: 1;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &__more, 
+        &__share {
+            padding: 0.4vmin 1.2vmin !important;
+
+            color: $formItemButtonColor !important;
+            background-color: $formItemButtonBackgroundColor !important;
+
+            text-transform: capitalize !important;
+        }
+
+        &__more:hover, 
+        &__share:hover {
+            color: $formItemButtonHoverColor !important;
+            background-color: $formItemButtonHoverBackgroundColor !important;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0.9vmin 0.9vmin 1.5vmin $itemShadowColor;
+
+        cursor: pointer;
+
+        transition: 0.4s;
+    }
+}
