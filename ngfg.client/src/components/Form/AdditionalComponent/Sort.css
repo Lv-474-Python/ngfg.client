@@ -15,4 +15,5 @@
     display: flex;
     justify-content: left;
     margin-top: 1.5vmin !important;
+    cursor: pointer;
 }
