@@ -27,10 +27,6 @@ class HomePage extends Component {
             const forms = res.data.forms.reverse().slice(0, LIMIT_ITEMS_NUMBER);
             this.setState({ forms })
         })
-        // .catch(error => {
-        //     console.log(error);
-        //     console.log(this.state);
-        // })
 
         axios.get(`${API_URL}/${API_VERSION}/fields/`, {
             withCredentials: true,
