@@ -1,51 +1,61 @@
-import React, { Component } from 'react';
-import {useHistory, Link, withRouter} from 'react-router-dom'
-import './Form.css'
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
+import './Group.css'
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-
-
+import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
+import axios from "axios";
 
 class GroupItem extends Component {
+    state = {
+        ownerName: undefined
+    };
     goToView = () => {
-        console.log(this.context.history);
-        console.log(this.props.history);
         this.props.history.push(`/groups/${this.props.item.id}`)
+    };
+
+    getOwnerName = () => {
+        axios.get(`http://ngfg.com:8000/api/v1/users/${this.props.item.ownerId}`, {
+            withCredentials: true,
+        })
+            .then(res => {
+                const ownerName = res.data.username;
+                console.log(ownerName)
+                this.setState({ownerName})
+            });
+    };
+    componentDidMount() {
+        this.getOwnerName(this.props.item.ownerId);
     }
 
     render() {
         return (
-            <Card className='card-item'>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {this.props.item.name}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {this.props.item.name}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
+            <Card className='group-item'>
+                <CardContent>
+                    <Typography variant="h5"
+                                component="h2"
+                                className='group-item-header'>
+                        {this.props.item.name}
+                    </Typography>
+                    <Typography variant="p"
+                                component="p"
+                                className='group-item-content'>
+                        owner: {this.state.ownerName}
+                    </Typography>
+                    <Typography variant="p"
+                                component="p"
+                                className='group-item-content'>
+                        members: {this.props.item.users.length}
+                    </Typography>
+
+                    {/*<PublishField published={this.props.item.isPublished} />*/}
+                </CardContent>
+
                 <CardActions>
                     <Button
-                          className='form-item-link'
-                          size="small"
-                          color="primary"
-                          onClick={this.goToView}>
-                        View Group
-                    </Button>
-                    {/* <Link to={`/forms/${this.props.item.id}`} size="small" color="primary" onClick={this.goToView}>
-                        View form
-                    </Link> */}
-                    <Button size="small" color="primary">
-                        Learn More
+                        className='group-item-link'
+                        size="medium"
+                        onClick={this.goToView}>
+                        View group
                     </Button>
                 </CardActions>
             </Card>

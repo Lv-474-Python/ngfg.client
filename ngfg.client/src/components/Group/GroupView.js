@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import GroupItem from './GroupItem';
-
-
 class GroupView extends Component {
     state = {
         "id": undefined,
+        "created": undefined,
         "name": undefined,
         "ownerId": undefined,
+        "ownerName": undefined,
         "users": []
     }
 
@@ -24,14 +23,17 @@ class GroupView extends Component {
     }
 
     componentDidMount() {
-        this.getGroupData()
+        this.getGroupData();
     }
 
     render() {
         return (
             <div>
                 id {this.state.id},
-                name {this.state.name}
+                name {this.state.name},
+                {this.state.fields.map(elem =>
+                    elem.field.name
+                )}
             </div>
         );
     }

@@ -37,7 +37,7 @@ class Header extends Component {
     }
 
     handleGroupsClick = () => {
-        console.log('groups click');
+        this.props.history.push('/groups/');
     }
 
     handleLogoutClick = () => {
