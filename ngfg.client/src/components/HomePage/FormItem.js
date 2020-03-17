@@ -7,7 +7,7 @@ import './FormItem.scss';
 
 
 const FORM_NAME_LIMIT = 20;
-const FORM_TITLE_LIMIT = 30;
+const FORM_TITLE_LIMIT = 25;
 
 
 class FormItem extends Component {
