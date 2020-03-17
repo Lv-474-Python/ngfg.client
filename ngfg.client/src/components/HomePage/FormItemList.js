@@ -16,7 +16,6 @@ class FormItemList extends Component {
                       onShareClick={this.props.onShareClick}
             />
         )
-        // console.log(forms);
         return forms;
     }
 

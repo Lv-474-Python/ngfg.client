@@ -16,7 +16,6 @@ class FieldItemList extends Component {
                        onShareClick={this.props.onShareClick}
             />
         )
-        // console.log(fields);
         return fields;
     }
 

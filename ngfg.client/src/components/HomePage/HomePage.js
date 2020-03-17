@@ -26,7 +26,6 @@ class HomePage extends Component {
         }).then(res => {
             const forms = res.data.forms.reverse().slice(0, LIMIT_ITEMS_NUMBER);
             this.setState({ forms })
-            // console.log(res);
             
         })
 
@@ -34,8 +33,7 @@ class HomePage extends Component {
             withCredentials: true,
         }).then(res => {
             const fields = res.data.fields.reverse().slice(0, LIMIT_ITEMS_NUMBER);
-            this.setState({ fields })
-            // console.log(res);
+            this.setState({ fields })   
         })
     }
 
