@@ -6,7 +6,7 @@ const CALLBACK_URI = 'http://ngfg.com:8000/api/v1/auth/login/callback';
 
 class OAuthRedirect extends Component {
     getSession = () => {
-        axios.get( CALLBACK_URI + this.props.location.search, {
+        axios.get(CALLBACK_URI + this.props.location.search, {
             withCredentials: true
         }).then((res) => {
             this.props.history.push('/')
@@ -15,12 +15,9 @@ class OAuthRedirect extends Component {
         })
     };
 
-    componentDidMount() {
-        this.getSession();
-    }
-
     render() {
-        return(
+        this.getSession();
+        return (
             <div></div>
         )
     }
