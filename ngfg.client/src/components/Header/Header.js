@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
-import { AppBar, Button, Toolbar } from '@material-ui/core';
+import {AppBar, Button, Toolbar} from '@material-ui/core';
 
 import './Header.scss';
+import Link from "@material-ui/core/Link";
 
 
 class Header extends Component {
@@ -47,7 +48,7 @@ class Header extends Component {
             <div>
 
                 <AppBar className="navbar"
-                    position="static"
+                        position="static"
                 >
                     <Toolbar className="navbar__toolbar">
                         <Button className="navbar__logo"
@@ -77,11 +78,10 @@ class Header extends Component {
                             Groups
                         </Button>
 
-                        <Button className="navbar__btn"
-                            onClick={this.handleLogoutClick}
-                        >
-                            Log Out
-                        </Button>
+                        <Link className='navbar__link'
+                              href='http://ngfg.com:8000/api/v1/auth/login?redirect_url=http://localhost:3000/oauth/redirect'>
+                            Log in
+                        </Link>
                     </Toolbar>
                 </AppBar>
             </div>

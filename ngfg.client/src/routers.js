@@ -8,35 +8,39 @@ import Header from './components/Header/Header';
 import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField'
+import OAuthRedirect from "./components/OAuthRedirect/OAuthRedirect";
 
 
 class Routers extends Component {
 
     render() {
-        return(
+        return (
             <BrowserRouter>
                 <Header/>
                 <Switch>
                     <Route path='/login'
-                        component={LoginPage}
-                        
-                        />
+                           component={LoginPage}
+
+                    />
                     <Route path='/forms/:id'
-                        component={FormView}
-                        
-                        />
+                           component={FormView}
+
+                    />
                     <Route path='/forms'
-                        component={FormList}
-                        
-                        />
+                           component={FormList}
+
+                    />
                     <Route path='/field'
-                        component={CreateField}
-                        
-                        />
+                           component={CreateField}
+
+                    />
+                    <Route path='/oauth/redirect'
+                           component={OAuthRedirect}
+                    />
                     <Route path='/'
-                        component={HomePage}
-                        
-                        />
+                           component={HomePage}
+
+                    />
                 </Switch>
             </BrowserRouter>
         )
