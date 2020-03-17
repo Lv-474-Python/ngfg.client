@@ -1,28 +1,9 @@
 import React, { Component } from 'react';
-import './Header.css'
+import {withRouter} from 'react-router-dom'
 
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import BottomNavigation from '@material-ui/core/BottomNavigation'
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
 
-const useStyles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-});
+import './Header.scss';
 
 
 class Header extends Component {
@@ -39,24 +20,70 @@ class Header extends Component {
         this.props.history.push(`/${newValue}`);
     }
 
-    // handleClick = (event, new) => {
+    handleLogoClick = () => {
+        console.log('logo click');
+        console.log(this.props.history);
+        this.props.history.push('/');
+    }
 
-    // }
+    handleFormsClick = () => {
+        console.log('forms click');
+        console.log(this.props.history);
+        // this.props.history.push('/forms/');
+    }
+
+    handleFieldsClick = () => {
+        console.log('fields click');
+    }
+
+    handleGroupsClick = () => {
+        console.log('groups click');
+    }
+
+    handleLogoutClick = () => {
+        console.log('Log out click');
+    }
 
     render() {
-        const { classes } = this.props; // classes = this.props.classes
         return (
             <div>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="h6">
-                            NgFg
-                        </Typography>
-                        <Typography variant="h6" className={classes.title}>
-                            NgFg
-                        </Typography>
 
-                        <Button >Login</Button>
+                <AppBar className="navbar"
+                    position="static"
+                >
+                    <Toolbar className="navbar__toolbar">
+                        <Button className="navbar__logo"
+                                onClick={this.handleLogoClick}
+                        >
+                            NgFg
+                        </Button>
+
+                        {/* <Link className="navbar__link"
+                            component="button">
+                            Forms
+                        </Link> */}
+
+                        <Button className="navbar__link"
+                                onClick={this.handleFormsClick}
+                        >
+                            Forms
+                        </Button>
+                        <Button className="navbar__link"
+                                onClick={this.handleFieldsClick}
+                        >
+                            Fields
+                        </Button>
+                        <Button className="navbar__link"
+                                onClick={this.handleGroupsClick}
+                        >
+                            Groups
+                        </Button>
+
+                        <Button className="navbar__btn"
+                            onClick={this.handleLogoutClick}
+                        >
+                            Log Out
+                        </Button>
                     </Toolbar>
                 </AppBar>
             </div>
@@ -64,4 +91,4 @@ class Header extends Component {
     }
 }
 
-export default withStyles(useStyles)(Header);
+export default withRouter(Header);
