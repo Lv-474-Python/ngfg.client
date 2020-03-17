@@ -1,0 +1,76 @@
+@import "colors";
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1 !important;
+
+    background-color: $homeBackgroundColor !important;
+
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+    &__title {
+        padding: 3vh 0 3vh 8vw;
+
+        color: $homeTitleColor;
+
+        font-size: 2rem;
+        text-align: left;
+    }
+
+    &__content {
+        display: flex;
+        flex-grow: 1 !important;
+    }
+
+    &__forms {
+        padding-top: 2vh;
+        padding-left: 8vw;
+        padding-right: 2vw;
+
+        width: 50vw;
+
+        background-color: $homeFormsBackgroundColor;
+
+        &__title {
+            display: flex !important;
+            justify-content: flex-start !important;
+
+            font-size: 1.8rem !important;
+            text-align: left !important;
+            text-transform: capitalize !important;
+
+            &:hover {
+                color: $homeFormsTitleHoverColor !important;
+                background-color: $homeFormsTitleHoverBackgroundColor !important;
+            }
+        }
+    }
+
+    &__fields {
+        padding-top: 2vh;
+        padding-left: 2vw;
+        padding-right: 8vw;
+
+        width: 50vw;
+
+        background-color: $homeFieldsBackgroundColor;
+
+        &__title {
+            display: flex !important;
+            justify-content: flex-start !important;
+
+            color: $homeFieldsTitleColor !important;
+
+            font-size: 1.8rem !important;
+            text-align: left !important;
+            text-transform: capitalize !important;
+
+            &:hover {
+                color: $homeFieldsTitleHoverColor !important;
+                background-color: $homeFieldsTitleHoverBackgroundColor !important;
+            }
+        }
+    }
+}

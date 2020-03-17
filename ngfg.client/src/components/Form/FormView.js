@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import FormItem from './FormItem';
-
 
 class FormView extends Component {
     state = {

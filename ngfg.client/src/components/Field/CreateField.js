@@ -5,12 +5,6 @@ import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-
-
 
 class CreateField extends Component {
     state = {
@@ -66,7 +60,7 @@ class CreateField extends Component {
                  />
                  {
                      [1, 2].includes(this.state.fieldType) &&
-                     <IsStrict onChange={this.handleStrictChange}
+                     <IsStrict onChange={   this.handleStrictChange}
                                value={this.state.isStrict}
                      />
                  }
