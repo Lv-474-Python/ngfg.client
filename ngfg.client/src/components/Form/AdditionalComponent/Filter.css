@@ -1,0 +1,17 @@
+.filter {
+    margin-top: 3vmin;
+    width: 100%;
+}
+
+.filter-title {
+    display: flex;
+    justify-content: left;
+}
+
+.filter-content {
+     margin-left: 3vmin;
+}
+
+.filter-item {
+    color: #f9a825 !important;
+}
