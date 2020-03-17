@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom'
 import './Form.css'
 
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
-import PublishField from "./AdditionalComponent/PublishField";
+import FormStatus from "./AdditionalComponent/FormStatus";
 
 
 class FormItem extends Component {
@@ -25,7 +25,7 @@ class FormItem extends Component {
                                 className='form-item-content'>
                         {this.props.item.title}
                     </Typography>
-                    <PublishField published={this.props.item.isPublished} />
+                    <FormStatus published={this.props.item.isPublished} />
                 </CardContent>
 
                 <CardActions>

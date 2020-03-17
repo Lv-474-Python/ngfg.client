@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import Typography from '@material-ui/core/Typography'
 
-class PublishField extends Component {
+class FormStatus extends Component {
     render() {
         return (
             <Typography variant="p"
@@ -14,4 +14,4 @@ class PublishField extends Component {
     }
 }
 
-export default withRouter(PublishField);
+export default withRouter(FormStatus);
