@@ -6,7 +6,8 @@
     justify-content: space-between;
     align-items: normal;
     width: 50vw;
-    margin: 5px;
+    margin: 1vw;
+    margin-bottom: 2vw !important;
     border-radius: 0 !important;
     background-color: #F9A825 !important;
 }
@@ -27,6 +28,10 @@
     width: 7vmax;
     margin-bottom: 5px !important;
     background-color: #37474F !important;
+}
+
+.field-button :hover {
+    color: #F9A825 !important;
 }
 
 .field-typo {
@@ -60,11 +65,13 @@
 .field-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start !important;
     justify-content: start;
     width: 60vw;
     float: left;
 }
+
+/* Filter */
 
 .filter-div {
     display: flex;
@@ -80,8 +87,11 @@
     flex-direction: column;
     text-align: start;
     width: 20vw;
-    background-color: #37474F;
+    height: 40vw;
     margin-top: 1vw;
+    margin-right: 1vw !important;
+    background-color: #37474F;
+
 }
 
 .filter-typo {
@@ -103,15 +113,24 @@
     color: #F9A825 !important;
 }
 
+/* Search bar */
+
 .search-bar {
     display: flex;
     justify-content: start;
     align-items: center;
     margin-top: 1vw;
-    margin-left: 0.5vw;
+    margin-left: 1vw;
     width: 50vw;
     height: 3vw;
     border-radius: 0 !important;
+}
+
+/* Fields page */
+
+.fields-page {
+    display: flex;
+    flex-direction: row;
 }
 
 .not-found {

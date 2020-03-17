@@ -12,6 +12,9 @@ const fieldTypes = {
     'Checkbox': 6
 };
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
+
 
 class FormList extends Component {
     constructor(props) {
@@ -23,7 +26,7 @@ class FormList extends Component {
     };
 
     getData = () => {
-        axios.get('http://ngfg.com:8000/api/v1/fields/', {
+        axios.get(`${API_URL}/${API_VERSION}/fields`, {
             withCredentials: true,
         })
             .then(res => {
