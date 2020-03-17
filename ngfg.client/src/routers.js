@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField'
+import GroupList from './components/Group/GroupList'
 
 
 class Routers extends Component {
@@ -32,6 +33,10 @@ class Routers extends Component {
                     <Route path='/field'
                         component={CreateField}
                         
+                        />
+                    <Route path='/groups'
+                        component={GroupList}
+
                         />
                     <Route path='/'
                         component={HomePage}

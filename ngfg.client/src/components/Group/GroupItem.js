@@ -39,7 +39,7 @@ class GroupItem extends Component {
                           size="small"
                           color="primary"
                           onClick={this.goToView}>
-                        View form
+                        View Group
                     </Button>
                     {/* <Link to={`/forms/${this.props.item.id}`} size="small" color="primary" onClick={this.goToView}>
                         View form
