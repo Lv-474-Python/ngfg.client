@@ -16,25 +16,25 @@ class FormCreation extends Component {
         "formFields": []
     }
 
-    getName = (event) => {
+    handleNameChange = (event) => {
         this.setState({
             name: event.target.value
         });
     }
 
-    getTitle = (event) => {
+    handleTitleChange = (event) => {
         this.setState({
             title: event.target.value
         });
     }
 
-    getResultUrl = (event) => {
+    handleResultUrlChange = (event) => {
         this.setState({
            resultUrl: event.target.value
         });
     }
 
-    publish = (event) => {
+    handlePublish = (event) => {
         this.setState({
             isPublished: true
         });
@@ -52,62 +52,63 @@ class FormCreation extends Component {
                 console.log(res);
                 }
             )
+            .catch ( error => {
+                console.log(error);
+                }
+            );
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
 
-        console.log(data);
+        this.setState({...data});
+        axios.post('http://ngfg.com:8000/api/v1/forms/',
+            {
+                name: this.state.name,
+                title: this.state.title,
+                resultUtl: this.state.resultUrl,
+                isPublished: this.state.isPublished
+            },
+            {withCredentials: true})
+            .then ( res => {
+                    console.log(res);
+                }
+            )
+            .catch ( error => {
+                console.log(error);
+                }
+            );
     }
 
 
     render() {
         return(
-            /*<div>
+            <div className="form-container">
                 <FormControl>
                     <TextField
                         label="Enter Form Name:"
                         type="text"
-                        onChange={this.getName}
+                        onChange={this.handleNameChange}
                     />
                     <TextField
                         label="Enter Form Title"
                         type="text"
-                        onChange={this.getTitle}
+                        onChange={this.handleTitleChange}
                     />
                     <TextField
                         label="Link Result URL"
                         type="url"
-                        onChange={this.getResultUrl}
+                        onChange={this.handleResultUrlChange}
                     />
-                    {console.log(this.state)}
-                    {console.log(typeof(this.state))}
-                    <Button onClick={this.publish}>
+                    <Button onClick={this.handlePublish}>
                         Publish
                     </Button>
                     <Button onClick={this.save}>
                         Save
                     </Button>
                 </FormControl>
-            </div> */
-              <form onSubmit={this.handleSubmit}>
-                  <TextField name="name"
-                             label="Enter Form Name"
-                             type="text"
-                  />
-                  <TextField name="title"
-                             label="Enter Form Title"
-                             type="text"
-                  />
-                  <TextField name="resultUrl"
-                             label="Enter Result Url"
-                             type="url"
-                  />
-                  <Button type="submit">
-                      Save
-                  </Button>
-              </form>
+            </div>
         )
     }
 
