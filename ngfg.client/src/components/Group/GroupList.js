@@ -77,7 +77,7 @@ class GroupList extends Component {
     render() {
         return (
             <div className='group-list-wrapper'>
-                <div className="side-menu">
+                <div className="group-side-menu">
                     <Sort sortValue={["By Name"]}
                           handleSort={this.handleSort}/>
                     <Button className="create-group-btn"
@@ -94,7 +94,7 @@ class GroupList extends Component {
                                    this.handleSearch(this.state.search)
                                }}
                                value={this.state.search}
-                               className='search'/>
+                               className='group-search'/>
 
                     <div className='group-list'>
                         {

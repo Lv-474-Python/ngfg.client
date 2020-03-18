@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-.side-menu {
+.group-side-menu {
     display: flex;
     flex-wrap: wrap;
     background-color: #37474f;
@@ -31,7 +31,7 @@
     margin: 1.5vmin;
 }
 
-.search {
+.group-search {
     width: 125vmin;
     margin: 1.5vmin auto;
 }
