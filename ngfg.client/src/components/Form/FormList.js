@@ -33,7 +33,6 @@ class FormList extends Component {
     };
 
     filterForm = (forms, filter) => {
-        console.log(this.state)
         let filteredForms = [];
         let publishedFilter = filter['Published'];
         let draftFilter = filter['Draft'];
@@ -42,7 +41,7 @@ class FormList extends Component {
             return forms;
         }
 
-        forms.map(form => {
+        forms.forEach(form => {
             if (form.isPublished && publishedFilter || !form.isPublished && draftFilter) {
                 filteredForms.push(form);
             }
@@ -63,7 +62,7 @@ class FormList extends Component {
     searchForms = (forms, search) => {
         if (search !== "") {
             let searchForm = [];
-            forms.map(form => {
+            forms.forEach(form => {
                 if (form.name.toLowerCase().includes(search.toLowerCase())) {
                     searchForm.push(form)
                 }
