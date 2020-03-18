@@ -49,7 +49,7 @@ class HomePage extends Component {
     }
 
     handleFormsTitleClick = () => {
-        console.log('Forms title click');
+        this.props.history.push('/forms')
     }
 
     handleFieldsTitleClick = () => {
