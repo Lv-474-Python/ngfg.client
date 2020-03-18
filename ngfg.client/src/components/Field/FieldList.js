@@ -19,7 +19,7 @@ const API_VERSION = 'v1';
 class FieldList extends Component {
 
     state = {
-        'fields': []
+        fields: []
     };
 
     getData = () => {
@@ -27,7 +27,6 @@ class FieldList extends Component {
             withCredentials: true,
         })
             .then(res => {
-                this.setState({filter: this.props.filter});
                 const fields = res.data.fields.filter(this.filterFields);
                 this.setState({fields})
             })
