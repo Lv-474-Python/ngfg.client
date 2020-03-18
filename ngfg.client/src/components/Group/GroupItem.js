@@ -37,12 +37,12 @@ class GroupItem extends Component {
                         {this.props.item.name}
                     </Typography>
                     <br/>
-                    <Typography variant="p"
+                    <Typography variant="inherit"
                                 component="p"
                                 className='group-item-content'>
                         owner: {this.state.ownerName}
                     </Typography>
-                    <Typography variant="p"
+                    <Typography variant="inherit"
                                 component="p"
                                 className='group-item-content'>
                         members: {this.props.item.users.length}
