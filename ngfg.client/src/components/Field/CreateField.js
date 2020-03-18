@@ -21,9 +21,19 @@ class CreateField extends Component {
     }
 
     handleChangeFieldType = (event) => {
+        console.log(event.target.value);
         this.setState({
             fieldType: event.target.value
         });
+        if (event.target.value === 1){
+            this.setState({
+                choiceOptions: [],
+                settingAutocomplete_dataUrl: undefined,
+                settingAutocomplete_sheet: undefined,
+                settingAutocomplete_fromRow: undefined,
+                settingAutocomplete_toRow: undefined
+            })
+        }
     }
 
     handleStrictChange = (event) => {
