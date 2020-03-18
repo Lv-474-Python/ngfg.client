@@ -1,6 +1,6 @@
 .filter {
     width: 100%;
-    margin: 2vmin;
+    margin: 1.5vw;
 }
 
 .filter-title {
@@ -13,6 +13,11 @@
      margin-left: 3vmin;
 }
 
+.filter-form-group-item {
+    padding: 0.1vw !important;
+}
+
 .filter-form-item {
     color: #f9a825 !important;
+    padding: 0.1vw !important;
 }

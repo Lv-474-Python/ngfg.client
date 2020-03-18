@@ -15,7 +15,8 @@ class Filter extends Component {
 
     componentDidMount() {
         let filter = {};
-        this.props.checkboxValue.map(elem => {
+
+        this.props.checkboxValue.forEach(elem => {
             filter[elem] = false
         });
 
@@ -41,6 +42,7 @@ class Filter extends Component {
                 <FormGroup className='filter-content'>
                     {this.props.checkboxValue.map(elem =>
                         <FormControlLabel
+                            className='filter-form-group-item'
                             key={elem}
                             label={elem}
                             control={<Checkbox className='filter-form-item'
