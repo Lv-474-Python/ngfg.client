@@ -42,7 +42,7 @@ class Filter extends Component {
                     {this.props.checkboxValue.map(elem =>
                         <FormControlLabel
                             label={elem}
-                            control={<Checkbox className='filter-item'
+                            control={<Checkbox className='filter-form-item'
                                                onChange={(event) =>
                                                    this.filterClick(event, elem)}/>}/>
                     )}
