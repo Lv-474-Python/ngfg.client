@@ -39,8 +39,8 @@ class FieldsPage extends Component {
         this.setState({shared});
     };
 
-    handleSearch = (event) => {
-        this.setState({search: event.target.value});
+    handleSearch = (value) => {
+        this.setState({search: value});
     };
 
     render() {

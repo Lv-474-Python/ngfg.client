@@ -76,7 +76,7 @@ class FieldList extends Component {
                         this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
                                    key={elem.id}
-                                   formCretaion={this.props.formCreation}
+                                   formCreation={this.props.formCreation}
                         />)
                 }
             </div>

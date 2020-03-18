@@ -1,21 +1,16 @@
 import React, {Component} from "react";
 
-import {Paper, InputBase} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchBar from 'material-ui-search-bar'
 
 class Search extends Component {
 
     render() {
         return (
-            <Paper component="div" className='search-bar'>
-                <SearchIcon className='search-icon'/>
-                <InputBase
-                    className='field-card-content'
-                    placeholder="Search"
-                    onChange={this.props.handleSearch}
-
-                />
-            </Paper>
+            <SearchBar onChange={(newValue) => {
+                this.props.handleSearch(newValue)
+            }}
+                       value={this.props.search}
+                       className={this.props.formCreation ? 'narrow-search-bar' : 'search-bar'}/>
         )
     }
 }

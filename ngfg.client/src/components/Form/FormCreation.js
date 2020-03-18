@@ -4,8 +4,9 @@ import axios from 'axios';
 import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from '@material-ui/core/styles';
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class FormCreation extends Component {
     state = {
@@ -41,7 +42,7 @@ class FormCreation extends Component {
     }
 
     save = () => {
-        axios.post('http://ngfg.com:8000/api/v1/forms/', {
+        axios.post(`http://ngfg.com:8000/api/v1/forms`, {
                 name: this.state.name,
                 title: this.state.title,
                 resultUrl: this.state.resultUrl,

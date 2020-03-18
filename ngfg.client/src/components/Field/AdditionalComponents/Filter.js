@@ -1,11 +1,7 @@
 import React, {Component} from "react";
 
-import {
-    Checkbox,
-    FormGroup,
-    FormControlLabel,
-    Typography
-} from "@material-ui/core";
+import {Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class Filter extends Component {
 
@@ -203,6 +199,10 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
+                <Button className={this.props.formCreation ? "narrow-filter-create-btn" : "filter-create-btn"}
+                        size='medium'>
+                    Create Field
+                </Button>
             </div>
         )
     }

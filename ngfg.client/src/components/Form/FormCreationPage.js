@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import FormCreation from './FormCreation';
-import Button from "@material-ui/core/Button";
 import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
@@ -40,8 +38,8 @@ class FormCreationPage extends Component {
         this.setState({shared});
     };
 
-    handleSearch = (event) => {
-        this.setState({search: event.target.value});
+    handleSearch = (value) => {
+        this.setState({search: value});
     };
 
     render() {
@@ -53,11 +51,14 @@ class FormCreationPage extends Component {
                     handleSort={this.handleSort}
                     sort={this.state.sort}
                     handleShared={this.handleShared}
-                    shared={this.state.shared}/>
+                    shared={this.state.shared}
+                    formCreation={true}/>
             </div>
             <div className="form-creation-fieldlist">
                 <Search handleSearch={this.handleSearch}
-                            search={this.state.search}/>
+                            search={this.state.search}
+                            formCreation={true}
+                />
                 <FieldList filter={this.state.filter}
                            search={this.state.search}
                            shared={this.state.shared}

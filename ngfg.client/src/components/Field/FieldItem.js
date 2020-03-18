@@ -16,6 +16,7 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -136,10 +137,12 @@ class FieldItem extends Component {
     };
 
     render() {
+        console.log(this.props)
+        console.log(this.props.formCreation)
         return (
-            <Card className={"field-card-item"}>
-                    <CardContent className={"field-card-content"}>
-                        <Typography className='field-typo' gutterBottom variant={this.props.formCreation? "h5" : "caption"} component="h2">
+            <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
+                    <CardContent className={this.props.formCreation ? "narrow-field-card-content" : "field-card-content"}>
+                        <Typography className='field-typo' gutterBottom variant={this.props.formCreation ? "caption" : "h5"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
                         <Typography className={"field-typo"}
@@ -177,36 +180,43 @@ class FieldItem extends Component {
                     <CardActions className='field-card-actions'>
                         <br/>
                         {this.props.formCreation
-                        ? <div><Button
-                            variant="contained"
-                            size="small"
-                            color="secondary"
-                            className='field-button'
-                            endIcon={<SendIcon/>}>
-                            Share
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className='field-button'
-                            endIcon={<EditIcon/>}>
-                            Edit
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className='field-button'
-                            endIcon={<DeleteIcon/>}>
-                            Delete
-                        </Button>
+                        ? <div>
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    color="secondary"
+                                    className='field-button'
+                                    endIcon={<AddIcon/>}>
+                                    Add
+                                </Button>
                             </div>
-                            : <div>
-                            <Button>
-                                Add
-                            </Button>
-                            </div>}
+                        : <div>
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    color="secondary"
+                                    className='field-button'
+                                    endIcon={<SendIcon/>}>
+                                    Share
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    size="small"
+                                    className='field-button'
+                                    endIcon={<EditIcon/>}>
+                                    Edit
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    size="small"
+                                    className='field-button'
+                                    endIcon={<DeleteIcon/>}>
+                                    Delete
+                                </Button>
+                            </div>
+                        }
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&

@@ -1,18 +1,63 @@
-.card-item {
-    width: 345px;
-    /* height: 140px; */
-    margin: 5px;
-}
-
 .form-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: left;
+    width: 128vmin;
+}
+
+.form-list-wrapper {
+    display: flex;
     justify-content: center;
 }
 
+.side-menu {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #37474f;
+    width: 20vw;
+    height: 52vmin;
+    margin: 1.5vmin;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1.5vmin;
+    color: #f9a825 !important;
+    justify-content: center !important;
+}
+
+.form-list-item {
+    width: 61vmin;
+    background-color: #f9a825 !important;
+    margin: 1.5vmin;
+}
+
+.search {
+    width: 125vmin;
+    margin: 1.5vmin auto;
+}
+
+.form-item-content {
+    display: flex !important;
+    justify-content: left !important;
+}
+
 .form-item-link {
-    text-decoration: none;
+    background-color: #37474f !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin-left: 1.5vmin !important;
+    margin-bottom: 1.5vmin !important;
+}
+
+.form-item-link :hover {
+    color: #F9A825 !important;
+}
+
+.create-form-btn {
+    background-color: #f9a825 !important;
+    color: #37474f !important;
+    text-transform: capitalize !important;
+    align-self: flex-end;
+    margin-bottom: 2vmin !important;
 }
 
 html, body {
@@ -76,10 +121,10 @@ html, body {
     display: flex;
     width: 30vh;
     background-color: #37474F;
+    justify-content: center;
 }
 
 .form-creation-main-component {
-    margin-left: auto;
-    margin-right: 0;
+    margin-left: 5vh;
 }
 

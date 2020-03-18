@@ -5,16 +5,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    width: 24vmin;
-    height: 20vmin;
+
+    width: 27.8vmin;
+    height: 24.5vmin;
     margin-top: 2vmin;
+    margin-right: 1.2vmin;
 
     color: $newItemColor;
     background-color: $itemBackgroundColor;
     border-radius: 1vmin;
 
-    font-size: 7rem;
+    font-size: 6rem;
+    font-weight: 500;
 
     &:hover {
         color: $newItemHoverColor;
