@@ -11,7 +11,7 @@ class Login extends Component {
 
     render() {
         return (
-            <Button className=' navbar__link'
+            <Button className=' navbar__btn'
                     onClick={this.login}>
                 Log in
             </Button>

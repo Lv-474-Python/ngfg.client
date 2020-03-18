@@ -19,7 +19,7 @@ class Logout extends Component {
 
     render() {
         return (
-            <Button className='navbar__link'
+            <Button className='navbar__btn'
                     onClick={this.logout}>
                 Log out
             </Button>
