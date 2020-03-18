@@ -1,7 +1,8 @@
 import React, {Component} from "react";
+
+import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 
 class Filter extends Component {
 
@@ -157,7 +158,7 @@ class Filter extends Component {
                         label="Autocomplete"
                     />
                 </FormGroup>
-                <h3 className='filter-category'>Sort</h3>
+                <h3 className='filter-category'>Shared</h3>
                 <FormGroup>
                     <FormControlLabel
                         className='filter-typo'
@@ -170,7 +171,7 @@ class Filter extends Component {
                                               shared: !this.props.shared.shared
                                           })}
                             />}
-                        label="Shared"
+                        label="Shared with me"
                     />
                     <FormControlLabel
                         className='filter-typo'

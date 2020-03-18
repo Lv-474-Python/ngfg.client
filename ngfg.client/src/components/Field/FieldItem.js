@@ -37,7 +37,6 @@ class FieldItem extends Component {
         return [
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.id}>
                     From { !this.props.item.range || this.props.item.range.min === null ?
@@ -47,7 +46,6 @@ class FieldItem extends Component {
                 </Typography>),
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.name}>
                 <Checkbox
@@ -62,7 +60,6 @@ class FieldItem extends Component {
         return [
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.id}>
                     From { !this.props.item.range || this.props.item.range.min === null ?
@@ -72,7 +69,6 @@ class FieldItem extends Component {
                 </Typography>),
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.name}>
                     <Checkbox
@@ -87,7 +83,6 @@ class FieldItem extends Component {
                 return [
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.id}>
                     From {this.props.item.settingAutocomplete.fromRow} {"to "}
@@ -95,7 +90,6 @@ class FieldItem extends Component {
                 </Typography>),
             (<Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p"
                          key={this.props.item.name}>
                 <Link className='field-link' href={this.props.item.settingAutocomplete.dataUrl}>
@@ -108,7 +102,6 @@ class FieldItem extends Component {
         return (
             <Typography className="field-typo"
                          variant="body2"
-                         color="textSecondary"
                          component="p">
                     From { !this.props.item.range || this.props.item.range.min === null ?
                     "0" : this.props.item.range.min} {"to "}
@@ -120,9 +113,9 @@ class FieldItem extends Component {
     getChoiceOptions = function() {
         return (
             <ExpansionPanel className='field-expand'>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel1a-content"
+                <ExpansionPanelSummary className='field-expand-summary'
+                                       expandIcon={<ExpandMoreIcon className='expand-icon'/>}
+                                       aria-controls="panel1a-content"
                 >
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
@@ -151,7 +144,6 @@ class FieldItem extends Component {
                         </Typography>
                         <Typography className="field-typo"
                                     variant="h6"
-                                    color="textSecondary"
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -177,9 +169,8 @@ class FieldItem extends Component {
                         }
                         <Typography className="field-typo"
                                     variant="caption"
-                                    color="textSecondary"
                                     component="p">
-                            Created: {this.props.item.created}
+                            Created: {new Date(this.props.item.created).toDateString()}
                         </Typography>
                     </CardContent>
 

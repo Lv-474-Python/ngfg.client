@@ -16,13 +16,14 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    margin-left: 0.5vw;
     width: 35vw;
 }
 
 .field-card-actions {
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    margin-right: 0.8vw;
 }
 
 .field-button {
@@ -54,8 +55,14 @@
     background-color: #F9A825 !important;
 }
 
-.field-expand-details {
+.field-expand-summary {
+    min-height: 3vw !important;
+    height: 3.5vw !important;
+    padding: 0 0.8vw 0 0.8vw !important;
+}
 
+.field-expand-details {
+    margin-top: -1vw !important;
 }
 
 .choice-typo {
