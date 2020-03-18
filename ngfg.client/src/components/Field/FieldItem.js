@@ -139,11 +139,11 @@ class FieldItem extends Component {
         return (
             <Card className={this.props.formCreation ? "field-card-item" : "narrow-field-card-item"}>
                     <CardContent className={this.props.formCreation ? "field-card-content" : "narrow-field-card-content"}>
-                        <Typography className='field-typo' gutterBottom variant="h5" component="h2">
+                        <Typography className='field-typo' gutterBottom variant={this.props.formCreation? "h5" : "caption"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
                         <Typography className={this.props.formCreation ? "field-typo": "narrow-field-typo"}
-                                    variant="h6"
+                                    variant={this.props.formCreation? "h6": "caption"}
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -176,7 +176,8 @@ class FieldItem extends Component {
 
                     <CardActions className='field-card-actions'>
                         <br/>
-                        <Button
+                        {this.props.formCreation
+                        ? <div><Button
                             variant="contained"
                             size="small"
                             color="secondary"
@@ -200,6 +201,12 @@ class FieldItem extends Component {
                             endIcon={<DeleteIcon/>}>
                             Delete
                         </Button>
+                            </div>
+                            : <div>
+                            <Button>
+                                Add
+                            </Button>
+                            </div>}
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&

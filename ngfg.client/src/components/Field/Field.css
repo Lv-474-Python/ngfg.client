@@ -159,7 +159,7 @@
 
 .narrow-field-card-item {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     justify-content: space-between;
     align-items: normal;
     width: 20vw;
@@ -173,5 +173,5 @@
 .narrow-field-typo {
     width: 100%;
     text-align: start;
-    font-size: small;
+    font-size: 10px;
 }
