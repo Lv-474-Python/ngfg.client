@@ -3,7 +3,6 @@ import {BrowserRouter} from 'react-router-dom';
 import {Route, Switch} from 'react-router';
 
 import HomePage from './components/HomePage/HomePage';
-import LoginPage from './components/LoginPage/LoginPage';
 import Header from './components/Header/Header';
 import FieldsPage from './components/Field/FieldsPage';
 import FormList from './components/Form/FormList';
