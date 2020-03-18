@@ -1,0 +1,21 @@
+.sort {
+    width: 100%;
+    margin: 1.5vw;
+}
+
+.sort-title {
+    display: flex;
+    justify-content: left;
+    font-size: 1.5vw !important;
+}
+
+.sort-content {
+    margin-left: 1.5vw !important;
+}
+
+.sort-item {
+    display: flex;
+    justify-content: left;
+    cursor: pointer;
+    margin: 0.1vw !important;
+}
