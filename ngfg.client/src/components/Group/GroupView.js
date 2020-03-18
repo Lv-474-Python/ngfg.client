@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
-c
+
 class GroupView extends Component {
     state = {
         "id": undefined,
@@ -20,7 +20,6 @@ class GroupView extends Component {
         })
             .then(res => {
                 const group = res.data;
-                console.log(group);
                 this.setState({ ...group })
             })
     }
@@ -34,8 +33,8 @@ class GroupView extends Component {
             <div>
                 id {this.state.id},
                 name {this.state.name},
-                {this.state.fields.map(elem =>
-                    elem.field.name
+                {this.state.users.map(elem =>
+                    elem.email
                 )}
             </div>
         );
