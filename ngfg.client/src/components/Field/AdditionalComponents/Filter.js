@@ -53,7 +53,7 @@ class Filter extends Component {
         return (
             <div className="filter-item">
                 <Typography className='filter-category'
-                            variant="p"
+                            variant="inherit"
                             component="p">
                     Sort
                 </Typography>
@@ -74,7 +74,7 @@ class Filter extends Component {
 
                 </FormGroup>
                 <Typography className='filter-category'
-                            variant="p"
+                            variant="inherit"
                             component="p">
                     Type
                 </Typography>
@@ -168,7 +168,7 @@ class Filter extends Component {
                     />
                 </FormGroup>
                 <Typography className='filter-category'
-                            variant="p"
+                            variant="inherit"
                             component="p">
                     Shared
                 </Typography>
