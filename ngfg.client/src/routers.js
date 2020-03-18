@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {Switch, Route} from 'react-router';
+import {Route, Switch} from 'react-router';
 
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import Header from './components/Header/Header';
+import FieldsPage from './components/Field/FieldsPage';
 import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField'
@@ -32,6 +33,10 @@ class Routers extends Component {
                         />
                     <Route path='/form'
                         component={FormCreationPage}
+
+                        />
+                    <Route path='/fields'
+                           component={FieldsPage}
 
                         />
                     <Route path='/field'

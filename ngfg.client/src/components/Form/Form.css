@@ -15,7 +15,7 @@
     text-decoration: none;
 }
 
-body {
+html, body {
     background-color: #F1F1F1;
 }
 
@@ -66,5 +66,20 @@ body {
 
 .form-creation-field {
     width: 90vh !important;
+}
+
+.main-form-creation-container{
+    display: flex;
+}
+
+.form-creation-filter {
+    display: flex;
+    width: 30vh;
+    background-color: #37474F;
+}
+
+.form-creation-main-component {
+    margin-left: auto;
+    margin-right: 0;
 }
 
