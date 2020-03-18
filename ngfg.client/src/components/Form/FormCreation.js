@@ -4,6 +4,8 @@ import axios from 'axios';
 import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from '@material-ui/core/styles';
+
 
 class FormCreation extends Component {
     state = {
@@ -32,11 +34,10 @@ class FormCreation extends Component {
         });
     }
 
-    handlePublish = (event) => {
+    handlePublish = () => {
         this.setState({
             isPublished: true
-        });
-        this.save(event);
+        }, this.save);
     }
 
     save = () => {
@@ -76,21 +77,33 @@ class FormCreation extends Component {
                     </div>
 
                     <div className="form-creation-card">
-                    <TextField
-                        label="Enter Form Name:"
-                        type="text"
-                        onChange={this.handleNameChange}
-                    />
-                    <TextField
-                        label="Enter Form Title"
-                        type="text"
-                        onChange={this.handleTitleChange}
-                    />
-                    <TextField
-                        label="Link Result URL"
-                        type="url"
-                        onChange={this.handleResultUrlChange}
-                    />
+                            <TextField
+                            id="form-name"
+                            className="form-creation-field"
+                            variant="outlined"
+                            helperText="Enter Form Name"
+                            type="text"
+                            color="$F9A825"
+                            onChange={this.handleNameChange}
+                        />
+                        <TextField
+                            className="form-creation-field"
+                            variant="outlined"
+                            helperText="Enter Form Title"
+                            size="small"
+                            margin="dense"
+                            type="text"
+                            onChange={this.handleTitleChange}
+                        />
+                        <TextField
+                            className="form-creation-field"
+                            variant="outlined"
+                            helperText="Link Result URL"
+                            size="small"
+                            margin="dense"
+                            type="url"
+                            onChange={this.handleResultUrlChange}
+                        />
                     </div>
                 </FormControl>
             </div>

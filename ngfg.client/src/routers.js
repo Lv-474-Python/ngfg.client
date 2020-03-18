@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField'
-import FormCreation from './components/Form/FormCreation'
+import FormCreationPage from './components/Form/FormCreationPage'
 
 
 class Routers extends Component {
@@ -31,7 +31,7 @@ class Routers extends Component {
                         
                         />
                     <Route path='/form'
-                        component={FormCreation}
+                        component={FormCreationPage}
 
                         />
                     <Route path='/field'

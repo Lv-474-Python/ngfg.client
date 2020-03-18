@@ -19,28 +19,33 @@ body {
     background-color: #F1F1F1;
 }
 
-.form-btn-container {
+.form-container {
     display: flex;
-    align-content: flex-start;
-    margin-top: 7vh;
+    flex-direction: column;
+    margin-top: 5vh;
+    flex-wrap: wrap;
+    width: 120vh;
+    margin-left: auto;
+    margin-right: 25vh;
+}
+
+.form-btn-container {
     margin-bottom: 4vh;
+    flex-direction: row;
+    align-content: flex-start;
+    display: flex;
+    width: inherit;
 }
 
 .form-creation-card {
-    width: 130vh;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
+    background-color: #fff;
     height: 100%;
+    flex-wrap: wrap;
+    padding: 10vh;
+    width: inherit;
     box-shadow: 2px 2px 25px 1px rgba(0, 0, 0, 0.25);
-}
-
-.form-container {
-    display: flex;
-    margin: 0 auto;
-    height: 145vh;
 }
 
 .form-creation-btn {
@@ -48,8 +53,8 @@ body {
     background-color: #37474F !important;
     color: #fff !important;
     border-radius: 10px !important;
-    width: 22vh;
-    height: 7vh;
+    width: 20vh;
+    height: 6vh;
     margin-right: 5vh !important;
 }
 
@@ -57,5 +62,9 @@ body {
     text-transform: capitalize !important;
     background-color: #F9A825 !important;
     color: #000 !important;
+}
+
+.form-creation-field {
+    width: 90vh !important;
 }
 
