@@ -7,10 +7,6 @@ import Search from './AdditionalComponents/Search'
 
 class FieldsPage extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         filter: {
             showAll: true,
@@ -58,7 +54,7 @@ class FieldsPage extends Component {
                             handleShared={this.handleShared}
                             shared={this.state.shared}/>
                 </div>
-                <div className='field-list'>
+                <div>
                     <Search handleSearch={this.handleSearch}
                             search={this.state.search}/>
                     <FieldList filter={this.state.filter}

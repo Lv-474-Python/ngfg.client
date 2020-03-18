@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
-import './Field.css'
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
+import './Field.css'
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    Checkbox,
+    ExpansionPanel,
+    ExpansionPanelDetails,
+    ExpansionPanelSummary,
+    FormGroup,
+    Link,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import {FormGroup} from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
-import TextField from "@material-ui/core/TextField";
-import Typography from '@material-ui/core/Typography';
 
 const fieldTypes = {
     'Number': 1,
@@ -80,6 +83,27 @@ class FieldItem extends Component {
                 </Typography>)]
     };
 
+    getAutocompleteField = function() {
+                return [
+            (<Typography className="field-typo"
+                         variant="body2"
+                         color="textSecondary"
+                         component="p"
+                         key={this.props.item.id}>
+                    From {this.props.item.settingAutocomplete.fromRow} {"to "}
+                    {this.props.item.settingAutocomplete.toRow}
+                </Typography>),
+            (<Typography className="field-typo"
+                         variant="body2"
+                         color="textSecondary"
+                         component="p"
+                         key={this.props.item.name}>
+                <Link className='field-link' href={this.props.item.settingAutocomplete.dataUrl}>
+                    Go to sheet
+                </Link>
+            </Typography>)]
+    };
+
      getCheckboxField = function() {
         return (
             <Typography className="field-typo"
@@ -94,7 +118,6 @@ class FieldItem extends Component {
     };
 
     getChoiceOptions = function() {
-        console.log(this.props.item.choiceOptions);
         return (
             <ExpansionPanel className='field-expand'>
                 <ExpansionPanelSummary
@@ -103,7 +126,7 @@ class FieldItem extends Component {
                 >
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <FormGroup className='field-card-content'>
+                    <FormGroup className='field-expand-details'>
                         {
 
                             this.props.item.choiceOptions.map(elem =>
@@ -123,7 +146,7 @@ class FieldItem extends Component {
         return (
             <Card className='field-card-item'>
                     <CardContent className='field-card-content'>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography className='field-typo' gutterBottom variant="h5" component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
                         <Typography className="field-typo"
@@ -145,9 +168,19 @@ class FieldItem extends Component {
                             this.getTextField().map(elem => {return elem})
                         }
                         {
+                            this.props.item.fieldType === 5 &&
+                            this.getAutocompleteField().map(elem => {return elem})
+                        }
+                        {
                             this.props.item.fieldType === 6 &&
                             this.getCheckboxField()
                         }
+                        <Typography className="field-typo"
+                                    variant="caption"
+                                    color="textSecondary"
+                                    component="p">
+                            Created: {this.props.item.created}
+                        </Typography>
                     </CardContent>
 
                     <CardActions className='field-card-actions'>
@@ -158,7 +191,7 @@ class FieldItem extends Component {
                             color="secondary"
                             className='field-button'
                             endIcon={<SendIcon/>}>
-                            Send
+                            Share
                         </Button>
                         <Button
                             variant="contained"

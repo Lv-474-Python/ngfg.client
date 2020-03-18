@@ -17,9 +17,6 @@ const API_VERSION = 'v1';
 
 
 class FieldList extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     state = {
         'fields': []
@@ -68,7 +65,6 @@ class FieldList extends Component {
     }
 
     render() {
-        console.log("changes");
         return (
             <div>
                 {
