@@ -12,7 +12,7 @@ const fieldTypes = {
     'Radio': 4,
     'Autocomplete': 5,
     'Checkbox': 6
-}
+};
 
 
 class SelectFieldType extends Component {
@@ -31,7 +31,8 @@ class SelectFieldType extends Component {
                         Type
                     </InputLabel>
                     <Select onChange={this.props.onChange}
-                            
+                            value={this.props.fieldType}
+
                     >
                         {
                             Object.entries(fieldTypes).map((elem) => {

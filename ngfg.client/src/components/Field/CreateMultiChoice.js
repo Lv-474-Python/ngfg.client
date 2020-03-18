@@ -9,13 +9,13 @@ import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import {TextField} from "@material-ui/core";
 
 
-class CreateNumberField extends Component {
+class CreateMultiChoice extends Component {
     state = {
         "name": undefined,
-        "fieldType": 1,
-        "isStrict": false,
+        "fieldType": this.props.fieldType,
         "range_min": undefined,
         "range_max": undefined,
+        "choiceOptions": []
     };
 
     handleNameChange = (event) => {
@@ -24,24 +24,11 @@ class CreateNumberField extends Component {
         });
     };
 
-    handleChangeFieldType = (event) => {
-        this.setState({
-            fieldType: event.target.value
-        });
-    };
-
-    handleStrictChange = (event) => {
-        console.log(event.target);
-        this.setState({
-            isStrict: event.target.checked
-        });
-    };
-
     handleRangeMaxChange = (event) => {
         this.setState({
             'range_max': event.target.value
         });
-         if (event.target.value === "") {
+        if (event.target.value === "") {
             this.setState({'range_max': undefined});
         }
 
@@ -63,16 +50,22 @@ class CreateNumberField extends Component {
     };
 
     sendData = (event) => {
-        console.log('event.target');
         console.log(event.target);
-        console.log('this.state inside send');
         console.log(this.state);
-        const field = {
-            name: this.state.name,
-            fieldType: this.state.fieldType,
-            isStrict: this.state.isStrict,
-            range: {min: this.state.range_min, max: this.state.range_max}
-        };
+        if (this.state.fieldType === 6) {
+            var field = {
+                name: this.state.name,
+                fieldType: this.state.fieldType,
+                range: {min: this.state.range_min, max: this.state.range_max},
+                choiceOptions: this.state.choiceOptions
+            }
+        } else {
+            var field = {
+                name: this.state.name,
+                fieldType: this.state.fieldType,
+                choiceOptions: this.state.choiceOptions
+            }
+        }
         axios.post('http://ngfg.com:8000/api/v1/fields/', {...field}, {withCredentials: true})
             .then(res => {
                     console.log(res);
@@ -95,21 +88,17 @@ class CreateNumberField extends Component {
                            type="text"
                            onChange={this.handleNameChange}
                 />
-                <IsStrict onChange={this.handleStrictChange}
-                          value={this.state.isStrict}
-                />
-                <Range onChangeMin={this.handleRangeMinChange}
-                       onChangeMax={this.handleRangeMaxChange}
-                       maxValue={this.state.range_max}
-                       minValue={this.state.range_min}
+
+                {[6].includes(this.state.fieldType) && <Range onChangeMin={this.handleRangeMinChange}
+                                                              onChangeMax={this.handleRangeMaxChange}
+                                                              maxValue={this.state.range_max}
+                                                              minValue={this.state.range_min}
+                />}
+
+                <ChoiceOptionList setOptions={this.setOptions}
+                                  choiceOptions={this.state.choiceOptions}
                 />
 
-                {/*{*/}
-                {/*    [4, 6].includes(this.state.fieldType) &&*/}
-                {/*    <ChoiceOptionList setOptions={this.setOptions}*/}
-                {/*                      choiceOptions={this.state.choiceOptions}*/}
-                {/*    />*/}
-                {/*}*/}
                 <div>
                     <Button onClick={this.sendData}>
                         Send
@@ -121,4 +110,4 @@ class CreateNumberField extends Component {
     }
 }
 
-export default CreateNumberField;
+export default CreateMultiChoice;
