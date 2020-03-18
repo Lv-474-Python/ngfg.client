@@ -7,8 +7,8 @@ import LoginPage from './components/LoginPage/LoginPage';
 import Header from './components/Header/Header';
 import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
-import CreateField from './components/Field/CreateField'
-import OAuthRedirect from "./components/OAuthRedirect/OAuthRedirect";
+import CreateField from './components/Field/CreateField';
+import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
 
 
 class Routers extends Component {

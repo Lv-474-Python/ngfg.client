@@ -4,12 +4,14 @@ import {withRouter} from 'react-router-dom'
 import {AppBar, Button, Toolbar} from '@material-ui/core';
 
 import './Header.scss';
-import Link from "@material-ui/core/Link";
+import Login from "./Login";
+import Logout from "./Logout";
 
 
 class Header extends Component {
     state = {
-        'page': 'home'
+        'page': 'home',
+        'login': false
     };
 
     handleChange = (event, newValue) => {
@@ -39,11 +41,18 @@ class Header extends Component {
         console.log('groups click');
     }
 
-    handleLogoutClick = () => {
-        console.log('Log out click');
+    componentDidMount() {
+        let logged = sessionStorage.getItem('Logged');
+        logged = logged === 'true';
+        this.setState({'login': logged})
     }
 
+    handleLogin = () => {
+        return this.state.login ? <Logout /> : <Login/>
+    };
+
     render() {
+
         return (
             <div>
 
@@ -78,10 +87,7 @@ class Header extends Component {
                             Groups
                         </Button>
 
-                        <Link className='navbar__link'
-                              href='http://ngfg.com:8000/api/v1/auth/login?redirect_url=http://localhost:3000/oauth/redirect'>
-                            Log in
-                        </Link>
+                        {this.handleLogin()}
                     </Toolbar>
                 </AppBar>
             </div>
