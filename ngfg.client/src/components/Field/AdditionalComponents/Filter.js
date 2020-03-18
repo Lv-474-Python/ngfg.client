@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Typography from "@material-ui/core/Typography";
 
 class Filter extends Component {
 
@@ -51,7 +52,11 @@ class Filter extends Component {
     render() {
         return (
             <div className="filter-item">
-                <h3 className='filter-category'>Sort</h3>
+                <Typography className='filter-category'
+                            variant="p"
+                            component="p">
+                    Sort
+                </Typography>
                 <FormGroup >
                     <FormControlLabel
                         className='filter-typo'
@@ -68,7 +73,11 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <h3 className='filter-category'>Type</h3>
+                <Typography className='filter-category'
+                            variant="p"
+                            component="p">
+                    Type
+                </Typography>
                 <FormGroup className='filter-typo'>
                     <FormControlLabel
                         className='filter-typo'
@@ -158,7 +167,11 @@ class Filter extends Component {
                         label="Autocomplete"
                     />
                 </FormGroup>
-                <h3 className='filter-category'>Shared</h3>
+                <Typography className='filter-category'
+                            variant="p"
+                            component="p">
+                    Shared
+                </Typography>
                 <FormGroup>
                     <FormControlLabel
                         className='filter-typo'
