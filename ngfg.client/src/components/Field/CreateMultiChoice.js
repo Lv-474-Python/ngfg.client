@@ -50,19 +50,13 @@ class CreateMultiChoice extends Component {
     sendData = (event) => {
         console.log(event.target);
         console.log(this.state);
+        var field = {
+            name: this.state.name,
+            fieldType: this.state.fieldType,
+            choiceOptions: this.state.choiceOptions
+        };
         if (this.state.fieldType === 6) {
-            var field = {
-                name: this.state.name,
-                fieldType: this.state.fieldType,
-                range: {min: this.state.range_min, max: this.state.range_max},
-                choiceOptions: this.state.choiceOptions
-            }
-        } else {
-            var field = {
-                name: this.state.name,
-                fieldType: this.state.fieldType,
-                choiceOptions: this.state.choiceOptions
-            }
+            field.range = {min: this.state.range_min, max: this.state.range_max}
         }
         axios.post('http://ngfg.com:8000/api/v1/fields/', {...field}, {withCredentials: true})
             .then(res => {
