@@ -60,7 +60,7 @@ class CreateField extends Component {
                  />
                  {
                      [1, 2].includes(this.state.fieldType) &&
-                     <IsStrict onChange={   this.handleStrictChange}
+                     <IsStrict onChange={this.handleStrictChange}
                                value={this.state.isStrict}
                      />
                  }
