@@ -19,7 +19,7 @@ class ChoiceOptionList extends Component {
 
     onChange = (event, index)  => {
         let values = this.state.values;
-        values[index] = event.target.value
+        values[index] = event.target.value;
 
         this.setState({
             values
