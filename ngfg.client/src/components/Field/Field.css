@@ -92,8 +92,11 @@
     text-align: start;
     width: 20vw;
     height: 38vw;
+    position: sticky;
+    top: 1.5vmin;
     margin-top: 1vw;
     margin-right: 1vw !important;
+    border-radius: 5px;
     background-color: #37474F;
 
 }
