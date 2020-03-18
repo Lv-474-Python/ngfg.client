@@ -33,8 +33,8 @@ class Header extends Component {
     }
 
     handleFieldsClick = () => {
-        console.log('fields click');
-    }
+        this.props.history.push('/fields/');
+    };
 
     handleGroupsClick = () => {
         this.props.history.push('/groups/');
