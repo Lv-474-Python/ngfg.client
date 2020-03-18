@@ -42,7 +42,7 @@ class FormList extends Component {
         }
 
         forms.forEach(form => {
-            if (form.isPublished && publishedFilter || !form.isPublished && draftFilter) {
+            if ((form.isPublished && publishedFilter) || (!form.isPublished && draftFilter)) {
                 filteredForms.push(form);
             }
         });
