@@ -137,13 +137,13 @@ class FieldItem extends Component {
 
     render() {
         return (
-            <Card className={this.props.formCreation ? "field-card-item" : "narrow-field-card-item"}>
-                    <CardContent className={this.props.formCreation ? "field-card-content" : "narrow-field-card-content"}>
+            <Card className={"field-card-item"}>
+                    <CardContent className={"field-card-content"}>
                         <Typography className='field-typo' gutterBottom variant={this.props.formCreation? "h5" : "caption"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
-                        <Typography className={this.props.formCreation ? "field-typo": "narrow-field-typo"}
-                                    variant={this.props.formCreation? "h6": "caption"}
+                        <Typography className={"field-typo"}
+                                    variant={"caption"}
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -167,7 +167,7 @@ class FieldItem extends Component {
                             this.props.item.fieldType === 6 &&
                             this.getCheckboxField()
                         }
-                        <Typography className={this.props.formCreation ? "field-typo" : "narrow-field-typo"}
+                        <Typography className={"field-typo"}
                                     variant="caption"
                                     component="p">
                             Created: {new Date(this.props.item.created).toDateString()}
