@@ -5,6 +5,9 @@ import './Group.css'
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import axios from "axios";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
+
 class GroupItem extends Component {
     state = {
         ownerName: undefined
@@ -14,7 +17,7 @@ class GroupItem extends Component {
     };
 
     getOwnerName = () => {
-        axios.get(`http://ngfg.com:8000/api/v1/users/${this.props.item.ownerId}`, {
+        axios.get(`${API_URL}/${API_VERSION}/groups/${this.props.item.ownerId}`, {
             withCredentials: true,
         })
             .then(res => {

@@ -14,15 +14,14 @@
     display: flex;
     flex-wrap: wrap;
     background-color: #37474f;
-    width: 22vmin;
-    height: 22vmin;
+    width: 20vw;
+    height: 25vmin;
     margin: 1.5vmin;
     position: -webkit-sticky;
     position: sticky;
     top: 1.5vmin;
     color: #f9a825 !important;
     justify-content: center !important;
-    border-radius: 0.5vmin;
 }
 
 .group-item {

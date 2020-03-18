@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
+c
 class GroupView extends Component {
     state = {
         "id": undefined,
@@ -12,7 +15,7 @@ class GroupView extends Component {
     }
 
     getGroupData = () => {
-        axios.get(`http://ngfg.com:8000/api/v1/groups/${this.props.match.params.id}`, {
+        axios.get(`${API_URL}/${API_VERSION}/groups/${this.props.match.params.id}`, {
             withCredentials: true,
         })
             .then(res => {
