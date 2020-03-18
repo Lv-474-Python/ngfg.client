@@ -16,6 +16,7 @@ const FIELD_TYPES = {
     6: 'Checkbox'
 }
 
+
 class FieldItem extends Component {
 
     getFieldName = () => {
@@ -27,11 +28,12 @@ class FieldItem extends Component {
         let item = null
         if (text.length > limit) {
             const cut_text = text.substring(0, limit - 3) + "..."
-            item = (<Tooltip title={text} placement="top-end" arrow>
-                <div className={className}>
-                    {cut_text}
-                </div>
-            </Tooltip>
+            item = (
+                <Tooltip title={text} placement="top-end" arrow>
+                    <div className={className}>
+                        {cut_text}
+                    </div>
+                </Tooltip>
             )
         } else {
             item = (<div className={className}>
@@ -60,15 +62,13 @@ class FieldItem extends Component {
 
                 <div className="field-item__buttons">
                     <Button className="field-item__buttons__more"
-                            onClick={this.props.onViewMoreClick}
-                    >
+                            onClick={this.props.onViewMoreClick}>
                         View more
                     </Button>
 
                     <Button className="field-item__buttons__share"
                             endIcon={<SendIcon>send</SendIcon>}
-                            onClick={this.props.onShareClick}
-                    >
+                            onClick={this.props.onShareClick}>
                         Share
                     </Button>
                 </div>

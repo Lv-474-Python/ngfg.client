@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
 
-import { AppBar, Button, Toolbar } from '@material-ui/core';
+import { 
+    AppBar, 
+    Button, 
+    Toolbar 
+} from '@material-ui/core';
 
 import './Header.scss';
 
@@ -47,41 +51,29 @@ class Header extends Component {
     render() {
         return (
             <div>
-
                 <AppBar className="navbar"
-                    position="static"
-                >
+                        position="static">
                     <Toolbar className="navbar__toolbar">
                         <Button className="navbar__logo"
-                                onClick={this.handleLogoClick}
-                        >
+                                onClick={this.handleLogoClick}>
                             NgFg
                         </Button>
 
-                        {/* <Link className="navbar__link"
-                            component="button">
-                            Forms
-                        </Link> */}
-
                         <Button className="navbar__link"
-                                onClick={this.handleFormsClick}
-                        >
+                                onClick={this.handleFormsClick}>
                             Forms
                         </Button>
                         <Button className="navbar__link"
-                                onClick={this.handleFieldsClick}
-                        >
+                                onClick={this.handleFieldsClick}>
                             Fields
                         </Button>
                         <Button className="navbar__link"
-                                onClick={this.handleGroupsClick}
-                        >
+                                onClick={this.handleGroupsClick}>
                             Groups
                         </Button>
 
                         <Button className="navbar__btn"
-                            onClick={this.handleLogoutClick}
-                        >
+                                onClick={this.handleLogoutClick}>
                             Log Out
                         </Button>
                     </Toolbar>

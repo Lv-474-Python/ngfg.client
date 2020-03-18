@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import {Button, Tooltip} from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 
 import FormItemList from './FormItemList';
 import FieldItemList from './FieldItemList';
@@ -20,19 +20,23 @@ class HomePage extends Component {
     }
 
     getData = () => {
-        
+
         axios.get(`${API_URL}/${API_VERSION}/forms/`, {
             withCredentials: true,
         }).then(res => {
             const forms = res.data.forms.reverse().slice(0, LIMIT_ITEMS_NUMBER);
             this.setState({ forms })
+        }).catch(error => {
+            console.log(error);
         })
 
         axios.get(`${API_URL}/${API_VERSION}/fields/`, {
             withCredentials: true,
         }).then(res => {
             const fields = res.data.fields.reverse().slice(0, LIMIT_ITEMS_NUMBER);
-            this.setState({ fields })   
+            this.setState({ fields })
+        }).catch(error => {
+            console.log(error);
         })
     }
 
@@ -68,8 +72,7 @@ class HomePage extends Component {
                         {/* Це посиланням має бути */}
                         <Tooltip title="Check full list" placement="top-end" arrow>
                             <Button className="home__forms__title" 
-                                    onClick={this.handleFormsTitleClick}
-                            >
+                                    onClick={this.handleFormsTitleClick}>
                                 Forms
                             </Button>
                         </Tooltip>
@@ -84,8 +87,7 @@ class HomePage extends Component {
                     <div className="home__fields">
                         <Tooltip title="Check full list" placement="top-end" arrow>
                             <Button className="home__fields__title" 
-                                    onClick={this.handleFieldsTitleClick}
-                            >
+                                    onClick={this.handleFieldsTitleClick}>
                                 Fields
                             </Button>
                         </Tooltip>
