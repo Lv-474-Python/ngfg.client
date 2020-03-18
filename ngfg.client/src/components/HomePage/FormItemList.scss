@@ -1,0 +1,6 @@
+.forms-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap; // flex-direction, -wrap
+    justify-content: space-between;
+}
