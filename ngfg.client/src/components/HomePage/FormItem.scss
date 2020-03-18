@@ -38,7 +38,7 @@
         align-items: flex-end;
         justify-content: space-between;
 
-        &__more, 
+        &__more,
         &__share {
             padding: 0.4vmin 1.2vmin !important;
 
@@ -48,7 +48,7 @@
             text-transform: capitalize !important;
         }
 
-        &__more:hover, 
+        &__more:hover,
         &__share:hover {
             color: $formItemButtonHoverColor !important;
             background-color: $formItemButtonHoverBackgroundColor !important;
