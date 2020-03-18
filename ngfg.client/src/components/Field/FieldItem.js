@@ -20,6 +20,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SendIcon from '@material-ui/icons/Send';
+import Popup from "reactjs-popup";
+import CreateField from "./CreateField";
 
 const fieldTypes = {
     'Number': 1,
@@ -192,14 +194,23 @@ class FieldItem extends Component {
                             endIcon={<EditIcon/>}>
                             Edit
                         </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className='field-button'
-                            endIcon={<DeleteIcon/>}>
-                            Delete
-                        </Button>
+                        <Popup trigger={
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size="small"
+                                className='field-button'
+                                endIcon={<DeleteIcon/>}>
+                                Delete
+                            </Button>}
+                               className='create-popup'
+                               modal>
+                            {
+                                () => {
+                                    return (<CreateField/>)
+                                }
+                            }
+                        </Popup>
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&
