@@ -35,7 +35,7 @@ class GroupList extends Component {
     searchGroups = (groups, search) => {
         if (search !== "") {
             let searchGroup = [];
-            groups.map(group => {
+            groups.forEach(group => {
                 if (group.name.toLowerCase().includes(search.toLowerCase())) {
                     searchGroup.push(group)
                 }
