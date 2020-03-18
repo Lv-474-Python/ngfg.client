@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Button from "@material-ui/core/Button";
-import Filter from "./AdditionalComponent/Filter";
 import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
 import GroupItem from "./GroupItem";
@@ -14,10 +13,6 @@ class GroupList extends Component {
     state = {
         groups: [],
         filteredGroups: [],
-        filter: {
-            'Published': false,
-            'Draft': false
-        },
         search: "",
         sortKey: "Name"
     };
@@ -29,35 +24,12 @@ class GroupList extends Component {
             .then(res => {
                 const groups = res.data.groups;
                 console.log(groups)
-                this.setState({groups})
+                this.setState({groups: groups, filteredGroups: groups})
             });
     };
 
     filterGroup = (groups, filter) => {
-        let filteredGroups = [];
-        let publishedFilter = filter['Published'];
-        let draftFilter = filter['Draft'];
-
-        if ((!publishedFilter && !draftFilter) || (publishedFilter && draftFilter)) {
-            return groups;
-        }
-
-        groups.map(group => {
-            if (group.isPublished && publishedFilter || !group.isPublished && draftFilter) {
-                filteredGroups.push(group);
-            }
-        });
-
-        return filteredGroups;
-    };
-
-    handleFilter = (filter) => {
-        let searchGroups = this.searchGroups(this.state.groups, this.state.search);
-        let filteredGroups = this.filterGroup(searchGroups, filter);
-        this.setState({
-            filter: filter,
-            filteredGroups: filteredGroups
-        });
+        return groups
     };
 
     searchGroups = (groups, search) => {
@@ -74,21 +46,17 @@ class GroupList extends Component {
     };
 
     handleSearch = (searchValue) => {
-        let filteredGroups = this.filterGroup(this.state.groups, this.state.filter);
-        let searchGroups = this.searchGroups(filteredGroups, searchValue);
-        this.setState({ filteredGroups: searchGroups })
+        let searchGroups = this.searchGroups(this.state.groups, searchValue);
+        this.setState({filteredGroups: searchGroups})
     };
 
     sortGroups = (groups, sortKey, ascending) => {
-        if (sortKey === 'Name') {
+        if (sortKey === 'By Name') {
             groups.sort((group1, group2) => {
                 return group1.name.toLowerCase().localeCompare(group2.name.toLowerCase())
             });
 
             return ascending ? groups : groups.reverse()
-        }
-        if (sortKey === 'Date') {
-            return groups
         }
     };
 
@@ -110,13 +78,8 @@ class GroupList extends Component {
         return (
             <div className='group-list-wrapper'>
                 <div className="side-menu">
-                    <Sort sortValue={["Name", "Date"]}
+                    <Sort sortValue={["By Name"]}
                           handleSort={this.handleSort}/>
-
-                    <Filter filterName="Status"
-                            checkboxValue={["Published", "Draft"]}
-                            handleFilter={this.handleFilter}/>
-
                     <Button className="create-group-btn"
                             size='large'>
                         Create Group
@@ -124,9 +87,9 @@ class GroupList extends Component {
                 </div>
                 <div>
                     <SearchBar onChange={(newValue) => {
-                                   this.handleSearch(newValue);
-                                   this.setState({search: newValue});
-                               }}
+                        this.handleSearch(newValue);
+                        this.setState({search: newValue});
+                    }}
                                onRequestSearch={() => {
                                    this.handleSearch(this.state.search)
                                }}
@@ -135,9 +98,9 @@ class GroupList extends Component {
 
                     <div className='group-list'>
                         {
-                            this.state.groups.map(group =>
+                            this.state.filteredGroups.map(group =>
                                 <GroupItem item={group}
-                                          key={group.id}/>
+                                           key={group.id}/>
                             )
                         }
                     </div>

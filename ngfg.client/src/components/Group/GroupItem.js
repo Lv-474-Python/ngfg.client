@@ -19,10 +19,10 @@ class GroupItem extends Component {
         })
             .then(res => {
                 const ownerName = res.data.username;
-                console.log(ownerName)
                 this.setState({ownerName})
             });
     };
+
     componentDidMount() {
         this.getOwnerName(this.props.item.ownerId);
     }
@@ -36,6 +36,7 @@ class GroupItem extends Component {
                                 className='group-item-header'>
                         {this.props.item.name}
                     </Typography>
+                    <br/>
                     <Typography variant="p"
                                 component="p"
                                 className='group-item-content'>
@@ -46,8 +47,6 @@ class GroupItem extends Component {
                                 className='group-item-content'>
                         members: {this.props.item.users.length}
                     </Typography>
-
-                    {/*<PublishField published={this.props.item.isPublished} />*/}
                 </CardContent>
 
                 <CardActions>
