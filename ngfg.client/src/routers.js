@@ -19,10 +19,6 @@ class Routers extends Component {
             <BrowserRouter>
                 <Header/>
                 <Switch>
-                    <Route path='/login'
-                           component={LoginPage}
-
-                    />
                     <Route path='/forms/:id'
                            component={FormView}
 
