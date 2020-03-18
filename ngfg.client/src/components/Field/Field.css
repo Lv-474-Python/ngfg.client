@@ -91,7 +91,7 @@
     flex-direction: column;
     text-align: start;
     width: 20vw;
-    height: 40vw;
+    height: 38vw;
     margin-top: 1vw;
     margin-right: 1vw !important;
     background-color: #37474F;
@@ -116,6 +116,13 @@
     margin: 1.5vw !important;
     margin-bottom: 0 !important;
     color: #F9A825 !important;
+}
+
+.filter-create-btn {
+    margin-top: 3vw !important;
+    margin-left: 5vw !important;
+    width: 10vw !important;
+    background-color: #F9A825 !important;
 }
 
 /* Search bar */
