@@ -71,7 +71,7 @@ class CreateNumberOrTextField extends Component {
     render() {
         return (
             <div>
-                <TextField label="Enter Form Name:"
+                <TextField label="Enter field name:"
                            type="text"
                            onChange={this.handleNameChange}
                 />
