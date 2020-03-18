@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
-import { AppBar, Button, Toolbar } from '@material-ui/core';
+import {AppBar, Button, Toolbar} from '@material-ui/core';
 
 import './Header.scss';
+import Login from "./Login";
+import Logout from "./Logout";
 
 
 class Header extends Component {
     state = {
-        'page': 'home'
+        'page': 'home',
+        'login': false
     };
 
     handleChange = (event, newValue) => {
@@ -27,10 +30,8 @@ class Header extends Component {
     }
 
     handleFormsClick = () => {
-        console.log('forms click');
-        console.log(this.props.history);
-        // this.props.history.push('/forms/');
-    }
+        this.props.history.push('/forms/');
+    };
 
     handleFieldsClick = () => {
         this.props.history.push('/fields/');
@@ -40,16 +41,23 @@ class Header extends Component {
         console.log('groups click');
     }
 
-    handleLogoutClick = () => {
-        console.log('Log out click');
+    componentDidMount() {
+        let logged = sessionStorage.getItem('Logged');
+        logged = logged === 'true';
+        this.setState({'login': logged})
     }
 
+    handleLogin = () => {
+        return this.state.login ? <Logout /> : <Login/>
+    };
+
     render() {
+
         return (
             <div>
 
                 <AppBar className="navbar"
-                    position="static"
+                        position="static"
                 >
                     <Toolbar className="navbar__toolbar">
                         <Button className="navbar__logo"
@@ -79,11 +87,7 @@ class Header extends Component {
                             Groups
                         </Button>
 
-                        <Button className="navbar__btn"
-                            onClick={this.handleLogoutClick}
-                        >
-                            Log Out
-                        </Button>
+                        {this.handleLogin()}
                     </Toolbar>
                 </AppBar>
             </div>
