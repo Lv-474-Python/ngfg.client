@@ -4,6 +4,8 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import {TextField} from "@material-ui/core";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class CreateTextArea extends Component {
     state = {
@@ -22,7 +24,7 @@ class CreateTextArea extends Component {
             name: this.state.name,
             fieldType: this.state.fieldType
         };
-        axios.post('http://ngfg.com:8000/api/v1/fields/', {...field}, {withCredentials: true})
+        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
             .then(res => {
                     console.log(res);
                     console.log(res.data);

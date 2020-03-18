@@ -6,6 +6,8 @@ import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
 import {TextField} from "@material-ui/core";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class CreateNumberOrTextField extends Component {
     state = {
@@ -55,7 +57,7 @@ class CreateNumberOrTextField extends Component {
             isStrict: this.state.isStrict,
             range: {min: this.state.range_min, max: this.state.range_max}
         };
-        axios.post('http://ngfg.com:8000/api/v1/fields/', {...field}, {withCredentials: true})
+        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
             .then(res => {
                     console.log(res);
                     console.log(res.data);

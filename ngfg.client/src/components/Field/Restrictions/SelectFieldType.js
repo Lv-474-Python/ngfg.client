@@ -38,7 +38,6 @@ class SelectFieldType extends Component {
                             Object.entries(fieldTypes).map((elem) => {
                                 // elem[0] - key (Number, Text)
                                 // elem[1] - value (1, 2, 3, ...)
-                                console.log('changed type');
                                 return <option value={elem[1]} key={elem[1]}>{elem[0]}</option>
                             })
                         }

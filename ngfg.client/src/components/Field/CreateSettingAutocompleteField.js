@@ -6,15 +6,17 @@ import SettingAutocomplete from './Restrictions/SettingAutocomplete'
 import Button from '@material-ui/core/Button';
 import {TextField} from "@material-ui/core";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class CreateSettingAutocompleteField extends Component {
     state = {
         "name": undefined,
         "fieldType": 5,
-        "settingAutocomplete_dataUrl": undefined,
-        "settingAutocomplete_sheet": undefined,
-        "settingAutocomplete_fromRow": undefined,
-        "settingAutocomplete_toRow": undefined
+        "dataUrl": undefined,
+        "sheet": undefined,
+        "fromRow": undefined,
+        "toRow": undefined
     };
 
     handleNameChange = (event) => {
@@ -25,25 +27,25 @@ class CreateSettingAutocompleteField extends Component {
 
     handleDataURL = (event) => {
         this.setState({
-            settingAutocomplete_dataUrl: event.target.value
+            dataUrl: event.target.value
         })
     };
 
     handleSheet = (event) => {
         this.setState({
-            settingAutocomplete_sheet: event.target.value
+            sheet: event.target.value
         })
     };
 
     handleFromRow = (event) => {
         this.setState({
-            settingAutocomplete_fromRow: event.target.value
+            fromRow: event.target.value
         })
     };
 
     handleToRow = (event) => {
         this.setState({
-            settingAutocomplete_toRow: event.target.value
+            toRow: event.target.value
         })
     };
 
@@ -52,13 +54,13 @@ class CreateSettingAutocompleteField extends Component {
             name: this.state.name,
             fieldType: this.state.fieldType,
             settingAutocomplete: {
-                dataUrl: this.state.settingAutocomplete_dataUrl,
-                sheet: this.state.settingAutocomplete_sheet,
-                fromRow: this.state.settingAutocomplete_fromRow,
-                toRow: this.state.settingAutocomplete_toRow
+                dataUrl: this.state.dataUrl,
+                sheet: this.state.sheet,
+                fromRow: this.state.fromRow,
+                toRow: this.state.toRow
             }
         };
-        axios.post('http://ngfg.com:8000/api/v1/fields/', {...field}, {withCredentials: true})
+        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
             .then(res => {
                     console.log(res);
                     console.log(res.data);
