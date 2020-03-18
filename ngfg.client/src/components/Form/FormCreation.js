@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {InputLabel, Input, TextField} from "@material-ui/core";
-import Radio from '@material-ui/core/Radio';
+import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 class FormCreation extends Component {
@@ -38,6 +36,7 @@ class FormCreation extends Component {
         this.setState({
             isPublished: true
         });
+        this.save(event);
     }
 
     save = () => {
@@ -58,34 +57,25 @@ class FormCreation extends Component {
             );
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
-
-        this.setState({...data});
-        axios.post('http://ngfg.com:8000/api/v1/forms/',
-            {
-                name: this.state.name,
-                title: this.state.title,
-                resultUtl: this.state.resultUrl,
-                isPublished: this.state.isPublished
-            },
-            {withCredentials: true})
-            .then ( res => {
-                    console.log(res);
-                }
-            )
-            .catch ( error => {
-                console.log(error);
-                }
-            );
-    }
-
 
     render() {
         return(
             <div className="form-container">
                 <FormControl>
+                    <div className="form-btn-container">
+                        <Button onClick={this.handlePublish}
+                                className="form-creation-btn"
+                        >
+                            Publish
+                        </Button>
+                        <Button onClick={this.save}
+                                className="form-creation-btn"
+                        >
+                            Save
+                        </Button>
+                    </div>
+
+                    <div className="form-creation-card">
                     <TextField
                         label="Enter Form Name:"
                         type="text"
@@ -101,17 +91,11 @@ class FormCreation extends Component {
                         type="url"
                         onChange={this.handleResultUrlChange}
                     />
-                    <Button onClick={this.handlePublish}>
-                        Publish
-                    </Button>
-                    <Button onClick={this.save}>
-                        Save
-                    </Button>
+                    </div>
                 </FormControl>
             </div>
         )
     }
-
 }
 
 export default FormCreation;
