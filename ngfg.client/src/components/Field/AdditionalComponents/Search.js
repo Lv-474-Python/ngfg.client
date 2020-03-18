@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import Paper from "@material-ui/core/Paper";
+
+import {Paper, InputBase} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 
 class Search extends Component {
 
