@@ -31,6 +31,10 @@ class Routers extends Component {
                            component={FieldsPage}
 
                         />
+                    <Route path='/fields'
+                           component={FieldsPage}
+
+                        />
                     <Route path='/field'
                            component={CreateField}
 
