@@ -34,8 +34,8 @@ class Filter extends Component {
         return (
             <div className='filter'>
                 <Typography className='filter-title'
-                            variant="h5"
-                            component="h2">
+                            variant="inherit"
+                            component="p">
                     {this.props.filterName}
                 </Typography>
                 <FormGroup className='filter-content'>

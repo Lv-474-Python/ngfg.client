@@ -5,9 +5,10 @@
 .sort-title {
     display: flex;
     justify-content: left;
+    font-size: 1.5vw !important;
 }
 
-.sort-content{
+.sort-content {
     margin-left: 3vmin;
 }
 

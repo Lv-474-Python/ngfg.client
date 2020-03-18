@@ -26,8 +26,8 @@ class Sort extends Component {
         return (
             <div className='sort'>
                 <Typography className='sort-title'
-                            variant="h5"
-                            component="h2">
+                            variant="inherit"
+                            component="p">
                     Sort
                 </Typography>
 
