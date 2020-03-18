@@ -9,7 +9,7 @@ class OAuthRedirect extends Component {
         axios.get(CALLBACK_URI + this.props.location.search, {
             withCredentials: true
         }).then((res) => {
-            sessionStorage.setItem('Logged', 'true');
+            localStorage.setItem('Logged', 'true');
             window.location.href = '/'
         }).catch((error) => {
             console.log(error)

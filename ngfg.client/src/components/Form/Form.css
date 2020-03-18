@@ -48,6 +48,10 @@
     margin-bottom: 1.5vmin !important;
 }
 
+.form-item-link :hover {
+    color: #F9A825 !important;
+}
+
 .create-form-btn {
     background-color: #f9a825 !important;
     color: #37474f !important;
