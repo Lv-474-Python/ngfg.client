@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
-import SelectFieldType from './Restrictions/SelectFieldType';
-import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import {TextField} from "@material-ui/core";

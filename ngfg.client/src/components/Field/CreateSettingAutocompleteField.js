@@ -68,8 +68,7 @@ class CreateSettingAutocompleteField extends Component {
                     console.log(error);
                 }
             );
-    }
-    ;
+    };
 
     render() {
         console.log('this.state');
@@ -84,7 +83,6 @@ class CreateSettingAutocompleteField extends Component {
                                      onChangeSheet={this.handleSheet}
                                      onChangeFromRow={this.handleFromRow}
                                      onChangeToRow={this.handleToRow}
-
                 />
                 <div>
                     <Button onClick={this.sendData}>
@@ -92,7 +90,6 @@ class CreateSettingAutocompleteField extends Component {
                     </Button>
                 </div>
             </div>
-
         );
     }
 }

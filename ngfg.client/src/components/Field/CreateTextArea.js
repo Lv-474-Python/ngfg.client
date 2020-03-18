@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
-import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import {TextField} from "@material-ui/core";
 
 
@@ -18,16 +17,7 @@ class CreateTextArea extends Component {
         });
     };
 
-
-    setOptions = (choiceOptions) => {
-        this.setState({
-            choiceOptions
-        })
-    };
-
-    sendData = (event) => {
-        console.log(event.target);
-        console.log(this.state);
+    sendData = () => {
         const field = {
             name: this.state.name,
             fieldType: this.state.fieldType

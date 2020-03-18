@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
-import SelectFieldType from './Restrictions/SelectFieldType';
 import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
-import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import {TextField} from "@material-ui/core";
 
 
@@ -21,12 +19,6 @@ class CreateNumberOrTextField extends Component {
     handleNameChange = (event) => {
         this.setState({
             name: event.target.value
-        });
-    };
-
-    handleChangeFieldType = (event) => {
-        this.setState({
-            fieldType: event.target.value
         });
     };
 
@@ -56,15 +48,7 @@ class CreateNumberOrTextField extends Component {
         }
     };
 
-    setOptions = (choiceOptions) => {
-        this.setState({
-            choiceOptions
-        })
-    };
-
-    sendData = (event) => {
-        console.log(event.target);
-        console.log(this.state);
+    sendData = () => {
         const field = {
             name: this.state.name,
             fieldType: this.state.fieldType,
@@ -85,8 +69,6 @@ class CreateNumberOrTextField extends Component {
     ;
 
     render() {
-        console.log('this.state');
-        console.log(this.state);
         return (
             <div>
                 <TextField label="Enter Form Name:"
@@ -101,13 +83,6 @@ class CreateNumberOrTextField extends Component {
                        maxValue={this.state.range_max}
                        minValue={this.state.range_min}
                 />
-
-                {/*{*/}
-                {/*    [4, 6].includes(this.state.fieldType) &&*/}
-                {/*    <ChoiceOptionList setOptions={this.setOptions}*/}
-                {/*                      choiceOptions={this.state.choiceOptions}*/}
-                {/*    />*/}
-                {/*}*/}
                 <div>
                     <Button onClick={this.sendData}>
                         Send
