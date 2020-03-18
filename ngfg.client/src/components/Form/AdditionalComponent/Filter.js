@@ -41,6 +41,7 @@ class Filter extends Component {
                 <FormGroup className='filter-content'>
                     {this.props.checkboxValue.map(elem =>
                         <FormControlLabel
+                            key={elem}
                             label={elem}
                             control={<Checkbox className='filter-form-item'
                                                onChange={(event) =>

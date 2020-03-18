@@ -35,8 +35,9 @@ class Sort extends Component {
                     {this.props.sortValue.map(elem =>
                         <Typography className="sort-item"
                                     onClick={this.handleClick}
-                                    variant="p"
-                                    component="p">
+                                    variant="inherit"
+                                    component="p"
+                                    key={elem}>
                             {elem}
                         </Typography>
                     )}

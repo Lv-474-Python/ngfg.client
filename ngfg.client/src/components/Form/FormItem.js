@@ -20,7 +20,7 @@ class FormItem extends Component {
                                 className='form-item-content'>
                         {this.props.item.name}
                     </Typography>
-                    <Typography variant="p"
+                    <Typography variant="inherit"
                                 component="p"
                                 className='form-item-content'>
                         {this.props.item.title}

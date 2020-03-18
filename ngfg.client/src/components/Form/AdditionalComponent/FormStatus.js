@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 class FormStatus extends Component {
     render() {
         return (
-            <Typography variant="p"
+            <Typography variant="inherit"
                         component="p"
                         className='form-item-content'>
                 Status: {this.props.published ? "Published": "Draft"}
