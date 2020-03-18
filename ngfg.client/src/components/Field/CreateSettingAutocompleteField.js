@@ -71,8 +71,6 @@ class CreateSettingAutocompleteField extends Component {
     };
 
     render() {
-        console.log('this.state');
-        console.log(this.state);
         return (
             <div>
                 <TextField label="Enter field name:"

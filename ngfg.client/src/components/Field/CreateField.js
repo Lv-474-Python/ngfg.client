@@ -22,31 +22,8 @@ class CreateField extends Component {
     };
 
     render() {
-        console.log('this.state');
-        console.log(this.state);
         return (
             <div>
-                {/*<SelectFieldType onChange={this.handleChangeFieldType}*/}
-                {/*                 fieldType={this.state.fieldType}*/}
-                {/*/>*/}
-                {/*{*/}
-                {/*    [1].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={1}/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    [2].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={2}/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    [3].includes(this.state.fieldType) && <CreateTextArea/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    [4].includes(this.state.fieldType) && <CreateMultiChoice fieldType={4}/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    [5].includes(this.state.fieldType) && <CreateSettingAutocompleteField/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    [6].includes(this.state.fieldType) && <CreateMultiChoice fieldType={6}/>*/}
-                {/*}*/}
                 <Popup trigger={<button className="button"> Create Field </button>} modal>
                     {close => (
                         <div className="modal">

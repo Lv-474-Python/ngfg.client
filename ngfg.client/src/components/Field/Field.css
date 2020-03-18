@@ -1,3 +1,153 @@
+/* Field item */
+
+.field-card-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: normal;
+    width: 50vw;
+    margin: 1vw;
+    margin-bottom: 2vw !important;
+    border-radius: 0 !important;
+    background-color: #F9A825 !important;
+}
+.field-card-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0.5vw;
+    width: 35vw;
+}
+
+.field-card-actions {
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 0.8vw;
+}
+
+.field-button {
+    width: 7vmax;
+    margin-bottom: 5px !important;
+    background-color: #37474F !important;
+}
+
+.field-button :hover {
+    color: #F9A825 !important;
+}
+
+.field-typo {
+    width: 100%;
+    text-align: start;
+}
+
+.field-checkbox {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.field-expand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+    border-radius: 0 !important;
+    background-color: #F9A825 !important;
+}
+
+.field-expand-summary {
+    min-height: 3vw !important;
+    height: 3.5vw !important;
+    padding: 0 0.8vw 0 0.8vw !important;
+}
+
+.field-expand-details {
+    margin-top: -1vw !important;
+}
+
+.choice-typo {
+    text-align: start !important;
+    margin-left: 3vw !important;
+    width: 50vw !important;
+}
+
+.field-link{
+    color: #000000 !important;
+}
+
+/* Filter */
+
+.filter-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    width: 30vw;
+    float: left;
+}
+
+.filter-item {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-direction: column;
+    text-align: start;
+    width: 20vw;
+    height: 40vw;
+    margin-top: 1vw;
+    margin-right: 1vw !important;
+    background-color: #37474F;
+
+}
+
+.filter-typo {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #F9A825 !important;
+}
+
+.filter-checkbox {
+    margin-left: 3vw !important;
+    padding: 0.1vw !important;
+    color: #F9A825 !important;
+}
+
+.filter-category {
+    width: 100%;
+    font-size: 1.5vw !important;
+    margin: 1.5vw !important;
+    margin-bottom: 0 !important;
+    color: #F9A825 !important;
+}
+
+/* Search bar */
+
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1vw;
+    margin-left: 1vw;
+    width: 50vw;
+    height: 4vw;
+    border-radius: 0 !important;
+}
+
+.search-icon {
+    font-size: 2.5vw !important;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+/* Fields page */
+
+.fields-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.not-found {
+    margin-left: 1vw;
+}
+
 .modal > .close {
   cursor: pointer;
   position: absolute;

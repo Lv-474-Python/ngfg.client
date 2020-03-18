@@ -47,9 +47,7 @@ class CreateMultiChoice extends Component {
         })
     };
 
-    sendData = (event) => {
-        console.log(event.target);
-        console.log(this.state);
+    sendData = () => {
         var field = {
             name: this.state.name,
             fieldType: this.state.fieldType,
