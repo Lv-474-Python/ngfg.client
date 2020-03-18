@@ -42,7 +42,7 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        let logged = localStorage.getItem('Logged');
+        let logged = sessionStorage.getItem('Logged');
         logged = logged === 'true';
         this.setState({'login': logged})
     }

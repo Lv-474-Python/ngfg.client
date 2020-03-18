@@ -10,7 +10,7 @@ class Logout extends Component {
         axios.get(LOGOUT_URL, {
             withCredentials: true
         }).then(response => {
-            localStorage.setItem('Logged', 'false');
+            sessionStorage.setItem('Logged', 'false');
             window.location.href = '/'
         }).catch(error => {
             console.log(error)
