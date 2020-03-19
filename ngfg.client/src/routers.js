@@ -10,7 +10,8 @@ import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField';
 import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
 import FormCreationPage from "./components/Form/FormCreationPage";
-
+import GroupList from './components/Group/GroupList'
+import GroupView from "./components/Group/GroupView";
 
 class Routers extends Component {
 
@@ -43,6 +44,14 @@ class Routers extends Component {
                     <Route path='/oauth/redirect'
                            component={OAuthRedirect}
                     />
+                    <Route path='/groups/:id'
+                        component={GroupView}
+
+                        />
+                    <Route path='/groups'
+                        component={GroupList}
+
+                        />
                     <Route path='/'
                            component={HomePage}
 
