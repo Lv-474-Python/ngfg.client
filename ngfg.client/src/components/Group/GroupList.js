@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
 import GroupItem from "./GroupItem";
-import FieldItem from "../Field/FieldItem";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
