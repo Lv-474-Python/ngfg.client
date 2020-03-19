@@ -199,7 +199,7 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <CreateWindow text={'Create field'}/>
+                <CreateWindow text={'Create field'} getData={this.props.getData}/>
             </div>
         )
     }
