@@ -137,8 +137,6 @@ class FieldItem extends Component {
     };
 
     render() {
-        console.log(this.props)
-        console.log(this.props.formCreation)
         return (
             <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
                     <CardContent className={this.props.formCreation ? "narrow-field-card-content" : "field-card-content"}>
@@ -180,7 +178,7 @@ class FieldItem extends Component {
                     <CardActions className='field-card-actions'>
                         <br/>
                         {this.props.formCreation
-                        ? <div>
+                            ? <div className="fields-button-grouper">
                                 <Button
                                     variant="contained"
                                     size="small"
@@ -190,7 +188,7 @@ class FieldItem extends Component {
                                     Add
                                 </Button>
                             </div>
-                        : <div>
+                            : <div className="fields-button-grouper">
                                 <Button
                                     variant="contained"
                                     size="small"

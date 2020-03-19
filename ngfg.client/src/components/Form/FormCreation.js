@@ -42,7 +42,7 @@ class FormCreation extends Component {
     }
 
     save = () => {
-        axios.post(`http://ngfg.com:8000/api/v1/forms`, {
+        axios.post(`http://ngfg.com:8000/api/v1/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
                 resultUrl: this.state.resultUrl,

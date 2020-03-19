@@ -109,10 +109,6 @@ html, body {
     color: #000 !important;
 }
 
-.form-creation-field {
-    width: 90vh !important;
-}
-
 .main-form-creation-container{
     display: flex;
 }
@@ -128,3 +124,6 @@ html, body {
     margin-left: 5vh;
 }
 
+.form-creation-fieldlist {
+    background-color: #263238;
+}

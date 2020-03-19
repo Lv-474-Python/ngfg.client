@@ -120,6 +120,20 @@
 
 }
 
+.narrow-filter-item {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-direction: column;
+    text-align: start;
+    width: 30vh;
+    height: 100%;
+    position: sticky;
+    top: 1.5vmin;
+    margin-top: 1vw;
+    margin-right: 1vw !important;
+    background-color: #37474F;
+}
+
 .filter-typo {
     margin: 0 !important;
     padding: 0 !important;
@@ -191,4 +205,9 @@
   background: #ffffff;
   border-radius: 18px;
   border: 1px solid #cfcece;
+}
+
+.fields-button-grouper {
+    display: flex;
+    flex-direction: column;
 }
