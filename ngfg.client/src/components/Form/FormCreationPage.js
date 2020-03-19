@@ -3,6 +3,10 @@ import FormCreation from './FormCreation';
 import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
+import axios from "axios";
+
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class FormCreationPage extends Component {
 
@@ -23,7 +27,19 @@ class FormCreationPage extends Component {
           shared: true,
           my: true
         },
-        search: undefined
+        search: undefined,
+        fields: []
+    };
+
+
+    getData = () => {
+        axios.get(`${API_URL}/${API_VERSION}/fields`, {
+            withCredentials: true,
+        })
+            .then(res => {
+                const fields = res.data.fields;
+                this.setState({fields})
+            })
     };
 
     handleFilter = (filter) => {
@@ -42,6 +58,10 @@ class FormCreationPage extends Component {
         this.setState({search: value});
     };
 
+    componentDidMount() {
+        this.getData();
+    }
+
     render() {
         return (
         <div className="main-form-creation-container">
@@ -53,7 +73,8 @@ class FormCreationPage extends Component {
                     sort={this.state.sort}
                     handleShared={this.handleShared}
                     shared={this.state.shared}
-                    formCreation={true}/>
+                    formCreation={true}
+                    getData={this.getData}/>
             </div>
             <div className="form-creation-fieldlist">
                 <Search handleSearch={this.handleSearch}
@@ -65,6 +86,8 @@ class FormCreationPage extends Component {
                            shared={this.state.shared}
                            sort={this.state.sort}
                            formCreation={true}
+                           getData={this.getData}
+                           fields={this.state.fields}
                 />
             </div>
             </div>
