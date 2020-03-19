@@ -13,7 +13,8 @@ class NewFormItem extends Component {
     render() {
         console.log(this.props)
         return (
-            <div className="new-form-item">
+            <div className="new-form-item"
+                 onClick={this.handleClick}>
                 +
             </div>
         );
