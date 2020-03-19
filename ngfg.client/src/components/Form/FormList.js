@@ -123,7 +123,8 @@ class FormList extends Component {
                             handleFilter={this.handleFilter}/>
 
                     <Button className="create-form-btn"
-                            size='large'>
+                            size='large'
+                            onClick = {this.props.history.push('/form')}>
                         Create Form
                     </Button>
                 </div>

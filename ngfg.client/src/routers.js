@@ -19,7 +19,7 @@ class Routers extends Component {
             <BrowserRouter>
                 <Header/>
                 <Switch>
-                    <Route path='/form'
+                    <Route path='/form/create'
                            component={FormCreationPage}
                     />
                     <Route path='/forms/:id'
