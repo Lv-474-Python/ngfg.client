@@ -16,11 +16,11 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteField from "./AdditionalComponents/DeleteField";
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SendIcon from '@material-ui/icons/Send';
+import ShareField from "./AdditionalComponents/ShareField";
+import AddIcon from '@material-ui/icons/Add';
 
 const fieldTypes = {
     'Number': 1,
@@ -189,14 +189,9 @@ class FieldItem extends Component {
                                 </Button>
                             </div>
                             : <div className="fields-button-grouper">
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    color="secondary"
-                                    className='field-button'
-                                    endIcon={<SendIcon/>}>
-                                    Share
-                                </Button>
+                                <ShareField field={this.props.item}
+                                            handleDeleted={this.props.handleDeleted}
+                                />
                                 <Button
                                     variant="contained"
                                     color="secondary"
@@ -205,14 +200,9 @@ class FieldItem extends Component {
                                     endIcon={<EditIcon/>}>
                                     Edit
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    size="small"
-                                    className='field-button'
-                                    endIcon={<DeleteIcon/>}>
-                                    Delete
-                                </Button>
+                                <DeleteField field={this.props.item}
+                                             handleDeleted={this.props.handleDeleted}
+                                />
                             </div>
                         }
                     </CardActions>
