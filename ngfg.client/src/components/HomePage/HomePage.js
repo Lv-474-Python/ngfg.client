@@ -80,6 +80,7 @@ class HomePage extends Component {
                         <FormItemList forms={this.state.forms}
                                       onViewMoreClick={this.handleViewMoreClick}
                                       onShareClick={this.handleShareClick}
+                                      history = {this.props.history}
                                       
                         />
                     </div>

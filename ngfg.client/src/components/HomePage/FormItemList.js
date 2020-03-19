@@ -23,7 +23,9 @@ class FormItemList extends Component {
         this.renderItems();
         return (
             <div className="forms-list">
-                <NewFormItem />
+                <NewFormItem
+                    history={this.props.history}
+                />
                 {this.renderItems()}
             </div>
         );

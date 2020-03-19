@@ -13,7 +13,7 @@ const FORM_TITLE_LIMIT = 20;
 class FormItem extends Component {
 
     getFormStatus = () => {
-        let status = this.props.IsPublished ? 'Published' : 'Draft';
+        let status = this.props.item.isPublished ? 'Published' : 'Draft';
         return `Status: ${status}`;
     }
 
