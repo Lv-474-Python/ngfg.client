@@ -75,12 +75,16 @@ class FieldList extends Component {
                 {
                     this.state.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}
-                                   key={elem.id}/>
+                                   key={elem.id}
+                                   formCreation={this.props.formCreation}
+                        />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
+                                   key={elem.id}
+                                   formCreation={this.props.formCreation}
                                    handleDeleted={this.handleDeleted}
-                                   key={elem.id}/>)
+                        />)
                 }
             </div>
         );

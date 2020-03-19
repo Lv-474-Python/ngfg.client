@@ -10,6 +10,18 @@
     margin-bottom: 2vw !important;
     background-color: #F9A825 !important;
 }
+
+.narrow-field-card-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: normal;
+    width: 20vw;
+    margin: 1vw;
+    margin-bottom: 2vw !important;
+    background-color: #F9A825 !important;
+}
+
 .field-card-content {
     display: flex;
     flex-wrap: wrap;
@@ -17,6 +29,15 @@
     align-items: center;
     margin-left: 0.5vw;
     width: 35vw;
+}
+
+.narrow-field-card-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0.5vw;
+    width: 15vw;
 }
 
 .field-card-actions {
@@ -101,6 +122,20 @@
 
 }
 
+.narrow-filter-item {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-direction: column;
+    text-align: start;
+    width: 30vh;
+    position: sticky;
+    top: 1.5vmin;
+    margin-top: 1vw;
+    margin-right: 1vw !important;
+    background-color: #37474F;
+    flex-grow: 1;
+}
+
 .filter-typo {
     margin: 0 !important;
     padding: 0 !important;
@@ -129,12 +164,25 @@
     background-color: #F9A825 !important;
 }
 
+.narrow-filter-create-btn {
+    margin-top: 3vw !important;
+    margin-left: 2vw !important;
+    width: 10vw !important;
+    background-color: #F9A825 !important;
+}
+
 /* Search bar */
 
 .search-bar {
     margin-top: 1vw;
     margin-left: 1vw;
     width: 50vw;
+}
+
+.narrow-search-bar {
+    margin-top: 1vw;
+    margin-left: 1vw;
+    width: 20vw;
 }
 
 /* Fields page */
@@ -160,6 +208,11 @@
   background: #ffffff;
   border-radius: 18px;
   border: 1px solid #cfcece;
+}
+
+.fields-button-grouper {
+    display: flex;
+    flex-direction: column;
 }
 
 .create-popup {
