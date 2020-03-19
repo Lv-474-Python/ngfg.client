@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import FieldItem from './FieldItem';
+import CreateWindow from "./CreationWindow";
 
 const fieldTypes = {
     'Number': 1,
@@ -12,25 +13,8 @@ const fieldTypes = {
     'Checkbox': 6
 };
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
-
 
 class FieldList extends Component {
-
-    state = {
-        fields: []
-    };
-
-    getData = () => {
-        axios.get(`${API_URL}/${API_VERSION}/fields`, {
-            withCredentials: true,
-        })
-            .then(res => {
-                const fields = res.data.fields.filter(this.filterFields);
-                this.setState({fields})
-            })
-    };
 
     filterFields = (field) => {
         if (this.props.search) {
@@ -59,27 +43,23 @@ class FieldList extends Component {
         }
     };
 
-    handleDeleted = (deleted, field) => {
+    handleDeleted = (deleted) => {
         if(deleted) {
             this.getData();
         }
     };
 
-    componentDidMount() {
-        this.getData();
-    }
-
     render() {
         return (
             <div>
                 {
-                    this.state.fields.filter(this.filterFields).map(elem =>
+                    this.props.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
                         />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
-                        this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
+                        this.props.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
