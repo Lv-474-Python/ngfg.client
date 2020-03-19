@@ -9,6 +9,7 @@ import FormList from './components/Form/FormList';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField';
 import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
+import FormCreationPage from "./components/Form/FormCreationPage";
 import GroupList from './components/Group/GroupList'
 import GroupView from "./components/Group/GroupView";
 
@@ -27,6 +28,11 @@ class Routers extends Component {
                            component={FormList}
 
                     />
+
+                    <Route path='/form'
+                           component={FormCreationPage}
+                    />
+
                     <Route path='/fields'
                            component={FieldsPage}
 
