@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import Header from './components/Header/Header';
 import FieldsPage from './components/Field/FieldsPage';
 import FormList from './components/Form/FormList';
+import FormPass from './components/FormPass/FormPass';
 import FormView from './components/Form/FormView';
 import CreateField from './components/Field/CreateField';
 import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
@@ -36,7 +37,9 @@ class Routers extends Component {
                         />
                     <Route path='/field'
                            component={CreateField}
-
+                    />
+                    <Route path='/pass-form/:id'
+                            component={FormPass}
                     />
                     <Route path='/oauth/redirect'
                            component={OAuthRedirect}
