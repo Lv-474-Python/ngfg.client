@@ -145,10 +145,12 @@ class FormList extends Component {
 
                     <div className='form-list'>
                         {
-                            this.state.filteredForms.map(form =>
-                                <FormItem item={form}
-                                          key={form.id}/>
-                            )
+                            this.state.filteredForms.length !== 0 ?
+                                this.state.filteredForms.map(form =>
+                                    <FormItem item={form}
+                                              key={form.id}/>
+                                ) :
+                                <h2 className='not-found-form'>Nothing found</h2>
                         }
                     </div>
                 </div>
