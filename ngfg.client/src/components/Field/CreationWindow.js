@@ -34,7 +34,7 @@ export default function FormDialog(props) {
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Field creation</DialogTitle>
                 <DialogContent>
-                    <CreateField/>
+                    <CreateField getData={props.getData}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

@@ -62,6 +62,7 @@ class CreateNumberOrTextField extends Component {
                     console.log(res);
                     console.log(res.data);
                     alert('Field created');
+                    this.props.getData();
                 }
             )
             .catch(error => {
