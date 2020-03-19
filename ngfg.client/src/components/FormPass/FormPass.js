@@ -19,7 +19,7 @@ const FIELD_TYPES = {
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
-http://ngfg.com:8000/api/v1/forms/57/fields/
+// http://ngfg.com:8000/api/v1/forms/57/fields/
 
 class FormPass extends Component {
     state = {
@@ -29,34 +29,37 @@ class FormPass extends Component {
 
     getFormData = () => {
         console.log('Form pass')
-        // let id = this.props.match.params.id;
-        let id = 57;
+        let id = this.props.match.params.id;
 
-        // axios.get(`${API_URL}/${API_VERSION}/forms/${id}/`, {
-        //     withCredentials: true,
-        // }).then(res => {
-        //         const forms = res.data.forms;
-        //         console.log(forms);
-        //         this.setState({forms})
-        // }).catch(error => {
-        //     console.log(error);
-        // })
+        axios.get(`${API_URL}/${API_VERSION}/forms/${id}`, {
+            withCredentials: true,
+        }).then(res => {
+            const form = res.data;
+            this.setState({ form })
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
+    sortFormFieldsComparer = (field1, field2) => {
+        return field1.position > field2.position;
     }
 
     getFormFieldsData = () => {
         console.log('Form fields')
-        // let id = this.props.match.params.id;
-        let id = 57
+        let id = this.props.match.params.id;
 
-        // axios.get(`${API_URL}/${API_VERSION}/forms/${id}/fields`, {
-        //     withCredentials: true,
-        // }).then(res => {
-        //         const forms = res.data.forms;
-        //         console.log(forms);
-        //         this.setState({forms})
-        // }).catch(error => {
-        //     console.log(error);
-        // })
+        axios.get(`${API_URL}/${API_VERSION}/forms/${id}/fields/`, {
+            withCredentials: true,
+        }).then(res => {
+            let formFields = res.data.formFields;
+            formFields = formFields.sort(this.sortFormFieldsComparer);
+            this.setState({ formFields })
+
+            console.log(this.state);
+        }).catch(error => {
+            console.log(error);
+        })
     }
     
     renderFields = () => {
