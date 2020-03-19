@@ -89,7 +89,7 @@ html, body {
     height: 100%;
     flex-wrap: wrap;
     padding: 10vh;
-    width: inherit;
+    width: 90vh;
     box-shadow: 2px 2px 25px 1px rgba(0, 0, 0, 0.25);
 }
 
@@ -122,6 +122,7 @@ html, body {
 
 .form-creation-main-component {
     margin-left: 5vh;
+    width: 90vh;
 }
 
 .form-creation-fieldlist {
