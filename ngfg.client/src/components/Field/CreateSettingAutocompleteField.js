@@ -64,10 +64,12 @@ class CreateSettingAutocompleteField extends Component {
             .then(res => {
                     console.log(res);
                     console.log(res.data);
+                    alert('Field created');
                 }
             )
             .catch(error => {
                     console.log(error);
+                    alert('Field was not created');
                 }
             );
     };
