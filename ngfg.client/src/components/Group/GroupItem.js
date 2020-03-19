@@ -17,7 +17,7 @@ class GroupItem extends Component {
     };
 
     getOwnerName = () => {
-        axios.get(`${API_URL}/${API_VERSION}/groups/${this.props.item.ownerId}`, {
+        axios.get(`${API_URL}/${API_VERSION}/users/${this.props.item.ownerId}`, {
             withCredentials: true,
         })
             .then(res => {
