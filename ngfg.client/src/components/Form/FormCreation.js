@@ -84,7 +84,6 @@ class FormCreation extends Component {
                             variant="outlined"
                             helperText="Enter Form Name"
                             type="text"
-                            color="$F9A825"
                             onChange={this.handleNameChange}
                         />
                         <TextField
