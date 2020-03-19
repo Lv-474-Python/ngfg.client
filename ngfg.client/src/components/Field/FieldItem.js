@@ -102,7 +102,7 @@ class FieldItem extends Component {
      getCheckboxField = function() {
         return (
             <Typography className="field-typo"
-                         variant="body2"
+                         variant={this.props.formCreation ? "caption" : "body2"}
                          component="p">
                     From { !this.props.item.range || this.props.item.range.min === null ?
                     "0" : this.props.item.range.min} {"to "}
@@ -124,7 +124,7 @@ class FieldItem extends Component {
                         {
 
                             this.props.item.choiceOptions.map(elem =>
-                                 <TextField className='choice-typo'
+                                 <TextField className={this.props.formCreation ? "" : 'choice-typo'}
                                             disabled key={elem}
                                             defaultValue={elem} />
                             )

@@ -45,6 +45,7 @@ class FormCreationPage extends Component {
     render() {
         return (
         <div className="main-form-creation-container">
+            <div className="form-creation-fields">
             <div className="form-creation-filter">
             <Filter handleFilter={this.handleFilter}
                     filter={this.state.filter}
@@ -65,6 +66,7 @@ class FormCreationPage extends Component {
                            sort={this.state.sort}
                            formCreation={true}
                 />
+            </div>
             </div>
             <div className="form-creation-main-component">
             <FormCreation
