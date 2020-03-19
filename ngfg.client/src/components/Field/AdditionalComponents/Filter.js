@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
+import CreateWindow from '../CreationWindow'
 import {Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 
 class Filter extends Component {
 
@@ -199,10 +199,7 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <Button className="filter-create-btn"
-                        size='medium'>
-                    Create Field
-                </Button>
+                <CreateWindow text={'Create field'}/>
             </div>
         )
     }
