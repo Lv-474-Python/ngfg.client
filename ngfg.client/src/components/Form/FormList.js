@@ -107,6 +107,10 @@ class FormList extends Component {
         })
     };
 
+    handleCreateFormClick = () => {
+        this.props.history.push('/form')
+    }
+
     componentDidMount() {
         this.getData();
     };
@@ -124,7 +128,7 @@ class FormList extends Component {
 
                     <Button className="create-form-btn"
                             size='large'
-                            onClick = {this.props.history.push('/form')}>
+                            onClick={this.handleCreateFormClick}>
                         Create Form
                     </Button>
                 </div>
