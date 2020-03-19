@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import FieldItem from './FieldItem';
+import CreateWindow from "./CreationWindow";
 
 const fieldTypes = {
     'Number': 1,
@@ -72,6 +73,7 @@ class FieldList extends Component {
     render() {
         return (
             <div>
+                <CreateWindow text={'Create field'} getData={this.getData}/>
                 {
                     this.state.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}
