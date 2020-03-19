@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import FieldItem from './FieldItem';
+import CreateWindow from "./CreationWindow";
 
 const fieldTypes = {
     'Number': 1,
@@ -59,6 +60,12 @@ class FieldList extends Component {
         }
     };
 
+    handleDeleted = (deleted, field) => {
+        if(deleted) {
+            this.getData();
+        }
+    };
+
     componentDidMount() {
         this.getData();
     }
@@ -66,14 +73,20 @@ class FieldList extends Component {
     render() {
         return (
             <div>
+                <CreateWindow text={'Create field'} getData={this.getData}/>
                 {
                     this.state.fields.filter(this.filterFields).map(elem =>
                         <FieldItem item={elem}
-                                   key={elem.id}/>
+                                   key={elem.id}
+                                   formCreation={this.props.formCreation}
+                        />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
-                                   key={elem.id}/>)
+                                   key={elem.id}
+                                   formCreation={this.props.formCreation}
+                                   handleDeleted={this.handleDeleted}
+                        />)
                 }
             </div>
         );

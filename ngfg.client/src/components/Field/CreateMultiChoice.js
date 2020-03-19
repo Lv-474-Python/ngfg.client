@@ -62,10 +62,13 @@ class CreateMultiChoice extends Component {
             .then(res => {
                     console.log(res);
                     console.log(res.data);
+                    alert('Field created');
+                    this.props.getData();
                 }
             )
             .catch(error => {
                     console.log(error);
+                    alert('Field was not created');
                 }
             );
     }

@@ -10,7 +10,7 @@ class Search extends Component {
                 this.props.handleSearch(newValue)
             }}
                        value={this.props.search}
-                       className='search-bar'/>
+                       className={this.props.formCreation ? 'narrow-search-bar' : 'search-bar'}/>
         )
     }
 }
