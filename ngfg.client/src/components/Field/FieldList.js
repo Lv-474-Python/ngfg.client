@@ -45,7 +45,7 @@ class FieldList extends Component {
 
     handleDeleted = (deleted) => {
         if(deleted) {
-            this.getData();
+            this.props.getData();
         }
     };
 
