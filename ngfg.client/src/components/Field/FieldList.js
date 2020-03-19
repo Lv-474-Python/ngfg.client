@@ -59,6 +59,12 @@ class FieldList extends Component {
         }
     };
 
+    handleDeleted = (deleted, field) => {
+        if(deleted) {
+            this.getData();
+        }
+    };
+
     componentDidMount() {
         this.getData();
     }
@@ -77,6 +83,7 @@ class FieldList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
+                                   handleDeleted={this.handleDeleted}
                         />)
                 }
             </div>

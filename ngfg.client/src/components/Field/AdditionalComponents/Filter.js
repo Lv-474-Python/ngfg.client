@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 
-import {Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import {Button, Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
+import Popup from "reactjs-popup";
+import CreateField from "../CreateField";
 
 class Filter extends Component {
 
@@ -199,10 +200,20 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <Button className={this.props.formCreation ? "narrow-filter-create-btn" : "filter-create-btn"}
-                        size='medium'>
-                    Create Field
-                </Button>
+                <Popup trigger={
+                    <Button className={this.props.formCreation ? "narrow-filter-create-btn" : "filter-create-btn"}
+                            size='medium'>
+                        Create Field
+                    </Button>}
+                       className='create-popup'
+                       modal>
+                    {
+                        () => {
+                            return (<CreateField/>)
+                        }
+                    }
+                </Popup>
+
             </div>
         )
     }
