@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 
-import {Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import {Button, Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
 import Popup from "reactjs-popup";
 import CreateField from "../CreateField";
 

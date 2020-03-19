@@ -59,6 +59,12 @@ class FieldList extends Component {
         }
     };
 
+    handleDeleted = (deleted, field) => {
+        if(deleted) {
+            this.getData();
+        }
+    };
+
     componentDidMount() {
         this.getData();
     }
@@ -73,6 +79,7 @@ class FieldList extends Component {
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.state.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
                         <FieldItem item={elem}
+                                   handleDeleted={this.handleDeleted}
                                    key={elem.id}/>)
                 }
             </div>

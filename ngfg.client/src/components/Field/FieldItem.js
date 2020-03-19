@@ -16,12 +16,10 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteField from "./AdditionalComponents/DeleteField";
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SendIcon from '@material-ui/icons/Send';
-import Popup from "reactjs-popup";
-import CreateField from "./CreateField";
+import ShareField from "./AdditionalComponents/ShareField";
 
 const fieldTypes = {
     'Number': 1,
@@ -34,6 +32,7 @@ const fieldTypes = {
 
 
 class FieldItem extends Component {
+
 
     getNumberField = function() {
         return [
@@ -178,14 +177,9 @@ class FieldItem extends Component {
 
                     <CardActions className='field-card-actions'>
                         <br/>
-                        <Button
-                            variant="contained"
-                            size="small"
-                            color="secondary"
-                            className='field-button'
-                            endIcon={<SendIcon/>}>
-                            Share
-                        </Button>
+                        <ShareField field={this.props.item}
+                                    handleDeleted={this.props.handleDeleted}
+                        />
                         <Button
                             variant="contained"
                             color="secondary"
@@ -194,23 +188,10 @@ class FieldItem extends Component {
                             endIcon={<EditIcon/>}>
                             Edit
                         </Button>
-                        <Popup trigger={
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                size="small"
-                                className='field-button'
-                                endIcon={<DeleteIcon/>}>
-                                Delete
-                            </Button>}
-                               className='create-popup'
-                               modal>
-                            {
-                                () => {
-                                    return (<CreateField/>)
-                                }
-                            }
-                        </Popup>
+                        <DeleteField field={this.props.item}
+                                     handleDeleted={this.props.handleDeleted}
+                        />
+
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&
