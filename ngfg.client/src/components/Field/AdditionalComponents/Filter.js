@@ -49,15 +49,15 @@ class Filter extends Component {
 
     render() {
         return (
-            <div className="filter-item">
+            <div className={this.props.formCreation ? "narrow-filter-item" : "filter-item"}>
                 <Typography className='filter-category'
-                            variant="inherit"
+                            variant={"inherit"}
                             component="p">
                     Sort
                 </Typography>
                 <FormGroup >
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.sort.byNameDesc}
                                       className='filter-checkbox'
@@ -71,14 +71,14 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <Typography className='filter-category'
+                <Typography className={'filter-category'}
                             variant="inherit"
                             component="p">
                     Type
                 </Typography>
-                <FormGroup className='filter-typo'>
+                <FormGroup className={'filter-typo'}>
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showNumber}
                                       className='filter-checkbox'
@@ -92,7 +92,7 @@ class Filter extends Component {
                         label="Number"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showText}
                                       className='filter-checkbox'
@@ -106,7 +106,7 @@ class Filter extends Component {
                         label="Text"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showTextArea}
                                       className='filter-checkbox'
@@ -120,7 +120,7 @@ class Filter extends Component {
                         label="TextArea"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showCheckbox}
                                       className='filter-checkbox'
@@ -135,7 +135,7 @@ class Filter extends Component {
                         label="Checkbox"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showRadio}
                                       className='filter-checkbox'
@@ -150,7 +150,7 @@ class Filter extends Component {
                         label="Radio"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.filter.showAutocomplete}
                                       className='filter-checkbox'
@@ -172,7 +172,7 @@ class Filter extends Component {
                 </Typography>
                 <FormGroup>
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.shared.shared}
                                       className='filter-checkbox'
@@ -185,7 +185,7 @@ class Filter extends Component {
                         label="Shared with me"
                     />
                     <FormControlLabel
-                        className='filter-typo'
+                        className={'filter-typo'}
                         control={
                             <Checkbox checked={this.props.shared.my}
                                       className='filter-checkbox'
