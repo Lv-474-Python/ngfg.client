@@ -23,12 +23,12 @@ class Routers extends Component {
                            component={FormView}
 
                     />
-                    <Route exact path='/forms'
+                    <Route path='/forms'
                            component={FormList}
 
                     />
 
-                    <Route exact path='/form'
+                    <Route path='/form'
                            component={FormCreationPage}
                     />
 
