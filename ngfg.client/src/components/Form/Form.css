@@ -141,3 +141,7 @@ html, body {
     width: 40vw;
     display: flex;
 }
+
+.not-found-form {
+   margin: auto;
+}
