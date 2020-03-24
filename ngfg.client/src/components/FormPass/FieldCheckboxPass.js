@@ -99,7 +99,6 @@ class FieldCheckboxPass extends Component {
             pickedOptions: pickedOptions
         }, () => {
             const isValid = this.validateAnswer();
-            console.log(isValid);
 
             this.props.setAnswer(this.props.index, this.state.pickedOptions)
             this.props.setIsValid(this.props.index, isValid);

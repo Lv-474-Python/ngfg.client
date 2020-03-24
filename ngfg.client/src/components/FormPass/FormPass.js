@@ -79,7 +79,7 @@ class FormPass extends Component {
     setAnswer = (index, answer) => {
         let { results } = this.state;
         results[index].answer = answer;
-        this.setState({ results }, () => { console.log(this.state) })
+        this.setState({ results })
     }
 
     setIsValid = (index, isValid) => {
