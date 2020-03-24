@@ -222,12 +222,11 @@ class FormPass extends Component {
             }).then(res => {
                 console.log('nice');
                 console.log(res);
+                this.props.history.push(`${this.props.history.location.pathname}/response`);
             }).catch(error => {
                 console.log(error);
             });
         }
-
-        // що робити коли класно, запостив - переводити на якусь сторінку
     }
 
     render() {
