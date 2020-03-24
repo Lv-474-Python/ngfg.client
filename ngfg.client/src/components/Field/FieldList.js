@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
 import FieldItem from './FieldItem';
-import CreateWindow from "./CreationWindow";
+
 
 const fieldTypes = {
     'Number': 1,
@@ -37,14 +36,14 @@ class FieldList extends Component {
     sortFields = (field1, field2) => {
         if (this.props.sort.byNameDesc !== null) {
             if (this.props.sort.byNameDesc) {
-                return field1.name < field2.name
+                return field1.name.toLowerCase().localeCompare(field2.name.toLowerCase())
             }
-            return field1.name > field2.name
+            return field2.name.toLowerCase().localeCompare(field1.name.toLowerCase())
         }
     };
 
-    handleDeleted = (deleted) => {
-        if(deleted) {
+    handleUpdated = (updated) => {
+        if(updated) {
             this.props.getData();
         }
     };
@@ -63,7 +62,7 @@ class FieldList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
-                                   handleDeleted={this.handleDeleted}
+                                   handleUpdated={this.handleUpdated}
                         />)
                 }
             </div>

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import '../../Form/Form.css'
 import {
     Button,
     Dialog,
@@ -44,9 +45,8 @@ class DeleteField extends Component {
     handleClose = () => {
         this.setState({open: false, openResponse: false},
             () => {
-            this.props.handleDeleted(
-                this.state.response === "Deleted successfully",
-                this.props.field
+            this.props.handleUpdated(
+                this.state.response === "Deleted successfully"
                 );
         });
     };
@@ -82,10 +82,10 @@ class DeleteField extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link">
                             Disagree
                         </Button>
-                        <Button onClick={this.handleAgree} color="primary" autoFocus>
+                        <Button onClick={this.handleAgree} className="form-item-link" autoFocus>
                             Agree
                         </Button>
                     </DialogActions>
@@ -104,7 +104,7 @@ class DeleteField extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link" color="primary">
                             Ok
                         </Button>
                     </DialogActions>

@@ -24,7 +24,7 @@ class CreateField extends Component {
         return (
             <div>
                 <SelectFieldType onChange={this.handleChangeFieldType}
-                                 fieldType={this.state.fieldType}
+                                 fieldType={this.state.fieldType || 1}
                 />
                 {
                     [1].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={1} getData={this.props.getData}/>

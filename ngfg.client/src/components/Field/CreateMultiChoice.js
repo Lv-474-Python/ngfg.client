@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import Button from '@material-ui/core/Button';
-import Range from './Restrictions/Range';
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
-import {TextField} from "@material-ui/core";
+import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
+import Range from './Restrictions/Range';
+import TextField from '@material-ui/core/TextField';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
+
 
 class CreateMultiChoice extends Component {
     state = {
@@ -71,16 +72,72 @@ class CreateMultiChoice extends Component {
                     alert('Field was not created');
                 }
             );
-    }
-    ;
+    };
+
+    sendUpdateData = () => {
+        let response = ""
+        let initOptions = this.state.initOptions
+        let newOptions = this.state.choiceOptions
+
+        let field = {
+            updatedName: this.state.name,
+            addedChoiceOptions: [...newOptions].filter(x => !initOptions.includes(x)),
+            removedChoiceOptions: [...initOptions].filter(x => !newOptions.includes(x))
+        };
+        if (this.state.fieldType === 6) {
+            if ( this.state.range_min == null && this.state.range_max == null) {
+                field.deleteRange = true
+            }
+            else {
+                field.range = {min: this.state.range_min, max: this.state.range_max}
+            }
+        }
+        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
+                  {...field}, 
+                  {withCredentials: true})
+            .then(res => {
+                    this.props.handleUpdated(true);
+                    response = "Field updated"
+                    this.props.setResponse(response);
+                }
+            )
+            .catch(error => {
+                let response = error.response.data.message;
+                if (response.range) {
+                    response = response.range._schema.toString();
+                };
+                console.log(error)
+                this.props.setResponse(response);
+                }
+            );
+        this.props.setResponse(response);
+        this.props.handleAgree();
+    };
+
+    componentDidMount () {
+        if (this.props.isUpdate) {
+            this.setState({
+                name: this.props.field.name,
+                choiceOptions: this.props.field.choiceOptions,
+                initOptions: [...this.props.field.choiceOptions]
+            })
+            if (this.props.field.range) {
+                if (this.props.field.range.min !== null) {
+                    this.setState({range_min: this.props.field.range.min})
+                }
+                if (this.props.field.range.max !== null) {
+                    this.setState({range_max: this.props.field.range.max})
+                }
+            }
+        }
+    };
 
     render() {
-        console.log('this.state');
-        console.log(this.state);
         return (
             <div>
-                <TextField label="Enter Form Name:"
+                <TextField label="Enter Field Name:"
                            type="text"
+                           value={this.state.name || ""}
                            onChange={this.handleNameChange}
                 />
 
@@ -94,11 +151,11 @@ class CreateMultiChoice extends Component {
                                   choiceOptions={this.state.choiceOptions}
                 />
 
-                <div>
-                    <Button onClick={this.sendData}>
-                        Send
-                    </Button>
-                </div>
+                <CreateOrUpdateActions sendData={this.sendData}
+                                       sendUpdateData={this.sendUpdateData}
+                                       handleClose={this.props.handleClose}
+                                       isUpdate={this.props.isUpdate}
+                />
             </div>
 
         );

@@ -13,13 +13,13 @@ class Range extends Component {
                 <TextField
                     label="From"
                     type="number"
-                    value={this.props.range_min}
+                    value={this.props.minValue == null ? "" : this.props.minValue}
                     onChange={this.props.onChangeMin}
                 />
                 <TextField
                     label="To"
                     type="number"
-                    value={this.props.range_max}
+                    value={this.props.maxValue == null ? "" : this.props.maxValue}
                     onChange={this.props.onChangeMax}
                 />
             </div>

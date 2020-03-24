@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import SettingAutocomplete from './Restrictions/SettingAutocomplete'
-
-import Button from '@material-ui/core/Button';
 import {TextField} from "@material-ui/core";
 
 const API_URL = 'http://ngfg.com:8000/api';
@@ -75,23 +74,74 @@ class CreateSettingAutocompleteField extends Component {
             );
     };
 
+    sendUpdateData = () => {
+        let response = ""
+
+        let field = {
+            updatedName: this.state.name,
+            updatedAutocomplete: {
+                dataUrl: this.state.dataUrl,
+                sheet: this.state.sheet,
+                fromRow: this.state.fromRow,
+                toRow: this.state.toRow
+            }
+        };
+
+        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
+                  {...field}, 
+                  {withCredentials: true})
+            .then(res => {
+                    this.props.handleUpdated(true);
+                    response = "Field updated"
+                    this.props.setResponse(response);
+                }
+            )
+            .catch(error => {
+                let response = error.response.data.message;
+                if (response.range) {
+                    response = response.range._schema.toString();
+                };
+                this.props.setResponse(response);
+                }
+            );
+        this.props.setResponse(response);
+        this.props.handleAgree();
+    };
+
+    componentDidMount () {
+        if (this.props.isUpdate) {
+            this.setState({
+                name: this.props.field.name,
+                dataUrl: this.props.field.settingAutocomplete.dataUrl,
+                sheet: this.props.field.settingAutocomplete.sheet,
+                fromRow: this.props.field.settingAutocomplete.fromRow,
+                toRow: this.props.field.settingAutocomplete.toRow
+            })
+        }
+    };
+
     render() {
         return (
             <div>
                 <TextField label="Enter field name:"
                            type="text"
+                           value={this.state.name || ""}
                            onChange={this.handleNameChange}
                 />
                 <SettingAutocomplete onChangeDataURL={this.handleDataURL}
                                      onChangeSheet={this.handleSheet}
                                      onChangeFromRow={this.handleFromRow}
                                      onChangeToRow={this.handleToRow}
+                                     dataUrl={this.state.dataUrl}
+                                     sheet={this.state.sheet}
+                                     fromRow={this.state.fromRow}
+                                     toRow={this.state.toRow}
                 />
-                <div>
-                    <Button onClick={this.sendData}>
-                        Send
-                    </Button>
-                </div>
+                <CreateOrUpdateActions sendData={this.sendData}
+                                       sendUpdateData={this.sendUpdateData}
+                                       handleClose={this.props.handleClose}
+                                       isUpdate={this.props.isUpdate}
+                />
             </div>
         );
     }
