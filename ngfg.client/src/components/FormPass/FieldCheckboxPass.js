@@ -43,10 +43,9 @@ class FieldCheckboxPass extends Component {
                 <FormControlLabel key={i}
                                   control={
                                     <Checkbox className="field-checkbox-pass__checkbox-item"
-                                              checked={this.state[option]} 
-                                              onChange={this.onChange} 
-                                              name={option} 
-                                              
+                                              checked={this.state[option]}
+                                              onChange={this.onChange}
+                                              name={option}
                                     />
                                   }
                                   label={option}

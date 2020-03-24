@@ -43,6 +43,7 @@ class FormPassResponse extends Component {
             <div className='form-pass-response'>
 
                 <div className="form-pass-response__item">
+
                     <div className='form-pass-response__item__title'>
                         {this.state.form.title}
                     </div>
@@ -50,6 +51,7 @@ class FormPassResponse extends Component {
                     <div className='form-pass-response__item__info'>
                         Your response has been recorded.
                     </div>
+
                 </div>
 
             </div>

@@ -90,7 +90,7 @@ class FormPass extends Component {
 
     getFieldItemByType = (formField, index) => {
         let result = null;
-        let resultItem = this.state.results[index]; 
+        let resultItem = this.state.results[index];
         const isValid = resultItem ? resultItem.isValid : true;
 
         
@@ -187,7 +187,7 @@ class FormPass extends Component {
         let resultsIsValid = true;
         for (let i = 0; i < results.length; ++i) {
             let result = results[i];
-            if ( !result.isValid || !result.answer) {
+            if (!result.isValid || !result.answer) {
                 result.isValid = false;
                 resultsIsValid = false;
             }

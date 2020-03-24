@@ -33,7 +33,8 @@ class FieldAutocompletePass extends Component {
                 {parts.map((part, index) => (
                     <span key={index} 
                           style={{ 
-                              fontWeight: part.highlight ? FONT_WEIGHT_BOLD : FONT_WEIGHT_NORMAL }}>
+                              fontWeight: part.highlight ? FONT_WEIGHT_BOLD : FONT_WEIGHT_NORMAL
+                          }}>
                         {part.text}
                     </span>
                 ))}
@@ -59,11 +60,10 @@ class FieldAutocompletePass extends Component {
                     {this.props.formField.question}
                 </div>
 
-                <Autocomplete
-                    options={this.props.formField.field.values}
-                    renderInput={this.renderInput}
-                    renderOption={this.renderOption}
-                    onChange={this.onChange}
+                <Autocomplete options={this.props.formField.field.values}
+                              renderInput={this.renderInput}
+                              renderOption={this.renderOption}
+                              onChange={this.onChange}
                 />
 
             </div>

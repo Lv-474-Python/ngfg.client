@@ -55,16 +55,19 @@ class FieldRadioPass extends Component {
 
                 <FormControl component="fieldset"
                              className="field-radio-pass__input">
+
                     <FormLabel className="field-radio-pass__input__help"
                                error={ !this.props.isValid }>
                         Pick one
                     </FormLabel>
+
                     <RadioGroup aria-label="gender"
                                 name={radioName}
                                 value={this.state.answer[0]}
                                 onChange={this.onChange}>
                         {this.getOptions()}
                     </RadioGroup>
+
                 </FormControl>
 
             </div>
