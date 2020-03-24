@@ -183,23 +183,17 @@ class FormPass extends Component {
 
     validateResults = () => {
         let { results } = this.state;
-        console.log(this.state);
 
-        // let errors = [];
         let resultsIsValid = true;
         for (let i = 0; i < results.length; ++i) {
             let result = results[i];
             if ( !result.isValid || !result.answer) {
                 result.isValid = false;
                 resultsIsValid = false;
-                // errors.push(`Fill: ${this.state.formFields[i].question}`);
             }
             results[i] = result;
         }
         this.setState({ results });
-        // console.log(errors);
-        console.log();
-        console.log();
 
         return resultsIsValid;
     }
@@ -220,7 +214,6 @@ class FormPass extends Component {
         const isValid = this.validateResults();
         if (isValid) {
             const results = this.getResultsToSubmit();
-            console.log(results);
 
             axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.form.id}/answers`, {
                 answers: results,
@@ -260,8 +253,5 @@ class FormPass extends Component {
         );
     }
 }
-
-// МОЖЕ з onChange поміняти на onBlur
-// забери console.log
 
 export default FormPass;
