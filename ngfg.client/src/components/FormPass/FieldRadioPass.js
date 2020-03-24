@@ -13,10 +13,7 @@ import './FieldRadioPass.scss'
 
 class FieldRadioPass extends Component {
     state = {
-        // 'answer': this.props.formField.field.choiceOptions[0]
         'answer': [null]
-        // 'answer': null
-        // undefined, [] - бикує
     }
 
     getOptions = () => {
@@ -45,11 +42,6 @@ class FieldRadioPass extends Component {
         this.props.setAnswer(this.props.index, answer)
         this.props.setIsValid(this.props.index, true)
     }
-
-    // componentDidMount() {
-    //     const answer = ;
-    //     this.setState({ answer });
-    // }
 
     render() {
         const radioName = this.props.formField.field.name;
