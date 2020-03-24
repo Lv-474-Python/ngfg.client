@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
 import FieldItem from './FieldItem';
-import CreateWindow from "./CreationWindow";
 
 const fieldTypes = {
     'Number': 1,
