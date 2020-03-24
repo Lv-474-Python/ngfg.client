@@ -4,12 +4,14 @@ import axios from 'axios';
 import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import FormFieldCreate from "./AdditionalComponent/FormFieldCreate";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
 class FormCreation extends Component {
     state = {
+        "formId": undefined,
         "name": undefined,
         "title": undefined,
         "resultUrl": undefined,
@@ -50,7 +52,7 @@ class FormCreation extends Component {
             },
             {withCredentials: true})
             .then( res => {
-                console.log(res);
+                    this.setState({formId: res.data.id});
                 }
             )
             .catch ( error => {
@@ -68,7 +70,7 @@ class FormCreation extends Component {
                         <Button onClick={this.handlePublish}
                                 className="form-creation-btn"
                         >
-                            Publish
+                            Save & Publish
                         </Button>
                         <Button onClick={this.save}
                                 className="form-creation-btn"
@@ -80,14 +82,14 @@ class FormCreation extends Component {
                     <div className="form-creation-card">
                             <TextField
                             id="form-name"
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Enter Form Name"
                             type="text"
                             onChange={this.handleNameChange}
                         />
                         <TextField
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Enter Form Title"
                             size="small"
@@ -96,7 +98,7 @@ class FormCreation extends Component {
                             onChange={this.handleTitleChange}
                         />
                         <TextField
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Link Result URL"
                             size="small"
@@ -104,6 +106,16 @@ class FormCreation extends Component {
                             type="url"
                             onChange={this.handleResultUrlChange}
                         />
+                                                {
+                            this.props.addedFields.map((elem, index) =>
+                                <FormFieldCreate field={elem}
+                                                 id={elem.id}
+                                                 position={index}
+                                />
+                            )
+                        }
+                        <div>
+                        </div>
                     </div>
                 </FormControl>
             </div>

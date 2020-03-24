@@ -49,6 +49,12 @@ class FieldList extends Component {
         }
     };
 
+    handleAddField = (fieldId) => {
+        console.log("From Fieldlist: " + fieldId);
+        this.props.formCreationCallback(fieldId);
+    }
+
+
     render() {
         return (
             <div>
@@ -57,6 +63,7 @@ class FieldList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
+                                   onAddClick={this.handleAddField}
                         />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.props.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
@@ -64,6 +71,7 @@ class FieldList extends Component {
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
                                    handleDeleted={this.handleDeleted}
+                                   onAddClick={this.handleAddField}
                         />)
                 }
             </div>

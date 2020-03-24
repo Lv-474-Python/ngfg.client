@@ -3,6 +3,7 @@ import FormCreation from './FormCreation';
 import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
+import FormFieldCreate from "./AdditionalComponent/FormFieldCreate";
 import axios from "axios";
 
 const API_URL = 'http://ngfg.com:8000/api';
@@ -28,7 +29,8 @@ class FormCreationPage extends Component {
           my: true
         },
         search: undefined,
-        fields: []
+        fields: [],
+        addedFields: []
     };
 
 
@@ -62,7 +64,24 @@ class FormCreationPage extends Component {
         this.getData();
     }
 
+    handleFieldAddition = (fieldId) => {
+        console.log("From FormCreationPage: ", fieldId);
+        this.getFieldData(fieldId);
+    }
+
+    getFieldData = (fieldId) => {
+        axios.get(`${API_URL}/${API_VERSION}/fields/${fieldId}`,
+            {withCredentials: true})
+            .then(res =>{
+                const field = res.data;
+                this.setState(prevState => ({
+                    addedFields: [...prevState.addedFields, field]
+                }))
+            })
+    }
+
     render() {
+        console.log(this.state.addedFields);
         return (
         <div className="main-form-creation-container">
             <div className="form-creation-fields">
@@ -88,11 +107,12 @@ class FormCreationPage extends Component {
                            formCreation={true}
                            getData={this.getData}
                            fields={this.state.fields}
+                           formCreationCallback = {this.handleFieldAddition}
                 />
             </div>
             </div>
             <div className="form-creation-main-component">
-            <FormCreation
+            <FormCreation addedFields={this.state.addedFields}
             />
             </div>
         </div>

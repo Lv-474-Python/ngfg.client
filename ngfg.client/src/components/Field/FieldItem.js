@@ -136,6 +136,11 @@ class FieldItem extends Component {
 
     };
 
+    handleAddClick = () => {
+        var fieldId = this.props.item.id;
+        this.props.onAddClick(fieldId);
+    }
+
     render() {
         return (
             <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
@@ -180,6 +185,7 @@ class FieldItem extends Component {
                         {this.props.formCreation
                             ? <div className="fields-button-grouper">
                                 <Button
+                                    onClick={this.handleAddClick}
                                     variant="contained"
                                     size="small"
                                     color="secondary"
