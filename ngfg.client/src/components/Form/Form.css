@@ -10,6 +10,15 @@
     justify-content: center;
 }
 
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+    flex-wrap: wrap;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: 25vh;
+}
 .side-menu {
     display: flex;
     flex-wrap: wrap;
@@ -59,4 +68,76 @@
     text-transform: capitalize !important;
     align-self: flex-end;
     margin-bottom: 2vmin !important;
+}
+
+.form-btn-container {
+    margin-bottom: 4vh;
+    flex-direction: row;
+    align-content: flex-start;
+    display: flex;
+    width: inherit;
+}
+
+.form-creation-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    height: 100%;
+    flex-wrap: wrap;
+    padding: 10vh;
+    width: 90vh;
+    box-shadow: 2px 2px 25px 1px rgba(0, 0, 0, 0.25);
+}
+
+.form-creation-btn {
+    text-transform: capitalize !important;
+    background-color: #37474F !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    width: 20vh;
+    height: 6vh;
+    margin-right: 5vh !important;
+}
+
+.form-creation-btn:hover {
+    text-transform: capitalize !important;
+    background-color: #F9A825 !important;
+    color: #000 !important;
+}
+
+.main-form-creation-container{
+    display: flex;
+    flex-grow: 1;
+}
+
+
+
+.form-creation-main-component {
+    margin-left: 5vh;
+    width: 50vw;
+}
+
+.form-creation-filter {
+    display: flex;
+    background-color: #37474F;
+    justify-content: center;
+    flex-grow: 1;
+    width: 10vw;
+}
+
+.form-creation-fieldlist {
+    display: flex;
+    flex-direction: column;
+    background-color: #263238;
+    flex-grow: 1;
+    width: 15vw;
+}
+
+.form-creation-fields {
+    width: 40vw;
+    display: flex;
+}
+
+.not-found-form {
+   margin: auto;
 }

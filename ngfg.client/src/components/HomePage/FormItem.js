@@ -7,13 +7,13 @@ import './FormItem.scss';
 
 
 const FORM_NAME_LIMIT = 20;
-const FORM_TITLE_LIMIT = 30;
+const FORM_TITLE_LIMIT = 20;
 
 
 class FormItem extends Component {
 
     getFormStatus = () => {
-        let status = this.props.IsPublished ? 'Published' : 'Draft';
+        let status = this.props.item.isPublished ? 'Published' : 'Draft';
         return `Status: ${status}`;
     }
 
@@ -31,11 +31,12 @@ class FormItem extends Component {
         let item = null
         if (text.length > limit) {
             const cut_text = text.substring(0, limit - 3) + "..."
-            item = (<Tooltip title={text} placement="top-end" arrow>
-                <div className={className}>
-                    {cut_text}
-                </div>
-            </Tooltip>
+            item = (
+                <Tooltip title={text} placement="top-end" arrow>
+                    <div className={className}>
+                        {cut_text}
+                    </div>
+                </Tooltip>
             )
         } else {
             item = (<div className={className}>
@@ -57,15 +58,13 @@ class FormItem extends Component {
                 </div>
                 <div className="form-item__buttons">
                     <Button className="form-item__buttons__more"
-                        onClick={this.props.onViewMoreClick}
-                    >
+                            onClick={this.props.onViewMoreClick}>
                         View more
                     </Button>
 
                     <Button className="form-item__buttons__share"
-                        endIcon={<SendIcon>send</SendIcon>}
-                        onClick={this.props.onShareClick}
-                    >
+                            endIcon={<SendIcon>send</SendIcon>}
+                            onClick={this.props.onShareClick}>
                         Share
                     </Button>
                 </div>

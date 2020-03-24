@@ -16,10 +16,11 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteField from "./AdditionalComponents/DeleteField";
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SendIcon from '@material-ui/icons/Send';
+import ShareField from "./AdditionalComponents/ShareField";
+import AddIcon from '@material-ui/icons/Add';
 
 const fieldTypes = {
     'Number': 1,
@@ -101,7 +102,7 @@ class FieldItem extends Component {
      getCheckboxField = function() {
         return (
             <Typography className="field-typo"
-                         variant="body2"
+                         variant={this.props.formCreation ? "caption" : "body2"}
                          component="p">
                     From { !this.props.item.range || this.props.item.range.min === null ?
                     "0" : this.props.item.range.min} {"to "}
@@ -123,7 +124,7 @@ class FieldItem extends Component {
                         {
 
                             this.props.item.choiceOptions.map(elem =>
-                                 <TextField className='choice-typo'
+                                 <TextField className={this.props.formCreation ? "" : 'choice-typo'}
                                             disabled key={elem}
                                             defaultValue={elem} />
                             )
@@ -137,13 +138,13 @@ class FieldItem extends Component {
 
     render() {
         return (
-            <Card className='field-card-item'>
-                    <CardContent className='field-card-content'>
-                        <Typography className='field-typo' gutterBottom variant="h5" component="h2">
+            <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
+                    <CardContent className={this.props.formCreation ? "narrow-field-card-content" : "field-card-content"}>
+                        <Typography className='field-typo' gutterBottom variant={this.props.formCreation ? "caption" : "h5"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
-                        <Typography className="field-typo"
-                                    variant="h6"
+                        <Typography className={"field-typo"}
+                                    variant={"caption"}
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -167,7 +168,7 @@ class FieldItem extends Component {
                             this.props.item.fieldType === 6 &&
                             this.getCheckboxField()
                         }
-                        <Typography className="field-typo"
+                        <Typography className={"field-typo"}
                                     variant="caption"
                                     component="p">
                             Created: {new Date(this.props.item.created).toDateString()}
@@ -176,30 +177,34 @@ class FieldItem extends Component {
 
                     <CardActions className='field-card-actions'>
                         <br/>
-                        <Button
-                            variant="contained"
-                            size="small"
-                            color="secondary"
-                            className='field-button'
-                            endIcon={<SendIcon/>}>
-                            Share
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className='field-button'
-                            endIcon={<EditIcon/>}>
-                            Edit
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            size="small"
-                            className='field-button'
-                            endIcon={<DeleteIcon/>}>
-                            Delete
-                        </Button>
+                        {this.props.formCreation
+                            ? <div className="fields-button-grouper">
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    color="secondary"
+                                    className='field-button'
+                                    endIcon={<AddIcon/>}>
+                                    Add
+                                </Button>
+                            </div>
+                            : <div className="fields-button-grouper">
+                                <ShareField field={this.props.item}
+                                            handleDeleted={this.props.handleDeleted}
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    size="small"
+                                    className='field-button'
+                                    endIcon={<EditIcon/>}>
+                                    Edit
+                                </Button>
+                                <DeleteField field={this.props.item}
+                                             handleDeleted={this.props.handleDeleted}
+                                />
+                            </div>
+                        }
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&

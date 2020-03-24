@@ -1,0 +1,73 @@
+.group-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 128vmin;
+}
+
+.group-list-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.group-side-menu {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #37474f;
+    width: 20vw;
+    height: 25vmin;
+    margin: 1.5vmin;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1.5vmin;
+    color: #f9a825 !important;
+    justify-content: center !important;
+}
+
+.group-item {
+    width: 61vmin;
+    background-color: #f9a825 !important;
+    margin: 1.5vmin;
+}
+
+.group-search {
+    width: 125vmin;
+    margin: 1.5vmin auto;
+}
+
+.group-item-content {
+    display: flex !important;
+    justify-content: left !important;
+    margin-top: 1vmin !important;
+}
+
+.group-item-header {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.group-item-link {
+    background-color: #37474f !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin-left: 1.5vmin !important;
+    margin-bottom: 1.5vmin !important;
+}
+
+.group-item-link :hover {
+    color: #F9A825 !important;
+}
+
+.create-group-btn {
+    background-color: #f9a825 !important;
+    color: #37474f !important;
+    text-transform: capitalize !important;
+    align-self: flex-end;
+    height: 6vmin;
+    margin-bottom: 0.5vmax !important;
+}
+
+.group-not-found {
+    display: flex;
+    justify-content: center;
+}
