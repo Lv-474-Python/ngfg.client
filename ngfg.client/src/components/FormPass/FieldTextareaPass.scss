@@ -1,6 +1,4 @@
-$fieldBackgroundColor: #ffffff;
-$fieldShadowColor: 0.1vw 0.35vh 0.1vmin #37474F;
-$fieldErrorColor: #f44336;
+@import "colors";
 
 
 .field-textarea-pass {
@@ -10,7 +8,7 @@ $fieldErrorColor: #f44336;
 
     background-color: $fieldBackgroundColor;
     border-radius: 0.5vmin;
-    box-shadow: $fieldShadowColor;
+    box-shadow: $fieldBoxShadow;
 
     &__question {
         font-size: 1.5rem;

@@ -1,5 +1,4 @@
-$fieldBackgroundColor: #ffffff;
-$fieldShadowColor: 0.1vw 0.35vh 0.1vmin #37474F;
+@import "colors";
 
 
 .field-auto-pass {
@@ -9,7 +8,7 @@ $fieldShadowColor: 0.1vw 0.35vh 0.1vmin #37474F;
 
     background-color: $fieldBackgroundColor;
     border-radius: 0.5vmin;
-    box-shadow: $fieldShadowColor;
+    box-shadow: $fieldBoxShadow;
 
     text-align: left;
 
