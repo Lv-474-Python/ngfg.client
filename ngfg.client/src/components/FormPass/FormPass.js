@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Button } from '@material-ui/core';
 
-// поки хай буде, там видалю якщо шо
-const FIELD_TYPES = {
-    1: 'Number',
-    2: 'Text',
-    3: 'TextArea',
-    4: 'Radio',
-    5: 'Autocomplete',
-    6: 'Checkbox'
-}
+import FieldNumberPass from './FieldNumberPass';
+import FieldTextPass from './FieldTextPass';
+import FieldTextareaPass from './FieldTextareaPass';
+import FieldRadioPass from './FieldRadioPass';
+import FieldCheckboxPass from './FieldCheckboxPass';
+import FieldAutocompletePass from './FieldAutocompletePass';
+import './FormPass.scss';
 
-// не забудь
-// - routers додати то
-// сортую по позиціям
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
-// http://ngfg.com:8000/api/v1/forms/57/fields/
 
 class FormPass extends Component {
     state = {
-        'form': undefined,
-        'formFields': []
+        'form': {
+            id: undefined,
+            name: undefined,
+            title: undefined,
+            resultUrl: undefined,
+            isPublished: undefined,
+            created: undefined,
+            ownerId: undefined
+        },
+        'formFields': [],
+        'results': []
     }
 
     getFormData = () => {
-        console.log('Form pass')
         let id = this.props.match.params.id;
 
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}`, {
@@ -45,8 +48,20 @@ class FormPass extends Component {
         return field1.position > field2.position;
     }
 
+    setResultState = (formFields) => {
+        let results = [];
+        for (let i = 0; i < formFields.length; ++i) {
+            let resultItem = {
+                position: formFields[i].position,
+                answer: undefined,
+                isValid: true
+            };
+            results.push(resultItem);
+        }
+        this.setState({ results });
+    }
+
     getFormFieldsData = () => {
-        console.log('Form fields')
         let id = this.props.match.params.id;
 
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}/fields/`, {
@@ -55,28 +70,110 @@ class FormPass extends Component {
             let formFields = res.data.formFields;
             formFields = formFields.sort(this.sortFormFieldsComparer);
             this.setState({ formFields })
-
-            console.log(this.state);
+            this.setResultState(formFields);
         }).catch(error => {
             console.log(error);
         })
     }
-    
-    renderFields = () => {
-        // може інакше придумай обхід
-        let formFields = []
-        for (let i = 0; i < this.state.formFields.length; ++i) {
-            // тут іфки різні і .push() до масиву
-            // або взагалі
-            // let item = this.getFieldItemByType()
-            // formFields.push(item);
-        }
-        return formFields
+
+    setAnswer = (index, answer) => {
+        let { results } = this.state;
+        results[index].answer = answer;
+        this.setState({ results }, () => { console.log(this.state) })
     }
 
-    getFieldItemByType = () => {
-        // тут іфки
-        console.log('getFieldItemByType method');
+    setIsValid = (index, isValid) => {
+        let { results } = this.state;
+        results[index].isValid = isValid;
+        this.setState({ results })
+    }
+
+    getFieldItemByType = (formField, index) => {
+        let result = null;
+        let resultItem = this.state.results[index]; 
+        const isValid = resultItem ? resultItem.isValid : true;
+
+        
+        switch (formField.field.fieldType) {
+            case 1:
+                result = (
+                    <FieldNumberPass key={formField.id}
+                                     formField={formField}
+                                     index={index}
+                                     setAnswer={this.setAnswer}
+                                     setIsValid={this.setIsValid}
+                                     isValid={isValid}
+                    />
+                );
+                break;
+            case 2:
+                result = (
+                    <FieldTextPass key={formField.id}
+                                   formField={formField}
+                                   index={index}
+                                   setAnswer={this.setAnswer}
+                                   setIsValid={this.setIsValid}
+                                   isValid={isValid}
+                    />
+                );
+                break;
+            case 3:
+                result = (
+                    <FieldTextareaPass key={formField.id}
+                                       formField={formField}
+                                       index={index}
+                                       setAnswer={this.setAnswer}
+                                       setIsValid={this.setIsValid}
+                                       isValid={isValid}
+                    />
+                );
+                break;
+            case 4:
+                result = (
+                    <FieldRadioPass key={formField.id}
+                                    formField={formField}
+                                    index={index}
+                                    setAnswer={this.setAnswer}
+                                    setIsValid={this.setIsValid}
+                                    isValid={isValid}
+                    />
+                );
+                break;
+            case 5:
+                result = (
+                    <FieldAutocompletePass key={formField.id} 
+                                           formField={formField}
+                                           index={index}
+                                           setAnswer={this.setAnswer}
+                                           setIsValid={this.setIsValid}
+                                           isValid={isValid}
+                    />
+                );
+                break;
+            case 6:
+                result = (
+                    <FieldCheckboxPass key={formField.id}
+                                       formField={formField}
+                                       index={index}
+                                       setAnswer={this.setAnswer}
+                                       setIsValid={this.setIsValid}
+                                       isValid={isValid}
+                    />
+                );
+                break;
+            default:
+                break;
+        }
+        return result
+    }
+
+    renderFields = () => {
+        let formFields = []
+        for (let i = 0; i < this.state.formFields.length; ++i) {
+            let item = this.getFieldItemByType(this.state.formFields[i], i);
+            formFields.push(item);
+        }
+        return formFields
     }
 
     componentDidMount() {
@@ -84,23 +181,87 @@ class FormPass extends Component {
         this.getFormFieldsData();
     }
 
+    validateResults = () => {
+        let { results } = this.state;
+        console.log(this.state);
+
+        // let errors = [];
+        let resultsIsValid = true;
+        for (let i = 0; i < results.length; ++i) {
+            let result = results[i];
+            if ( !result.isValid || !result.answer) {
+                result.isValid = false;
+                resultsIsValid = false;
+                // errors.push(`Fill: ${this.state.formFields[i].question}`);
+            }
+            results[i] = result;
+        }
+        this.setState({ results });
+        // console.log(errors);
+        console.log();
+        console.log();
+
+        return resultsIsValid;
+    }
+
+    getResultsToSubmit = () => {
+        let results = [];
+        for (let i = 0; i < this.state.results.length; ++i) {
+            const resultsItem = {
+                position: this.state.formFields[i].position,
+                answer: this.state.results[i].answer
+            }
+            results.push(resultsItem);
+        }
+        return results;
+    }
+
+    submitForm = () => {
+        const isValid = this.validateResults();
+        if (isValid) {
+            const results = this.getResultsToSubmit();
+            console.log(results);
+
+            axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.form.id}/answers`, {
+                answers: results,
+            }, {
+                withCredentials: true,
+            }).then(res => {
+                console.log('nice');
+                console.log(res);
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+
+        // що робити коли класно, запостив - переводити на якусь сторінку
+    }
+
     render() {
         return (
             <div className='form-pass'>
 
                 <div className='form-pass__title'>
-
+                    {this.state.form.title}
                 </div>
+
                 <div className='form-pass__fields'>
-                    { this.renderFields() }
+                    {this.renderFields()}
                 </div>
-                <div className='form-pass__submit'>
 
+                <div>
+                    <Button className='form-pass__submit'
+                            onClick={this.submitForm}>
+                        Submit
+                    </Button>
                 </div>
 
             </div>
         );
     }
 }
+
+// МОЖЕ з onChange поміняти на onBlur
+// забери console.log
 
 export default FormPass;
