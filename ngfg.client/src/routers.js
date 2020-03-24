@@ -21,6 +21,9 @@ class Routers extends Component {
             <BrowserRouter>
                 <Header/>
                 <Switch>
+                    <Route path='/' exact
+                           component={HomePage}
+                    />
                     <Route path='/forms/:id'
                            component={FormView}
 
@@ -53,12 +56,10 @@ class Routers extends Component {
                         />
                     <Route path='/groups'
                         component={GroupList}
-
-                        />
-                    <Route path='/'
-                           component={HomePage}
-
                     />
+
+                    {/* <Route component={GroupList}>
+                    </Route> */}
                 </Switch>
             </BrowserRouter>
         )
