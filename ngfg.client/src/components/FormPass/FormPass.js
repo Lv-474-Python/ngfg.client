@@ -220,8 +220,6 @@ class FormPass extends Component {
             }, {
                 withCredentials: true,
             }).then(res => {
-                console.log('nice');
-                console.log(res);
                 this.props.history.push(`${this.props.history.location.pathname}/response`);
             }).catch(error => {
                 console.log(error);

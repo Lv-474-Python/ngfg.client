@@ -135,7 +135,6 @@ class FieldCheckboxPass extends Component {
                 <FormControl component="fieldset"
                              className="field-checkbox-pass__input"
                              error={ !this.props.isValid }>
-                             {/* required> */}
                     <FormLabel component="legend"
                                className="field-checkbox-pass__input__help">
                         {restrictions}

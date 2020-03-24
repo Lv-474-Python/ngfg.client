@@ -67,11 +67,9 @@ class FieldNumberPass extends Component {
 
                 <TextField className="field-number-pass__input"
                            label="Your answer"
-                           //    type="number"
                            helperText={restrictions}
                            onChange={this.onChange}
                            error={ !this.props.isValid }
-                           //    required
                 />
 
             </div>

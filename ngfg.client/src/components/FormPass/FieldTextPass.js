@@ -69,7 +69,6 @@ class FieldTextPass extends Component {
                            helperText={restrictions}
                            onChange={this.onChange}
                            error={ !this.props.isValid }
-                        //    required
                 />
 
             </div>

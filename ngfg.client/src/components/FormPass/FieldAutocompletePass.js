@@ -9,6 +9,10 @@ import { Autocomplete } from '@material-ui/lab';
 import './FieldAutocompletePass.scss'
 
 
+const FONT_WEIGHT_NORMAL = 400;
+const FONT_WEIGHT_BOLD = 700;
+
+
 class FieldAutocompletePass extends Component {
     renderInput = (params) => {
         return (
@@ -27,7 +31,9 @@ class FieldAutocompletePass extends Component {
         return (
             <div>
                 {parts.map((part, index) => (
-                    <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                    <span key={index} 
+                          style={{ 
+                              fontWeight: part.highlight ? FONT_WEIGHT_BOLD : FONT_WEIGHT_NORMAL }}>
                         {part.text}
                     </span>
                 ))}
