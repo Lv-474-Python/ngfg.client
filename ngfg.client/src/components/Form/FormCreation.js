@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormFieldCreate from "./AdditionalComponent/FormFieldCreate";
+import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
@@ -16,6 +17,7 @@ class FormCreation extends Component {
         "title": undefined,
         "resultUrl": undefined,
         "isPublished": false,
+        "formField": {},
         "formFields": []
     }
 
@@ -40,10 +42,27 @@ class FormCreation extends Component {
     handlePublish = () => {
         this.setState({
             isPublished: true
-        }, this.save);
+        }, this.saveForm);
     }
 
-    save = () => {
+    saveFormFields = (formId, formField) => {
+        axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
+            fieldId: formField.fieldId,
+            question: formField.question,
+            position: formField.position
+        },
+            {withCredentials: true})
+            .then ( res => {
+                console.log(res);
+                }
+            )
+            .catch(error => {
+                console.log(error);
+                }
+            )
+    }
+
+    saveForm = () => {
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -52,7 +71,10 @@ class FormCreation extends Component {
             },
             {withCredentials: true})
             .then( res => {
-                    this.setState({formId: res.data.id});
+                    const formId = res.data.id;
+                    Object.entries(this.state.formFields).map(([key, value]) => (
+                        this.saveFormFields(formId, value)
+                    ));
                 }
             )
             .catch ( error => {
@@ -61,8 +83,20 @@ class FormCreation extends Component {
             );
     }
 
+    addField = (fieldId, position, question) => {
+        let formField = {fieldId: fieldId, position: position, question: question}
+        let formFields = this.state.formFields;
+        formFields[position] = formField;
+        this.setState({formFields});
+    }
+
 
     render() {
+        console.log("ENTRIES");
+        Object.entries(this.state.formFields).map(([key, value]) => (
+            console.log(value.fieldId, value.position, value.question)
+        ));
+        console.log(this.state.formFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -72,7 +106,7 @@ class FormCreation extends Component {
                         >
                             Save & Publish
                         </Button>
-                        <Button onClick={this.save}
+                        <Button onClick={this.saveForm}
                                 className="form-creation-btn"
                         >
                             Save
@@ -106,17 +140,18 @@ class FormCreation extends Component {
                             type="url"
                             onChange={this.handleResultUrlChange}
                         />
-                                                {
+                        {
                             this.props.addedFields.map((elem, index) =>
                                 <FormFieldCreate field={elem}
-                                                 id={elem.id}
                                                  position={index}
+                                                 addField={this.addField}
                                 />
                             )
                         }
                         <div>
                         </div>
                     </div>
+
                 </FormControl>
             </div>
         )

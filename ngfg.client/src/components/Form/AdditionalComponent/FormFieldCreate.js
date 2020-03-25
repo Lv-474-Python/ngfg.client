@@ -1,43 +1,38 @@
 import React, {Component} from "react";
-import axios from 'axios';
 import FieldItem from "../../Field/FieldItem";
 import TextField from "@material-ui/core/TextField";
 import '../Form.css'
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
-
 class FormFieldCreate extends Component {
 
     state = {
-        field: undefined
+        question: undefined,
     }
 
-    getData = () => {
-        axios.get(`${API_URL}/${API_VERSION}/fields/${this.props.id}`,
-            {withCredentials: true})
-            .then(res => {
-                const field = res.data
-                this.setState({field: field});
-                })
+    handleAddition = () => {
+        this.props.addField(this.props.field.id, this.props.position, this.state.question);
     }
 
-    componentDidMount() {
-        this.getData();
+    sendField = (event) => {
+        this.setState({question: event.target.value},
+            this.handleAddition);
     }
+
 
     render() {
-        console.log('Logging state withing FormField', this.props);
         return(
             <React.Fragment>
                 <TextField variant="outlined"
-                           helperText='Enter question'
+                           helperText={`Enter question for ${this.props.field.name}`}
                            size="small"
                            type="text"
+                           value={this.state.question}
                            className="form-creation-fields"
+                           onChange={this.sendField}
                 />
                 <FieldItem  item={this.props.field}
-                            key={this.props.id}
+                            key={this.props.field.id}
+                            formField={true}
                 />
             </React.Fragment>
         );

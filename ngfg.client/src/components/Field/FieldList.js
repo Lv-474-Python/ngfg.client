@@ -49,9 +49,9 @@ class FieldList extends Component {
         }
     };
 
-    handleAddField = (fieldId) => {
-        console.log("From Fieldlist: " + fieldId);
-        this.props.formCreationCallback(fieldId);
+    handleAddField = (fieldData) => {
+        console.log("From Fieldlist: " + fieldData);
+        this.props.addField(fieldData);
     }
 
 

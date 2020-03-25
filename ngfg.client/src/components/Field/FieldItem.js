@@ -21,6 +21,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import classNames from "classnames";
 
 const fieldTypes = {
     'Number': 1,
@@ -33,6 +35,62 @@ const fieldTypes = {
 
 
 class FieldItem extends Component {
+
+    renderActions = () => {
+        if (this.props.formCreation) {
+            return (
+                <div className="fields-button-grouper">
+                    <Button
+                        onClick={this.handleAddClick}
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className='field-button'
+                        endIcon={<AddIcon/>}>
+                        Add
+                    </Button>
+                </div>
+            )
+        } else if (this.props.formField) {
+            return (
+                <div className="fields-button-grouper">
+                    <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<RemoveIcon/>}>
+                        Remove
+                    </Button>
+                </div>
+            )
+        } else {
+            return (
+                <div className="fields-button-grouper">
+                    <ShareField field={this.props.item}
+                            handleDeleted={this.props.handleDeleted}/>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size="small"
+                                className='field-button'
+                                endIcon={<EditIcon/>}>
+                                Edit
+                            </Button>
+                    <DeleteField field={this.props.item}
+                                 handleDeleted={this.props.handleDeleted}/>
+                </div>
+            )
+        }
+    }
+
+    getElementClass = () => {
+        const fieldItemClassName = classNames({
+            'narrow-': this.props.formCreation,
+            'form-': this.props.formField
+        })
+        return fieldItemClassName
+    }
 
     getNumberField = function() {
         return [
@@ -124,7 +182,7 @@ class FieldItem extends Component {
                         {
 
                             this.props.item.choiceOptions.map(elem =>
-                                 <TextField className={this.props.formCreation ? "" : 'choice-typo'}
+                                 <TextField className={`${this.getElementClass()}choice-typo`}
                                             disabled key={elem}
                                             defaultValue={elem} />
                             )
@@ -137,19 +195,20 @@ class FieldItem extends Component {
     };
 
     handleAddClick = () => {
-        var fieldId = this.props.item.id;
-        this.props.onAddClick(fieldId);
+        const fieldData = this.props.item;
+        this.props.onAddClick(fieldData);
     }
 
     render() {
+
         return (
-            <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
-                    <CardContent className={this.props.formCreation ? "narrow-field-card-content" : "field-card-content"}>
+            <Card className={`${this.getElementClass()}field-card-item`}>
+                    <CardContent className={`${this.getElementClass()}field-card-content`}>
                         <Typography className='field-typo' gutterBottom variant={this.props.formCreation ? "caption" : "h5"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
-                        <Typography className={"field-typo"}
-                                    variant={"caption"}
+                        <Typography className="field-typo"
+                                    variant="caption"
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -182,35 +241,7 @@ class FieldItem extends Component {
 
                     <CardActions className='field-card-actions'>
                         <br/>
-                        {this.props.formCreation
-                            ? <div className="fields-button-grouper">
-                                <Button
-                                    onClick={this.handleAddClick}
-                                    variant="contained"
-                                    size="small"
-                                    color="secondary"
-                                    className='field-button'
-                                    endIcon={<AddIcon/>}>
-                                    Add
-                                </Button>
-                            </div>
-                            : <div className="fields-button-grouper">
-                                <ShareField field={this.props.item}
-                                            handleDeleted={this.props.handleDeleted}
-                                />
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    size="small"
-                                    className='field-button'
-                                    endIcon={<EditIcon/>}>
-                                    Edit
-                                </Button>
-                                <DeleteField field={this.props.item}
-                                             handleDeleted={this.props.handleDeleted}
-                                />
-                            </div>
-                        }
+                        {this.renderActions()}
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&

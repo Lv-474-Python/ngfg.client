@@ -64,9 +64,10 @@ class FormCreationPage extends Component {
         this.getData();
     }
 
-    handleFieldAddition = (fieldId) => {
-        console.log("From FormCreationPage: ", fieldId);
-        this.getFieldData(fieldId);
+    handleFieldAddition = (fieldData) => {
+        this.setState(prevState => ({
+            addedFields: [...prevState.addedFields, fieldData]
+        }));
     }
 
     getFieldData = (fieldId) => {
@@ -81,7 +82,6 @@ class FormCreationPage extends Component {
     }
 
     render() {
-        console.log(this.state.addedFields);
         return (
         <div className="main-form-creation-container">
             <div className="form-creation-fields">
@@ -107,7 +107,7 @@ class FormCreationPage extends Component {
                            formCreation={true}
                            getData={this.getData}
                            fields={this.state.fields}
-                           formCreationCallback = {this.handleFieldAddition}
+                           addField = {this.handleFieldAddition}
                 />
             </div>
             </div>
