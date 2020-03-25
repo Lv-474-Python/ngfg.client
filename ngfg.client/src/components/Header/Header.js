@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
 import {
     AppBar,
@@ -10,6 +11,9 @@ import {
 import './Header.scss';
 import Login from "./Login";
 import Logout from "./Logout";
+
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 
 class Header extends Component {
@@ -46,13 +50,22 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        let logged = sessionStorage.getItem('Logged');
-        logged = logged === 'true';
-        this.setState({'login': logged})
+        this.verifyLogin()
     }
 
+    verifyLogin = () => {
+        axios.get(`${API_URL}/${API_VERSION}/verify_login`,
+            {
+                withCredentials: true
+            }).then(response => {
+                this.setState({login: true})
+            }).catch(error => {
+                this.setState({login: false})
+            });
+    };
+
     handleLogin = () => {
-        return this.state.login ? <Logout /> : <Login/>
+        return this.state.login ? <Logout/> : <Login/>
     };
 
     render() {

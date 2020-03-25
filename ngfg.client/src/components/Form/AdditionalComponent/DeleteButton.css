@@ -1,0 +1,15 @@
+.form-delete-btn, .form-delete-dialog-btn {
+    background-color: #37474f !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin-bottom: 1.5vmin !important;
+    width: 6.5vw;
+}
+
+.form-delete-btn:hover, .form-delete-dialog-btn:hover {
+    color: #F9A825 !important;
+}
+
+.form-delete-wrapper {
+    margin-left: 1.5vmin !important;
+}

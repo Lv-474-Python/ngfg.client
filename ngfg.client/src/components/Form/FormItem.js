@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 import './Form.css'
-import axios from 'axios'
 
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import FormStatus from "./AdditionalComponent/FormStatus";
 import SendIcon from "@material-ui/icons/Send";
-import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import DeleteButtonForm from "./AdditionalComponent/DeleteButton";
 
 
 class FormItem extends Component {
@@ -55,13 +54,7 @@ class FormItem extends Component {
                         onClick={this.handleShare}>
                         Share
                     </Button>
-                     <Button
-                        size='medium'
-                        className='form-item-btn'
-                        endIcon={<DeleteIcon/>}
-                        onClick={this.handleDelete}>
-                        Delete
-                    </Button>
+                    <DeleteButtonForm form={this.props.item} handleDelete={this.props.handleDelete} />
                 </CardActions>
             </Card>
         );

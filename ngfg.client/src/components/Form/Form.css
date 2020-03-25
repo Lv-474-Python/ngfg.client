@@ -139,5 +139,6 @@
 }
 
 .not-found-form {
-   margin: auto;
+    margin:  1vw auto;
+    color: #37474F;
 }
