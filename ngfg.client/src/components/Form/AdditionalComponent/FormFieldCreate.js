@@ -18,6 +18,9 @@ class FormFieldCreate extends Component {
             this.handleAddition);
     }
 
+    handleRemoval = () => {
+        this.props.removeField(this.props.position)
+    }
 
     render() {
         return(
@@ -33,6 +36,7 @@ class FormFieldCreate extends Component {
                 <FieldItem  item={this.props.field}
                             key={this.props.field.id}
                             formField={true}
+                            onRemoveClick={this.handleRemoval}
                 />
             </React.Fragment>
         );

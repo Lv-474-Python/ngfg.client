@@ -3,7 +3,6 @@ import FormCreation from './FormCreation';
 import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
-import FormFieldCreate from "./AdditionalComponent/FormFieldCreate";
 import axios from "axios";
 
 const API_URL = 'http://ngfg.com:8000/api';
@@ -70,16 +69,6 @@ class FormCreationPage extends Component {
         }));
     }
 
-    getFieldData = (fieldId) => {
-        axios.get(`${API_URL}/${API_VERSION}/fields/${fieldId}`,
-            {withCredentials: true})
-            .then(res =>{
-                const field = res.data;
-                this.setState(prevState => ({
-                    addedFields: [...prevState.addedFields, field]
-                }))
-            })
-    }
 
     render() {
         return (

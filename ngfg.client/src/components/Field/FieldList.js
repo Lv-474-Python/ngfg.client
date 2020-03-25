@@ -50,7 +50,6 @@ class FieldList extends Component {
     };
 
     handleAddField = (fieldData) => {
-        console.log("From Fieldlist: " + fieldData);
         this.props.addField(fieldData);
     }
 

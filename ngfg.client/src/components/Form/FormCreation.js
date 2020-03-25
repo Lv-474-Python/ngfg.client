@@ -90,13 +90,13 @@ class FormCreation extends Component {
         this.setState({formFields});
     }
 
+    removeField = (position) => {
+        let formFields = this.state.formFields;
+        console.log(formFields[position])
+    }
+
 
     render() {
-        console.log("ENTRIES");
-        Object.entries(this.state.formFields).map(([key, value]) => (
-            console.log(value.fieldId, value.position, value.question)
-        ));
-        console.log(this.state.formFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -140,14 +140,10 @@ class FormCreation extends Component {
                             type="url"
                             onChange={this.handleResultUrlChange}
                         />
-                        {
-                            this.props.addedFields.map((elem, index) =>
-                                <FormFieldCreate field={elem}
-                                                 position={index}
-                                                 addField={this.addField}
-                                />
-                            )
-                        }
+                        <FormFieldCreationList fields={this.props.addedFields}
+                                               addField={this.addField}
+                                               removeField={this.removeField}
+                        />
                         <div>
                         </div>
                     </div>

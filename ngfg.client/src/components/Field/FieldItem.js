@@ -22,6 +22,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import classNames from "classnames";
 
 const fieldTypes = {
@@ -59,8 +61,25 @@ class FieldItem extends Component {
                         size="small"
                         color="secondary"
                         className="field-button"
-                        endIcon={<RemoveIcon/>}>
+                        endIcon={<RemoveIcon/>}
+                        onClick={this.handleRemoveClick}>
                         Remove
+                    </Button>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<ArrowUpwardIcon/>}>
+                        Up
+                    </Button>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<ArrowDownwardIcon/>}>
+                        Down
                     </Button>
                 </div>
             )
@@ -197,6 +216,10 @@ class FieldItem extends Component {
     handleAddClick = () => {
         const fieldData = this.props.item;
         this.props.onAddClick(fieldData);
+    }
+
+    handleRemoveClick = () => {
+        this.props.onRemoveClick();
     }
 
     render() {
