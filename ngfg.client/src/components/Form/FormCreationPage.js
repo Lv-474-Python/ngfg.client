@@ -75,6 +75,11 @@ class FormCreationPage extends Component {
         this.setState({addedFields: addedFields})
     }
 
+    handleMoveUp = (position) => {
+        let addedFields = this.state.addedFields;
+
+    }
+
     render() {
         return (
         <div className="main-form-creation-container">
