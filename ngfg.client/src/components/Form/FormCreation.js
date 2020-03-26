@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
+import {Droppable} from 'react-beautiful-dnd';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
@@ -136,11 +137,18 @@ class FormCreation extends Component {
                             onChange={this.handleResultUrlChange}
                         />
                         <div>
-                        <FormFieldCreationList fields={this.props.addedFields}
-                                               addField={this.addField}
-                                               handleFieldRemoval={this.handleFieldRemoval}
-                        />
-                        </div>
+                            <Droppable droppableId="droppable-1">
+                                {(provided) => (
+                                    <FormFieldCreationList fields={this.props.addedFields}
+                                                           addField={this.addField}
+                                                           handleFieldRemoval={this.handleFieldRemoval}
+                                                           {...provided.droppableProps}
+                                                            innerRef={provided.innerRef}>
+                                        {provided.placeholder}
+                                    </FormFieldCreationList>
+                                    )}
+                            </Droppable>
+                                </div>
                     </div>
 
                 </FormControl>

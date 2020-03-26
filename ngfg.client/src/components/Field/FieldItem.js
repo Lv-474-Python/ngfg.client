@@ -21,9 +21,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
 import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import classNames from "classnames";
 
 const fieldTypes = {
@@ -153,11 +150,6 @@ class FieldItem extends Component {
         this.props.onAddClick(fieldData);
     }
 
-    handleRemoveClick = () => {
-        let position = this.props.position;
-        this.props.onRemoveClick(position);
-    }
-
     renderActions = () => {
         if (this.props.formCreation) {
             return (
@@ -170,36 +162,6 @@ class FieldItem extends Component {
                         className='field-button'
                         endIcon={<AddIcon/>}>
                         Add
-                    </Button>
-                </div>
-            )
-        } else if (this.props.formField) {
-            return (
-                <div className="fields-button-grouper">
-                    <Button
-                        onClick={this.handleRemoveClick}
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<RemoveIcon/>}>
-                        Remove
-                    </Button>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<ArrowUpwardIcon/>}>
-                        Up
-                    </Button>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<ArrowDownwardIcon/>}>
-                        Down
                     </Button>
                 </div>
             )

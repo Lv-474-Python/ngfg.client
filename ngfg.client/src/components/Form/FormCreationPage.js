@@ -4,6 +4,7 @@ import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
 import axios from "axios";
+import {DragDropContext} from 'react-beautiful-dnd';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
@@ -75,8 +76,7 @@ class FormCreationPage extends Component {
         this.setState({addedFields: addedFields})
     }
 
-    handleMoveUp = (position) => {
-        let addedFields = this.state.addedFields;
+    onDragEnd = (result) => {
 
     }
 
@@ -110,11 +110,13 @@ class FormCreationPage extends Component {
                 />
             </div>
             </div>
+            <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="form-creation-main-component">
             <FormCreation addedFields={this.state.addedFields}
                           removeField={this.handleFieldRemoval}
             />
             </div>
+            </DragDropContext>
         </div>
         )
     }
