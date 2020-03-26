@@ -22,14 +22,29 @@ class FieldList extends Component {
             }
         }
 
-        if (this.props.filter.showAll) {
-            return true
+        let type = Object.entries(fieldTypes).filter((elem) => {
+            return elem[1] === field.fieldType})[0][0];
+
+        if (!this.props.filter.showAll) {
+            if(!this.props.filter['show' + type]) {
+                return false
+            }
         }
 
-        let type = Object.entries(fieldTypes).filter((elem) => {
-                                    return elem[1] === field.fieldType})[0][0];
-
-        return this.props.filter['show' + type];
+        if (!this.props.shared.all) {
+            if (this.props.shared.shared) {
+                if (field.owner.current) {
+                    return false
+                }
+            }
+    
+            if (this.props.shared.my) {
+                if (!field.owner.current) {
+                    return false
+                }
+            }
+        }
+        return true;
 
     };
 

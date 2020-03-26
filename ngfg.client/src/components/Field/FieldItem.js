@@ -189,7 +189,8 @@ class FieldItem extends Component {
                                     Add
                                 </Button>
                             </div>
-                            : <div className="fields-button-grouper">
+                            : this.props.item.owner.current ? 
+                            <div className="fields-button-grouper">
                                 <ShareField field={this.props.item} />
                                 <UpdateField field={this.props.item} 
                                              handleUpdated={this.props.handleUpdated}
@@ -197,7 +198,7 @@ class FieldItem extends Component {
                                 <DeleteField field={this.props.item}
                                              handleUpdated={this.props.handleUpdated}
                                 />
-                            </div>
+                            </div> : <br/>
                         }
                     </CardActions>
                     {
