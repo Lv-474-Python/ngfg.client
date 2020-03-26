@@ -85,7 +85,6 @@ class FieldCheckboxPass extends Component {
     }
 
     onChange = (event) => {
-        // хз по форматуванню
         let pickedOptions = this.handlePickedOptions(
             event.target.checked,
             event.target.name,
