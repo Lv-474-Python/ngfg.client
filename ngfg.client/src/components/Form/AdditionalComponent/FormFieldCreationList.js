@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import FormFieldCreate from "./FormFieldCreate";
+import CreateFormField from "../../Field/CreateFormField";
 
 class FormFieldCreationList extends Component {
 
@@ -17,18 +17,17 @@ class FormFieldCreationList extends Component {
 
     render() {
         return(
-            <React.Fragment>
-                {
+            <div>
+            {
                 this.props.fields.map((elem, index) =>
-                        <FormFieldCreate field={elem}
+                        <CreateFormField field={elem}
                                          id={elem.id}
                                          position={index}
                                          addField={this.handleSendField}
-                                         removeField={this.handleRemoveField}
+                                         onRemoveClick={this.handleRemoveField}
                         />)
-
             }
-            </React.Fragment>
+            </div>
         )
     }
 

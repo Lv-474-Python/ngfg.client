@@ -135,11 +135,11 @@ class FormCreation extends Component {
                             type="url"
                             onChange={this.handleResultUrlChange}
                         />
+                        <div>
                         <FormFieldCreationList fields={this.props.addedFields}
                                                addField={this.addField}
                                                handleFieldRemoval={this.handleFieldRemoval}
                         />
-                        <div>
                         </div>
                     </div>
 
