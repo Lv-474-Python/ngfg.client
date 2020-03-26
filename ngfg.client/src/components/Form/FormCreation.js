@@ -12,12 +12,10 @@ const API_VERSION = 'v1';
 
 class FormCreation extends Component {
     state = {
-        "formId": undefined,
         "name": undefined,
         "title": undefined,
         "resultUrl": undefined,
         "isPublished": false,
-        "formField": {},
         "formFields": []
     }
 
