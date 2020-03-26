@@ -13,7 +13,7 @@ import './FieldRadioPass.scss'
 
 class FieldRadioPass extends Component {
     state = {
-        'answer': [null]
+        'answer': null
     }
 
     getOptions = () => {
@@ -37,9 +37,9 @@ class FieldRadioPass extends Component {
     }
 
     onChange = (event) => {
-        const answer = [event.target.value];
+        const answer = event.target.value;
         this.setState({ answer });
-        this.props.setAnswer(this.props.index, answer)
+        this.props.setAnswer(this.props.index, [answer])
         this.props.setIsValid(this.props.index, true)
     }
 
@@ -63,7 +63,7 @@ class FieldRadioPass extends Component {
 
                     <RadioGroup aria-label="gender"
                                 name={radioName}
-                                value={this.state.answer[0]}
+                                value={this.state.answer}
                                 onChange={this.onChange}>
                         {this.getOptions()}
                     </RadioGroup>
