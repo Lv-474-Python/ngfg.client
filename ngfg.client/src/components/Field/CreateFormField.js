@@ -153,6 +153,18 @@ class CreateFormField extends Component {
             this.handleAddition);
     }
 
+    handleMoveUpClick = () => {
+        let position = this.props.position;
+        let disabled = this.props.disableMoveUp;
+        this.props.onMoveUpClik(position, disabled);
+    }
+
+    handleMoveDownClick = () => {
+        let position = this.props.position;
+        let disabled = this.props.disableMoveDown;
+        this.props.onMoveDownClick(position, disabled);
+    }
+
     render() {
         return (
             <Card className='form-field-card-item'>
@@ -215,8 +227,21 @@ class CreateFormField extends Component {
                                 variant="contained"
                                 size="small"
                                 color="secondary"
-                                className="field-button">
-                                Drag
+                                className="field-button"
+                                endIcon={<ArrowUpwardIcon/>}
+                                onClick={this.handleMoveUpClick}
+                                disabled={this.props.disableMoveUp}>
+                                Up
+                            </Button>
+                            <Button
+                                variant="contained"
+                                size="small"
+                                color="secondary"
+                                className="field-button"
+                                endIcon={<ArrowDownwardIcon/>}
+                                onClick={this.handleMoveDownClick}
+                                disabled={this.props.disableMoveDown}>
+                                Down
                             </Button>
                         </div>
                     </CardActions>

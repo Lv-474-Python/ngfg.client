@@ -43,6 +43,11 @@ class FormCreation extends Component {
         }, this.saveForm);
     }
 
+    validateQuestions = () => {
+        let addedFields = this.state.addedFields;
+        let formFields = this.state.formFields;
+    }
+
     saveFormFields = (formId, formField) => {
         axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
             fieldId: formField.fieldId,
@@ -61,6 +66,7 @@ class FormCreation extends Component {
     }
 
     saveForm = () => {
+        this.validateQuestions()
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -90,9 +96,19 @@ class FormCreation extends Component {
 
     handleFieldRemoval = (position) => {
         this.props.removeField(position);
-}
+    }
+
+    handleFieldMoveUp = (position, disabled) => {
+        this.props.moveUpField(position, disabled);
+    }
+
+    handleFieldMoveDown = (position, disabled) => {
+        this.props.moveDownField(position, disabled);
+    }
 
     render() {
+        console.log(this.props.addedFields);
+        console.log(this.state.formFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -137,18 +153,12 @@ class FormCreation extends Component {
                             onChange={this.handleResultUrlChange}
                         />
                         <div>
-                            <Droppable droppableId="droppable-1">
-                                {(provided) => (
-                                    <FormFieldCreationList fields={this.props.addedFields}
+                            <FormFieldCreationList fields={this.props.addedFields}
                                                            addField={this.addField}
                                                            handleFieldRemoval={this.handleFieldRemoval}
-                                                           {...provided.droppableProps}
-                                                            innerRef={provided.innerRef}>
-                                        {provided.placeholder}
-                                    </FormFieldCreationList>
-                                    )}
-                            </Droppable>
-                                </div>
+                                                           moveUpField={this.handleFieldMoveUp}
+                                                           moveDownField={this.handleFieldMoveDown}/>
+                        </div>
                     </div>
 
                 </FormControl>

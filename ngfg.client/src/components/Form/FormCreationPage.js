@@ -76,8 +76,20 @@ class FormCreationPage extends Component {
         this.setState({addedFields: addedFields})
     }
 
-    onDragEnd = (result) => {
+    handleMoveUp = (position, disabled) => {
+        let addedFields = this.state.addedFields;
+        if (!disabled) {
+            addedFields[position] = addedFields.splice(position-1, 1, addedFields[position])[0];
+            this.setState({addedFields: addedFields})
+        }
+    }
 
+    handleMoveDown = (position, disabled) => {
+        let addedFields = this.state.addedFields;
+        if (!disabled) {
+            addedFields[position] = addedFields.splice(position+1, 1, addedFields[position])[0];
+            this.setState({addedFields: addedFields})
+        }
     }
 
     render() {
@@ -110,13 +122,13 @@ class FormCreationPage extends Component {
                 />
             </div>
             </div>
-            <DragDropContext onDragEnd={this.onDragEnd}>
             <div className="form-creation-main-component">
             <FormCreation addedFields={this.state.addedFields}
                           removeField={this.handleFieldRemoval}
+                          moveUpField={this.handleMoveUp}
+                          moveDownField={this.handleMoveDown}
             />
             </div>
-            </DragDropContext>
         </div>
         )
     }

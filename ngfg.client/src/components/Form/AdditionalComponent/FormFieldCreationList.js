@@ -15,6 +15,14 @@ class FormFieldCreationList extends Component {
         this.props.handleFieldRemoval(position);
     }
 
+    handleMoveUpField = (position, disabled) => {
+        this.props.moveUpField(position, disabled);
+    }
+
+    handleMoveDownField = (position, disabled) => {
+        this.props.moveDownField(position, disabled);
+    }
+
     render() {
         return(
             <div>
@@ -25,6 +33,10 @@ class FormFieldCreationList extends Component {
                                          position={index}
                                          addField={this.handleSendField}
                                          onRemoveClick={this.handleRemoveField}
+                                         onMoveUpClik={this.handleMoveUpField}
+                                         onMoveDownClick={this.handleMoveDownField}
+                                         disableMoveUp={index==0 ? true : false}
+                                         disableMoveDown={index==this.props.fields.length-1 ? true : false}
                         />)
             }
             </div>
