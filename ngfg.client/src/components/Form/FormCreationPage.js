@@ -69,6 +69,11 @@ class FormCreationPage extends Component {
         }));
     }
 
+    handleFieldRemoval = (position) => {
+        let addedFields = this.state.addedFields;
+        addedFields.splice(position, 1);
+        this.setState({addedFields: addedFields})
+    }
 
     render() {
         return (
@@ -96,12 +101,13 @@ class FormCreationPage extends Component {
                            formCreation={true}
                            getData={this.getData}
                            fields={this.state.fields}
-                           addField = {this.handleFieldAddition}
+                           addField={this.handleFieldAddition}
                 />
             </div>
             </div>
             <div className="form-creation-main-component">
             <FormCreation addedFields={this.state.addedFields}
+                          removeField={this.handleFieldRemoval}
             />
             </div>
         </div>

@@ -53,6 +53,9 @@ class FieldList extends Component {
         this.props.addField(fieldData);
     }
 
+    handleRemoveField = (position) => {
+        this.props.removeField(position);
+    }
 
     render() {
         return (
@@ -63,6 +66,7 @@ class FieldList extends Component {
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
                                    onAddClick={this.handleAddField}
+                                   onRemoveClick={this.handleRemoveField}
                         />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.props.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
@@ -71,6 +75,7 @@ class FieldList extends Component {
                                    formCreation={this.props.formCreation}
                                    handleDeleted={this.handleDeleted}
                                    onAddClick={this.handleAddField}
+                                   onRemoveClick={this.handleRemoveField}
                         />)
                 }
             </div>

@@ -90,11 +90,9 @@ class FormCreation extends Component {
         this.setState({formFields});
     }
 
-    removeField = (position) => {
-        let formFields = this.state.formFields;
-        console.log(formFields[position])
-    }
-
+    handleFieldRemoval = (position) => {
+        this.props.removeField(position);
+}
 
     render() {
         return(
@@ -142,7 +140,7 @@ class FormCreation extends Component {
                         />
                         <FormFieldCreationList fields={this.props.addedFields}
                                                addField={this.addField}
-                                               removeField={this.removeField}
+                                               handleFieldRemoval={this.handleFieldRemoval}
                         />
                         <div>
                         </div>

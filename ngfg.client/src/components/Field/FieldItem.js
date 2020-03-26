@@ -38,71 +38,6 @@ const fieldTypes = {
 
 class FieldItem extends Component {
 
-    renderActions = () => {
-        if (this.props.formCreation) {
-            return (
-                <div className="fields-button-grouper">
-                    <Button
-                        onClick={this.handleAddClick}
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className='field-button'
-                        endIcon={<AddIcon/>}>
-                        Add
-                    </Button>
-                </div>
-            )
-        } else if (this.props.formField) {
-            return (
-                <div className="fields-button-grouper">
-                    <Button
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<RemoveIcon/>}
-                        onClick={this.handleRemoveClick}>
-                        Remove
-                    </Button>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<ArrowUpwardIcon/>}>
-                        Up
-                    </Button>
-                    <Button
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="field-button"
-                        endIcon={<ArrowDownwardIcon/>}>
-                        Down
-                    </Button>
-                </div>
-            )
-        } else {
-            return (
-                <div className="fields-button-grouper">
-                    <ShareField field={this.props.item}
-                            handleDeleted={this.props.handleDeleted}/>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                size="small"
-                                className='field-button'
-                                endIcon={<EditIcon/>}>
-                                Edit
-                            </Button>
-                    <DeleteField field={this.props.item}
-                                 handleDeleted={this.props.handleDeleted}/>
-                </div>
-            )
-        }
-    }
-
     getElementClass = () => {
         const fieldItemClassName = classNames({
             'narrow-': this.props.formCreation,
@@ -219,11 +154,76 @@ class FieldItem extends Component {
     }
 
     handleRemoveClick = () => {
-        this.props.onRemoveClick();
+        let position = this.props.position;
+        this.props.onRemoveClick(position);
+    }
+
+    renderActions = () => {
+        if (this.props.formCreation) {
+            return (
+                <div className="fields-button-grouper">
+                    <Button
+                        onClick={this.handleAddClick}
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className='field-button'
+                        endIcon={<AddIcon/>}>
+                        Add
+                    </Button>
+                </div>
+            )
+        } else if (this.props.formField) {
+            return (
+                <div className="fields-button-grouper">
+                    <Button
+                        onClick={this.handleRemoveClick}
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<RemoveIcon/>}>
+                        Remove
+                    </Button>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<ArrowUpwardIcon/>}>
+                        Up
+                    </Button>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        className="field-button"
+                        endIcon={<ArrowDownwardIcon/>}>
+                        Down
+                    </Button>
+                </div>
+            )
+        } else {
+            return (
+                <div className="fields-button-grouper">
+                    <ShareField field={this.props.item}
+                            handleDeleted={this.props.handleDeleted}/>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size="small"
+                                className='field-button'
+                                endIcon={<EditIcon/>}>
+                                Edit
+                            </Button>
+                    <DeleteField field={this.props.item}
+                                 handleDeleted={this.props.handleDeleted}/>
+                </div>
+            )
+        }
     }
 
     render() {
-
         return (
             <Card className={`${this.getElementClass()}field-card-item`}>
                     <CardContent className={`${this.getElementClass()}field-card-content`}>

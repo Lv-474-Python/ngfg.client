@@ -6,7 +6,7 @@ import '../Form.css'
 class FormFieldCreate extends Component {
 
     state = {
-        question: undefined,
+        question: "",
     }
 
     handleAddition = () => {
@@ -18,8 +18,8 @@ class FormFieldCreate extends Component {
             this.handleAddition);
     }
 
-    handleRemoval = () => {
-        this.props.removeField(this.props.position)
+    removeField = (position) => {
+        this.props.removeField(position);
     }
 
     render() {
@@ -36,7 +36,8 @@ class FormFieldCreate extends Component {
                 <FieldItem  item={this.props.field}
                             key={this.props.field.id}
                             formField={true}
-                            onRemoveClick={this.handleRemoval}
+                            position={this.props.position}
+                            onRemoveClick={this.removeField}
                 />
             </React.Fragment>
         );
