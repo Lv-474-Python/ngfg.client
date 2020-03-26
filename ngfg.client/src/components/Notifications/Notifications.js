@@ -41,7 +41,6 @@ class Notifications extends Component {
         })
     }
     
-
     render() {
         return (
             <div className='notifications'>
@@ -50,23 +49,19 @@ class Notifications extends Component {
                 [...Array(this.state.values.length).keys()].map(index =>
                         <Alert className='notification'
                                key={index}
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => this.close(index)}
-                                >
-                                <CloseIcon fontSize="inherit" />
-                                </IconButton>
-                            }
-                        >
+                               action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => this.close(index)}>
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }>
                         {this.state.values[index]}
                         </Alert>)
             }
-        </div>
-
-        );
+            </div>);
     }
 }
 
