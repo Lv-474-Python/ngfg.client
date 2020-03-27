@@ -15,18 +15,6 @@ class Notifications extends Component {
         values: []
     }
 
-    onChange = (event, index)  => {
-        let values = this.state.values;
-        values[index] = event.target.value;
-
-        this.setState({
-            values
-        }, () => {
-            this.props.setOptions(this.state.values);
-        } );
-
-    }
-
     close = (index) => {
         let values = this.state.values;
         values.splice(index, 1)
@@ -38,6 +26,13 @@ class Notifications extends Component {
             let values = this.state.values;
             values.push(message)
             this.setState({values})
+
+            setTimeout(() => {
+                let index = this.state.values.indexOf(message);
+                if (index !== -1) {
+                    this.close(index);
+                }
+            }, 20000) //20 seconds
         })
     }
     
