@@ -54,7 +54,6 @@ class FormFieldCreationList extends Component {
     }
 
     render() {
-        console.log(this.state.questions)
         return(
             <React.Fragment>
             {

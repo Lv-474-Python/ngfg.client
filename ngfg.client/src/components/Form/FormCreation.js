@@ -117,7 +117,7 @@ class FormCreation extends Component {
     }
 
     render() {
-        console.log("formFields within FormCreation: ", this.state.formFields);
+        console.log(this.state.formFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -168,7 +168,7 @@ class FormCreation extends Component {
                                                            handleFieldRemoval={this.handleFieldRemoval}
                                                            moveUpField={this.handleFieldMoveUp}
                                                            moveDownField={this.handleFieldMoveDown}
-                                                            fetchQuestions={this.fetchQuestions}/>
+                                                           fetchQuestions={this.fetchQuestions}/>
                         </div>
                     </div>
 
