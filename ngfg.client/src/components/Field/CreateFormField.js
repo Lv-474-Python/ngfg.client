@@ -169,13 +169,6 @@ class CreateFormField extends Component {
         return (
             <Card className='form-field-card-item'>
                     <CardContent className='form-field-card-content'>
-                        <TextField variant="outlined"
-                           helperText={`Enter question for ${this.props.field.name}`}
-                           size="small"
-                           type="text"
-                           value={this.state.question}
-                           className="form-creation-fields"
-                           onChange={this.sendField}/>
                         <Typography className='field-typo' gutterBottom variant="h5" component="h2">
                             <b>{this.props.field.name}</b>
                         </Typography>

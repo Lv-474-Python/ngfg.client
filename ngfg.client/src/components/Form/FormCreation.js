@@ -19,6 +19,12 @@ class FormCreation extends Component {
         "formFields": []
     }
 
+    fetchQuestions = (index, question) => {
+        let formFields = this.state.formFields;
+        formFields[index].question = question;
+        this.setState({formFields})
+    }
+
     handleNameChange = (event) => {
         this.setState({
             name: event.target.value
@@ -94,6 +100,10 @@ class FormCreation extends Component {
         this.setState({formFields});
     }
 
+    addFormFields = (formFields) => {
+        this.setState({formFields: formFields});
+    }
+
     handleFieldRemoval = (position) => {
         this.props.removeField(position);
     }
@@ -107,8 +117,7 @@ class FormCreation extends Component {
     }
 
     render() {
-        console.log(this.props.addedFields);
-        console.log(this.state.formFields);
+        console.log("formFields within FormCreation: ", this.state.formFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -154,10 +163,12 @@ class FormCreation extends Component {
                         />
                         <div>
                             <FormFieldCreationList fields={this.props.addedFields}
+                                                           addFormFields={this.addFormFields}
                                                            addField={this.addField}
                                                            handleFieldRemoval={this.handleFieldRemoval}
                                                            moveUpField={this.handleFieldMoveUp}
-                                                           moveDownField={this.handleFieldMoveDown}/>
+                                                           moveDownField={this.handleFieldMoveDown}
+                                                            fetchQuestions={this.fetchQuestions}/>
                         </div>
                     </div>
 
