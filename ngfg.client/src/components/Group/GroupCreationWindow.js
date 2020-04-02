@@ -25,7 +25,7 @@ class GroupCreationWindow extends Component{
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Field creation</DialogTitle>
                 <DialogContent>
-                    <GroupCreation />
+                    <GroupCreation getData={this.props.getData} handleClose={this.handleClose}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.handleClose} color="primary">

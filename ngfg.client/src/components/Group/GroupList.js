@@ -24,7 +24,6 @@ class GroupList extends Component {
         })
             .then(res => {
                 const groups = res.data.groups;
-                console.log(groups)
                 this.setState({groups: groups, filteredGroups: groups})
             });
     };
@@ -81,7 +80,7 @@ class GroupList extends Component {
                 <div className="group-side-menu">
                     <Sort sortValue={["By Name"]}
                           handleSort={this.handleSort}/>
-                    <GroupCreationWindow/>
+                    <GroupCreationWindow getData={this.getData}/>
                 </div>
                 <div>
                     <SearchBar onChange={(newValue) => {

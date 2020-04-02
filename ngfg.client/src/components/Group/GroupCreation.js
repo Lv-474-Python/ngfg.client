@@ -40,11 +40,12 @@ class GroupCreation extends Component {
                     console.log(res.data);
                     alert('Group created');
                     this.props.getData();
+                    this.props.handleClose();
                 }
             )
             .catch(error => {
                     console.log(error);
-                    alert('Fuck you');
+                    alert('Field was not created');
                 }
             );
     };
