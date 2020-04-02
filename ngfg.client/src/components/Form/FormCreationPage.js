@@ -66,30 +66,14 @@ class FormCreationPage extends Component {
 
     handleFieldAddition = (fieldData) => {
         this.setState(prevState => ({
-            addedFields: [...prevState.addedFields, fieldData]
+            addedFields: [...prevState.addedFields, {field: fieldData, question: undefined}]
         }));
     }
 
     handleFieldRemoval = (position) => {
         let addedFields = this.state.addedFields;
-        addedFields.splice(position, 1);
+        addedFields = addedFields.slice(0, position).concat(addedFields.slice(position+1, addedFields.length));
         this.setState({addedFields: addedFields})
-    }
-
-    handleMoveUp = (position, disabled) => {
-        let addedFields = this.state.addedFields;
-        if (!disabled) {
-            addedFields[position] = addedFields.splice(position-1, 1, addedFields[position])[0];
-            this.setState({addedFields: addedFields})
-        }
-    }
-
-    handleMoveDown = (position, disabled) => {
-        let addedFields = this.state.addedFields;
-        if (!disabled) {
-            addedFields[position] = addedFields.splice(position+1, 1, addedFields[position])[0];
-            this.setState({addedFields: addedFields})
-        }
     }
 
     render() {
@@ -125,8 +109,6 @@ class FormCreationPage extends Component {
             <div className="form-creation-main-component">
             <FormCreation addedFields={this.state.addedFields}
                           removeField={this.handleFieldRemoval}
-                          moveUpField={this.handleMoveUp}
-                          moveDownField={this.handleMoveDown}
             />
             </div>
         </div>

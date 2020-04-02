@@ -8,49 +8,21 @@ class FormFieldCreationList extends Component {
         questions: []
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.fields.length != this.props.fields.length || this.detectQuestionsUpdate(prevState, this.state)) {
-            let formFields = [];
-            this.props.fields.map((elem, index) =>
-                formFields[index] = {fieldId: elem.id, position: index, question: this.state.questions[index]}
-            );
-            this.props.addFormFields(formFields);
-        }
-    }
-
-    detectQuestionsUpdate = (prevState, thisState) => {
-        this.props.fields.map(function(elem, index) {
-
-        if(prevState.questions[index]!=thisState.questions[index]){
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    });
-    }
-
-    handleSendField = (fieldId, position, question) => {
-        this.props.addField(fieldId, position, question)
-    }
-
     handleRemoveField = (position) => {
         this.props.handleFieldRemoval(position);
     }
 
-    handleMoveUpField = (position, disabled) => {
-        this.props.moveUpField(position, disabled);
+    handleMoveUpClick = (position, disabled) => {
+        this.props.handleMoveUp(position, disabled);
     }
 
-    handleMoveDownField = (position, disabled) => {
-        this.props.moveDownField(position, disabled);
+    handleMoveDownClick = (position, disabled) => {
+        this.props.handleMoveDown(position, disabled);
     }
 
-    addQuestion = (event, position) => {
-        //let questions = this.state.questions;
-        //questions[position] = event.target.value;
-        this.props.fetchQuestions(position, event.target.value)
+    fetchQuestion = (event, position) => {
+        let question = event.target.value;
+        this.props.fetchQuestion(position, question);
     }
 
     render() {
@@ -60,19 +32,18 @@ class FormFieldCreationList extends Component {
                 this.props.fields.map((elem, index) =>
                         <div>
                             <TextField variant="outlined"
-                                       helperText={`Enter question for ${elem.name}`}
+                                       helperText={`Enter question for ${elem.field.name}`}
                                        size="small"
                                        type="text"
-                                       value={elem.question}
                                        className="form-creation-fields"
-                                       onChange={(event) => this.addQuestion(event, index)}/>
-                        <CreateFormField field={elem}
-                                         id={elem.id}
+                                       value={elem.question}
+                                       onChange={(event)=> this.fetchQuestion(event, index)}/>
+                        <CreateFormField field={elem.field}
+                                         id={elem.field.id}
                                          position={index}
-                                         addField={this.handleSendField}
                                          onRemoveClick={this.handleRemoveField}
-                                         onMoveUpClik={this.handleMoveUpField}
-                                         onMoveDownClick={this.handleMoveDownField}
+                                         handleMoveUp={this.handleMoveUpClick}
+                                         handleMoveDown={this.handleMoveDownClick}
                                          disableMoveUp={index==0 ? true : false}
                                          disableMoveDown={index==this.props.fields.length-1 ? true : false}
                         /></div>)

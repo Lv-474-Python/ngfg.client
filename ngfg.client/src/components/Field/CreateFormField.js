@@ -144,25 +144,16 @@ class CreateFormField extends Component {
         this.props.onRemoveClick(position);
     }
 
-    handleAddition = () => {
-        this.props.addField(this.props.field.id, this.props.position, this.state.question);
-    }
-
-    sendField = (event) => {
-        this.setState({question: event.target.value},
-            this.handleAddition);
-    }
-
-    handleMoveUpClick = () => {
+    onMoveUpClick = () => {
         let position = this.props.position;
         let disabled = this.props.disableMoveUp;
-        this.props.onMoveUpClik(position, disabled);
+        this.props.handleMoveUp(position, disabled);
     }
 
-    handleMoveDownClick = () => {
+    onMoveDownClick = () => {
         let position = this.props.position;
         let disabled = this.props.disableMoveDown;
-        this.props.onMoveDownClick(position, disabled);
+        this.props.handleMoveDown(position, disabled);
     }
 
     render() {
@@ -222,8 +213,8 @@ class CreateFormField extends Component {
                                 color="secondary"
                                 className="field-button"
                                 endIcon={<ArrowUpwardIcon/>}
-                                onClick={this.handleMoveUpClick}
-                                disabled={this.props.disableMoveUp}>
+                                disabled={this.props.disableMoveUp}
+                                onClick={this.onMoveUpClick}>
                                 Up
                             </Button>
                             <Button
@@ -232,8 +223,8 @@ class CreateFormField extends Component {
                                 color="secondary"
                                 className="field-button"
                                 endIcon={<ArrowDownwardIcon/>}
-                                onClick={this.handleMoveDownClick}
-                                disabled={this.props.disableMoveDown}>
+                                disabled={this.props.disableMoveDown}
+                                onClick={this.onMoveDownClick}>
                                 Down
                             </Button>
                         </div>

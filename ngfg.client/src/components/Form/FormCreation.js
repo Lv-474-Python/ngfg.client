@@ -19,10 +19,10 @@ class FormCreation extends Component {
         "formFields": []
     }
 
-    fetchQuestions = (index, question) => {
-        let formFields = this.state.formFields;
-        formFields[index].question = question;
-        this.setState({formFields})
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.addedFields != this.props.addedFields) {
+            this.setState({formFields: this.props.addedFields});
+        }
     }
 
     handleNameChange = (event) => {
@@ -49,16 +49,11 @@ class FormCreation extends Component {
         }, this.saveForm);
     }
 
-    validateQuestions = () => {
-        let addedFields = this.state.addedFields;
-        let formFields = this.state.formFields;
-    }
-
-    saveFormFields = (formId, formField) => {
+    saveFormFields = (formId, formField, position) => {
         axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
-            fieldId: formField.fieldId,
+            fieldId: formField.field.id,
             question: formField.question,
-            position: formField.position
+            position: position
         },
             {withCredentials: true})
             .then ( res => {
@@ -72,7 +67,6 @@ class FormCreation extends Component {
     }
 
     saveForm = () => {
-        this.validateQuestions()
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -83,7 +77,7 @@ class FormCreation extends Component {
             .then( res => {
                     const formId = res.data.id;
                     Object.entries(this.state.formFields).map(([key, value]) => (
-                        this.saveFormFields(formId, value)
+                        this.saveFormFields(formId, value, key)
                     ));
                 }
             )
@@ -93,31 +87,34 @@ class FormCreation extends Component {
             );
     }
 
-    addField = (fieldId, position, question) => {
-        let formField = {fieldId: fieldId, position: position, question: question}
-        let formFields = this.state.formFields;
-        formFields[position] = formField;
-        this.setState({formFields});
-    }
-
-    addFormFields = (formFields) => {
-        this.setState({formFields: formFields});
-    }
-
     handleFieldRemoval = (position) => {
         this.props.removeField(position);
     }
 
-    handleFieldMoveUp = (position, disabled) => {
-        this.props.moveUpField(position, disabled);
+    handleMoveUpField = (position, disabled) => {
+        let formFields = this.state.formFields;
+        if (!disabled) {
+            formFields[position] = formFields.splice(position-1, 1, formFields[position])[0];
+            this.setState({formFields: formFields});
+        }
     }
 
-    handleFieldMoveDown = (position, disabled) => {
-        this.props.moveDownField(position, disabled);
+    handleMoveDownField = (position, disabled) => {
+        let formFields = this.state.formFields;
+        if (!disabled) {
+            formFields[position] = formFields.splice(position+1, 1, formFields[position])[0];
+            this.setState({formFields: formFields});
+        }
+    }
+
+    fetchQuestion = (position, question) => {
+        let formFields = this.state.formFields;
+        formFields[position].question = question;
+        this.setState({formFields: formFields});
     }
 
     render() {
-        console.log(this.state.formFields);
+        console.log(this.state.formFields)
         return(
             <div className="form-container">
                 <FormControl>
@@ -162,13 +159,11 @@ class FormCreation extends Component {
                             onChange={this.handleResultUrlChange}
                         />
                         <div>
-                            <FormFieldCreationList fields={this.props.addedFields}
-                                                           addFormFields={this.addFormFields}
-                                                           addField={this.addField}
+                            <FormFieldCreationList fields={this.state.formFields}
                                                            handleFieldRemoval={this.handleFieldRemoval}
-                                                           moveUpField={this.handleFieldMoveUp}
-                                                           moveDownField={this.handleFieldMoveDown}
-                                                           fetchQuestions={this.fetchQuestions}/>
+                                                           handleMoveUp={this.handleMoveUpField}
+                                                           handleMoveDown={this.handleMoveDownField}
+                                                           fetchQuestion={this.fetchQuestion}/>
                         </div>
                     </div>
 
