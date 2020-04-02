@@ -144,16 +144,3 @@ html, body {
 .not-found-form {
    margin: auto;
 }
-
-.droppable {
-    background-color: darksalmon;
-    display: flex;
-    flex-direction: column;
-}
-
-.draggable {
-    background-color: darkgreen;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-}
