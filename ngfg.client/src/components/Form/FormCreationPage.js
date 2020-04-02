@@ -4,7 +4,6 @@ import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
 import axios from "axios";
-import {DragDropContext} from 'react-beautiful-dnd';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';

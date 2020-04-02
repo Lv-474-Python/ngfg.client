@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import CreateFormField from "../../Field/CreateFormField";
-import {CardContent, TextField} from "@material-ui/core";
+import {TextField} from "@material-ui/core";
 
 class FormFieldCreationList extends Component {
 

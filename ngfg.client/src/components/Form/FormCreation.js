@@ -5,7 +5,6 @@ import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
-import {Droppable} from 'react-beautiful-dnd';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
