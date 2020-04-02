@@ -1,0 +1,75 @@
+.Test {
+    display: flex;
+    justify-content: center;
+}
+.group-view {
+    width: 140vmin;
+    background-color: #f9a825 !important;
+    /*display: flex !important;*/
+    /*flex-direction: column !important;*/
+    /*justify-content: center !important;*/
+    /*align-items: center !important;*/
+}
+
+/*p {*/
+/*    fo*/
+/*}*/
+
+.group-view-content {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 1vmin !important;
+
+}
+
+.group-view-header {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+}
+
+.group-view-owner {
+    display: flex !important;
+    justify-content: left !important;
+    flex-wrap: nowrap !important;
+}
+
+.group-view-created {
+    display: flex !important;
+    justify-content: flex-end !important;
+
+}
+
+.member-list {
+    display: flex !important;
+    justify-content:space-between !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.group-view-link {
+    background-color: #37474f !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin-left: 1.5vmin !important;
+    margin-bottom: 1.5vmin !important;
+}
+
+.group-view-link :hover {
+    color: #F9A825 !important;
+}
+
+
+.create-group-btn {
+    background-color: #f9a825 !important;
+    color: #37474f !important;
+    text-transform: capitalize !important;
+    align-self: flex-end;
+    height: 6vmin;
+    margin-bottom: 0.5vmax !important;
+}
+
+.group-not-found {
+        display: flex;
+    justify-content: center;
+}
