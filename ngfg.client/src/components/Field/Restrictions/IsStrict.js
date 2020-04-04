@@ -11,7 +11,7 @@ class IsStrict extends Component {
         return (
             <FormControl component="fieldset">
                 <FormControlLabel
-                    value={this.props.value}
+                    checked={this.props.value || false}
                     control={<Switch color="primary" />}
                     label="Is Strict"
                     labelPlacement="end"

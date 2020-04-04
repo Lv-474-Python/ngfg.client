@@ -1,0 +1,23 @@
+@import "colors";
+
+
+.field-text-pass {
+    width: 40vw;
+    margin-top: 3vmin;
+    padding: 2vmin 2.5vmin 2vmin 2.5vmin;
+
+    background-color: $fieldBackgroundColor;
+    border-radius: 0.5vmin;
+    box-shadow: $fieldBoxShadow;
+
+    &__question {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    &__input {
+        width: 100%;
+
+        margin-top: 2vh !important;
+    }
+}

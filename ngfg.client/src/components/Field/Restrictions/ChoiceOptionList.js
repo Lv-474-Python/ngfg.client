@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 
 
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 
 class ChoiceOptionList extends Component {
     state = {
         count: 1,
-        values: this.props.choiceOptions
-    }
-
-    countUp = () => {
-        this.setState({
-            count: this.state.count + 1
-        })
+        values: []
     }
 
     onChange = (event, index)  => {
-        let values = this.state.values;
+        let values = this.props.choiceOptions;
         values[index] = event.target.value;
+        if (values[index] === "" && index !== 0) {
+            values.splice(index, 1);
+        }
 
         this.setState({
             values
@@ -29,23 +25,26 @@ class ChoiceOptionList extends Component {
 
     }
 
+    componentDidMount() {
+        this.setState({
+            count: this.props.choiceOptions + 1,
+            values: this.props.choiceOptions
+        })
+    }
+
     render() {
-        console.log(this.state);
         return (
             <div>
                 {
-                    
-                    [...Array(this.state.count).keys()].map(index =>
+                    [...Array(this.props.choiceOptions.length + 1).keys()].map(index =>
                         <TextField label=""
                                     type="text"
+                                    key={index}
+                                    value={this.props.choiceOptions[index] || ""}
                                     onChange={(event) => this.onChange(event, index)}
                             />
                     )
                 }
-                
-                <Button onClick={this.countUp}>
-                    Add option
-                </Button>
             </div>
         );
     }

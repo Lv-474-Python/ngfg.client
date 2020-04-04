@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
 import './Field.css'
+import AddIcon from '@material-ui/icons/Add';
 import {
     Button,
     Card,
@@ -17,10 +18,10 @@ import {
     Typography
 } from '@material-ui/core';
 import DeleteField from "./AdditionalComponents/DeleteField";
-import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
-import AddIcon from '@material-ui/icons/Add';
+import UpdateField from "./UpdateField";
+
 
 const fieldTypes = {
     'Number': 1,
@@ -51,7 +52,7 @@ class FieldItem extends Component {
                          key={this.props.item.name}>
                 <Checkbox
                     className='field-checkbox'
-                    checked={this.props.item.isStrict}
+                    checked={this.props.item.isStrict || false}
                     disabled={true}/>
                 Only integers
             </Typography>)]
@@ -74,7 +75,7 @@ class FieldItem extends Component {
                          key={this.props.item.name}>
                     <Checkbox
                         className='field-checkbox'
-                        checked={this.props.item.isStrict}
+                        checked={this.props.item.isStrict || false}
                         disabled={true}/>
                     Only letters
                 </Typography>)]
@@ -188,22 +189,16 @@ class FieldItem extends Component {
                                     Add
                                 </Button>
                             </div>
-                            : <div className="fields-button-grouper">
-                                <ShareField field={this.props.item}
-                                            handleDeleted={this.props.handleDeleted}
+                            : this.props.item.owner.current ? 
+                            <div className="fields-button-grouper">
+                                <ShareField field={this.props.item} />
+                                <UpdateField field={this.props.item} 
+                                             handleUpdated={this.props.handleUpdated}
                                 />
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    size="small"
-                                    className='field-button'
-                                    endIcon={<EditIcon/>}>
-                                    Edit
-                                </Button>
                                 <DeleteField field={this.props.item}
-                                             handleDeleted={this.props.handleDeleted}
+                                             handleUpdated={this.props.handleUpdated}
                                 />
-                            </div>
+                            </div> : <br/>
                         }
                     </CardActions>
                     {

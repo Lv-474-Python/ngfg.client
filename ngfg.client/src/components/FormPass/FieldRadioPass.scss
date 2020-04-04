@@ -1,0 +1,32 @@
+@import "colors";
+
+
+.field-radio-pass {
+    width: 40vw;
+    margin-top: 3vmin;
+    padding: 2vmin 2.5vmin 2vmin 2.5vmin;
+
+    background-color: $fieldBackgroundColor;
+    border-radius: 0.5vmin;
+    box-shadow: $fieldBoxShadow;
+
+    text-align: left;
+
+    &__question {
+        font-size: 1.5rem;
+    }
+
+    &__input {
+        width: 100%;
+
+        margin-top: 2vh !important;
+
+        &__help {
+            font-size: 0.8rem !important;
+        }
+    }
+
+    &__radio-item {
+        color: $radioOptionColor !important;
+    }
+}
