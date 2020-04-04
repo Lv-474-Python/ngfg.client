@@ -30,6 +30,14 @@ class Filter extends Component {
     onChangeShared = (event, change) => {
         let shared = this.props.shared;
         shared = Object.assign(shared, change);
+
+        if (shared.my && shared.shared){
+            shared.all = true;
+        }
+        else {
+            shared.all = false;
+        }
+        
         this.setState({
             shared
         }, () => {

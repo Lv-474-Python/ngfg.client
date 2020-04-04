@@ -21,11 +21,12 @@ class FieldsPage extends Component {
             showAutocomplete: false
         },
         sort: {
-          byNameDesc: true
+            byNameDesc: true
         },
         shared: {
-          shared: true,
-          my: true
+            all: true,
+            shared: false,
+            my: false
         },
         search: undefined,
         fields: []
