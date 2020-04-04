@@ -30,11 +30,13 @@ class CreateTextArea extends Component {
                     console.log(res.data);
                     alert('Field created');
                     this.props.getData();
+                    this.props.handleClose();
                 }
             )
             .catch(error => {
                     console.log(error);
                     alert('Field was not created');
+                    this.props.handleClose();
                 }
             );
     }
