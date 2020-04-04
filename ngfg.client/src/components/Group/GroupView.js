@@ -63,9 +63,6 @@ class GroupView extends Component {
             <div>
                 <div className={'Test'}>
                     <Card className='group-view'>
-                        {/*<CardHeader*/}
-                        {/*        title={this.state.name}*/}
-                        {/*/>*/}
 
                         <CardContent>
 
@@ -81,43 +78,47 @@ class GroupView extends Component {
                                         component="h2"
                                         className='group-view-owner'>
 
-                            <div className={'info'}>
-                                <span className={'owner'}>owner name {this.state.ownerName}</span>
-                                <span className={'created'}>created: {this.state.created}</span>
-                            </div>
+                                <div className={'info'}>
+                                    <span
+                                        className={'owner'}>Owner name: {this.state.ownerName}</span>
+                                    <span className={'created'}>Created: {this.state.created}</span>
+                                </div>
 
                             </Typography>
 
+                            <h2>Group Members: </h2>
 
-                            {/*<Typography variant="h6"*/}
-                            {/*            component="h2"*/}
-                            {/*            className='group-view-created'>*/}
+                            <TableContainer className={'members-container-fake'} component={Paper}>
+                                <Table className="members" aria-label="simple table">
+                                    <TableHead>
 
-                            {/*    /!*created: {this.state.created}*!/*/}
+                                        {/*<TableRow className={'members-row-fake'}>*/}
+                                        {/*    <TableCell className={'members-el-fake'}>#</TableCell>*/}
+                                        {/*    <TableCell className={'members-el-fake'}>Name</TableCell>*/}
+                                        {/*    <TableCell className={'members-el-fake'}>Email</TableCell>*/}
+                                        {/*</TableRow>*/}
 
-                            {/*</Typography>*/}
-
-                            {/*<Typography variant="h6"*/}
-                            {/*            component="h2"*/}
-                            {/*            className='group-view-members'>*/}
-                            {/*    MEMbers:*/}
-
-                            {/*<ol className={"member-list"}>*/}
-                            {/*    {this.state.users.map((item, i) =>*/}
-                            {/*        <li> {item.username} {item.email} </li>*/}
-                            {/*    )}*/}
-                            {/*</ol>*/}
-
-                            <TableContainer component={Paper}>
-                                <Table className="member" aria-label="simple table">
-                                    <TableHead className='member-head'>
-                                        <TableRow className={'member-row'}>
+                                        <TableRow className={'members-body'}>
                                             <TableCell align={"center"}>#</TableCell>
                                             <TableCell align={"center"}>Name</TableCell>
                                             <TableCell align={"center"}>Email</TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody className={'member-body'}>
+                                </Table>
+                            </TableContainer>
+
+
+                            <TableContainer className={'members-container'} component={Paper}>
+                                <Table className="members" aria-label="simple table">
+                                    {/*<TableHead className='members-head'>*/}
+
+                                    {/*    <TableRow className={'members-row'}>*/}
+                                    {/*        <TableCell align={"center"}>#</TableCell>*/}
+                                    {/*        <TableCell align={"center"}>Name</TableCell>*/}
+                                    {/*        <TableCell align={"center"}>Email</TableCell>*/}
+                                    {/*    </TableRow>*/}
+                                    {/*</TableHead>*/}
+                                    <TableBody className={'members-body'}>
                                         {this.state.users.map((row, index) => (
                                             <TableRow component="tr" key={row.username}>
                                                 <TableCell align={"center"}
@@ -136,8 +137,6 @@ class GroupView extends Component {
                                 </Table>
                             </TableContainer>
 
-
-                            {/*</Typography>*/}
                         </CardContent>
 
                     </Card>

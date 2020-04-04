@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
 }
+
 .group-view {
     width: 50vmax;
     background-color: #f9a825 !important;
@@ -37,12 +38,6 @@
 
 }
 
-.member-list {
-    display: flex !important;
-    justify-content:space-between !important;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
 
 .group-view-link {
     background-color: #37474f !important;
@@ -67,20 +62,20 @@
 }
 
 .group-not-found {
-        display: flex;
+    display: flex;
     justify-content: center;
 }
 
-.member, .member-head {
-    background-color: #f9a825 !important;
-    border: 1px solid black;
 
-}
-td{
+td {
+    /*display: block !important;*/
+    display: flex;
+    flex-grow: 1 !important;
+    overflow: auto !important;
     border-color: black !important;
 }
 
-.info{
+.info {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
@@ -89,6 +84,7 @@ td{
     margin-bottom: 1.5vmin;
 
 }
+
 .owner {
     display: flex;
 
@@ -97,4 +93,58 @@ td{
 .created {
     display: flex;
     justify-content: right;
+}
+
+
+.members-container-fake {
+    display: flex;
+    /*width: 48vmax !important;*/
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members-row-fake {
+    display: flex !important;
+    justify-content: space-around !important;
+    margin-right: 15vmax !important;
+}
+
+.members-el-fake {
+    display: flex ;
+    justify-content: space-around!important;
+    margin-right: 9vmax;
+}
+
+.members-container {
+    display: flex;
+    height: 250px;
+    width: 48.5vmax !important;
+    flex-flow: row;
+    align-items: stretch;
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members {
+    display: flex;
+    height: 100px;
+    flex-flow: row;
+    align-items: stretch;
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members-head {
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members-body {
+    /*display: block !important;*/
+    /*width: 100% !important;*/
+    /*display: flex;*/
+    /*height: 250px !important;*/
+    /*flex-direction: column !important;*/
+    display: block; /* Disable tabular layout, and make <tbody> a flex item */
+  margin: auto 0;
 }
