@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import '../../Form/Form.css'
 import {
     Button,
     Dialog,
@@ -95,10 +96,10 @@ class ShareField extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link">
                             Close
                         </Button>
-                        <Button onClick={this.handleAgree} color="primary" autoFocus>
+                        <Button onClick={this.handleAgree} className="form-item-link" autoFocus>
                             Share
                         </Button>
                     </DialogActions>
@@ -117,7 +118,7 @@ class ShareField extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link">
                             Ok
                         </Button>
                     </DialogActions>

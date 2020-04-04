@@ -4,12 +4,23 @@ import './Form.css'
 
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import FormStatus from "./AdditionalComponent/FormStatus";
+import SendIcon from "@material-ui/icons/Send";
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import DeleteButtonForm from "./AdditionalComponent/DeleteButton";
 
 
 class FormItem extends Component {
     goToView = () => {
         this.props.history.push(`/forms/${this.props.item.id}`)
     };
+
+    handleShare = () => {
+        console.log("Share")
+    }
+
+    handleDelete = () => {
+        console.log("Delete")
+    }
 
     render() {
         return (
@@ -30,11 +41,20 @@ class FormItem extends Component {
 
                 <CardActions>
                     <Button
-                        className='form-item-link'
+                        className='form-item-btn'
                         size="medium"
-                        onClick={this.goToView}>
-                        View form
+                        onClick={this.goToView}
+                        endIcon={<VisibilityOutlinedIcon/>}>
+                        View
                     </Button>
+                    <Button
+                        size='medium'
+                        className='form-item-btn'
+                        endIcon={<SendIcon/>}
+                        onClick={this.handleShare}>
+                        Share
+                    </Button>
+                    <DeleteButtonForm form={this.props.item} handleDelete={this.props.handleDelete} />
                 </CardActions>
             </Card>
         );
