@@ -55,6 +55,9 @@ class CreateTextArea extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
+                if (response.updatedName) {
+                    response = response.updatedName._schema.toString();
+                }
                 this.props.setResponse(response);
             }
             );

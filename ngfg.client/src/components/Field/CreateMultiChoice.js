@@ -103,10 +103,13 @@ class CreateMultiChoice extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
-                if (response.range) {
+                console.log(error.response.data.message)
+                if (response.updatedName) {
+                    response = response.updatedName._schema.toString();
+                }
+                else if (response.range) {
                     response = response.range._schema.toString();
                 };
-                console.log(error)
                 this.props.setResponse(response);
                 }
             );

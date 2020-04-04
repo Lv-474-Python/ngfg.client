@@ -98,9 +98,9 @@ class CreateSettingAutocompleteField extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
-                if (response.range) {
-                    response = response.range._schema.toString();
-                };
+                if (response.updatedName) {
+                    response = response.updatedName._schema.toString();
+                }
                 this.props.setResponse(response);
                 }
             );
