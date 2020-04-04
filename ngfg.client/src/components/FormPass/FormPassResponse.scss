@@ -1,0 +1,33 @@
+@import "colors";
+
+
+.form-pass-response {
+    display: flex;
+    flex-flow: column wrap;
+    flex-grow: 1;
+    align-self: center;
+
+    width: 40vw;
+    margin-bottom: 1.5vh;
+
+    text-align: left;
+
+    &__item {
+        margin-top: 3vmin;
+        padding: 1vmin 2.5vmin 2vmin 2.5vmin;
+
+        color: $titleColor;
+        background-color: $titleBackgroundColor;
+        border-radius: 0.5vmin;
+        box-shadow: 0.1vw 0.35vh 0.1vmin $titleShadowColor;
+
+        &__title {
+            font-size: 1.5rem;
+        }
+    
+        &__info {
+            padding-top: 2vmin;
+            font-size: 0.9rem;
+        }
+    }
+}
