@@ -10,25 +10,25 @@ class SettingAutocomplete extends Component {
                 <TextField
                     label="data URL"
                     type="url"
-                    value={this.props.settingAutocomplete_dataUrl}
+                    value={this.props.dataUrl || ""}
                     onChange={this.props.onChangeDataURL}
                 />
                 <TextField
                     label="Sheet"
                     type="text"
-                    value={this.props.settingAutocomplete_sheet}
+                    value={this.props.sheet || ""}
                     onChange={this.props.onChangeSheet}
                 />
                 <TextField
                     label="from row"
                     type="text"
-                    value={this.props.settingAutocomplete_fromRow}
+                    value={this.props.fromRow || ""}
                     onChange={this.props.onChangeFromRow}
                 />
                 <TextField
                     label="to row"
                     type="text"
-                    value={this.props.settingAutocomplete_toRow}
+                    value={this.props.toRow || ""}
                     onChange={this.props.onChangeToRow}
                 />
             </div>

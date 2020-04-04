@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
-import { 
-    AppBar, 
-    Button, 
-    Toolbar 
+import {
+    AppBar,
+    Button,
+    Toolbar
 } from '@material-ui/core';
 
 import './Header.scss';
 import Login from "./Login";
 import Logout from "./Logout";
+
+const API_URL = 'http://ngfg.com:8000';
 
 
 class Header extends Component {
@@ -25,13 +28,13 @@ class Header extends Component {
         console.log(this.props);
         console.log(this.props.history);
         this.props.history.push(`/${newValue}`);
-    }
+    };
 
     handleLogoClick = () => {
         console.log('logo click');
         console.log(this.props.history);
         this.props.history.push('/');
-    }
+    };
 
     handleFormsClick = () => {
         this.props.history.push('/forms/');
@@ -43,16 +46,29 @@ class Header extends Component {
 
     handleGroupsClick = () => {
         this.props.history.push('/groups/');
-    }
+    };
 
     componentDidMount() {
-        let logged = sessionStorage.getItem('Logged');
-        logged = logged === 'true';
-        this.setState({'login': logged})
+        this.verifyLogin()
     }
 
+    verifyLogin = () => {
+        axios.get(`${API_URL}/verify_login`,
+            {
+                withCredentials: true
+            }).then(response => {
+                this.setState({login: true})
+            }).catch(error => {
+                this.setState({login: false})
+            });
+    };
+
+    handleLogout = () => {
+        this.setState({login: false})
+    };
+
     handleLogin = () => {
-        return this.state.login ? <Logout /> : <Login/>
+        return this.state.login ? <Logout handleLogout={this.handleLogout}/> : <Login/>
     };
 
     render() {

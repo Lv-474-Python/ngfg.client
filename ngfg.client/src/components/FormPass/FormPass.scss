@@ -1,0 +1,48 @@
+@import "colors";
+
+
+.form-pass {
+    display: flex;
+    flex-flow: column wrap;
+    flex-grow: 1;
+    align-self: center;
+
+    width: 40vw;
+    margin-bottom: 1.5vh;
+
+    &__title {
+        margin-top: 3vmin;
+        padding: 1vmin 2.5vmin 2.5vmin 2.5vmin;
+
+        color: $titleColor;
+        background-color: $titleBackgroundColor;
+        border-radius: 0.5vmin;
+        box-shadow: 0.1vw 0.35vh 0.1vmin $titleShadowColor;
+
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    &__submit {
+        display: flex !important;
+        justify-content: flex-end !important;
+
+        margin-top: 1.5vh !important;
+        padding: 0 1vw !important;
+
+        color: $submitColor !important;
+        background-color: $submitBackgroundColor !important;
+
+        font-weight: 500 !important;
+        text-align: center !important;
+        text-transform: capitalize !important;
+        line-height: 4vmin !important;
+
+        &:hover {
+            color: $submitHoverColor !important;
+            background-color: $submitHoverBackgroundColor !important;
+
+            transition: 0.3s !important;
+        }
+    }
+}
