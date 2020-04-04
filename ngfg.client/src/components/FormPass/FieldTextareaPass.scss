@@ -1,0 +1,34 @@
+@import "colors";
+
+
+.field-textarea-pass {
+    width: 40vw;
+    margin-top: 3vmin;
+    padding: 2vmin 2.5vmin 2vmin 2.5vmin;
+
+    background-color: $fieldBackgroundColor;
+    border-radius: 0.5vmin;
+    box-shadow: $fieldBoxShadow;
+
+    &__question {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+
+    &__input {
+        resize: none;
+        overflow: auto !important;
+
+        width: 100%;
+        padding-top: 1vh;
+        padding-left: 0.5vw;
+        margin-top: 2vh !important;
+
+        font-family: 'Roboto' !important;
+
+        &__error {
+            border: 1px solid $fieldErrorColor;
+            color: $fieldErrorColor;
+        }
+    }
+}
