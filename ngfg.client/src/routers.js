@@ -14,6 +14,7 @@ import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
 import FormCreationPage from "./components/Form/FormCreationPage";
 import GroupList from './components/Group/GroupList'
 import GroupView from "./components/Group/GroupView";
+import Notifications from './components/Notifications/Notifications'
 
 class Routers extends Component {
 
@@ -21,6 +22,7 @@ class Routers extends Component {
         return(
             <BrowserRouter>
                 <Header/>
+                <Notifications/>
                 <Switch>
                     <Route path='/' exact
                            component={HomePage}

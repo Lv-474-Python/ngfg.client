@@ -1,0 +1,11 @@
+.notifications {
+    position: fixed !important;
+    right: 1vw !important;
+    bottom: 1vw !important;
+    width: 25vw !important;
+    z-index: 100 !important;
+}
+
+.notification {
+    margin-bottom: 0.6vw !important;
+}

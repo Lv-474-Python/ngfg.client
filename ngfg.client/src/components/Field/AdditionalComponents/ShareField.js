@@ -34,9 +34,6 @@ class ShareField extends Component {
                     recipients: this.state.recipients
                 },
                 {withCredentials: true,})
-            .then(res => {
-                this.setState({response: "Shared successfully"});
-            })
             .catch(err => {
                 let response = err.response.data.message;
                 if(typeof(response) != "string") {
@@ -46,9 +43,8 @@ class ShareField extends Component {
                     }).toString();
                 }
                 this.setState({response});
-
+                this.setState({openResponse: true});
             });
-        this.setState({openResponse: true});
     };
 
     handleClickOpen = () => {
