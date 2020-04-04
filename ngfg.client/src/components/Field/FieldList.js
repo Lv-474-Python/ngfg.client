@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 
 import FieldItem from './FieldItem';
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 
 const fieldTypes = {
     'Number': 1,
