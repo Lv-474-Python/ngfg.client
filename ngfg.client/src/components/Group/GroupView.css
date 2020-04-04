@@ -3,17 +3,14 @@
     justify-content: center;
 }
 .group-view {
-    width: 140vmin;
+    width: 50vmax;
     background-color: #f9a825 !important;
+    margin-top: 1.5vmax;
     /*display: flex !important;*/
     /*flex-direction: column !important;*/
     /*justify-content: center !important;*/
     /*align-items: center !important;*/
 }
-
-/*p {*/
-/*    fo*/
-/*}*/
 
 .group-view-content {
     display: flex !important;
@@ -72,4 +69,32 @@
 .group-not-found {
         display: flex;
     justify-content: center;
+}
+
+.member, .member-head {
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+
+}
+td{
+    border-color: black !important;
+}
+
+.info{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1vmin;
+    margin-bottom: 1.5vmin;
+
+}
+.owner {
+    display: flex;
+
+}
+
+.created {
+    display: flex;
+    justify-content: right;
 }
