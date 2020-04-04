@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import GroupCreationWindow from "./GroupCreationWindow"
-import Button from "@material-ui/core/Button";
 import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
 import GroupItem from "./GroupItem";

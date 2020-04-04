@@ -71,3 +71,13 @@
     display: flex;
     justify-content: center;
 }
+
+.group-create-header{
+    text-align: center;
+}
+/*test*/
+.group-create-name{
+    display: flex;
+    width: 30vw !important;
+    flex-grow: 120;
+}

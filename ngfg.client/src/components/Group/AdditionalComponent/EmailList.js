@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import FormGroup from "@material-ui/core/FormGroup";
 
 
 class EmailList extends Component {
@@ -17,7 +18,7 @@ class EmailList extends Component {
         })
     };
 
-    onChange = (event, index)  => {
+    onChange = (event, index) => {
         let values = this.state.values;
         values[index] = event.target.value;
 
@@ -25,7 +26,7 @@ class EmailList extends Component {
             values
         }, () => {
             this.props.setEmails(this.state.values);
-        } );
+        });
 
     };
 
@@ -36,9 +37,10 @@ class EmailList extends Component {
                 {
 
                     [...Array(this.state.count).keys()].map(index =>
-                        <TextField label=""
-                                    type="email"
-                                    onChange={(event) => this.onChange(event, index)}
+                            <TextField label="Enter email"
+                                       type="email"
+                                       fullWidth
+                                       onChange={(event) => this.onChange(event, index)}
                             />
                     )
                 }
