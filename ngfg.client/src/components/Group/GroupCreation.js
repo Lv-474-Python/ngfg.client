@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import EmailList from './AdditionalComponent/EmailList';
 
-import {FormGroup, TextField} from "@material-ui/core";
+import {FormGroup, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 const API_URL = 'http://ngfg.com:8000/api';
@@ -55,22 +55,26 @@ class GroupCreation extends Component {
         console.log(this.state);
         return (
             <div>
+                <FormGroup className='group-create-name'>
                     <TextField label="Group name"
                                placeholder="Input name"
                                type="text"
-                               InputLabelProps={{
-                                   shrink: true,
-                               }}
-                               fullWidth
                                onChange={this.handleNameChange}
-                               className='group-create-name'
                     />
+                </FormGroup>
+                <Typography className='mail-typo'
+                            variant="inherit"
+                            component="p">
+                    Emails:
+                </Typography>
                 <EmailList setEmails={this.setEmails}
                            emails={this.state.usersEmails}
                 />
-                <Button onClick={this.sendData}>
-                    Send
-                </Button>
+                <div className="group-btn-position">
+                    <Button onClick={this.sendData} className="group-creation-btn">
+                        Send
+                    </Button>
+                </div>
             </div>
 
         );

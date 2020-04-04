@@ -37,11 +37,11 @@ class GroupCreationWindow extends Component{
                         <DialogContent>
                             <GroupCreation getData={this.props.getData} handleClose={this.handleClose}/>
                         </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleClose} color="primary">
-                                Cancel
-                            </Button>
-                        </DialogActions>
+                        {/*<DialogActions>*/}
+                        {/*    <Button onClick={this.handleClose} color="primary">*/}
+                        {/*        Cancel*/}
+                        {/*    </Button>*/}
+                        {/*</DialogActions>*/}
                     </Dialog>
                     </div>
                 </div>
