@@ -27,6 +27,7 @@ class FormList extends Component {
             withCredentials: true,
         })
             .then(res => {
+                console.log(res);
                 const {forms} = res.data;
                 this.setState({forms: forms, filteredForms: forms})
             });
@@ -109,7 +110,19 @@ class FormList extends Component {
 
     handleCreateFormClick = () => {
         this.props.history.push('/form')
-    }
+    };
+    handleDelete = (deleted, item) => {
+        if (deleted) {
+            let filteredForms = this.state.filteredForms;
+
+            const index = filteredForms.indexOf(item);
+            if (index > -1) {
+                filteredForms.splice(index, 1);
+            }
+
+            this.setState({filteredForms})
+        }
+    };
 
     componentDidMount() {
         this.getData();
@@ -148,7 +161,8 @@ class FormList extends Component {
                             this.state.filteredForms.length !== 0 ?
                                 this.state.filteredForms.map(form =>
                                     <FormItem item={form}
-                                              key={form.id}/>
+                                              key={form.id}
+                                              handleDelete={this.handleDelete}/>
                                 ) :
                                 <h2 className='not-found-form'>Nothing found</h2>
                         }

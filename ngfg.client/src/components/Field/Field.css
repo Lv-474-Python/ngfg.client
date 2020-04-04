@@ -69,6 +69,7 @@
     width: 7vmax;
     margin-bottom: 5px !important;
     background-color: #37474F !important;
+    text-transform: capitalize !important;
     position: absolute;
     z-index: 9;
 }
@@ -187,6 +188,7 @@
     margin-left: 5vw !important;
     margin-bottom: 3vw !important;
     width: 10vw !important;
+    text-transform: capitalize !important;
     background-color: #F9A825 !important;
 }
 

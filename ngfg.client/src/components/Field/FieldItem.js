@@ -17,11 +17,12 @@ import {
     Typography
 } from '@material-ui/core';
 import DeleteField from "./AdditionalComponents/DeleteField";
-import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
 import AddIcon from '@material-ui/icons/Add';
 import classNames from "classnames";
+import UpdateField from "./UpdateField";
+
 
 const fieldTypes = {
     'Number': 1,
@@ -60,7 +61,7 @@ class FieldItem extends Component {
                          key={this.props.item.name}>
                 <Checkbox
                     className='field-checkbox'
-                    checked={this.props.item.isStrict}
+                    checked={this.props.item.isStrict || false}
                     disabled={true}/>
                 Only integers
             </Typography>)]
@@ -83,7 +84,7 @@ class FieldItem extends Component {
                          key={this.props.item.name}>
                     <Checkbox
                         className='field-checkbox'
-                        checked={this.props.item.isStrict}
+                        checked={this.props.item.isStrict || false}
                         disabled={true}/>
                     Only letters
                 </Typography>)]
@@ -150,41 +151,6 @@ class FieldItem extends Component {
         this.props.onAddClick(fieldData);
     }
 
-    renderActions = () => {
-        if (this.props.formCreation) {
-            return (
-                <div className="fields-button-grouper">
-                    <Button
-                        onClick={this.handleAddClick}
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className='field-button'
-                        endIcon={<AddIcon/>}>
-                        Add
-                    </Button>
-                </div>
-            )
-        } else {
-            return (
-                <div className="fields-button-grouper">
-                    <ShareField field={this.props.item}
-                            handleDeleted={this.props.handleDeleted}/>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                size="small"
-                                className='field-button'
-                                endIcon={<EditIcon/>}>
-                                Edit
-                            </Button>
-                    <DeleteField field={this.props.item}
-                                 handleDeleted={this.props.handleDeleted}/>
-                </div>
-            )
-        }
-    }
-
     render() {
         return (
             <Card className={`${this.getElementClass()}field-card-item`}>
@@ -226,7 +192,29 @@ class FieldItem extends Component {
 
                     <CardActions className='field-card-actions'>
                         <br/>
-                        {this.renderActions()}
+                        {this.props.formCreation
+                            ? <div className="fields-button-grouper">
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    color="secondary"
+                                    className='field-button'
+                                    endIcon={<AddIcon/>}
+                                    onClick={this.handleAddClick}>
+                                    Add
+                                </Button>
+                            </div>
+                            : this.props.item.owner.current ?
+                            <div className="fields-button-grouper">
+                                <ShareField field={this.props.item} />
+                                <UpdateField field={this.props.item}
+                                             handleUpdated={this.props.handleUpdated}
+                                />
+                                <DeleteField field={this.props.item}
+                                             handleUpdated={this.props.handleUpdated}
+                                />
+                            </div> : <br/>
+                        }
                     </CardActions>
                     {
                             [4,6].includes(this.props.item.fieldType) &&

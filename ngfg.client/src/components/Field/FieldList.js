@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
 import FieldItem from './FieldItem';
-import CreateWindow from "./CreationWindow";
 
 const fieldTypes = {
     'Number': 1,
@@ -23,28 +21,43 @@ class FieldList extends Component {
             }
         }
 
-        if (this.props.filter.showAll) {
-            return true
+        let type = Object.entries(fieldTypes).filter((elem) => {
+            return elem[1] === field.fieldType})[0][0];
+
+        if (!this.props.filter.showAll) {
+            if(!this.props.filter['show' + type]) {
+                return false
+            }
         }
 
-        let type = Object.entries(fieldTypes).filter((elem) => {
-                                    return elem[1] === field.fieldType})[0][0];
+        if (!this.props.shared.all) {
+            if (this.props.shared.shared) {
+                if (field.owner.current) {
+                    return false
+                }
+            }
 
-        return this.props.filter['show' + type];
+            if (this.props.shared.my) {
+                if (!field.owner.current) {
+                    return false
+                }
+            }
+        }
+        return true;
 
     };
 
     sortFields = (field1, field2) => {
         if (this.props.sort.byNameDesc !== null) {
             if (this.props.sort.byNameDesc) {
-                return field1.name < field2.name
+                return field1.name.toLowerCase().localeCompare(field2.name.toLowerCase())
             }
-            return field1.name > field2.name
+            return field2.name.toLowerCase().localeCompare(field1.name.toLowerCase())
         }
     };
 
-    handleDeleted = (deleted) => {
-        if(deleted) {
+    handleUpdated = (updated) => {
+        if(updated) {
             this.props.getData();
         }
     };
@@ -73,7 +86,7 @@ class FieldList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
-                                   handleDeleted={this.handleDeleted}
+                                   handleUpdated={this.handleUpdated}
                                    onAddClick={this.handleAddField}
                                    onRemoveClick={this.handleRemoveField}
                         />)

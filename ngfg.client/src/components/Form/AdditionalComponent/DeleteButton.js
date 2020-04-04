@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
+import './DeleteButton.css'
 
-import '../../Form/Form.css'
 import {
     Button,
     Dialog,
@@ -15,7 +15,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
-class DeleteField extends Component {
+class DeleteButtonForm extends Component {
 
     state = {
         open: false,
@@ -26,7 +26,7 @@ class DeleteField extends Component {
     handleRemove = () => {
 
         axios
-            .delete(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, {
+            .delete(`${API_URL}/${API_VERSION}/forms/${this.props.form.id}`, {
                 withCredentials: true,
             })
             .then(res => {
@@ -45,9 +45,9 @@ class DeleteField extends Component {
     handleClose = () => {
         this.setState({open: false, openResponse: false},
             () => {
-            this.props.handleUpdated(
-                this.state.response === "Deleted successfully"
-                );
+            this.props.handleDelete(
+                this.state.response === "Deleted successfully",
+                this.props.form);
         });
     };
 
@@ -58,12 +58,10 @@ class DeleteField extends Component {
 
     render() {
         return (
-            <div>
+            <div className='form-delete-wrapper'>
                 <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    className='field-button'
+                    size="medium"
+                    className='form-delete-btn'
                     endIcon={<DeleteIcon/>}
                     onClick={this.handleClickOpen}>
                     Delete
@@ -75,17 +73,17 @@ class DeleteField extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle
-                        id="alert-dialog-title">{"Delete Field"}</DialogTitle>
+                        id="alert-dialog-title">Delete Form</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Are you sure want to delete field <b>{this.props.field.name}</b>?
+                            Are you sure want to delete form <b>{this.props.form.name}</b>?
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} className="form-item-link">
+                        <Button onClick={this.handleClose} className='form-delete-dialog-btn'>
                             Disagree
                         </Button>
-                        <Button onClick={this.handleAgree} className="form-item-link" autoFocus>
+                        <Button onClick={this.handleAgree} className='form-delete-dialog-btn' autoFocus>
                             Agree
                         </Button>
                     </DialogActions>
@@ -97,14 +95,14 @@ class DeleteField extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle
-                        id="alert-dialog-title">{"Result"}</DialogTitle>
+                        id="alert-dialog-title">Result</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             {this.state.response}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} className="form-item-link" color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                             Ok
                         </Button>
                     </DialogActions>
@@ -114,4 +112,4 @@ class DeleteField extends Component {
     }
 }
 
-export default DeleteField
+export default DeleteButtonForm

@@ -7,7 +7,6 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@materi
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     var button = undefined;
-    console.log(props.text);
     const handleClickOpen = () => {
         setOpen(true);
     };
