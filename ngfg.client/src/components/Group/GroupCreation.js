@@ -36,23 +36,27 @@ class GroupCreation extends Component {
         axios.post(`${API_URL}/${API_VERSION}/groups/`, {...group},
             {withCredentials: true})
             .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    alert('Group created');
+                    this.props.setResponse("Group created");
                     this.props.getData();
-                    this.props.handleClose();
                 }
             )
             .catch(error => {
-                    console.log(error);
-                    alert('Field was not created');
+                let response = error.response.data.message;
+                if (response.is_exist) {
+                    // response = response.updatedName._schema.toString();
+                    response = response.is_exist.toString();
+                }
+                if (response.usersEmails)
+                {
+                    response = "Not a valid email address."
+                }
+                this.props.setResponse(response);
                 }
             );
+        this.props.handleAgree();
     };
 
     render() {
-        console.log('this.state');
-        console.log(this.state);
         return (
             <div>
                 <FormGroup className='group-create-name'>

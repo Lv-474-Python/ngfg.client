@@ -48,6 +48,7 @@ class EmailList extends Component {
                                        placeholder={"Input email"}
                                        key={index}
                                        value={this.props.emails[index] || ""}
+                                       // error={!/\S+@\S+\.\S+/.test(this.props.emails[index]) || false}
                                        onChange={(event) => this.onChange(event, index)}
                             />
                         </FormGroup>
