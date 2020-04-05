@@ -90,52 +90,42 @@ class GroupView extends Component {
 
                             <TableContainer className={'members-container-fake'} component={Paper}>
                                 <Table className="members" aria-label="simple table">
-                                    <TableHead>
-
-                                        {/*<TableRow className={'members-row-fake'}>*/}
-                                        {/*    <TableCell className={'members-el-fake'}>#</TableCell>*/}
-                                        {/*    <TableCell className={'members-el-fake'}>Name</TableCell>*/}
-                                        {/*    <TableCell className={'members-el-fake'}>Email</TableCell>*/}
-                                        {/*</TableRow>*/}
-
-                                        <TableRow className={'members-body'}>
-                                            <TableCell align={"center"}>#</TableCell>
-                                            <TableCell align={"center"}>Name</TableCell>
-                                            <TableCell align={"center"}>Email</TableCell>
+                                    <TableHead className={'members-head-fake'}>
+                                        <TableRow className={'members-body-fake'}>
+                                            <TableCell id={'number'} align={'center'}>#</TableCell>
+                                            <TableCell id={'name'} align={'center'}>Name</TableCell>
+                                            <TableCell id={'email'}
+                                                       align={'center'}>Email</TableCell>
                                         </TableRow>
                                     </TableHead>
                                 </Table>
                             </TableContainer>
 
-
-                            <TableContainer className={'members-container'} component={Paper}>
-                                <Table className="members" aria-label="simple table">
-                                    {/*<TableHead className='members-head'>*/}
-
-                                    {/*    <TableRow className={'members-row'}>*/}
-                                    {/*        <TableCell align={"center"}>#</TableCell>*/}
-                                    {/*        <TableCell align={"center"}>Name</TableCell>*/}
-                                    {/*        <TableCell align={"center"}>Email</TableCell>*/}
-                                    {/*    </TableRow>*/}
-                                    {/*</TableHead>*/}
-                                    <TableBody className={'members-body'}>
-                                        {this.state.users.map((row, index) => (
-                                            <TableRow component="tr" key={row.username}>
-                                                <TableCell align={"center"}
-                                                           component="td"
-                                                           scope="row">
-                                                    {index + 1}
-                                                </TableCell>
-                                                <TableCell
-                                                    align={"center"}>{row.username}</TableCell>
-                                                <TableCell align={"center"}>{row.email}</TableCell>
+                            {this.state.users.length === 0 ? <h2> Group has no users</h2> :
+                                <TableContainer className={'members-container'} component={Paper}>
+                                    <Table className="members" aria-label="simple table">
+                                        <TableBody className={'members-body'}>
+                                            {this.state.users.map((row, index) => (
+                                                <TableRow component="tr" key={row.username}>
+                                                    <TableCell align={"center"}
+                                                               component="td"
+                                                               scope="row">
+                                                        {index + 1}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        align={"center"}>{row.username}</TableCell>
+                                                    <TableCell
+                                                        align={"center"}>{row.email}</TableCell>
 
 
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                                                </TableRow>
+                                            ))}
+
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+
+                            }
 
                         </CardContent>
 

@@ -98,22 +98,35 @@ td {
 
 .members-container-fake {
     display: flex;
-    /*width: 48vmax !important;*/
+    width: 47.5vmax !important;
     background-color: #f9a825 !important;
-    border: 1px solid black;
+    box-shadow: none !important;
+    border-radius: 0px !important;
 }
 
-.members-row-fake {
-    display: flex !important;
-    justify-content: space-around !important;
-    margin-right: 15vmax !important;
+#number {
+    width: 14.6% !important;
 }
 
-.members-el-fake {
-    display: flex ;
-    justify-content: space-around!important;
-    margin-right: 9vmax;
+#name {
+    width: 27.5% !important;
 }
+
+#email {
+    width: 57.9% !important;
+}
+/*.members-row-fake {*/
+/*    display: flex !important;*/
+/*    margin-left: 10px !important;*/
+/*    !*justify-content: space-around !important;*!*/
+/*    !*margin-right: 15vmax !important;*!*/
+/*}*/
+
+/*.members-el-fake {*/
+/*    display: flex;*/
+/*    !*justify-content: space-around !important;*!*/
+/*    !*margin-right: 9vmax;*!*/
+/*}*/
 
 .members-container {
     display: flex;
@@ -140,11 +153,6 @@ td {
 }
 
 .members-body {
-    /*display: block !important;*/
-    /*width: 100% !important;*/
-    /*display: flex;*/
-    /*height: 250px !important;*/
-    /*flex-direction: column !important;*/
     display: block; /* Disable tabular layout, and make <tbody> a flex item */
-  margin: auto 0;
+    margin: auto 0;
 }
