@@ -104,7 +104,6 @@ class CreateSettingAutocompleteField extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
-                console.log(response)
                 if (response.updatedName) {
                     response = response.updatedName._schema.toString();
                 }

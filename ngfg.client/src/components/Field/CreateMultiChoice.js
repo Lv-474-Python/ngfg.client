@@ -95,7 +95,6 @@ class CreateMultiChoice extends Component {
                 field.range = {min: this.state.range_min, max: this.state.range_max}
             }
         }
-        console.log(field)
         axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
                   {...field}, 
                   {withCredentials: true})
@@ -107,7 +106,6 @@ class CreateMultiChoice extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
-                console.log(error.response.data.message)
                 if (response.updatedName) {
                     response = response.updatedName._schema.toString();
                 }

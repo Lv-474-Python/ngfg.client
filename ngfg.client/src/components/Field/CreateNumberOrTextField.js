@@ -88,7 +88,6 @@ class CreateNumberOrTextField extends Component {
         else {
             field.range = {min: this.state.range_min, max: this.state.range_max}
         }
-        console.log(field)
         axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
                   {...field}, 
                   {withCredentials: true})
@@ -100,7 +99,6 @@ class CreateNumberOrTextField extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
-                console.log(response)
                 if (response.updatedName) {
                     response = response.updatedName._schema.toString();
                 }
