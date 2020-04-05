@@ -7,10 +7,6 @@
     width: 50vmax;
     background-color: #f9a825 !important;
     margin-top: 1.5vmax;
-    /*display: flex !important;*/
-    /*flex-direction: column !important;*/
-    /*justify-content: center !important;*/
-    /*align-items: center !important;*/
 }
 
 .group-view-content {
@@ -68,7 +64,6 @@
 
 
 td {
-    /*display: block !important;*/
     display: flex;
     flex-grow: 1 !important;
     overflow: auto !important;
@@ -105,28 +100,16 @@ td {
 }
 
 #number {
-    width: 14.6% !important;
+    width: 14.8% !important;
 }
 
 #name {
-    width: 27.5% !important;
+    width: 27.7% !important;
 }
 
 #email {
-    width: 57.9% !important;
+    width: 57.5% !important;
 }
-/*.members-row-fake {*/
-/*    display: flex !important;*/
-/*    margin-left: 10px !important;*/
-/*    !*justify-content: space-around !important;*!*/
-/*    !*margin-right: 15vmax !important;*!*/
-/*}*/
-
-/*.members-el-fake {*/
-/*    display: flex;*/
-/*    !*justify-content: space-around !important;*!*/
-/*    !*margin-right: 9vmax;*!*/
-/*}*/
 
 .members-container {
     display: flex;
@@ -153,6 +136,6 @@ td {
 }
 
 .members-body {
-    display: block; /* Disable tabular layout, and make <tbody> a flex item */
+    display: block;
     margin: auto 0;
 }

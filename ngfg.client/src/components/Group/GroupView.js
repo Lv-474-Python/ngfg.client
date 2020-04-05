@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {
-    Button,
     Card,
-    CardActions,
-    CardHeader,
     CardContent,
     Typography,
     Paper,
@@ -13,7 +10,6 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TablePagination,
     TableRow
 } from "@material-ui/core";
 
@@ -33,12 +29,21 @@ class GroupView extends Component {
         "users": []
     }
 
+    formatDate = (date) => {
+        let data = new Date(date);
+        let day = data.getDay();
+        let month = data.getMonth();
+        let year = data.getFullYear();
+        return String(day) + "/" + String(month) + "/" + String(year);
+    }
+
     getGroupData = () => {
         axios.get(`${API_URL}/${API_VERSION}/groups/${this.props.match.params.id}`, {
             withCredentials: true,
         })
             .then(res => {
                 const group = res.data;
+                group.created = this.formatDate(group.created)
                 this.setState({...group}, this.getOwnerName)
             })
     }
