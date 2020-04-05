@@ -1,0 +1,38 @@
+div.group-select {
+    width: 33% !important;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div.user-select {
+    width: 33% !important;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+div.date-select {
+    width: 33% !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.group-and-users-token {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-picker {
+    width: 100% !important;
+    margin:  0.5vw 0;
+    display: flex;
+    justify-content: center;
+}
+
+.label {
+    text-transform: capitalize !important;
+}
