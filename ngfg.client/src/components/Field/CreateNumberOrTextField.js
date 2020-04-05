@@ -76,15 +76,19 @@ class CreateNumberOrTextField extends Component {
     sendUpdateData = () => {
         let response = ""
         const field = {
-            updatedName: this.state.name,
             isStrict: this.state.isStrict
         };
-        if ( this.state.range_min == null && this.state.range_max == null) {
+        if (this.state.initField.name !== this.state.name) {
+            field.updatedName = this.state.name
+        }
+        if (this.state.initField.range && 
+            this.state.range_min == null && this.state.range_max == null) {
             field.deleteRange = true
         }
         else {
             field.range = {min: this.state.range_min, max: this.state.range_max}
         }
+        console.log(field)
         axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
                   {...field}, 
                   {withCredentials: true})
@@ -96,6 +100,7 @@ class CreateNumberOrTextField extends Component {
             )
             .catch(error => {
                 let response = error.response.data.message;
+                console.log(response)
                 if (response.updatedName) {
                     response = response.updatedName._schema.toString();
                 }
@@ -113,9 +118,11 @@ class CreateNumberOrTextField extends Component {
 
     componentDidMount () {
         if (this.props.isUpdate) {
+            let initField = {...this.props.field}
             this.setState({
                 name: this.props.field.name,
-                isStrict: this.props.field.isStrict
+                isStrict: this.props.field.isStrict,
+                initField
             })
             if (this.props.field.range) {
                 if (this.props.field.range.min !== null) {

@@ -80,18 +80,22 @@ class CreateMultiChoice extends Component {
         let newOptions = this.state.choiceOptions
 
         let field = {
-            updatedName: this.state.name,
             addedChoiceOptions: [...newOptions].filter(x => !initOptions.includes(x)),
             removedChoiceOptions: [...initOptions].filter(x => !newOptions.includes(x))
         };
+        if (this.state.initField.name !== this.state.name) {
+            field.updatedName = this.state.name
+        }
         if (this.state.fieldType === 6) {
-            if ( this.state.range_min == null && this.state.range_max == null) {
+            if (this.state.initField.range && 
+                this.state.range_min == null && this.state.range_max == null) {
                 field.deleteRange = true
             }
             else {
                 field.range = {min: this.state.range_min, max: this.state.range_max}
             }
         }
+        console.log(field)
         axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
                   {...field}, 
                   {withCredentials: true})
@@ -109,6 +113,9 @@ class CreateMultiChoice extends Component {
                 }
                 else if (response.range) {
                     response = response.range._schema.toString();
+                }
+                else if (response.options_and_range_error) {
+                    response = response.options_and_range_error.toString();
                 };
                 this.props.setResponse(response);
                 }
@@ -119,10 +126,12 @@ class CreateMultiChoice extends Component {
 
     componentDidMount () {
         if (this.props.isUpdate) {
+            let initField = {...this.props.field}
             this.setState({
                 name: this.props.field.name,
                 choiceOptions: this.props.field.choiceOptions,
-                initOptions: [...this.props.field.choiceOptions]
+                initOptions: [...this.props.field.choiceOptions],
+                initField
             })
             if (this.props.field.range) {
                 if (this.props.field.range.min !== null) {
