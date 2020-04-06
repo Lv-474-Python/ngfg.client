@@ -78,7 +78,6 @@ class CreateSettingAutocompleteField extends Component {
         let response = ""
 
         let field = {
-            updatedName: this.state.name,
             updatedAutocomplete: {
                 dataUrl: this.state.dataUrl,
                 sheet: this.state.sheet,
@@ -86,7 +85,14 @@ class CreateSettingAutocompleteField extends Component {
                 toRow: this.state.toRow
             }
         };
-
+        if (this.state.initField.name !== this.state.name) {
+            field.updatedName = this.state.name
+        }
+        for (let prop in this.state.initField.settingAutocomplete) {
+            if (this.state[prop] !== this.state.initField.settingAutocomplete[prop]) {
+                field.updatedAutocomplete[prop] = this.state[prop]
+            }
+        }
         axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
                   {...field}, 
                   {withCredentials: true})
@@ -101,6 +107,9 @@ class CreateSettingAutocompleteField extends Component {
                 if (response.updatedName) {
                     response = response.updatedName._schema.toString();
                 }
+                else if (response.updatedAutocomplete) {
+                    response = response.updatedAutocomplete._schema.toString();
+                };
                 this.props.setResponse(response);
                 }
             );
@@ -110,12 +119,14 @@ class CreateSettingAutocompleteField extends Component {
 
     componentDidMount () {
         if (this.props.isUpdate) {
+            let initField = {...this.props.field}
             this.setState({
                 name: this.props.field.name,
                 dataUrl: this.props.field.settingAutocomplete.dataUrl,
                 sheet: this.props.field.settingAutocomplete.sheet,
                 fromRow: this.props.field.settingAutocomplete.fromRow,
-                toRow: this.props.field.settingAutocomplete.toRow
+                toRow: this.props.field.settingAutocomplete.toRow,
+                initField
             })
         }
     };
