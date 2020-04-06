@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {withRouter} from "react-router-dom";
+import {DateTimePicker} from "@material-ui/pickers";
 import {
     TextField,
     Typography,
@@ -11,7 +12,11 @@ import "./FormShareLink.css"
 
 class FormShareLink extends Component {
     state = {
-        formShareLink: ""
+        formShareLink: "",
+        fromDate: null,
+        toDate: null,
+        toDateError: false,
+        toDateHelperText: ""
     };
 
     handleClose = () => {
@@ -21,8 +26,69 @@ class FormShareLink extends Component {
     onChange = (event) => {
         let formShareLink = event.target.value;
         this.setState({formShareLink},
-        () => this.props.handleFormShare(this.state.formShareLink))
+            () => this.props.handleFormShare(this.state.formShareLink))
     };
+
+    handleFromDate = (fromDate) => {
+        if (this.state.toDate && fromDate) {
+            let diff = (fromDate.getTime() - this.state.toDate.getTime()) / 1000 / 60;
+            let diffMinutes = Math.abs(Math.round(diff));
+            if (diffMinutes < 5 || this.state.toDate < fromDate) {
+                this.setState({
+                        fromDate: fromDate,
+                        toDateError: true,
+                        toDateHelperText: "Min diff between To and From - 5 min"
+                    },
+                    () => this.props.handleFromDate(this.state.fromDate))
+            } else {
+                this.setState({
+                        fromDate: fromDate,
+                        toDateError: false,
+                        toDateHelperText: ""
+                    },
+                    () => this.props.handleFromDate(this.state.fromDate))
+            }
+        } else {
+            this.setState({
+                    fromDate: fromDate,
+                    toDateError: false,
+                    toDateHelperText: ""
+                },
+                () => this.props.handleFromDate(this.state.fromDate))
+        }
+
+    };
+
+    handleToDate = (toDate) => {
+        if (this.state.fromDate && toDate) {
+            let diff = (this.state.fromDate.getTime() - toDate.getTime()) / 1000 / 60;
+            let diffMinutes = Math.abs(Math.round(diff));
+            console.log(diffMinutes < 5, toDate < this.state.fromDate)
+            if (diffMinutes < 5 || toDate < this.state.fromDate) {
+                this.setState({
+                        toDate: toDate,
+                        toDateError: true,
+                        toDateHelperText: "Min diff between To and From - 5 min"
+                    },
+                    () => this.props.handleToDate(this.state.toDate))
+            } else {
+                this.setState({
+                        toDate: toDate,
+                        toDateError: false,
+                        toDateHelperText: ""
+                    },
+                    () => this.props.handleToDate(this.state.toDate))
+            }
+        } else {
+            this.setState({
+                    toDate: toDate,
+                    toDateError: false,
+                    toDateHelperText: ""
+                },
+                () => this.props.handleToDate(this.state.toDate))
+        }
+    };
+
 
     render() {
         return (
@@ -35,11 +101,35 @@ class FormShareLink extends Component {
                                inputProps={{
                                    readOnly: true
                                }}
+                               placeholder='Form share link'
                                fullWidth={true}
                                onChange={this.onChange}
-                               value={this.state.formShareLink}
+                               value={this.props.formShareLink}
                                type='text'/>
 
+                    <div className="date-select-link">
+                        <div className="date-picker-link">
+                            <DateTimePicker label="From"
+                                            disablePast
+                                            inputVariant='outlined'
+                                            value={this.state.fromDate}
+                                            onChange={this.handleFromDate}
+                                            clearable
+                                            showTodayButton/>
+                        </div>
+
+                        <div className="date-picker-link">
+                            <DateTimePicker label="To"
+                                            disablePast
+                                            inputVariant='outlined'
+                                            value={this.state.toDate}
+                                            onChange={this.handleToDate}
+                                            error={this.state.toDateError}
+                                            helperText={this.state.toDateHelperText}
+                                            clearable
+                                            showTodayButton/>
+                        </div>
+                    </div>
                 </FormControl>
             </div>
         )

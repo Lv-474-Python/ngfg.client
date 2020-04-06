@@ -1,4 +1,17 @@
 .form-share-dialog-link-text {
     font-size: 1.2rem !important;
-    margin-bottom: 0.3vw !important;
+    margin-bottom: 0.5vw !important;
+}
+
+.date-select-link {
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.date-picker-link {
+    margin: 1.3vw 1.3vw 0 0;
+    display: flex;
+    justify-content: center;
 }

@@ -33,7 +33,8 @@ class UsersList extends Component {
                     [...Array(this.state.count).keys()].map(index =>
                         <TextField label=""
                                    className='text-field'
-                                   type="text"
+                                   placeholder='User email'
+                                   type="email"
                                    key={index}
                                    value={this.props.users[index] || ""}
                                    onChange={(event) => this.onChange(event, index)}

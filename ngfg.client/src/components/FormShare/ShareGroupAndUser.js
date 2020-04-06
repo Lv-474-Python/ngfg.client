@@ -8,24 +8,76 @@ import UsersList from "./UsersList";
 import GroupSelect from "./GroupSelect"
 
 
-
 class ShareGroupAndUser extends Component {
 
     state = {
         fromDate: null,
         toDate: null,
         users: [],
-        selectedGroups: []
+        selectedGroups: [],
+        toDateError: false,
+        toDateHelperText: ""
     };
 
-    handelFromDate = (fromDate) => {
-        this.setState({fromDate},
-            () => this.props.handleFromDate(this.state.fromDate))
+    handleFromDate = (fromDate) => {
+        if (this.state.toDate && fromDate) {
+            let diff = (fromDate.getTime() - this.state.toDate.getTime()) / 1000 / 60;
+            let diffMinutes = Math.abs(Math.round(diff));
+            if (diffMinutes < 5 || this.state.toDate < fromDate) {
+                this.setState({
+                        fromDate: fromDate,
+                        toDateError: true,
+                        toDateHelperText: "Min diff between To and From - 5 min"
+                    },
+                    () => this.props.handleFromDate(this.state.fromDate))
+            } else {
+                this.setState({
+                        fromDate: fromDate,
+                        toDateError: false,
+                        toDateHelperText: ""
+                    },
+                    () => this.props.handleFromDate(this.state.fromDate))
+            }
+        } else {
+            this.setState({
+                    fromDate: fromDate,
+                    toDateError: false,
+                    toDateHelperText: ""
+                },
+                () => this.props.handleFromDate(this.state.fromDate))
+        }
+
     };
 
-    handelToDate = (toDate) => {
-        this.setState({toDate},
-            () => this.props.handleToDate(this.state.toDate))
+    handleToDate = (toDate) => {
+
+        if (this.state.fromDate && toDate) {
+            let diff = (this.state.fromDate.getTime() - toDate.getTime()) / 1000 / 60;
+            let diffMinutes = Math.abs(Math.round(diff));
+            console.log(diffMinutes < 5, toDate < this.state.fromDate)
+            if (diffMinutes < 5 || toDate < this.state.fromDate) {
+                this.setState({
+                        toDate: toDate,
+                        toDateError: true,
+                        toDateHelperText: "Min diff between To and From - 5 min"
+                    },
+                    () => this.props.handleToDate(this.state.toDate))
+            } else {
+                this.setState({
+                        toDate: toDate,
+                        toDateError: false,
+                        toDateHelperText: ""
+                    },
+                    () => this.props.handleToDate(this.state.toDate))
+            }
+        } else {
+            this.setState({
+                    toDate: toDate,
+                    toDateError: false,
+                    toDateHelperText: ""
+                },
+                () => this.props.handleToDate(this.state.toDate))
+        }
     };
 
     setUsers = (users) => {
@@ -61,7 +113,7 @@ class ShareGroupAndUser extends Component {
                                         disablePast
                                         inputVariant='outlined'
                                         value={this.state.fromDate}
-                                        onChange={this.handelFromDate}
+                                        onChange={this.handleFromDate}
                                         clearable
                                         showTodayButton/>
                     </div>
@@ -71,15 +123,13 @@ class ShareGroupAndUser extends Component {
                                         disablePast
                                         inputVariant='outlined'
                                         value={this.state.toDate}
-                                        onChange={this.handelToDate}
+                                        onChange={this.handleToDate}
+                                        error={this.state.toDateError}
+                                        helperText={this.state.toDateHelperText}
                                         clearable
-                                        showTodayButton
-                                        cancelLabel={<p className='label'>Cancel</p>}
-                                        okLabel={<p className='label'>Ok</p>}
-                                        clearLabel={<p className='label'>Clear</p>}
-                                        todayLabel={<p className='label'>Today</p>}/>
+                                        strictCompareDates
+                                        showTodayButton/>
                     </div>
-
                 </div>
             </div>
         )

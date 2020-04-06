@@ -27,12 +27,6 @@ div.date-select {
 }
 
 .date-picker {
-    width: 100% !important;
     margin:  0.5vw 0;
     display: flex;
-    justify-content: center;
-}
-
-.label {
-    text-transform: capitalize !important;
 }

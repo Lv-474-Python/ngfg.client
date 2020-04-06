@@ -33,11 +33,11 @@ class GroupSelect extends Component {
     render() {
         return (
             <FormControl className='form-control-group'>
-                <InputLabel id="demo-mutiple-chip-label">Groups</InputLabel>
+                <InputLabel id="group-select-label-id">Groups</InputLabel>
                 <Select variant='outlined'
                         className='group-select-item'
-                        labelId="demo-mutiple-chip-label"
-                        id="demo-mutiple-chip"
+                        labelId="group-select-label-id"
+                        id="group-select-id"
                         multiple
                         value={this.state.selectedGroupsNames}
                         onChange={this.handleChange}
