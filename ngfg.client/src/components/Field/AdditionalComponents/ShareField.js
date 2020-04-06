@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import '../../Form/Form.css'
 import {
     Button,
     Dialog,
@@ -33,9 +34,6 @@ class ShareField extends Component {
                     recipients: this.state.recipients
                 },
                 {withCredentials: true,})
-            .then(res => {
-                this.setState({response: "Shared successfully"});
-            })
             .catch(err => {
                 let response = err.response.data.message;
                 if(typeof(response) != "string") {
@@ -45,9 +43,8 @@ class ShareField extends Component {
                     }).toString();
                 }
                 this.setState({response});
-
+                this.setState({openResponse: true});
             });
-        this.setState({openResponse: true});
     };
 
     handleClickOpen = () => {
@@ -95,10 +92,10 @@ class ShareField extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link">
                             Close
                         </Button>
-                        <Button onClick={this.handleAgree} color="primary" autoFocus>
+                        <Button onClick={this.handleAgree} className="form-item-link" autoFocus>
                             Share
                         </Button>
                     </DialogActions>
@@ -117,7 +114,7 @@ class ShareField extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} className="form-item-link">
                             Ok
                         </Button>
                     </DialogActions>

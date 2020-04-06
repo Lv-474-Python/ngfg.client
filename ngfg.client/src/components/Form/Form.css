@@ -40,15 +40,16 @@
     justify-content: left !important;
 }
 
-.form-item-link {
+.form-item-btn {
     background-color: #37474f !important;
     color: white !important;
     text-transform: capitalize !important;
     margin-left: 1.5vmin !important;
     margin-bottom: 1.5vmin !important;
+    width: 6.5vw;
 }
 
-.form-item-link :hover {
+.form-item-btn :hover {
     color: #F9A825 !important;
 }
 
@@ -143,5 +144,6 @@ html, body {
 }
 
 .not-found-form {
-   margin: auto;
+    margin:  1vw auto;
+    color: #37474F;
 }

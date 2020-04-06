@@ -53,7 +53,7 @@ class HomePage extends Component {
     }
 
     handleFieldsTitleClick = () => {
-        console.log('Fields title click');
+        this.props.history.push('/fields')
     }
 
     componentDidMount() {
