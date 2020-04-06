@@ -4,6 +4,7 @@ import axios from 'axios';
 import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
@@ -15,6 +16,12 @@ class FormCreation extends Component {
         "resultUrl": undefined,
         "isPublished": false,
         "formFields": []
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.addedFields != this.props.addedFields) {
+            this.setState({formFields: this.props.addedFields});
+        }
     }
 
     handleNameChange = (event) => {
@@ -38,10 +45,27 @@ class FormCreation extends Component {
     handlePublish = () => {
         this.setState({
             isPublished: true
-        }, this.save);
+        }, this.saveForm);
     }
 
-    save = () => {
+    saveFormFields = (formId, formField, position) => {
+        axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
+            fieldId: formField.field.id,
+            question: formField.question,
+            position: position
+        },
+            {withCredentials: true})
+            .then ( res => {
+                console.log(res);
+                }
+            )
+            .catch(error => {
+                console.log(error);
+                }
+            )
+    }
+
+    saveForm = () => {
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -50,7 +74,10 @@ class FormCreation extends Component {
             },
             {withCredentials: true})
             .then( res => {
-                console.log(res);
+                    const formId = res.data.id;
+                    Object.entries(this.state.formFields).map(([key, value]) => (
+                        this.saveFormFields(formId, value, key)
+                    ));
                 }
             )
             .catch ( error => {
@@ -59,8 +86,34 @@ class FormCreation extends Component {
             );
     }
 
+    handleFieldRemoval = (position) => {
+        this.props.removeField(position);
+    }
+
+    handleMoveUpField = (position, disabled) => {
+        let formFields = this.state.formFields;
+        if (!disabled) {
+            formFields[position] = formFields.splice(position-1, 1, formFields[position])[0];
+            this.setState({formFields: formFields});
+        }
+    }
+
+    handleMoveDownField = (position, disabled) => {
+        let formFields = this.state.formFields;
+        if (!disabled) {
+            formFields[position] = formFields.splice(position+1, 1, formFields[position])[0];
+            this.setState({formFields: formFields});
+        }
+    }
+
+    fetchQuestion = (position, question) => {
+        let formFields = this.state.formFields;
+        formFields[position].question = question;
+        this.setState({formFields: formFields});
+    }
 
     render() {
+        console.log(this.state.formFields)
         return(
             <div className="form-container">
                 <FormControl>
@@ -68,9 +121,9 @@ class FormCreation extends Component {
                         <Button onClick={this.handlePublish}
                                 className="form-creation-btn"
                         >
-                            Publish
+                            Save & Publish
                         </Button>
-                        <Button onClick={this.save}
+                        <Button onClick={this.saveForm}
                                 className="form-creation-btn"
                         >
                             Save
@@ -80,14 +133,14 @@ class FormCreation extends Component {
                     <div className="form-creation-card">
                             <TextField
                             id="form-name"
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Enter Form Name"
                             type="text"
                             onChange={this.handleNameChange}
                         />
                         <TextField
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Enter Form Title"
                             size="small"
@@ -96,7 +149,7 @@ class FormCreation extends Component {
                             onChange={this.handleTitleChange}
                         />
                         <TextField
-                            className="form-creation-field"
+                            className="form-creation-fields"
                             variant="outlined"
                             helperText="Link Result URL"
                             size="small"
@@ -104,7 +157,15 @@ class FormCreation extends Component {
                             type="url"
                             onChange={this.handleResultUrlChange}
                         />
+                        <div>
+                            <FormFieldCreationList fields={this.state.formFields}
+                                                           handleFieldRemoval={this.handleFieldRemoval}
+                                                           handleMoveUp={this.handleMoveUpField}
+                                                           handleMoveDown={this.handleMoveDownField}
+                                                           fetchQuestion={this.fetchQuestion}/>
+                        </div>
                     </div>
+
                 </FormControl>
             </div>
         )

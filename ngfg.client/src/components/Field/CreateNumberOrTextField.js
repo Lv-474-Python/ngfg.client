@@ -78,10 +78,13 @@ class CreateNumberOrTextField extends Component {
     sendUpdateData = () => {
         let response = ""
         const field = {
-            updatedName: this.state.name,
             isStrict: this.state.isStrict
         };
-        if ( this.state.range_min == null && this.state.range_max == null) {
+        if (this.state.initField.name !== this.state.name) {
+            field.updatedName = this.state.name
+        }
+        if (this.state.initField.range && 
+            this.state.range_min == null && this.state.range_max == null) {
             field.deleteRange = true
         }
         else {
@@ -115,9 +118,11 @@ class CreateNumberOrTextField extends Component {
 
     componentDidMount () {
         if (this.props.isUpdate) {
+            let initField = {...this.props.field}
             this.setState({
                 name: this.props.field.name,
-                isStrict: this.props.field.isStrict
+                isStrict: this.props.field.isStrict,
+                initField
             })
             if (this.props.field.range) {
                 if (this.props.field.range.min !== null) {

@@ -36,7 +36,7 @@ class FieldList extends Component {
                     return false
                 }
             }
-    
+
             if (this.props.shared.my) {
                 if (!field.owner.current) {
                     return false
@@ -62,6 +62,14 @@ class FieldList extends Component {
         }
     };
 
+    handleAddField = (fieldData) => {
+        this.props.addField(fieldData);
+    }
+
+    handleRemoveField = (position) => {
+        this.props.removeField(position);
+    }
+
     render() {
         return (
             <div>
@@ -70,6 +78,8 @@ class FieldList extends Component {
                         <FieldItem item={elem}
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
+                                   onAddClick={this.handleAddField}
+                                   onRemoveClick={this.handleRemoveField}
                         />
                     ).length === 0 ? <h2 className='not-found'>Nothing found</h2> :
                         this.props.fields.filter(this.filterFields).sort(this.sortFields).map(elem =>
@@ -77,6 +87,8 @@ class FieldList extends Component {
                                    key={elem.id}
                                    formCreation={this.props.formCreation}
                                    handleUpdated={this.handleUpdated}
+                                   onAddClick={this.handleAddField}
+                                   onRemoveClick={this.handleRemoveField}
                         />)
                 }
             </div>
