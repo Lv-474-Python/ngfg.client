@@ -26,11 +26,12 @@ class FormFieldCreationList extends Component {
     }
 
     render() {
+        console.log(this.props.errors);
         return(
             <React.Fragment>
             {
                 this.props.fields.map((elem, index) =>
-                        <div>
+                        <div className="form-field-container">
                             <TextField variant="outlined"
                                        helperText={`Enter question for ${elem.field.name}`}
                                        size="small"
@@ -44,8 +45,8 @@ class FormFieldCreationList extends Component {
                                          onRemoveClick={this.handleRemoveField}
                                          handleMoveUp={this.handleMoveUpClick}
                                          handleMoveDown={this.handleMoveDownClick}
-                                         disableMoveUp={index==0 ? true : false}
-                                         disableMoveDown={index==this.props.fields.length-1 ? true : false}
+                                         disableMoveUp={index===0 ? true : false}
+                                         disableMoveDown={index===this.props.fields.length-1 ? true : false}
                         /></div>)
             }
             </React.Fragment>

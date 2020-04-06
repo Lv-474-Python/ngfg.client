@@ -146,3 +146,8 @@ html, body {
     margin:  1vw auto;
     color: #37474F;
 }
+
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+}

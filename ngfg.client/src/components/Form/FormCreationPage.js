@@ -66,7 +66,7 @@ class FormCreationPage extends Component {
 
     handleFieldAddition = (fieldData) => {
         this.setState(prevState => ({
-            addedFields: [...prevState.addedFields, {field: fieldData, question: undefined}]
+            addedFields: [...prevState.addedFields, {field: fieldData, question: ""}]
         }));
     }
 
