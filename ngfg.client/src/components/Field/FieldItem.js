@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
 import './Field.css'
-import AddIcon from '@material-ui/icons/Add';
 import {
     Button,
     Card,
@@ -20,6 +19,8 @@ import {
 import DeleteField from "./AdditionalComponents/DeleteField";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareField from "./AdditionalComponents/ShareField";
+import AddIcon from '@material-ui/icons/Add';
+import classNames from "classnames";
 import UpdateField from "./UpdateField";
 
 
@@ -34,6 +35,14 @@ const fieldTypes = {
 
 
 class FieldItem extends Component {
+
+    getElementClass = () => {
+        const fieldItemClassName = classNames({
+            'narrow-': this.props.formCreation,
+            'form-': this.props.formField
+        })
+        return fieldItemClassName
+    }
 
     getNumberField = function() {
         return [
@@ -125,7 +134,7 @@ class FieldItem extends Component {
                         {
 
                             this.props.item.choiceOptions.map(elem =>
-                                 <TextField className={this.props.formCreation ? "" : 'choice-typo'}
+                                 <TextField className={`${this.getElementClass()}choice-typo`}
                                             disabled key={elem}
                                             defaultValue={elem} />
                             )
@@ -137,15 +146,20 @@ class FieldItem extends Component {
 
     };
 
+    handleAddClick = () => {
+        const fieldData = this.props.item;
+        this.props.onAddClick(fieldData);
+    }
+
     render() {
         return (
-            <Card className={this.props.formCreation ? "narrow-field-card-item": "field-card-item"}>
-                    <CardContent className={this.props.formCreation ? "narrow-field-card-content" : "field-card-content"}>
+            <Card className={`${this.getElementClass()}field-card-item`}>
+                    <CardContent className={`${this.getElementClass()}field-card-content`}>
                         <Typography className='field-typo' gutterBottom variant={this.props.formCreation ? "caption" : "h5"} component="h2">
                             <b>{this.props.item.name}</b>
                         </Typography>
-                        <Typography className={"field-typo"}
-                                    variant={"caption"}
+                        <Typography className="field-typo"
+                                    variant="caption"
                                     component="h6">
                             {
                                 Object.entries(fieldTypes).filter((elem) => {
@@ -185,14 +199,15 @@ class FieldItem extends Component {
                                     size="small"
                                     color="secondary"
                                     className='field-button'
-                                    endIcon={<AddIcon/>}>
+                                    endIcon={<AddIcon/>}
+                                    onClick={this.handleAddClick}>
                                     Add
                                 </Button>
                             </div>
-                            : this.props.item.owner.current ? 
+                            : this.props.item.owner.current ?
                             <div className="fields-button-grouper">
                                 <ShareField field={this.props.item} />
-                                <UpdateField field={this.props.item} 
+                                <UpdateField field={this.props.item}
                                              handleUpdated={this.props.handleUpdated}
                                 />
                                 <DeleteField field={this.props.item}
