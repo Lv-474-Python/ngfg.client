@@ -21,14 +21,16 @@ class FormCreationPage extends Component {
             showAutocomplete: false
         },
         sort: {
-          byNameDesc: true
+            byNameDesc: true
         },
         shared: {
-          shared: true,
-          my: true
+            all: true,
+            shared: false,
+            my: false
         },
         search: undefined,
-        fields: []
+        fields: [],
+        addedFields: []
     };
 
 
@@ -62,6 +64,18 @@ class FormCreationPage extends Component {
         this.getData();
     }
 
+    handleFieldAddition = (fieldData) => {
+        this.setState(prevState => ({
+            addedFields: [...prevState.addedFields, {field: fieldData, question: undefined}]
+        }));
+    }
+
+    handleFieldRemoval = (position) => {
+        let addedFields = this.state.addedFields;
+        addedFields = addedFields.slice(0, position).concat(addedFields.slice(position+1, addedFields.length));
+        this.setState({addedFields: addedFields})
+    }
+
     render() {
         return (
         <div className="main-form-creation-container">
@@ -88,11 +102,13 @@ class FormCreationPage extends Component {
                            formCreation={true}
                            getData={this.getData}
                            fields={this.state.fields}
+                           addField={this.handleFieldAddition}
                 />
             </div>
             </div>
             <div className="form-creation-main-component">
-            <FormCreation
+            <FormCreation addedFields={this.state.addedFields}
+                          removeField={this.handleFieldRemoval}
             />
             </div>
         </div>
