@@ -22,6 +22,17 @@
     background-color: #F9A825 !important;
 }
 
+.form-field-card-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: normal;
+    background-color: #F9A825 !important;
+    margin-top: 1vw;
+    margin-bottom: 3vw;
+    width: 40vw;
+;}
+
 .field-card-content {
     display: flex;
     flex-wrap: wrap;
@@ -38,6 +49,14 @@
     align-items: center;
     margin-left: 0.5vw;
     width: 15vw;
+}
+
+.form-field-card-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20vw;
 }
 
 .field-card-actions {
@@ -94,6 +113,12 @@
     width: 50vw !important;
 }
 
+.form-choice-typo {
+    text-align: start !important;
+    width: 35vw !important;
+    margin-left: 1vw !important;
+}
+
 .field-link{
     color: #000000 !important;
 }
@@ -136,6 +161,7 @@
     background-color: #37474F;
     flex-grow: 1;
 }
+
 
 .filter-typo {
     margin: 0 !important;
