@@ -15,10 +15,8 @@ class EmailList extends Component {
     onChange = (event, index) => {
         let values = this.props.emails;
         values[index] = event.target.value;
-        if (values[index] === "" && index !== 0) {
-            values.splice(index, 1);
-        }
-        if (values[index] === "" && index === 0 && values[index + 1] !== "") {
+        if ((values[index] === "" && index !== 0) ||
+            (values[index] === "" && index === 0 && values[index + 1] !== "")) {
             values.splice(index, 1);
         }
 
