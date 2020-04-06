@@ -45,9 +45,7 @@ class FormPass extends Component {
 
         if (tokenData['nbf']) {
             let nbf = new Date(tokenData['nbf'] * JAVASCRIPT_TIME_MULTIPLIER);
-            console.log(nbf);
             if (nbf > new Date()) {
-                console.log('Redirect to "Form is not available yet" page');
                 isValid = false;
                 this.setState({
                     isFormAvailable: false,
@@ -58,9 +56,7 @@ class FormPass extends Component {
 
         if (tokenData['exp']) {
             let exp = new Date(tokenData['exp'] * JAVASCRIPT_TIME_MULTIPLIER);
-            console.log(exp);
             if (exp < new Date()) {
-                console.log('Redirect to "Form expired" page');
                 isValid = false;
                 this.setState({
                     isFormAvailable: false,
@@ -74,7 +70,6 @@ class FormPass extends Component {
 
     getFormData = (id) => {
 
-        console.log('FORM DATA');
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}`, {
             withCredentials: true,
         }).then(res => {
@@ -132,7 +127,6 @@ class FormPass extends Component {
     getFormFieldsData = () => {
         let id = this.state.form.id;
 
-        console.log('FORM FIELD DATA');
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}/fields/`, {
             withCredentials: true,
         }).then(res => {
