@@ -3,8 +3,8 @@ import axios from 'axios';
 import {
     Card,
     CardContent,
-    Typography,
     Paper,
+    Typography,
     Table,
     TableBody,
     TableCell,
