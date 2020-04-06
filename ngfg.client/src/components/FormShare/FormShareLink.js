@@ -32,6 +32,9 @@ class FormShareLink extends Component {
                         Form share link
                     </Typography>
                     <TextField variant='outlined'
+                               inputProps={{
+                                   readOnly: true
+                               }}
                                fullWidth={true}
                                onChange={this.onChange}
                                value={this.state.formShareLink}
