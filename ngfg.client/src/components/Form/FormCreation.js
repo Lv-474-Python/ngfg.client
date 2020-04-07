@@ -70,18 +70,22 @@ class FormCreation extends Component {
         },
             {withCredentials: true})
             .then ( res => {
-                console.log(res);
+                this.props.history.push(`/forms/${formId}`)
             })
             .catch(error => {
                 let response = error.response.data.message;
-                response.position = position;
-                this.setState({fieldErrors: {...response}});
+                response.position = parseInt(position);
+                let fieldErrors = this.state.fieldErrors;
+                fieldErrors[position] = response;
+                this.setState({fieldErrors});
                 this.deleteForm(formId);
                 }
             )
     }
 
     saveForm = () => {
+        this.setState({formErrors: {}});
+        this.setState({fieldErrors: []});
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -131,9 +135,6 @@ class FormCreation extends Component {
     }
 
     render() {
-        console.log("formFields: ", this.state.formFields);
-        console.log("formErrors: ", this.state.formErrors);
-        console.log("fieldErrors: ", this.state.fieldErrors);
         return(
             <div className="form-container">
                 <FormControl>

@@ -25,19 +25,26 @@ class FormFieldCreationList extends Component {
         this.props.fetchQuestion(position, question);
     }
 
+    renderErrorMessage = (elem, index) => {
+        if (this.props.errors[index]) {
+            return this.props.errors[index].question
+        }
+        return `Enter question for ${elem.field.name}`
+    }
+
     render() {
-        console.log(this.props.errors);
         return(
             <React.Fragment>
             {
                 this.props.fields.map((elem, index) =>
                         <div className="form-field-container">
                             <TextField variant="outlined"
-                                       helperText={`Enter question for ${elem.field.name}`}
+                                       helperText={this.renderErrorMessage(elem, index)}
                                        size="small"
                                        type="text"
                                        className="form-creation-fields"
                                        value={elem.question}
+                                       error={this.props.errors[index]}
                                        onChange={(event)=> this.fetchQuestion(event, index)}/>
                         <CreateFormField field={elem.field}
                                          id={elem.field.id}
