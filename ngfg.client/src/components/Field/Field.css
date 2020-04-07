@@ -320,3 +320,21 @@
     background-color: #F9A825 !important;
     color: #000 !important;
 }
+
+
+
+.create-field-autocomplete-url-sheet {
+    display: flex !important;
+    flex-direction: column;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    margin-bottom: 1vmax;
+}
+
+.create-field-limits-autocomplete-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    padding-bottom: 1vmax;
+}

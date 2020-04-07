@@ -137,7 +137,8 @@ class CreateSettingAutocompleteField extends Component {
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
-                    <TextField label="Enter field name:"
+                    <TextField label="Field name"
+                               placeholder="Enter field name"
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
