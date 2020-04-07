@@ -27,7 +27,6 @@ import './ShareFormModal.css'
 import {MIN_DIFF_BETWEEN_TO_AND_FROM_DATE, MILLISECONDS, SECONDS} from '../../constants';
 
 
-
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
@@ -210,8 +209,10 @@ class ShareFormModal extends Component {
 
 
     handleMinimalDiff = () => {
+        let emptyUsersAndGroups = this.state.users.length === 0 && this.state.selectedGroups.length === 0;
         if (this.state.toDate && this.state.fromDate) {
             let valid = true;
+
             let diff = (this.state.toDate.getTime() - this.state.fromDate.getTime()) / MILLISECONDS / SECONDS;
             let diffMinutes = Math.abs(Math.round(diff));
             if (diffMinutes < MIN_DIFF_BETWEEN_TO_AND_FROM_DATE || this.state.toDate <= this.state.fromDate) {
@@ -219,10 +220,22 @@ class ShareFormModal extends Component {
             }
 
             return valid ? (
-                <Button type='submit'
-                        className='form-share-dialog-btn'>
-                    Send
-                </Button>
+                emptyUsersAndGroups ?
+                    <Tooltip title="Please select group or enter user's email to share form" placement="top">
+                        <span>
+                            <Button onClick={this.handleSend}
+                                    disabled
+                                    type='submit'
+                                    className='form-share-dialog-btn'>
+                                Send
+                            </Button>
+                    </span>
+                    </Tooltip> :
+
+                    <Button type='submit'
+                            className='form-share-dialog-btn'>
+                        Send
+                    </Button>
             ) : (
                 <Tooltip title="Not valid date" placement="top">
                     <span>
@@ -237,7 +250,18 @@ class ShareFormModal extends Component {
             )
         }
 
-        return (
+        return emptyUsersAndGroups ? (
+            <Tooltip title="Please select group or enter user's email to share form" placement="top">
+                    <span>
+                        <Button onClick={this.handleSend}
+                                disabled
+                                type='submit'
+                                className='form-share-dialog-btn'>
+                        Send
+                        </Button>
+                    </span>
+            </Tooltip>
+        ) : (
             <Button type='submit'
                     className='form-share-dialog-btn'>
                 Send
