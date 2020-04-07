@@ -75,7 +75,7 @@ class FormEdit extends Component {
             .then(res=> {
                 let formFields = res.data.formFields;
                 console.log(formFields);
-                this.setState({formFields: formFields});
+                this.setState({formFields: formFields.sort((a,b)=>a.position-b.position)});
                 this.setState({initialFormFields: [...formFields]});
             })
     }
@@ -97,17 +97,6 @@ class FormEdit extends Component {
             question: formField.question,
             position: position
         }, {withCredentials: true})
-            .then(res=>{
-                console.log(res);
-            })
-            .catch(error=>{
-                console.log(error);
-            })
-    }
-
-    deleteFormField = (formField) => {
-        axios.delete(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
-            {withCredentials: true})
             .then(res=>{
                 console.log(res);
             })
