@@ -1,8 +1,15 @@
 import CreateField from './CreateField'
-
+import './Field.css'
 import React, {Component} from 'react';
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
+
+const styles = {
+    dialogPaper: {
+        minHeight: '80vh',
+        maxHeight: '80vh',
+    },
+};
 
 class FieldCreationWindow extends Component {
 
@@ -18,8 +25,17 @@ class FieldCreationWindow extends Component {
     handleClose = () => {
         this.setState(({
             open: false
+            // openResponse: false
         }))
     };
+    // handleAgree = () => {
+    //     this.setState({open: true, openResponse: true});
+    // };
+    //
+    // setResponse = (response) => {
+    //     this.setState({response});
+    // };
+
 
     render() {
         let button = undefined;
@@ -37,8 +53,13 @@ class FieldCreationWindow extends Component {
 
             <div>
                 {button}
-                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Field creation</DialogTitle>
+                <Dialog open={this.state.open}
+                        onClose={this.handleClose}
+                        aria-labelledby="form-dialog-title"
+                        maxWidth={"sm"}
+                        fullWidth={true}
+                        minHeight={"100px"}>
+                    <DialogTitle id="form-dialog-title" className="create-field-header">Create field</DialogTitle>
                     <DialogContent>
                         <CreateField getData={this.props.getData}/>
                     </DialogContent>

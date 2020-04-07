@@ -9,9 +9,7 @@ class CreateOrUpdateActions extends Component {
     render() {
         return (
             <DialogActions>
-                <Button onClick={this.props.handleClose} className="form-item-link">
-                        Close
-                </Button>
+
                 {
                     this.props.isUpdate &&
                     <Button onClick={this.props.sendUpdateData} className="form-item-link" autoFocus>
@@ -24,6 +22,9 @@ class CreateOrUpdateActions extends Component {
                     Send
                     </Button> 
                 }
+                <Button onClick={this.props.handleClose} className="form-item-link">
+                        Close
+                </Button>
             </DialogActions>
         );
     }

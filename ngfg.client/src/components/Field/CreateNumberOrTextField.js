@@ -5,6 +5,7 @@ import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
 import TextField from '@material-ui/core/TextField';
+import Typography from "@material-ui/core/Typography";
 
 
 const API_URL = 'http://ngfg.com:8000/api';
@@ -36,7 +37,7 @@ class CreateNumberOrTextField extends Component {
         this.setState({
             'range_max': event.target.value
         });
-         if (event.target.value === "") {
+        if (event.target.value === "") {
             this.setState({'range_max': undefined});
         }
 
@@ -81,16 +82,15 @@ class CreateNumberOrTextField extends Component {
         if (this.state.initField.name !== this.state.name) {
             field.updatedName = this.state.name
         }
-        if (this.state.initField.range && 
+        if (this.state.initField.range &&
             this.state.range_min == null && this.state.range_max == null) {
             field.deleteRange = true
-        }
-        else {
+        } else {
             field.range = {min: this.state.range_min, max: this.state.range_max}
         }
-        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
-                  {...field}, 
-                  {withCredentials: true})
+        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`,
+            {...field},
+            {withCredentials: true})
             .then(res => {
                     this.props.handleUpdated(true);
                     response = "Field updated"
@@ -98,23 +98,23 @@ class CreateNumberOrTextField extends Component {
                 }
             )
             .catch(error => {
-                let response = error.response.data.message;
-                if (response.updatedName) {
-                    response = response.updatedName._schema.toString();
-                }
-                else if (response.range) {
-                    response = response.range._schema.toString();
-                };
+                    let response = error.response.data.message;
+                    if (response.updatedName) {
+                        response = response.updatedName._schema.toString();
+                    } else if (response.range) {
+                        response = response.range._schema.toString();
+                    }
+                    ;
                     this.props.setResponse(response);
-                    
+
                 }
             );
 
-            
-            this.props.handleAgree();
+
+        this.props.handleAgree();
     };
 
-    componentDidMount () {
+    componentDidMount() {
         if (this.props.isUpdate) {
             let initField = {...this.props.field}
             this.setState({
@@ -135,20 +135,33 @@ class CreateNumberOrTextField extends Component {
 
     render() {
         return (
-            <div>
-                <TextField label="Enter field name:"
-                           type="text"
-                           value={this.state.name || ""}
-                           onChange={this.handleNameChange}
-                />
-                <IsStrict onChange={this.handleStrictChange}
-                          value={this.state.isStrict}
-                />
-                <Range onChangeMin={this.handleRangeMinChange}
-                       onChangeMax={this.handleRangeMaxChange}
-                       maxValue={this.state.range_max}
-                       minValue={this.state.range_min}
-                />
+            <div className="create-field-windows-content">
+                <div className="create-field-name">
+                    <TextField label="Enter field name:"
+                               type="text"
+                               value={this.state.name || ""}
+                               onChange={this.handleNameChange}
+                               fullWidth
+                               variant="outlined"
+                    />
+                </div>
+                <div>
+                    <Typography className='create-field-range-typo'
+                                variant="inherit"
+                                component="p">
+                        Range:
+                    </Typography>
+                    <Range onChangeMin={this.handleRangeMinChange}
+                           onChangeMax={this.handleRangeMaxChange}
+                           maxValue={this.state.range_max}
+                           minValue={this.state.range_min}
+                    />
+                </div>
+                <div className="create-field-strict">
+                    <IsStrict onChange={this.handleStrictChange}
+                              value={this.state.isStrict}
+                    />
+                </div>
                 <CreateOrUpdateActions sendData={this.sendData}
                                        sendUpdateData={this.sendUpdateData}
                                        handleClose={this.props.handleClose}

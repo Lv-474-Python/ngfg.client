@@ -30,8 +30,8 @@
     background-color: #F9A825 !important;
     margin-top: 1vw;
     margin-bottom: 3vw;
-    width: 40vw;
-;}
+    width: 40vw;;
+}
 
 .field-card-content {
     display: flex;
@@ -119,7 +119,7 @@
     margin-left: 1vw !important;
 }
 
-.field-link{
+.field-link {
     color: #000000 !important;
 }
 
@@ -225,17 +225,17 @@
 }
 
 .modal > .close {
-  cursor: pointer;
-  position: absolute;
-  display: block;
-  padding: 2px 5px;
-  line-height: 20px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
 }
 
 .fields-button-grouper {
@@ -243,7 +243,55 @@
     flex-direction: column;
 }
 
-.create-popup {
-    position: absolute !important;
-    z-index: 10 !important;
+.create-field-header {
+    text-align: center;
+    font-size: 1.5vmax !important;
+}
+
+.create-field-windows-content {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.create-field-select-type {
+    display: flex !important;
+    flex-direction: column !important;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    margin-bottom: 1vmax;
+}
+
+.create-field-name {
+    display: flex !important;
+    justify-content: center !important;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    margin-bottom: 1vmax;
+}
+
+.create-field-range-typo {
+    font-size: 1.2vmax !important;
+    padding-left: 3vmax !important;
+}
+
+.create-field-range-container {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    margin-bottom: 1vmax;
+    padding: 0 4vmax;
+    margin-top: 1vmax;
+}
+
+.create-field-range {
+    width: 13vmax !important;
+}
+
+
+.create-field-strict {
+    padding-left: 3vw !important;
+}
+
+.ccc {
+    /*background-color: whitesmoke !important;*/
+    /*height: 5vh !important;*/
 }
