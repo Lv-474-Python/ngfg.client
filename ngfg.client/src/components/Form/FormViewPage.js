@@ -90,6 +90,10 @@ class FormViewPage extends Component {
                             className="form-btn-view">
                         Publish
                     </ Button>
+                    <DeleteButtonForm deleteBtnClass='form-btn-view'
+                                      disableIcon={true}
+                                      form={this.state.form}
+                                      handleDelete={this.handleDelete} />
 
                     <Button onClick={this.saveForm}
                             className="form-btn-view">

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { Button, Tooltip } from '@material-ui/core';
+import {Button, Tooltip} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
 import './FormItem.scss';
@@ -25,6 +25,18 @@ class FormItem extends Component {
     getFormTitle = () => {
         let item = this.cutStringWithTooltip(this.props.item.title, FORM_TITLE_LIMIT, "form-item__title");
         return item;
+    }
+
+    handleShareButtonRender = () => {
+        if (this.props.item.isPublished) {
+            return (
+                <Button className="form-item__buttons__share"
+                        endIcon={<SendIcon>send</SendIcon>}
+                        onClick={this.props.onShareClick}>
+                    Share
+                </Button>
+            )
+        }
     }
 
     cutStringWithTooltip = (text, limit, className) => {
@@ -62,11 +74,7 @@ class FormItem extends Component {
                         View more
                     </Button>
 
-                    <Button className="form-item__buttons__share"
-                            endIcon={<SendIcon>send</SendIcon>}
-                            onClick={this.props.onShareClick}>
-                        Share
-                    </Button>
+                    { this.handleShareButtonRender()}
                 </div>
             </div>
         );

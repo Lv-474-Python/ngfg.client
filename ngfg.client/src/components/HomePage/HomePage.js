@@ -40,8 +40,8 @@ class HomePage extends Component {
         })
     }
 
-    handleViewMoreClick = () => {
-        console.log('view more click');
+    handleViewMoreClick = (form_id) => {
+        this.props.history.push(`/forms/${form_id}`)
     }
 
     handleShareClick = () => {

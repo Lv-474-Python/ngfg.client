@@ -18,8 +18,18 @@ class FormItem extends Component {
         console.log("Share")
     }
 
-    handleDelete = () => {
-        console.log("Delete")
+    handleShareRender = () => {
+        if (this.props.item.isPublished) {
+            return (
+                <Button
+                    size='medium'
+                    className='form-item-btn'
+                    endIcon={<SendIcon/>}
+                    onClick={this.handleShare}>
+                    Share
+                </Button>
+            )
+        }
     }
 
     render() {
@@ -47,13 +57,7 @@ class FormItem extends Component {
                         endIcon={<VisibilityOutlinedIcon/>}>
                         View
                     </Button>
-                    <Button
-                        size='medium'
-                        className='form-item-btn'
-                        endIcon={<SendIcon/>}
-                        onClick={this.handleShare}>
-                        Share
-                    </Button>
+                    {this.handleShareRender()}
                     <DeleteButtonForm deleteBtnClass='form-delete-btn'
                                       form={this.props.item}
                                       disableIcon={false}
