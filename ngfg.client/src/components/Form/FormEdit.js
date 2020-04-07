@@ -85,21 +85,35 @@ class FormEdit extends Component {
         this.getFormFieldsData();
     }
 
-    saveFormFields = (formId, formField, position) => {
-        axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
+    saveFormFields = (formField, position) => {
+        if (formField.added===true) {
+            this.postFormField(formField, position)
+        }
+    }
+
+    postFormField = (formField, position) => {
+        axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/`, {
             fieldId: formField.field.id,
             question: formField.question,
             position: position
-        },
-            {withCredentials: true})
-            .then ( res => {
+        }, {withCredentials: true})
+            .then(res=>{
                 console.log(res);
-                }
-            )
-            .catch(error => {
+            })
+            .catch(error=>{
                 console.log(error);
-                }
-            )
+            })
+    }
+
+    deleteFormField = (formField) => {
+        axios.delete(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
+            {withCredentials: true})
+            .then(res=>{
+                console.log(res);
+            })
+            .catch(error=>{
+                console.log(error);
+            })
     }
 
     saveForm = () => {
@@ -112,6 +126,9 @@ class FormEdit extends Component {
             {withCredentials: true})
             .then( res => {
                     console.log(res);
+                    Object.entries(this.state.formFields).map(([key, value]) => (
+                        this.saveFormFields(value, key)
+                    ));
                 }
             )
             .catch ( error => {
