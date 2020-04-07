@@ -4,9 +4,7 @@ import axios from 'axios';
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import Range from './Restrictions/Range';
-import TextField from '@material-ui/core/TextField';
-import Typography from "@material-ui/core/Typography";
-import {FormGroup} from "@material-ui/core";
+import {FormGroup, Typography, TextField} from "@material-ui/core";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';

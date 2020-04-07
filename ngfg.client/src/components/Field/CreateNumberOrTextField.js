@@ -4,8 +4,7 @@ import axios from 'axios';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import IsStrict from './Restrictions/IsStrict';
 import Range from './Restrictions/Range';
-import TextField from '@material-ui/core/TextField';
-import Typography from "@material-ui/core/Typography";
+import {Typography, TextField} from "@material-ui/core";
 
 
 const API_URL = 'http://ngfg.com:8000/api';

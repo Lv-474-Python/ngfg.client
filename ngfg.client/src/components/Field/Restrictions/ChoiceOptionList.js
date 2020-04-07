@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 
 
-import TextField from '@material-ui/core/TextField';
-import {FormGroup} from "@material-ui/core";
+import {FormGroup, TextField} from "@material-ui/core";
 
 
 class ChoiceOptionList extends Component {
