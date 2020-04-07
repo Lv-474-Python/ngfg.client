@@ -18,7 +18,7 @@ class FormEdit extends Component {
         "resultUrl": undefined,
         "isPublished": undefined,
         "formFields": [],
-        "addedFormFields": []
+        "initialFormFields": []
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -76,6 +76,7 @@ class FormEdit extends Component {
                 let formFields = res.data.formFields;
                 console.log(formFields);
                 this.setState({formFields: formFields});
+                this.setState({initialFormFields: [...formFields]});
             })
     }
 
@@ -102,7 +103,7 @@ class FormEdit extends Component {
     }
 
     saveForm = () => {
-        axios.post(`${API_URL}/${API_VERSION}/forms/`, {
+        axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}`, {
                 name: this.state.name,
                 title: this.state.title,
                 resultUrl: this.state.resultUrl,
@@ -110,10 +111,7 @@ class FormEdit extends Component {
             },
             {withCredentials: true})
             .then( res => {
-                    const formId = res.data.id;
-                    Object.entries(this.state.formFields).map(([key, value]) => (
-                        this.saveFormFields(formId, value, key)
-                    ));
+                    console.log(res);
                 }
             )
             .catch ( error => {
@@ -123,7 +121,9 @@ class FormEdit extends Component {
     }
 
     handleFieldRemoval = (position) => {
-        this.props.removeField(position);
+        let formFields = this.state.formFields;
+        formFields = formFields.slice(0, position).concat(formFields.slice(position+1, formFields.length));
+        this.setState({formFields: formFields})
     }
 
     handleMoveUpField = (position, disabled) => {
@@ -149,6 +149,8 @@ class FormEdit extends Component {
     }
 
     render() {
+        console.log("current ", this.state.formFields);
+        console.log("initial ", this.state.initialFormFields);
         return(
             <div className="form-container">
                 <FormControl>
