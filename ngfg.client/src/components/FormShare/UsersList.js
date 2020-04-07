@@ -34,7 +34,10 @@ class UsersList extends Component {
                         <TextField label=""
                                    className='text-field'
                                    placeholder='User email'
-                                   type="email"
+                                   inputProps={{
+                                       'pattern': '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$',
+                                   }}
+                                   type='email'
                                    key={index}
                                    value={this.props.users[index] || ""}
                                    onChange={(event) => this.onChange(event, index)}
