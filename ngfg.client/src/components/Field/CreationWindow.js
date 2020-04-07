@@ -61,13 +61,9 @@ class FieldCreationWindow extends Component {
                         minHeight={"100px"}>
                     <DialogTitle id="form-dialog-title" className="create-field-header">Create field</DialogTitle>
                     <DialogContent>
-                        <CreateField getData={this.props.getData}/>
+                        <CreateField getData={this.props.getData}
+                                     handleClose={this.handleClose}/>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
-                    </DialogActions>
                 </Dialog>
             </div>
         );

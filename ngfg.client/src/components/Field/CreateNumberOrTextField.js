@@ -65,11 +65,13 @@ class CreateNumberOrTextField extends Component {
                     console.log(res.data);
                     alert('Field created');
                     this.props.getData();
+                    this.props.handleClose();
                 }
             )
             .catch(error => {
                     console.log(error);
                     alert('Field was not created');
+                    this.props.handleClose();
                 }
             );
     };
@@ -162,11 +164,13 @@ class CreateNumberOrTextField extends Component {
                               value={this.state.isStrict}
                     />
                 </div>
+                <div className="field-action-btn-container">
                 <CreateOrUpdateActions sendData={this.sendData}
                                        sendUpdateData={this.sendUpdateData}
                                        handleClose={this.props.handleClose}
                                        isUpdate={this.props.isUpdate}
                 />
+                </div>
             </div>
 
         );

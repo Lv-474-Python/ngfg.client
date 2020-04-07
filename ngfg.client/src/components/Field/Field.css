@@ -291,7 +291,23 @@
     padding-left: 3vw !important;
 }
 
-.ccc {
-    /*background-color: whitesmoke !important;*/
-    /*height: 5vh !important;*/
+.field-action-btn-container {
+    display: flex !important;
+    justify-content: space-evenly !important;
+    padding-top: 1.5vw;
+    padding-bottom: 1vw;
+
+}
+.field-action-btn {
+    text-transform: capitalize !important;
+    background-color: #37474F !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    width: 10vw;
+}
+
+.field-action-btn:hover {
+    text-transform: capitalize !important;
+    background-color: #F9A825 !important;
+    color: #000 !important;
 }

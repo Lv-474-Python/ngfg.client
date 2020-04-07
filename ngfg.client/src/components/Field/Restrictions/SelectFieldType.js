@@ -35,7 +35,6 @@ class SelectFieldType extends Component {
                             defaultValue={1}
                             value={this.props.fieldType}
                             color="primary"
-                            className="ccc"
                     >
                         {
                             Object.entries(fieldTypes).map((elem) => {
