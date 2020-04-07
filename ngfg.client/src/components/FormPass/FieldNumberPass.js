@@ -16,10 +16,10 @@ class FieldNumberPass extends Component {
         }
 
         const { range } = field;
-        if (range.min) {
+        if (Number.isFinite(range.min)) {
             restrictions += ` Greater than ${range.min}.`
         }
-        if (range.max) {
+        if (Number.isFinite(range.max)) {
             restrictions += ` Less than ${range.max}.`
         }
 
@@ -37,10 +37,10 @@ class FieldNumberPass extends Component {
         }
 
         const { range } = field;
-        if (range.min && answer < range.min) {
+        if (Number.isFinite(range.min) && answer < range.min) {
             return false;
         }
-        if (range.min && answer > range.max) {
+        if (Number.isFinite(range.min) && answer > range.max) {
             return false;
         }
 
