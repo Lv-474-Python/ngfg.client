@@ -58,6 +58,10 @@ class FormItem extends Component {
         return item;
     }
 
+    handleViewMoreClick = (event) => {
+        this.props.onViewMoreClick(this.props.item.id)
+    }
+
     render() {
         return (
             <div className="form-item">
@@ -70,11 +74,11 @@ class FormItem extends Component {
                 </div>
                 <div className="form-item__buttons">
                     <Button className="form-item__buttons__more"
-                            onClick={this.props.onViewMoreClick}>
+                            onClick={this.handleViewMoreClick}>
                         View more
                     </Button>
 
-                    { this.handleShareButtonRender()}
+                    {this.handleShareButtonRender()}
                 </div>
             </div>
         );
