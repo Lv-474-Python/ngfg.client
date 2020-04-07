@@ -48,11 +48,11 @@ class Routers extends Component {
                            component={CreateField}
                     />
 
-                    <Route path='/pass-form/:id/response'
+                    <Route path='/pass-form/:token/response'
                             component={FormPassResponse}
                     />
 
-                    <Route path='/pass-form/:id'
+                    <Route path='/pass-form/:token'
                             component={FormPass}
                     />
 
