@@ -1,56 +1,87 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
+
+import FormControl from '@material-ui/core/FormControl';
+import {TextField} from "@material-ui/core";
+import FormViewFieldList from "./FormViewFieldList";
+import {withRouter} from "react-router-dom";
+
+import "./FormView.css"
+import Button from "@material-ui/core/Button";
+import Sort from "./AdditionalComponent/Sort";
+import Filter from "./AdditionalComponent/Filter";
 
 
 class FormView extends Component {
-    state = {
-        "id": undefined,
-        "isPublished": undefined,
-        "name": undefined,
-        "ownerId": undefined,
-        "resultUrl": undefined,
-        "title": undefined,
-        "fields": []
-    }
 
-    getFormData = () => {
-        axios.get(`http://ngfg.com:8000/api/v1/forms/${this.props.match.params.id}`, {
-            withCredentials: true,
-        })
-            .then(res => {
-                const form = res.data;
-                console.log(form);
-                this.setState({ ...form })
-            })
-    }
-
-    getFormFields = () => {
-        axios.get(`http://ngfg.com:8000/api/v1/forms/${this.props.match.params.id}/fields`, {
-            withCredentials: true,
-        })
-            .then(res => {
-                const fields = res.data.formFields;
-                console.log(fields);
-                this.setState({ fields })
-            })
-    }
-
-    componentDidMount() {
-        this.getFormData();
-        this.getFormFields();
+    handlePublishTest = () => {
+        return this.props.form.isPublished ? "Published" : "Draft"
     }
 
     render() {
         return (
-            <div>
-                id {this.state.id},
-                name {this.state.name},
-                {this.state.fields.map(elem => 
-                    elem.field.name 
-                )}
+            <div className="form-container-view">
+                <FormControl>
+                    <div className="form-creation-card">
+                        <TextField
+                            id="form-name"
+                            inputProps={{
+                                readOnly: true
+                            }}
+                            label={'Name'}
+                            className="form-view-fields"
+                            variant="outlined"
+                            type="text"
+                            value={this.props.form.name}
+                        />
+                        <TextField
+                            className="form-view-fields"
+                            variant="outlined"
+                            inputProps={{
+                                readOnly: true
+                            }}
+                            label={'Title'}
+                            size="small"
+                            margin="dense"
+                            type="text"
+                            value={this.props.form.title}
+                        />
+                        <TextField
+                            className="form-view-fields"
+                            variant="outlined"
+                            inputProps={{
+                                readOnly: true
+                            }}
+                            label={'Result Url'}
+                            size="small"
+                            margin="dense"
+                            type="url"
+                            value={this.props.form.resultUrl}
+                        />
+
+                        <TextField
+                            className="form-view-fields"
+                            variant="outlined"
+                            inputProps={{
+                                readOnly: true
+                            }}
+                            label={'Status'}
+                            size="small"
+                            margin="dense"
+                            type="url"
+                            value={this.props.form.isPublished !== "" ? this.handlePublishTest() : ''}
+                        />
+                        <div>
+                            <FormViewFieldList fields={this.props.fields}
+                            />
+                        </div>
+                    </div>
+
+                </FormControl>
             </div>
-        );
+        )
     }
 }
 
-export default FormView;
+
+export default withRouter(FormView);

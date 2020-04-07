@@ -36,7 +36,7 @@ class FormItem extends Component {
                                 className='form-item-content'>
                         {this.props.item.title}
                     </Typography>
-                    <FormStatus published={this.props.item.isPublished} />
+                    <FormStatus published={this.props.item.isPublished}/>
                 </CardContent>
 
                 <CardActions>
@@ -54,7 +54,10 @@ class FormItem extends Component {
                         onClick={this.handleShare}>
                         Share
                     </Button>
-                    <DeleteButtonForm form={this.props.item} handleDelete={this.props.handleDelete} />
+                    <DeleteButtonForm deleteBtnClass='form-delete-btn'
+                                      form={this.props.item}
+                                      disableIcon={false}
+                                      handleDelete={this.props.handleDelete}/>
                 </CardActions>
             </Card>
         );

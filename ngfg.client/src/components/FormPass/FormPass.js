@@ -37,6 +37,7 @@ class FormPass extends Component {
 
     decodeToken = (token) => {
         const decodedData = jwt_decode(token);
+        console.log(decodedData)
         return decodedData;
     }
 
@@ -85,7 +86,7 @@ class FormPass extends Component {
     handleToken = () => {
         let token = String(this.props.match.params.token);
 
-        axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check`
+        axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_token`
         ).then(() => {
             let tokenData = this.decodeToken(token);
             let isTokenValid = this.verifyTokenFlags(tokenData);

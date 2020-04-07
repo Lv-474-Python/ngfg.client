@@ -61,8 +61,8 @@ class DeleteButtonForm extends Component {
             <div className='form-delete-wrapper'>
                 <Button
                     size="medium"
-                    className='form-delete-btn'
-                    endIcon={<DeleteIcon/>}
+                    className={this.props.deleteBtnClass}
+                    endIcon={ this.props.disableIcon ? null : <DeleteIcon/>}
                     onClick={this.handleClickOpen}>
                     Delete
                 </Button>
