@@ -95,9 +95,9 @@ class CreateSettingAutocompleteField extends Component {
                 field.updatedAutocomplete[prop] = this.state[prop]
             }
         }
-        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
-                  {...field}, 
-                  {withCredentials: true})
+        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`,
+            {...field},
+            {withCredentials: true})
             .then(res => {
                     this.props.handleUpdated(true);
                     response = "Field updated"
@@ -105,21 +105,21 @@ class CreateSettingAutocompleteField extends Component {
                 }
             )
             .catch(error => {
-                let response = error.response.data.message;
-                if (response.updatedName) {
-                    response = response.updatedName._schema.toString();
-                }
-                else if (response.updatedAutocomplete) {
-                    response = response.updatedAutocomplete._schema.toString();
-                };
-                this.props.setResponse(response);
+                    let response = error.response.data.message;
+                    if (response.updatedName) {
+                        response = response.updatedName._schema.toString();
+                    } else if (response.updatedAutocomplete) {
+                        response = response.updatedAutocomplete._schema.toString();
+                    }
+                    ;
+                    this.props.setResponse(response);
                 }
             );
         this.props.setResponse(response);
         this.props.handleAgree();
     };
 
-    componentDidMount () {
+    componentDidMount() {
         if (this.props.isUpdate) {
             let initField = {...this.props.field}
             this.setState({
@@ -135,12 +135,16 @@ class CreateSettingAutocompleteField extends Component {
 
     render() {
         return (
-            <div>
-                <TextField label="Enter field name:"
-                           type="text"
-                           value={this.state.name || ""}
-                           onChange={this.handleNameChange}
-                />
+            <div className="create-field-windows-content">
+                <div className="create-field-name">
+                    <TextField label="Enter field name:"
+                               type="text"
+                               value={this.state.name || ""}
+                               onChange={this.handleNameChange}
+                               fullWidth
+                               variant="outlined"
+                    />
+                </div>
                 <SettingAutocomplete onChangeDataURL={this.handleDataURL}
                                      onChangeSheet={this.handleSheet}
                                      onChangeFromRow={this.handleFromRow}
@@ -150,11 +154,13 @@ class CreateSettingAutocompleteField extends Component {
                                      fromRow={this.state.fromRow}
                                      toRow={this.state.toRow}
                 />
-                <CreateOrUpdateActions sendData={this.sendData}
-                                       sendUpdateData={this.sendUpdateData}
-                                       handleClose={this.props.handleClose}
-                                       isUpdate={this.props.isUpdate}
-                />
+                <div className="field-action-btn-container">
+                    <CreateOrUpdateActions sendData={this.sendData}
+                                           sendUpdateData={this.sendUpdateData}
+                                           handleClose={this.props.handleClose}
+                                           isUpdate={this.props.isUpdate}
+                    />
+                </div>
             </div>
         );
     }

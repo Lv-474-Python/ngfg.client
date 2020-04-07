@@ -11,9 +11,11 @@ class CreateOrUpdateActions extends Component {
 
                 {
                     this.props.isUpdate &&
-                    <Button onClick={this.props.sendUpdateData} className="form-item-link" autoFocus>
-                        Update
-                    </Button>
+                    <div>
+                        <Button onClick={this.props.sendUpdateData} className="field-action-btn" autoFocus>
+                            Update
+                        </Button>
+                    </div>
                 }
                 {
                     !this.props.isUpdate &&

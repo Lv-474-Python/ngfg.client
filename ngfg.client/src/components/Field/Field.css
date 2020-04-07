@@ -283,12 +283,20 @@
 }
 
 .create-field-range {
-    width: 13vmax !important;
+    width: 14vmax !important;
 }
-
 
 .create-field-strict {
     padding-left: 3vw !important;
+}
+
+.create-field-option {
+    display: flex !important;
+    justify-content: center !important;
+    padding-top: 1vmax;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    padding-bottom: 1vmin;
 }
 
 .field-action-btn-container {
@@ -298,6 +306,7 @@
     padding-bottom: 1vw;
 
 }
+
 .field-action-btn {
     text-transform: capitalize !important;
     background-color: #37474F !important;

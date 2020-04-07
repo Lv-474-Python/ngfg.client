@@ -136,10 +136,18 @@ class CreateNumberOrTextField extends Component {
     }
 
     render() {
+        let strict;
+        if (this.props.fieldType === 1) {
+            strict = "Only integers"
+        }
+        if (this.props.fieldType === 2) {
+            strict = "Only letters"
+        }
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
-                    <TextField label="Enter field name:"
+                    <TextField label="Field name"
+                               placeholder="Enter field name"
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
@@ -157,19 +165,21 @@ class CreateNumberOrTextField extends Component {
                            onChangeMax={this.handleRangeMaxChange}
                            maxValue={this.state.range_max}
                            minValue={this.state.range_min}
+                           fieldType={this.props.fieldType}
                     />
                 </div>
                 <div className="create-field-strict">
                     <IsStrict onChange={this.handleStrictChange}
                               value={this.state.isStrict}
+                              strict={strict}
                     />
                 </div>
                 <div className="field-action-btn-container">
-                <CreateOrUpdateActions sendData={this.sendData}
-                                       sendUpdateData={this.sendUpdateData}
-                                       handleClose={this.props.handleClose}
-                                       isUpdate={this.props.isUpdate}
-                />
+                    <CreateOrUpdateActions sendData={this.sendData}
+                                           sendUpdateData={this.sendUpdateData}
+                                           handleClose={this.props.handleClose}
+                                           isUpdate={this.props.isUpdate}
+                    />
                 </div>
             </div>
 

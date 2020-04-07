@@ -13,7 +13,7 @@ class IsStrict extends Component {
                 <FormControlLabel
                     checked={this.props.value || false}
                     control={<Switch color="primary" />}
-                    label="Is Strict"
+                    label={this.props.strict}
                     labelPlacement="end"
                     onChange={this.props.onChange}
                 />

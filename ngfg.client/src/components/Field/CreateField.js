@@ -22,6 +22,7 @@ class CreateField extends Component {
     };
 
     render() {
+
         return (
             <div>
                 <div className="create-field-select-type">

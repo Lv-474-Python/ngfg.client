@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
 
 
 const fieldTypes = {
@@ -33,6 +34,7 @@ class SelectFieldType extends Component {
                     </InputLabel>
                     <Select onChange={this.props.onChange}
                             defaultValue={1}
+                            label={"Field Type"}
                             value={this.props.fieldType}
                             color="primary"
                     >
