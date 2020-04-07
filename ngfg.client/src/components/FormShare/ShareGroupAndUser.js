@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import './ShareGroupAndUser.css'
 import UsersList from "./UsersList";
 import GroupSelect from "./GroupSelect"
+import {MIN_DIFF_BETWEEN_TO_AND_FROM_DATE, MILLISECONDS, SECONDS} from '../../constants'
 
 
 class ShareGroupAndUser extends Component {
@@ -21,13 +22,13 @@ class ShareGroupAndUser extends Component {
 
     handleFromDate = (fromDate) => {
         if (this.state.toDate && fromDate) {
-            let diff = (fromDate.getTime() - this.state.toDate.getTime()) / 1000 / 60;
+            let diff = (fromDate.getTime() - this.state.toDate.getTime()) / MILLISECONDS / SECONDS;
             let diffMinutes = Math.abs(Math.round(diff));
-            if (diffMinutes < 5 || this.state.toDate < fromDate) {
+            if (diffMinutes < MIN_DIFF_BETWEEN_TO_AND_FROM_DATE || this.state.toDate < fromDate) {
                 this.setState({
                         fromDate: fromDate,
                         toDateError: true,
-                        toDateHelperText: "Min diff between To and From - 5 min"
+                        toDateHelperText: `Min diff between To and From - ${MIN_DIFF_BETWEEN_TO_AND_FROM_DATE} min`
                     },
                     () => this.props.handleFromDate(this.state.fromDate))
             } else {
@@ -52,14 +53,13 @@ class ShareGroupAndUser extends Component {
     handleToDate = (toDate) => {
 
         if (this.state.fromDate && toDate) {
-            let diff = (this.state.fromDate.getTime() - toDate.getTime()) / 1000 / 60;
+            let diff = (this.state.fromDate.getTime() - toDate.getTime()) / MILLISECONDS / SECONDS;
             let diffMinutes = Math.abs(Math.round(diff));
-            console.log(diffMinutes < 5, toDate < this.state.fromDate)
-            if (diffMinutes < 5 || toDate < this.state.fromDate) {
+            if (diffMinutes < MIN_DIFF_BETWEEN_TO_AND_FROM_DATE || toDate < this.state.fromDate) {
                 this.setState({
                         toDate: toDate,
                         toDateError: true,
-                        toDateHelperText: "Min diff between To and From - 5 min"
+                        toDateHelperText: `Min diff between To and From - ${MIN_DIFF_BETWEEN_TO_AND_FROM_DATE} min`
                     },
                     () => this.props.handleToDate(this.state.toDate))
             } else {

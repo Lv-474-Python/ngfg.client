@@ -24,6 +24,7 @@ import ShareGroupAndUser from "./ShareGroupAndUser";
 import FormShareLink from "./FormShareLink";
 
 import './ShareFormModal.css'
+import {MIN_DIFF_BETWEEN_TO_AND_FROM_DATE, MILLISECONDS, SECONDS} from '../../constants';
 
 
 
@@ -175,9 +176,9 @@ class ShareFormModal extends Component {
     handleMinimalDiffLink = () => {
         if (this.state.toDateLink && this.state.fromDateLink) {
             let valid = true;
-            let diff = (this.state.toDateLink.getTime() - this.state.fromDateLink.getTime()) / 1000 / 60;
+            let diff = (this.state.toDateLink.getTime() - this.state.fromDateLink.getTime()) / MILLISECONDS / SECONDS;
             let diffMinutes = Math.abs(Math.round(diff));
-            if (diffMinutes < 5 || this.state.toDateLink <= this.state.fromDateLink) {
+            if (diffMinutes < MIN_DIFF_BETWEEN_TO_AND_FROM_DATE || this.state.toDateLink <= this.state.fromDateLink) {
                 valid = false
             }
 
@@ -211,12 +212,11 @@ class ShareFormModal extends Component {
     handleMinimalDiff = () => {
         if (this.state.toDate && this.state.fromDate) {
             let valid = true;
-            let diff = (this.state.toDate.getTime() - this.state.fromDate.getTime()) / 1000 / 60;
+            let diff = (this.state.toDate.getTime() - this.state.fromDate.getTime()) / MILLISECONDS / SECONDS;
             let diffMinutes = Math.abs(Math.round(diff));
-            if (diffMinutes < 5 || this.state.toDate <= this.state.fromDate) {
+            if (diffMinutes < MIN_DIFF_BETWEEN_TO_AND_FROM_DATE || this.state.toDate <= this.state.fromDate) {
                 valid = false
             }
-
 
             return valid ? (
                 <Button type='submit'
