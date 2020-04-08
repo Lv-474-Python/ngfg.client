@@ -18,11 +18,13 @@ class FormEdit extends Component {
         "resultUrl": undefined,
         "isPublished": undefined,
         "formFields": [],
-        "initialFormFields": []
+        "initialFormFields": [],
+        "formErrors": [],
+        "fieldErrors": []
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.addedFields != this.props.addedFields) {
+        if (prevProps.addedFields !== this.props.addedFields) {
             let formFields = this.state.formFields;
             formFields.push(this.props.addedFields);
             this.setState({formFields});
@@ -74,7 +76,6 @@ class FormEdit extends Component {
         })
             .then(res=> {
                 let formFields = res.data.formFields;
-                console.log(formFields);
                 this.setState({formFields: formFields.sort((a,b)=>a.position-b.position)});
                 this.setState({initialFormFields: [...formFields]});
             })
@@ -91,6 +92,7 @@ class FormEdit extends Component {
         } else {
             this.putFormField(formField);
         }
+        this.props.history.push(`/forms/${this.state.id}`)
     }
 
     postFormField = (formField, position) => {
@@ -103,7 +105,11 @@ class FormEdit extends Component {
                 console.log(res);
             })
             .catch(error=>{
-                console.log(error);
+                let response = error.response.data.message;
+                response.position = parseInt(position);
+                let fieldErrors = this.state.fieldErrors;
+                fieldErrors[position] = response;
+                this.setState({fieldErrors});
             })
     }
 
@@ -118,7 +124,11 @@ class FormEdit extends Component {
                 console.log(res)
             })
             .catch(error=>{
-                console.log(error)
+                let response = error.response.data.message;
+                response.position = parseInt(formField.position);
+                let fieldErrors = this.state.fieldErrors;
+                fieldErrors[formField.position] = response;
+                this.setState({fieldErrors});
             })
     }
 
@@ -136,6 +146,8 @@ class FormEdit extends Component {
     }
 
     saveForm = () => {
+        this.setState({formErrors: {}});
+        this.setState({fieldErrors: {}});
         axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -154,7 +166,8 @@ class FormEdit extends Component {
                 }
             )
             .catch ( error => {
-                console.log(error);
+                let response = error.response.data.message;
+                this.setState({formErrors: {...response}});
                 }
             );
     }
@@ -188,8 +201,6 @@ class FormEdit extends Component {
     }
 
     render() {
-        console.log("current ", this.state.formFields);
-        console.log("initial ", this.state.initialFormFields);
         return(
             <div className="form-container">
                 <FormControl>
@@ -211,28 +222,31 @@ class FormEdit extends Component {
                             id="form-name"
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Enter Form Name"
+                            helperText={this.state.formErrors.name ? this.state.formErrors.name : "Enter Form Name"}
                             type="text"
                             value={this.state.name}
+                            error={!!this.state.formErrors.name}
                             onChange={this.handleNameChange}
                         />
                         <TextField
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Enter Form Title"
+                            helperText={this.state.formErrors.title ? this.state.formErrors.title : "Enter Form Title"}
                             size="small"
                             margin="dense"
                             type="text"
+                            error={!!this.state.formErrors.title}
                             value={this.state.title}
                             onChange={this.handleTitleChange}
                         />
                         <TextField
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Link Result URL"
+                            helperText={this.state.formErrors.resultUrl ? this.state.formErrors.resultUrl : "Link Result URL"}
                             size="small"
                             margin="dense"
                             type="url"
+                            error={!!this.state.formErrors.resultUrl}
                             value={this.state.resultUrl}
                             onChange={this.handleResultUrlChange}
                         />
@@ -241,7 +255,9 @@ class FormEdit extends Component {
                                                    handleFieldRemoval={this.handleFieldRemoval}
                                                    handleMoveUp={this.handleMoveUpField}
                                                    handleMoveDown={this.handleMoveDownField}
-                                                   fetchQuestion={this.fetchQuestion}/>
+                                                   fetchQuestion={this.fetchQuestion}
+                                                   errors={this.state.fieldErrors}
+                            />
                         </div>
                     </div>
                 </FormControl>

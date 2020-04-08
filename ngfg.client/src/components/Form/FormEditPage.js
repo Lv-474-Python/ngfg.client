@@ -110,6 +110,7 @@ class FormEditPage extends Component {
             <FormEdit addedFields={this.state.addedFields}
                       removeField={this.handleFieldRemoval}
                       formId={this.props.match.params.id}
+                      history={this.props.history}
             />
             </div>
         </div>
