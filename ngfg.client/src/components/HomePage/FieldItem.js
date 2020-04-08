@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { Button, Tooltip } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
 
+import ShareField from '../Field/AdditionalComponents/ShareField'
 import './FieldItem.scss';
 
 
@@ -66,11 +66,9 @@ class FieldItem extends Component {
                         View more
                     </Button>
 
-                    <Button className="field-item__buttons__share"
-                            endIcon={<SendIcon>send</SendIcon>}
-                            onClick={this.props.onShareClick}>
-                        Share
-                    </Button>
+                    <ShareField className="field-item__buttons__share"
+                                field={this.props.item} 
+                                mainpage={true}/>
                 </div>
             </div>
         );
