@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {API_VERSION, API_URL} from '../../constants'
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import SettingAutocomplete from './Restrictions/SettingAutocomplete'
 import {TextField} from "@material-ui/core";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 class CreateSettingAutocompleteField extends Component {
     state = {
