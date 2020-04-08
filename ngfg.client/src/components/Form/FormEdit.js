@@ -107,11 +107,12 @@ class FormEdit extends Component {
             })
     }
 
-    putFormField = (formField) => {
+    putFormField = (formField, position) => {
         axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
             {
                 fieldId: formField.field.id,
-                question: formField.question
+                question: formField.question,
+                position: position
             }, {withCredentials: true})
             .then(res=>{
                 console.log(res)
@@ -119,6 +120,19 @@ class FormEdit extends Component {
             .catch(error=>{
                 console.log(error)
             })
+    }
+
+    deleteFormField = (formField) => {
+        if (!this.state.formFields.includes(formField)) {
+            axios.delete(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
+                {withCredentials: true})
+                .then(res=>{
+                    console.log(res);
+                })
+                .catch(error=>{
+                    console.log(error);
+                })
+        }
     }
 
     saveForm = () => {
@@ -131,6 +145,9 @@ class FormEdit extends Component {
             {withCredentials: true})
             .then( res => {
                     console.log(res);
+                    Object.entries(this.state.initialFormFields).map(([key, value])=>(
+                        this.deleteFormField(value)
+                    ));
                     Object.entries(this.state.formFields).map(([key, value]) => (
                         this.saveFormFields(value, key)
                     ));
