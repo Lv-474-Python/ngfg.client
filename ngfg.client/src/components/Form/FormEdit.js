@@ -2,27 +2,31 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import FormControl from '@material-ui/core/FormControl';
-import {TextField} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import {Button, TextField} from "@material-ui/core";
 import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
-class FormCreation extends Component {
+class FormEdit extends Component {
+
     state = {
+        "id": undefined,
         "name": undefined,
         "title": undefined,
         "resultUrl": undefined,
-        "isPublished": false,
+        "isPublished": undefined,
         "formFields": [],
+        "initialFormFields": [],
         "formErrors": [],
         "fieldErrors": []
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.addedFields !== this.props.addedFields) {
-            this.setState({formFields: this.props.addedFields});
+            let formFields = this.state.formFields;
+            formFields.push(this.props.addedFields);
+            this.setState({formFields});
         }
     }
 
@@ -50,43 +54,100 @@ class FormCreation extends Component {
         }, this.saveForm);
     }
 
-    deleteForm = (formId) => {
-        axios.delete(`${API_URL}/${API_VERSION}/forms/${formId}`, {
+    getFormData = () => {
+        axios.get(`${API_URL}/${API_VERSION}/forms/${this.props.formId}`, {
             withCredentials: true
         })
-            .then(res =>{
-                console.log(res);
-            })
-            .catch(error => {
-                console.log(error.message);
+            .then(res => {
+                let form = res.data;
+                this.setState({
+                    id: form.id,
+                    name: form.name,
+                    title: form.title,
+                    resultUrl: form.resultUrl,
+                    isPublished: form.isPublished})
             })
     }
 
-    saveFormFields = (formId, formField, position) => {
-        axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
+    getFormFieldsData = () => {
+        axios.get(`${API_URL}/${API_VERSION}/forms/${this.props.formId}/fields`, {
+            withCredentials: true
+        })
+            .then(res=> {
+                let formFields = res.data.formFields;
+                this.setState({formFields: formFields.sort((a,b)=>a.position-b.position)});
+                this.setState({initialFormFields: [...formFields]});
+            })
+    }
+
+    componentDidMount() {
+        this.getFormData();
+        this.getFormFieldsData();
+    }
+
+    saveFormFields = (formField, position) => {
+        if (formField.added===true) {
+            this.postFormField(formField, position);
+        } else {
+            this.putFormField(formField);
+        }
+        this.props.history.push(`/forms/${this.state.id}`)
+    }
+
+    postFormField = (formField, position) => {
+        axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/`, {
             fieldId: formField.field.id,
             question: formField.question,
             position: position
-        },
-            {withCredentials: true})
-            .then ( res => {
-                this.props.history.push(`/forms/${formId}`)
+        }, {withCredentials: true})
+            .then(res=>{
+                console.log(res);
             })
-            .catch(error => {
+            .catch(error=>{
                 let response = error.response.data.message;
                 response.position = parseInt(position);
                 let fieldErrors = this.state.fieldErrors;
                 fieldErrors[position] = response;
                 this.setState({fieldErrors});
-                this.deleteForm(formId);
-                }
-            )
+            })
+    }
+
+    putFormField = (formField, position) => {
+        axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
+            {
+                fieldId: formField.field.id,
+                question: formField.question,
+                position: position
+            }, {withCredentials: true})
+            .then(res=>{
+                console.log(res)
+            })
+            .catch(error=>{
+                let response = error.response.data.message;
+                response.position = parseInt(formField.position);
+                let fieldErrors = this.state.fieldErrors;
+                fieldErrors[formField.position] = response;
+                this.setState({fieldErrors});
+            })
+    }
+
+    deleteFormField = (formField) => {
+        if (!this.state.formFields.includes(formField)) {
+            axios.delete(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
+                {withCredentials: true})
+                .then(res=>{
+                    console.log(res);
+                })
+                .catch(error=>{
+                    console.log(error);
+                })
+        }
     }
 
     saveForm = () => {
         this.setState({formErrors: {}});
-        this.setState({fieldErrors: []});
-        axios.post(`${API_URL}/${API_VERSION}/forms/`, {
+        this.setState({fieldErrors: {}});
+        axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}`, {
                 name: this.state.name,
                 title: this.state.title,
                 resultUrl: this.state.resultUrl,
@@ -94,22 +155,26 @@ class FormCreation extends Component {
             },
             {withCredentials: true})
             .then( res => {
-                    this.setState({errors: {}})
-                    const formId = res.data.id;
+                    console.log(res);
+                    Object.entries(this.state.initialFormFields).map(([key, value])=>(
+                        this.deleteFormField(value)
+                    ));
                     Object.entries(this.state.formFields).map(([key, value]) => (
-                        this.saveFormFields(formId, value, key)
+                        this.saveFormFields(value, key)
                     ));
                 }
             )
             .catch ( error => {
                 let response = error.response.data.message;
-                this.setState({formErrors: {...response}})
+                this.setState({formErrors: {...response}});
                 }
             );
     }
 
     handleFieldRemoval = (position) => {
-        this.props.removeField(position);
+        let formFields = this.state.formFields;
+        formFields = formFields.slice(0, position).concat(formFields.slice(position+1, formFields.length));
+        this.setState({formFields: formFields})
     }
 
     handleMoveUpField = (position, disabled) => {
@@ -158,6 +223,7 @@ class FormCreation extends Component {
                             variant="outlined"
                             helperText={this.state.formErrors.name ? this.state.formErrors.name : "Enter Form Name"}
                             type="text"
+                            value={this.state.name}
                             error={!!this.state.formErrors.name}
                             onChange={this.handleNameChange}
                         />
@@ -169,6 +235,7 @@ class FormCreation extends Component {
                             margin="dense"
                             type="text"
                             error={!!this.state.formErrors.title}
+                            value={this.state.title}
                             onChange={this.handleTitleChange}
                         />
                         <TextField
@@ -179,22 +246,23 @@ class FormCreation extends Component {
                             margin="dense"
                             type="url"
                             error={!!this.state.formErrors.resultUrl}
+                            value={this.state.resultUrl}
                             onChange={this.handleResultUrlChange}
                         />
                         <div>
                             <FormFieldCreationList fields={this.state.formFields}
-                                                           handleFieldRemoval={this.handleFieldRemoval}
-                                                           handleMoveUp={this.handleMoveUpField}
-                                                           handleMoveDown={this.handleMoveDownField}
-                                                           fetchQuestion={this.fetchQuestion}
-                                                           errors={this.state.fieldErrors}/>
+                                                   handleFieldRemoval={this.handleFieldRemoval}
+                                                   handleMoveUp={this.handleMoveUpField}
+                                                   handleMoveDown={this.handleMoveDownField}
+                                                   fetchQuestion={this.fetchQuestion}
+                                                   errors={this.state.fieldErrors}
+                            />
                         </div>
                     </div>
-
                 </FormControl>
             </div>
         )
     }
 }
 
-export default FormCreation;
+export default FormEdit;
