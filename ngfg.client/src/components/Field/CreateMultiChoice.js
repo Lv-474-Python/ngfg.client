@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {API_VERSION, API_URL} from '../../constants'
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import Range from './Restrictions/Range';
 import {FormGroup, Typography, TextField} from "@material-ui/core";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 
 class CreateMultiChoice extends Component {
@@ -16,7 +14,9 @@ class CreateMultiChoice extends Component {
         "fieldType": this.props.fieldType,
         "range_min": undefined,
         "range_max": undefined,
-        "choiceOptions": []
+        "choiceOptions": [],
+        "nameFieldErrors": false,
+        "isValid": false
     };
 
     handleNameChange = (event) => {
@@ -49,6 +49,25 @@ class CreateMultiChoice extends Component {
             choiceOptions
         })
     };
+    validateValues = (name, range, choiceOptions) => {
+        let valid = true;
+        if (name === "" || name === undefined) {
+            valid = false;
+            this.setState({nameFieldErrors: {missed_data: "Missed data"}});
+        }
+        if (this.state.fieldType === 6) {
+            if (range.min > range.max) {
+                valid = false;
+            }
+            if (range.min < 0 || range.max < 0) {
+                valid = false;
+            }
+            if (range.min > choiceOptions.length || range.max > choiceOptions.length) {
+                valid = false;
+            }
+        }
+        return valid
+    }
 
     sendData = () => {
         var field = {
@@ -59,21 +78,23 @@ class CreateMultiChoice extends Component {
         if (this.state.fieldType === 6) {
             field.range = {min: this.state.range_min, max: this.state.range_max}
         }
-        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
-            .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    alert('Field created');
-                    this.props.getData();
-                    this.props.handleClose();
-                }
-            )
-            .catch(error => {
-                    console.log(error);
-                    alert('Field was not created');
-                    this.props.handleClose();
-                }
-            );
+
+        let isValid = this.validateValues(field.name, field.range, field.choiceOptions);
+
+        if (isValid === true) {
+            axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
+                .then(res => {
+                        alert('Field created');
+                        this.props.getData();
+                        this.props.handleClose();
+                    }
+                )
+                .catch(error => {
+                        let response = error.response.data.message;
+                        this.setState({nameFieldErrors: {...response}});
+                    }
+                );
+        }
     };
 
     sendUpdateData = () => {
@@ -143,6 +164,16 @@ class CreateMultiChoice extends Component {
     };
 
     render() {
+
+        let missedDataName = false;
+        if (this.state.name === undefined || this.state.name === "") {
+            missedDataName = this.state.nameFieldErrors.missed_data;
+        }
+        let isExistError = false;
+        if (this.state.nameFieldErrors.is_exist !== undefined) {
+            isExistError = this.state.nameFieldErrors.is_exist;
+        }
+
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
@@ -151,6 +182,8 @@ class CreateMultiChoice extends Component {
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
+                               error={missedDataName || isExistError}
+                               helperText={missedDataName || isExistError}
                                fullWidth
                                variant="outlined"
                     />
@@ -166,6 +199,8 @@ class CreateMultiChoice extends Component {
                                                                   onChangeMax={this.handleRangeMaxChange}
                                                                   maxValue={this.state.range_max}
                                                                   minValue={this.state.range_min}
+                                                                  fieldType={this.props.fieldType}
+                                                                  choiceOptions={this.state.choiceOptions}
                     />}
                 </div>
                 <FormGroup>
@@ -187,7 +222,6 @@ class CreateMultiChoice extends Component {
                     />
                 </div>
             </div>
-
         );
     }
 }

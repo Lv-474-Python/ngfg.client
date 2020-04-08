@@ -11,9 +11,8 @@ import {
     DialogActions,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {API_URL, API_VERSION} from '../../../constants';
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 class DeleteField extends Component {
 

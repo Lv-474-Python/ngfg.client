@@ -4,9 +4,7 @@ import jwt_decode from 'jwt-decode';
 
 import './FormPassResponse.scss';
 
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from '../../constants';
 
 
 class FormPassResponse extends Component {

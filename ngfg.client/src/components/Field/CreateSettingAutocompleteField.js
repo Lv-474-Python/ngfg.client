@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {API_VERSION, API_URL} from '../../constants'
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import SettingAutocomplete from './Restrictions/SettingAutocomplete'
 import {TextField} from "@material-ui/core";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 class CreateSettingAutocompleteField extends Component {
     state = {
@@ -15,7 +13,10 @@ class CreateSettingAutocompleteField extends Component {
         "dataUrl": undefined,
         "sheet": undefined,
         "fromRow": undefined,
-        "toRow": undefined
+        "toRow": undefined,
+        "nameFieldErrors": false,
+        "missedAutocompleteData": {},
+        "isValid": false
     };
 
     handleNameChange = (event) => {
@@ -47,6 +48,32 @@ class CreateSettingAutocompleteField extends Component {
             toRow: event.target.value
         })
     };
+    validateValues = (name, dataUrl, sheet, fromRow, toRow) => {
+        let valid = true;
+        let missedAutocompleteData = {dataUrl: false, sheet: false, fromRow: false, toRow:false};
+        if (name === "" || name === undefined) {
+            valid = false;
+            this.setState({nameFieldErrors: {missed_data: "Missed data"}});
+        }
+        if (dataUrl === "" || dataUrl === undefined) {
+            valid = false;
+            missedAutocompleteData.dataUrl = true;
+        }
+        if (sheet === "" || sheet === undefined) {
+            valid = false;
+            missedAutocompleteData.sheet = true;
+        }
+        if (fromRow === "" || fromRow === undefined) {
+            valid = false;
+            missedAutocompleteData.fromRow = true;
+        }
+        if (toRow === "" || toRow === undefined) {
+            valid = false;
+            missedAutocompleteData.toRow = true;
+        }
+        this.setState({missedAutocompleteData});
+        return valid
+    };
 
     sendData = () => {
         const field = {
@@ -59,21 +86,29 @@ class CreateSettingAutocompleteField extends Component {
                 toRow: this.state.toRow
             }
         };
-        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
-            .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    alert('Field created');
-                    this.props.getData();
-                    this.props.handleClose();
-                }
-            )
-            .catch(error => {
-                    console.log(error);
-                    alert('Field was not created');
-                    this.props.handleClose();
-                }
-            );
+        let isValid = this.validateValues(
+            field.name,
+            field.settingAutocomplete.dataUrl,
+            field.settingAutocomplete.sheet,
+            field.settingAutocomplete.fromRow,
+            field.settingAutocomplete.toRow);
+
+        if (isValid === true) {
+            axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
+                .then(res => {
+                        console.log(res);
+                        console.log(res.data);
+                        alert('Field created');
+                        this.props.getData();
+                        this.props.handleClose();
+                    }
+                )
+                .catch(error => {
+                        let response = error.response.data.message;
+                        this.setState({nameFieldErrors: {...response}});
+                    }
+                );
+        }
     };
 
     sendUpdateData = () => {
@@ -134,6 +169,14 @@ class CreateSettingAutocompleteField extends Component {
     };
 
     render() {
+        let missedDataName = false;
+        if (this.state.name === undefined || this.state.name === "") {
+            missedDataName = this.state.nameFieldErrors.missed_data;
+        }
+        let isExistError = false;
+        if (this.state.nameFieldErrors.is_exist !== undefined) {
+            isExistError = this.state.nameFieldErrors.is_exist;
+        }
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
@@ -142,6 +185,8 @@ class CreateSettingAutocompleteField extends Component {
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
+                               error={missedDataName || isExistError}
+                               helperText={missedDataName || isExistError}
                                fullWidth
                                variant="outlined"
                     />
@@ -154,6 +199,7 @@ class CreateSettingAutocompleteField extends Component {
                                      sheet={this.state.sheet}
                                      fromRow={this.state.fromRow}
                                      toRow={this.state.toRow}
+                                     missedAutocompleteData={this.state.missedAutocompleteData}
                 />
                 <div className="field-action-btn-container">
                     <CreateOrUpdateActions sendData={this.sendData}
