@@ -62,10 +62,10 @@ class FieldCheckboxPass extends Component {
             return true;
         }
 
-        if (range.min && this.state.pickedOptions.length < range.min) {
+        if (Number.isFinite(range.min) && this.state.pickedOptions.length < range.min) {
             return false
         }
-        if (range.max && this.state.pickedOptions.length > range.max) {
+        if (Number.isFinite(range.max) && this.state.pickedOptions.length > range.max) {
             return false
         }
 
@@ -91,7 +91,6 @@ class FieldCheckboxPass extends Component {
             this.state.pickedOptions
         );
 
-
         this.setState({
             [event.target.name]: event.target.checked,
             pickedOptions: pickedOptions
@@ -110,10 +109,10 @@ class FieldCheckboxPass extends Component {
         }
 
         let restrictions = "Pick";
-        if (range.min) {
+        if (Number.isFinite(range.min)) {
             restrictions += ` from ${range.min}`
         }
-        if (range.max) {
+        if (Number.isFinite(range.max)) {
             restrictions += ` to ${range.max}`
         }
         return restrictions;

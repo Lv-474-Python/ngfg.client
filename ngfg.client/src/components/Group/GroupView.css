@@ -1,0 +1,141 @@
+.Test {
+    display: flex;
+    justify-content: center;
+}
+
+.group-view {
+    width: 50vmax;
+    background-color: #f9a825 !important;
+    margin-top: 1.5vmax;
+}
+
+.group-view-content {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 1vmin !important;
+
+}
+
+.group-view-header {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+}
+
+.group-view-owner {
+    display: flex !important;
+    justify-content: left !important;
+    flex-wrap: nowrap !important;
+}
+
+.group-view-created {
+    display: flex !important;
+    justify-content: flex-end !important;
+
+}
+
+
+.group-view-link {
+    background-color: #37474f !important;
+    color: white !important;
+    text-transform: capitalize !important;
+    margin-left: 1.5vmin !important;
+    margin-bottom: 1.5vmin !important;
+}
+
+.group-view-link :hover {
+    color: #F9A825 !important;
+}
+
+
+.create-group-btn {
+    background-color: #f9a825 !important;
+    color: #37474f !important;
+    text-transform: capitalize !important;
+    align-self: flex-end;
+    height: 6vmin;
+    margin-bottom: 0.5vmax !important;
+}
+
+.group-not-found {
+    display: flex;
+    justify-content: center;
+}
+
+
+td {
+    display: flex;
+    flex-grow: 1 !important;
+    overflow: auto !important;
+    border-color: black !important;
+}
+
+.info {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1vmin;
+    margin-bottom: 1.5vmin;
+
+}
+
+.owner {
+    display: flex;
+
+}
+
+.created {
+    display: flex;
+    justify-content: right;
+}
+
+
+.members-container-fake {
+    display: flex;
+    width: 47.5vmax !important;
+    background-color: #f9a825 !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+}
+
+#number {
+    width: 14.8% !important;
+}
+
+#name {
+    width: 27.7% !important;
+}
+
+#email {
+    width: 57.5% !important;
+}
+
+.members-container {
+    display: flex;
+    height: 250px;
+    width: 48.5vmax !important;
+    flex-flow: row;
+    align-items: stretch;
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members {
+    display: flex;
+    height: 100px;
+    flex-flow: row;
+    align-items: stretch;
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members-head {
+    background-color: #f9a825 !important;
+    border: 1px solid black;
+}
+
+.members-body {
+    display: block;
+    margin: auto 0;
+}
