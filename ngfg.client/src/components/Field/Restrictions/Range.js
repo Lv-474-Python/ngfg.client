@@ -36,7 +36,20 @@ class Range extends Component {
                 rangeMaxError = "max must be less than 255 and greater than 0"
             }
         }
-
+        if (this.props.fieldType === 6) {
+            if (this.props.minValue < 0) {
+                rangeMinError = "min must greater than 0"
+            }
+            if (this.props.maxValue < 0) {
+                rangeMaxError = "max must greater than 0"
+            }
+            if (this.props.minValue > this.props.choiceOptions.length){
+                rangeMinError = "min can't be greater than options amount"
+            }
+            if (this.props.maxValue > this.props.choiceOptions.length){
+                rangeMaxError = "max can't be greater than options amount"
+            }
+        }
         if (this.props.minValue > this.props.maxValue) {
                 rangeMinError = "min must be less than max";
             }
