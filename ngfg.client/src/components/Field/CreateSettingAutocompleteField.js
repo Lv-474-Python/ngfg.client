@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {API_VERSION, API_URL} from '../../constants'
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import SettingAutocomplete from './Restrictions/SettingAutocomplete'
 import {TextField} from "@material-ui/core";
-
-import {API_URL, API_VERSION} from "../../constants"
 
 class CreateSettingAutocompleteField extends Component {
     state = {

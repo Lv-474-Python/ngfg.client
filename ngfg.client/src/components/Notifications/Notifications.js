@@ -5,9 +5,10 @@ import './Notification.css'
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import {SERVER_HOST} from '../../constants';
 
 
-const socket = openSocket('http://ngfg.com:8000')
+const socket = openSocket(`${SERVER_HOST}`)
 
 class Notifications extends Component {
 

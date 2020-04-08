@@ -16,7 +16,9 @@ import {
 
 
 import './GroupView.css'
-import {API_URL, API_VERSION} from "../../constants"
+
+import {API_URL, API_VERSION} from '../../constants';
+
 const columns = ["#", "Name", "Email"];
 
 class GroupView extends Component {

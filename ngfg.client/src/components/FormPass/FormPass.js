@@ -12,9 +12,8 @@ import FieldCheckboxPass from './FieldCheckboxPass';
 import FieldAutocompletePass from './FieldAutocompletePass';
 import './FormPass.scss';
 
+import {API_URL, API_VERSION} from '../../constants';
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 const JAVASCRIPT_TIME_MULTIPLIER = 1000;
 const TEXT_MIN = 0;
 const TEXT_MAX = 255;

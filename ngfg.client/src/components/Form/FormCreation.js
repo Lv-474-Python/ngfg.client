@@ -5,9 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from '../../constants';
 
 class FormCreation extends Component {
     state = {
