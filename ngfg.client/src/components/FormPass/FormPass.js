@@ -330,8 +330,9 @@ class FormPass extends Component {
         const isValid = this.validateResults();
         if (isValid) {
             const results = this.getResultsToSubmit();
+            const token = String(this.props.match.params.token);
 
-            axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.form.id}/answers`, {
+            axios.post(`${API_URL}/${API_VERSION}/tokens/${token}/answers`, {
                 answers: results,
             }, {
                 withCredentials: true,

@@ -56,6 +56,10 @@ class HomePage extends Component {
         this.props.history.push('/fields')
     }
 
+    handleViewMoreFieldClick = () => {
+        console.log("View More Field")
+    }
+
     componentDidMount() {
         this.getData();
     }
@@ -93,7 +97,7 @@ class HomePage extends Component {
                             </Button>
                         </Tooltip>
                         <FieldItemList fields={this.state.fields}
-                                       onViewMoreClick={this.handleViewMoreClick}
+                                       onViewMoreClick={this.handleViewMoreFieldClick}
                                        onShareClick={this.handleShareClick}
                         />
                     </div>
