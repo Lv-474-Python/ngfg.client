@@ -97,6 +97,7 @@ class HomePage extends Component {
                         <FieldItemList fields={this.state.fields}
                                        onViewMoreClick={this.handleViewMoreFieldClick}
                                        onShareClick={this.handleShareClick}
+                                       getData={this.getData}
                         />
                     </div>
 
