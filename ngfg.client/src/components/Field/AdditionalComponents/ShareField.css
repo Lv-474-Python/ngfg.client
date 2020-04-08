@@ -1,0 +1,24 @@
+.shared-dialog {
+    display: flex;
+    flex-direction: row;
+    width: 60vw !important;
+    max-height: 50vw !important;
+}
+
+.shared-list {
+    width: 20vw !important;
+    /* height: 20vw !important; */
+    margin: 1vw !important;
+    margin-top: -1vw !important;
+}
+
+.shared-table {
+    width: 25vw !important;
+    /* height: 20vw !important; */
+    margin: 0 !important;
+}
+
+.delete-icon {
+    margin: 0 !important;
+    padding: 0 !important;
+}
