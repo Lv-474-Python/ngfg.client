@@ -15,10 +15,10 @@ class FieldTextPass extends Component {
         }
 
         const { range } = field;
-        if (range.min) {
+        if (Number.isFinite(range.min)) {
             restrictions += ` Min number of characters: ${range.min}.`
         }
-        if (range.max) {
+        if (Number.isFinite(range.max)) {
             restrictions += ` Max number of characters: ${range.max}.`
         }
 
@@ -36,10 +36,10 @@ class FieldTextPass extends Component {
         }
 
         const { range } = field;
-        if (range.min && answer.length < range.min) {
+        if (Number.isFinite(range.min) && answer.length < range.min) {
             return false;
         }
-        if (range.max && answer.length > range.max) {
+        if (Number.isFinite(range.max) && answer.length > range.max) {
             return false;
         }
 

@@ -43,7 +43,7 @@ class FormPassResponse extends Component {
     handleToken = () => {
         let token = String(this.props.match.params.token);
 
-        axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check`
+        axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_token`
         ).then(() => {
             let tokenData = this.decodeToken(token);
 
