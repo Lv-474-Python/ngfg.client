@@ -5,6 +5,24 @@ import TextField from '@material-ui/core/TextField';
 
 class SettingAutocomplete extends Component {
     render() {
+        let dataUrlMissed = false;
+        let sheetMissed = false;
+        let fromRowMissed = false;
+        let toRowMissed = false;
+
+        if (this.props.missedAutocompleteData.dataUrl === true) {
+            dataUrlMissed = "Missed data";
+        }
+        if (this.props.missedAutocompleteData.sheet === true) {
+            sheetMissed = "Missed data";
+        }
+        if (this.props.missedAutocompleteData.fromRow === true) {
+            fromRowMissed = "Missed data";
+        }
+        if (this.props.missedAutocompleteData.toRow === true) {
+            toRowMissed = "Missed data";
+        }
+
         return (
             <div>
                 <div className="create-field-autocomplete-url-sheet">
@@ -16,6 +34,8 @@ class SettingAutocomplete extends Component {
                         onChange={this.props.onChangeDataURL}
                         fullWidth
                         variant="outlined"
+                        helperText={dataUrlMissed}
+                        error={dataUrlMissed}
                     />
                 </div>
                 <div className="create-field-autocomplete-url-sheet">
@@ -27,6 +47,8 @@ class SettingAutocomplete extends Component {
                         onChange={this.props.onChangeSheet}
                         fullWidth
                         variant="outlined"
+                        helperText={sheetMissed}
+                        error={sheetMissed}
                     />
                 </div>
                 <div className="create-field-limits-autocomplete-container">
@@ -37,7 +59,8 @@ class SettingAutocomplete extends Component {
                         value={this.props.fromRow || ""}
                         onChange={this.props.onChangeFromRow}
                         variant="outlined"
-                        helperText="Values E.G. A1"
+                        helperText={fromRowMissed ? fromRowMissed : "Values E.G. A1"}
+                        error={fromRowMissed}
                     />
                     <TextField
                         label="Column and row end"
@@ -46,7 +69,8 @@ class SettingAutocomplete extends Component {
                         value={this.props.toRow || ""}
                         onChange={this.props.onChangeToRow}
                         variant="outlined"
-                        helperText="Values E.G. B10"
+                        helperText={toRowMissed ? toRowMissed : "Values E.G. B10"}
+                        error={toRowMissed}
                     />
                 </div>
             </div>
