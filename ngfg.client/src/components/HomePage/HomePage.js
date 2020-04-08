@@ -40,8 +40,8 @@ class HomePage extends Component {
         })
     }
 
-    handleViewMoreClick = () => {
-        console.log('view more click');
+    handleViewMoreClick = (form_id) => {
+        this.props.history.push(`/forms/${form_id}`)
     }
 
     handleShareClick = () => {
@@ -54,6 +54,10 @@ class HomePage extends Component {
 
     handleFieldsTitleClick = () => {
         this.props.history.push('/fields')
+    }
+
+    handleViewMoreFieldClick = () => {
+        console.log("View More Field")
     }
 
     componentDidMount() {
@@ -93,7 +97,7 @@ class HomePage extends Component {
                             </Button>
                         </Tooltip>
                         <FieldItemList fields={this.state.fields}
-                                       onViewMoreClick={this.handleViewMoreClick}
+                                       onViewMoreClick={this.handleViewMoreFieldClick}
                                        onShareClick={this.handleShareClick}
                         />
                     </div>

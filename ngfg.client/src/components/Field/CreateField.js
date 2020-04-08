@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Field.css'
+import FormGroup from "@material-ui/core/FormGroup";
 
 import CreateNumberOrTextField from './CreateNumberOrTextField'
 import CreateTextArea from './CreateTextArea'
@@ -21,28 +22,41 @@ class CreateField extends Component {
     };
 
     render() {
+
         return (
             <div>
-                <SelectFieldType onChange={this.handleChangeFieldType}
-                                 fieldType={this.state.fieldType || 1}
-                />
+                <div className="create-field-select-type">
+                    <SelectFieldType onChange={this.handleChangeFieldType}
+                                     fieldType={this.state.fieldType || 1}
+                    />
+                </div>
                 {
-                    [1].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={1} getData={this.props.getData}/>
+                    [1].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={1}
+                                                                                   getData={this.props.getData}
+                                                                                   handleClose={this.props.handleClose}/>
                 }
                 {
-                    [2].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={2} getData={this.props.getData}/>
+                    [2].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={2}
+                                                                                   getData={this.props.getData}
+                                                                                   handleClose={this.props.handleClose}/>
                 }
                 {
-                    [3].includes(this.state.fieldType) && <CreateTextArea getData={this.props.getData}/>
+                    [3].includes(this.state.fieldType) && <CreateTextArea getData={this.props.getData}
+                                                                          handleClose={this.props.handleClose}/>
                 }
                 {
-                    [4].includes(this.state.fieldType) && <CreateMultiChoice fieldType={4} getData={this.props.getData}/>
+                    [4].includes(this.state.fieldType) && <CreateMultiChoice fieldType={4}
+                                                                             getData={this.props.getData}
+                                                                             handleClose={this.props.handleClose}/>
                 }
                 {
-                    [5].includes(this.state.fieldType) && <CreateSettingAutocompleteField getData={this.props.getData}/>
+                    [5].includes(this.state.fieldType) && <CreateSettingAutocompleteField getData={this.props.getData}
+                                                                                          handleClose={this.props.handleClose}/>
                 }
                 {
-                    [6].includes(this.state.fieldType) && <CreateMultiChoice fieldType={6} getData={this.props.getData}/>
+                    [6].includes(this.state.fieldType) && <CreateMultiChoice fieldType={6}
+                                                                             getData={this.props.getData}
+                                                                             handleClose={this.props.handleClose}/>
                 }
             </div>
         );

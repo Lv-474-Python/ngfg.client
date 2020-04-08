@@ -4,9 +4,9 @@ import './Form.css'
 
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import FormStatus from "./AdditionalComponent/FormStatus";
-import SendIcon from "@material-ui/icons/Send";
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import DeleteButtonForm from "./AdditionalComponent/DeleteButton";
+import ShareFormModal from "../FormShare/ShareFormModal";
 
 
 class FormItem extends Component {
@@ -14,12 +14,13 @@ class FormItem extends Component {
         this.props.history.push(`/forms/${this.props.item.id}`)
     };
 
-    handleShare = () => {
-        console.log("Share")
-    }
-
-    handleDelete = () => {
-        console.log("Delete")
+    handleShareRender = () => {
+        if (this.props.item.isPublished) {
+            return (
+                <ShareFormModal form={this.props.item}
+                                btnClassName="form-item-btn-share"/>
+            )
+        }
     }
 
     render() {
@@ -36,25 +37,21 @@ class FormItem extends Component {
                                 className='form-item-content'>
                         {this.props.item.title}
                     </Typography>
-                    <FormStatus published={this.props.item.isPublished} />
+                    <FormStatus published={this.props.item.isPublished}/>
                 </CardContent>
 
                 <CardActions>
                     <Button
                         className='form-item-btn'
-                        size="medium"
                         onClick={this.goToView}
                         endIcon={<VisibilityOutlinedIcon/>}>
                         View
                     </Button>
-                    <Button
-                        size='medium'
-                        className='form-item-btn'
-                        endIcon={<SendIcon/>}
-                        onClick={this.handleShare}>
-                        Share
-                    </Button>
-                    <DeleteButtonForm form={this.props.item} handleDelete={this.props.handleDelete} />
+                    {this.handleShareRender()}
+                    <DeleteButtonForm deleteBtnClass='form-delete-btn'
+                                      form={this.props.item}
+                                      disableIcon={false}
+                                      handleDelete={this.props.handleDelete}/>
                 </CardActions>
             </Card>
         );

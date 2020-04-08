@@ -71,3 +71,52 @@
     display: flex;
     justify-content: center;
 }
+
+.group-create-header {
+    text-align: center;
+    font-size: 1.5vw !important;
+}
+
+.group-create-name {
+    display: flex !important;
+    justify-content: center !important;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    padding-bottom: 1.5vmax;
+}
+
+.group-create-email {
+    display: flex !important;
+    justify-content: center !important;
+    padding-top: 1vmax;
+    padding-left: 3vmax !important;
+    padding-right: 3vmax !important;
+    padding-bottom: 1vmin;
+}
+
+.mail-typo {
+    font-size: 1.3vw !important;
+    padding-left: 3vmax !important;
+}
+
+.group-btn-position {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+
+}
+
+.group-creation-btn {
+    text-transform: capitalize !important;
+    background-color: #37474F !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    width: 10vw;
+}
+
+.group-creation-btn:hover {
+    text-transform: capitalize !important;
+    background-color: #F9A825 !important;
+    color: #000 !important;
+}

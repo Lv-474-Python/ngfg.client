@@ -8,13 +8,14 @@ import FieldsPage from './components/Field/FieldsPage';
 import FormList from './components/Form/FormList';
 import FormPass from './components/FormPass/FormPass';
 import FormPassResponse from './components/FormPass/FormPassResponse';
-import FormView from './components/Form/FormView';
+import FormViewPage from './components/Form/FormViewPage';
 import CreateField from './components/Field/CreateField';
 import OAuthRedirect from './components/OAuthRedirect/OAuthRedirect';
 import FormCreationPage from "./components/Form/FormCreationPage";
 import GroupList from './components/Group/GroupList'
 import GroupView from "./components/Group/GroupView";
 import Notifications from './components/Notifications/Notifications'
+import FormEditPage from "./components/Form/FormEditPage";
 
 class Routers extends Component {
 
@@ -29,7 +30,7 @@ class Routers extends Component {
                     />
 
                     <Route path='/forms/:id'
-                           component={FormView}
+                           component={FormViewPage}
                     />
 
                     <Route path='/forms'
@@ -40,6 +41,10 @@ class Routers extends Component {
                            component={FormCreationPage}
                     />
 
+                    <Route path='/edit-form/:id'
+                           component={FormEditPage}
+                    />
+
                     <Route path='/fields'
                            component={FieldsPage}
                     />
@@ -48,11 +53,11 @@ class Routers extends Component {
                            component={CreateField}
                     />
 
-                    <Route path='/pass-form/:id/response'
+                    <Route path='/pass-form/:token/response'
                             component={FormPassResponse}
                     />
 
-                    <Route path='/pass-form/:id'
+                    <Route path='/pass-form/:token'
                             component={FormPass}
                     />
 
