@@ -22,7 +22,7 @@ class FieldItemList extends Component {
     render() {
         return (
             <div className="fields-list">
-                <NewFieldItem />
+                <NewFieldItem getData={this.props.getData} />
                 {this.renderItems()}
             </div>
         );
