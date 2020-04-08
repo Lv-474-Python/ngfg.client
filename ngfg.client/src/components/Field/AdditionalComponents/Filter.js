@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import CreateWindow from '../CreationWindow'
+import FieldCreationWindow from "../CreationWindow"
 import {Checkbox, FormControlLabel, FormGroup, Typography} from "@material-ui/core";
 
 class Filter extends Component {
@@ -207,7 +207,7 @@ class Filter extends Component {
                     />
 
                 </FormGroup>
-                <CreateWindow text={'Create field'} getData={this.props.getData}/>
+                <FieldCreationWindow text={'Create field'} getData={this.props.getData}/>
             </div>
         )
     }

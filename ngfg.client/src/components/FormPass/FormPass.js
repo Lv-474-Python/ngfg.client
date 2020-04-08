@@ -16,6 +16,8 @@ import './FormPass.scss';
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 const JAVASCRIPT_TIME_MULTIPLIER = 1000;
+const TEXT_MIN = 0;
+const TEXT_MAX = 255;
 
 
 class FormPass extends Component {
@@ -88,15 +90,23 @@ class FormPass extends Component {
 
         axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_token`
         ).then(() => {
-            let tokenData = this.decodeToken(token);
-            let isTokenValid = this.verifyTokenFlags(tokenData);
 
-            if (isTokenValid) {
-                this.setState({isFormAvailable: true})
+            axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_user`, {
+                withCredentials: true
+            }).then(() => {
+                let tokenData = this.decodeToken(token);
 
-                const form_id = tokenData.form_id;
-                this.getFormData(form_id);
-            }
+                let isTokenValid = this.verifyTokenFlags(tokenData);
+                if (isTokenValid) {
+                    this.setState({isFormAvailable: true})
+
+                    const form_id = tokenData.form_id;
+                    this.getFormData(form_id);
+                }
+            })
+            .catch(() => {
+                this.props.history.push(`${this.props.history.location.pathname}/response`);
+            })
 
         }).catch(error => {
             console.log(error);
@@ -125,6 +135,29 @@ class FormPass extends Component {
         this.setState({ results });
     }
 
+    convertFormFieldToProperFormat = (formFields) => {
+        for (let i = 0; i < formFields.length; ++i) {
+            let field = formFields[i].field;
+            let type = field.fieldType;
+            if ( (type === 1 || type === 2) && !field.range) {
+                field['range'] = {}
+            }
+
+            let { range } = field;
+
+            if (type === 2) {
+                if (!range.min) {
+                    range['min'] = TEXT_MIN;
+                }
+                if (!range.max) {
+                    range['max'] = TEXT_MAX;
+                }
+            }
+        }
+
+        return formFields;
+    }
+
     getFormFieldsData = () => {
         let id = this.state.form.id;
 
@@ -133,8 +166,11 @@ class FormPass extends Component {
         }).then(res => {
             let formFields = res.data.formFields;
             formFields = formFields.sort(this.sortFormFieldsComparer);
-            this.setState({ formFields })
-            this.setResultState(formFields);
+            formFields = this.convertFormFieldToProperFormat(formFields)
+
+            this.setState({ formFields },
+                () => this.setResultState(formFields)
+            );
         }).catch(error => {
             console.log(error);
         })

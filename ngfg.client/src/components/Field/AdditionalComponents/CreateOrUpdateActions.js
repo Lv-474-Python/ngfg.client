@@ -1,29 +1,35 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import '../../Form/Form.css'
 import {Button, DialogActions} from '@material-ui/core';
-
 
 
 class CreateOrUpdateActions extends Component {
     render() {
         return (
             <DialogActions>
-                <Button onClick={this.props.handleClose} className="form-item-link">
-                        Close
-                </Button>
+
                 {
                     this.props.isUpdate &&
-                    <Button onClick={this.props.sendUpdateData} className="form-item-link" autoFocus>
-                    Update
-                    </Button>  
+                    <div>
+                        <Button onClick={this.props.sendUpdateData} className="field-action-btn" autoFocus>
+                            Update
+                        </Button>
+                    </div>
                 }
                 {
                     !this.props.isUpdate &&
-                    <Button onClick={this.props.sendData} className="form-item-link" autoFocus>
-                    Send
-                    </Button> 
+                    <div>
+                        <Button onClick={this.props.sendData} className="field-action-btn" autoFocus>
+                            Send
+                        </Button>
+                    </div>
                 }
+                <div>
+                    <Button onClick={this.props.handleClose} className="field-action-btn">
+                        Close
+                    </Button>
+                </div>
             </DialogActions>
         );
     }
