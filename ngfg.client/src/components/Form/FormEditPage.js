@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FormCreation from './FormCreation';
+import FormEdit from './FormEdit';
 import FieldList from "../Field/FieldList";
 import Search from "../Field/AdditionalComponents/Search";
 import Filter from "../Field/AdditionalComponents/Filter";
@@ -8,8 +8,7 @@ import axios from "axios";
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
 
-class FormCreationPage extends Component {
-
+class FormEditPage extends Component {
     state = {
         filter: {
             showAll: true,
@@ -30,9 +29,16 @@ class FormCreationPage extends Component {
         },
         search: undefined,
         fields: [],
-        addedFields: []
+        addedField: {},
+        form: {
+            id: undefined,
+            name: undefined,
+            title: undefined,
+            resultUrl: undefined,
+            isPublished: undefined,
+            fields: undefined
+        }
     };
-
 
     getData = () => {
         axios.get(`${API_URL}/${API_VERSION}/fields`, {
@@ -66,14 +72,8 @@ class FormCreationPage extends Component {
 
     handleFieldAddition = (fieldData) => {
         this.setState(prevState => ({
-            addedFields: [...prevState.addedFields, {field: fieldData, question: ""}]
+            addedFields: {field: fieldData, question: "", added: true}
         }));
-    }
-
-    handleFieldRemoval = (position) => {
-        let addedFields = this.state.addedFields;
-        addedFields = addedFields.slice(0, position).concat(addedFields.slice(position+1, addedFields.length));
-        this.setState({addedFields: addedFields})
     }
 
     render() {
@@ -107,9 +107,10 @@ class FormCreationPage extends Component {
             </div>
             </div>
             <div className="form-creation-main-component">
-            <FormCreation addedFields={this.state.addedFields}
-                          removeField={this.handleFieldRemoval}
-                          history={this.props.history}
+            <FormEdit addedFields={this.state.addedFields}
+                      removeField={this.handleFieldRemoval}
+                      formId={this.props.match.params.id}
+                      history={this.props.history}
             />
             </div>
         </div>
@@ -117,4 +118,4 @@ class FormCreationPage extends Component {
     }
 }
 
-export default FormCreationPage;
+export default FormEditPage;

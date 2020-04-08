@@ -11,9 +11,7 @@ import {
     DialogActions,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from '../../../constants';
 
 class DeleteButtonForm extends Component {
 
@@ -60,8 +58,9 @@ class DeleteButtonForm extends Component {
         return (
             <div className='form-delete-wrapper'>
                 <Button
-                    className='form-delete-btn'
-                    endIcon={<DeleteIcon/>}
+                    size="medium"
+                    className={this.props.deleteBtnClass}
+                    endIcon={ this.props.disableIcon ? null : <DeleteIcon/>}
                     onClick={this.handleClickOpen}>
                     Delete
                 </Button>

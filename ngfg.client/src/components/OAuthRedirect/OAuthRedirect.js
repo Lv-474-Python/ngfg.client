@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import axios from 'axios'
-
-const CALLBACK_URI = 'http://ngfg.com:8000/api/v1/auth/login/callback';
+import {API_URL, API_VERSION} from '../../constants';
 
 class OAuthRedirect extends Component {
     getSession = () => {
-        axios.get(CALLBACK_URI + this.props.location.search, {
+        axios.get(`${API_URL}/${API_VERSION}/auth/login/callback` + this.props.location.search, {
             withCredentials: true
         }).then((res) => {
             window.location.href = '/'

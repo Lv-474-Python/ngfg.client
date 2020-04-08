@@ -24,11 +24,14 @@ import ShareGroupAndUser from "./ShareGroupAndUser";
 import FormShareLink from "./FormShareLink";
 
 import './ShareFormModal.css'
-import {MIN_DIFF_BETWEEN_TO_AND_FROM_DATE, MILLISECONDS, SECONDS} from '../../constants';
-
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {
+    API_URL,
+    API_VERSION,
+    MIN_DIFF_BETWEEN_TO_AND_FROM_DATE,
+    MILLISECONDS,
+    SECONDS,
+    CLIENT_HOST
+} from '../../constants';
 
 
 const theme = createMuiTheme({
@@ -127,7 +130,7 @@ class ShareFormModal extends Component {
             url,
             {withCredentials: true}
         ).then(response => {
-            let formShareLink = `http://localhost:3000/pass-form/${response.data.token}`;
+            let formShareLink = `${CLIENT_HOST}/pass-form/${response.data.token}`;
             this.setState({formShareLink})
 
         }).catch(error => {
@@ -273,7 +276,7 @@ class ShareFormModal extends Component {
         return (
             <div>
                 <Button className={this.props.btnClassName}
-                        endIcon={<SendIcon/>}
+                        endIcon={this.props.disableIcon ? null : <SendIcon/>}
                         onClick={this.handleOpen}>
                     Share
                 </Button>
