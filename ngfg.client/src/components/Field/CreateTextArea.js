@@ -4,8 +4,7 @@ import axios from 'axios';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import TextField from '@material-ui/core/TextField';
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from "../../constants"
 
 class CreateTextArea extends Component {
     state = {
