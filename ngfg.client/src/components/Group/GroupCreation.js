@@ -12,8 +12,9 @@ const API_VERSION = 'v1';
 class GroupCreation extends Component {
     state = {
         "name": undefined,
-        "usersEmails": []
-
+        "usersEmails": [],
+        "nameFieldErrors": false,
+        "isValid": false
     };
 
     handleNameChange = (event) => {
@@ -28,35 +29,47 @@ class GroupCreation extends Component {
         })
     };
 
+    validateValues = (name) => {
+        let valid = true;
+        if (name === "" || name === undefined) {
+            valid = false;
+            this.setState({nameFieldErrors: {missed_data: "Missed data"}});
+        }
+        return valid;
+    };
     sendData = () => {
         const group = {
             name: this.state.name,
             usersEmails: this.state.usersEmails
         };
-        axios.post(`${API_URL}/${API_VERSION}/groups/`, {...group},
-            {withCredentials: true})
-            .then(res => {
-                    this.props.setResponse("Group created");
-                    this.props.getData();
-                }
-            )
-            .catch(error => {
-                let response = error.response.data.message;
-                if (response.is_exist) {
-                    // response = response.updatedName._schema.toString();
-                    response = response.is_exist.toString();
-                }
-                if (response.usersEmails)
-                {
-                    response = "Not a valid email address."
-                }
-                this.props.setResponse(response);
-                }
-            );
-        this.props.handleAgree();
+        let isValid = this.validateValues(group.name);
+        if (isValid === true) {
+            axios.post(`${API_URL}/${API_VERSION}/groups/`, {...group},
+                {withCredentials: true})
+                .then(res => {
+                        this.props.setResponse("Group created");
+                        this.props.getData();
+                        this.props.handleAgree();
+                    }
+                )
+                .catch(error => {
+                        let response = error.response.data.message;
+                        this.setState({nameFieldErrors: {...response}})
+                    }
+                );
+        }
+
     };
 
     render() {
+        let missedDataName = false;
+        if (this.state.name === undefined || this.state.name === "") {
+            missedDataName = this.state.nameFieldErrors.missed_data;
+        }
+        let isExistError = false;
+        if (this.state.nameFieldErrors.is_exist !== undefined) {
+            isExistError = this.state.nameFieldErrors.is_exist;
+        }
         return (
             <div>
                 <FormGroup className='group-create-name'>
@@ -64,6 +77,8 @@ class GroupCreation extends Component {
                                placeholder="Input name"
                                type="text"
                                onChange={this.handleNameChange}
+                               error={missedDataName || isExistError}
+                               helperText={missedDataName || isExistError}
                     />
                 </FormGroup>
                 <Typography className='mail-typo'
