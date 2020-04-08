@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
-import {API_VERSION, API_URL} from '../../constants'
 import '../../Form/Form.css'
 import './ShareField.css'
 import {
@@ -23,6 +22,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SendIcon from "@material-ui/icons/Send";
 import ChoiceOptionList from "../Restrictions/ChoiceOptionList";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class ShareField extends Component {
 

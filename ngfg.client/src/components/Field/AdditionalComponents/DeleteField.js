@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
-import {API_VERSION, API_URL} from '../../constants'
 import '../../Form/Form.css'
 import {
     Button,
@@ -13,6 +12,8 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+const API_URL = 'http://ngfg.com:8000/api';
+const API_VERSION = 'v1';
 
 class DeleteField extends Component {
 
