@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 
+import {API_VERSION, API_URL} from '../../constants'
 import FieldList from "./FieldList";
 import Filter from "./AdditionalComponents/Filter";
 import Search from './AdditionalComponents/Search'
 import axios from "axios";
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 class FieldsPage extends Component {
 

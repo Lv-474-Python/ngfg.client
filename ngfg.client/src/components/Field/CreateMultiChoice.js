@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {API_VERSION, API_URL} from '../../constants'
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import Range from './Restrictions/Range';
 import {FormGroup, Typography, TextField} from "@material-ui/core";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 
 class CreateMultiChoice extends Component {
