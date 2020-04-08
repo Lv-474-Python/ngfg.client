@@ -10,7 +10,9 @@ const API_VERSION = 'v1';
 class CreateTextArea extends Component {
     state = {
         "name": undefined,
-        "fieldType": 3
+        "fieldType": 3,
+        "nameFieldErrors": false,
+        "isValid": false
     };
 
     handleNameChange = (event) => {
@@ -19,26 +21,36 @@ class CreateTextArea extends Component {
         });
     };
 
+    validateValues = (name) => {
+        let valid = true;
+        if (name === "" || name === undefined) {
+            valid = false;
+            this.setState({nameFieldErrors: {missed_data: "Missed data"}});
+        }
+        return valid
+    };
+
     sendData = () => {
         const field = {
             name: this.state.name,
             fieldType: this.state.fieldType
         };
-        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
-            .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    alert('Field created');
-                    this.props.getData();
-                    this.props.handleClose();
-                }
-            )
-            .catch(error => {
-                    console.log(error);
-                    alert('Field was not created');
-                    this.props.handleClose();
-                }
-            );
+        let isValid = this.validateValues(field.name);
+
+        if (isValid === true) {
+            axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
+                .then(res => {
+                        alert('Field created');
+                        this.props.getData();
+                        this.props.handleClose();
+                    }
+                )
+                .catch(error => {
+                        let response = error.response.data.message;
+                        this.setState({nameFieldErrors: {...response}});
+                    }
+                );
+        }
     };
 
     sendUpdateData = () => {
@@ -73,6 +85,15 @@ class CreateTextArea extends Component {
     }
 
     render() {
+        let missedDataName = false;
+        if (this.state.name === undefined || this.state.name === "") {
+            missedDataName = this.state.nameFieldErrors.missed_data;
+        }
+        let isExistError = false;
+        if (this.state.nameFieldErrors.is_exist !== undefined) {
+            isExistError = this.state.nameFieldErrors.is_exist;
+        }
+
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
@@ -81,6 +102,8 @@ class CreateTextArea extends Component {
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
+                               error={missedDataName || isExistError}
+                               helperText={missedDataName || isExistError}
                                fullWidth
                                variant="outlined"
                     />
