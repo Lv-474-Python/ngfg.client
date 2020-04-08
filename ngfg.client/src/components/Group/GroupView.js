@@ -17,8 +17,8 @@ import {
 
 import './GroupView.css'
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from '../../constants';
+
 const columns = ["#", "Name", "Email"];
 
 class GroupView extends Component {
