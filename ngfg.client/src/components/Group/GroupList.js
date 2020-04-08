@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import Button from "@material-ui/core/Button";
+import GroupCreationWindow from "./GroupCreationWindow"
 import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
 import GroupItem from "./GroupItem";
@@ -23,7 +23,6 @@ class GroupList extends Component {
         })
             .then(res => {
                 const groups = res.data.groups;
-                console.log(groups)
                 this.setState({groups: groups, filteredGroups: groups})
             });
     };
@@ -80,10 +79,7 @@ class GroupList extends Component {
                 <div className="group-side-menu">
                     <Sort sortValue={["By Name"]}
                           handleSort={this.handleSort}/>
-                    <Button className="create-group-btn"
-                            size='large'>
-                        Create Group
-                    </Button>
+                    <GroupCreationWindow getData={this.getData}/>
                 </div>
                 <div>
                     <SearchBar onChange={(newValue) => {

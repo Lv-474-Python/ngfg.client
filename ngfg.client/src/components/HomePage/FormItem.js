@@ -4,6 +4,7 @@ import {Button, Tooltip} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
 import './FormItem.scss';
+import ShareFormModal from "../FormShare/ShareFormModal";
 
 
 const FORM_NAME_LIMIT = 20;
@@ -79,6 +80,8 @@ class FormItem extends Component {
                     </Button>
 
                     {this.handleShareButtonRender()}
+                    <ShareFormModal form={this.props.item}
+                                    btnClassName="form-item__buttons__share" />
                 </div>
             </div>
         );

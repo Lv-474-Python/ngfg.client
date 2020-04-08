@@ -4,9 +4,9 @@ import './Form.css'
 
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import FormStatus from "./AdditionalComponent/FormStatus";
-import SendIcon from "@material-ui/icons/Send";
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import DeleteButtonForm from "./AdditionalComponent/DeleteButton";
+import ShareFormModal from "../FormShare/ShareFormModal";
 
 
 class FormItem extends Component {
@@ -52,7 +52,6 @@ class FormItem extends Component {
                 <CardActions>
                     <Button
                         className='form-item-btn'
-                        size="medium"
                         onClick={this.goToView}
                         endIcon={<VisibilityOutlinedIcon/>}>
                         View
