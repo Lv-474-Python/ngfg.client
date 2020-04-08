@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.form-btn-view-container {
+    margin-bottom: 4vh;
+    /*justify-content: space-between;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+}
+
+.form-btn-view {
+    background-color: #37474F !important;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    width: 9vw !important;
+    margin-bottom: 3vmin !important;
+
+}
+
+.form-btn-view:hover {
+    text-transform: capitalize !important;
+    background-color: #F9A825 !important;
+    color: #000 !important;
+}
+
+.side-menu-view {
+    display: flex;
+    /*background-color: #37474f;*/
+    width: 10vw;
+    height: 39vmin;
+    margin: 3vw 1.5vmin;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1.5vmin;
+    color: #f9a825 !important;
+    justify-content: center !important;
+}

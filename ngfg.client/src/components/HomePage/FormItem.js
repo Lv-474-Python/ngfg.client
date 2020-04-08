@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { Button, Tooltip } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import {Button, Tooltip} from '@material-ui/core';
 
 import './FormItem.scss';
 import ShareFormModal from "../FormShare/ShareFormModal";
@@ -28,6 +27,15 @@ class FormItem extends Component {
         return item;
     }
 
+    handleShareButtonRender = () => {
+        if (this.props.item.isPublished) {
+            return (
+                 <ShareFormModal form={this.props.item}
+                                 btnClassName="form-item__buttons__share" />
+            )
+        }
+    }
+
     cutStringWithTooltip = (text, limit, className) => {
         let item = null
         if (text.length > limit) {
@@ -47,6 +55,10 @@ class FormItem extends Component {
         return item;
     }
 
+    handleViewMoreClick = (event) => {
+        this.props.onViewMoreClick(this.props.item.id)
+    }
+
     render() {
         return (
             <div className="form-item">
@@ -59,12 +71,11 @@ class FormItem extends Component {
                 </div>
                 <div className="form-item__buttons">
                     <Button className="form-item__buttons__more"
-                            onClick={this.props.onViewMoreClick}>
+                            onClick={this.handleViewMoreClick}>
                         View more
                     </Button>
 
-                    <ShareFormModal form={this.props.item}
-                                    btnClassName="form-item__buttons__share" />
+                    {this.handleShareButtonRender()}
                 </div>
             </div>
         );
