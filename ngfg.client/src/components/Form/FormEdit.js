@@ -87,7 +87,9 @@ class FormEdit extends Component {
 
     saveFormFields = (formField, position) => {
         if (formField.added===true) {
-            this.postFormField(formField, position)
+            this.postFormField(formField, position);
+        } else {
+            this.putFormField(formField);
         }
     }
 
@@ -102,6 +104,20 @@ class FormEdit extends Component {
             })
             .catch(error=>{
                 console.log(error);
+            })
+    }
+
+    putFormField = (formField) => {
+        axios.put(`${API_URL}/${API_VERSION}/forms/${this.state.id}/fields/${formField.id}`,
+            {
+                fieldId: formField.field.id,
+                question: formField.question
+            }, {withCredentials: true})
+            .then(res=>{
+                console.log(res)
+            })
+            .catch(error=>{
+                console.log(error)
             })
     }
 
