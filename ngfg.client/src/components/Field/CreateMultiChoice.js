@@ -4,7 +4,7 @@ import axios from 'axios';
 import ChoiceOptionList from './Restrictions/ChoiceOptionList';
 import CreateOrUpdateActions from './AdditionalComponents/CreateOrUpdateActions'
 import Range from './Restrictions/Range';
-import TextField from '@material-ui/core/TextField';
+import {FormGroup, Typography, TextField} from "@material-ui/core";
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
@@ -65,11 +65,13 @@ class CreateMultiChoice extends Component {
                     console.log(res.data);
                     alert('Field created');
                     this.props.getData();
+                    this.props.handleClose();
                 }
             )
             .catch(error => {
                     console.log(error);
                     alert('Field was not created');
+                    this.props.handleClose();
                 }
             );
     };
@@ -87,17 +89,16 @@ class CreateMultiChoice extends Component {
             field.updatedName = this.state.name
         }
         if (this.state.fieldType === 6) {
-            if (this.state.initField.range && 
+            if (this.state.initField.range &&
                 this.state.range_min == null && this.state.range_max == null) {
                 field.deleteRange = true
-            }
-            else {
+            } else {
                 field.range = {min: this.state.range_min, max: this.state.range_max}
             }
         }
-        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`, 
-                  {...field}, 
-                  {withCredentials: true})
+        axios.put(`${API_URL}/${API_VERSION}/fields/${this.props.field.id}/`,
+            {...field},
+            {withCredentials: true})
             .then(res => {
                     this.props.handleUpdated(true);
                     response = "Field updated"
@@ -105,24 +106,23 @@ class CreateMultiChoice extends Component {
                 }
             )
             .catch(error => {
-                let response = error.response.data.message;
-                if (response.updatedName) {
-                    response = response.updatedName._schema.toString();
-                }
-                else if (response.range) {
-                    response = response.range._schema.toString();
-                }
-                else if (response.options_and_range_error) {
-                    response = response.options_and_range_error.toString();
-                };
-                this.props.setResponse(response);
+                    let response = error.response.data.message;
+                    if (response.updatedName) {
+                        response = response.updatedName._schema.toString();
+                    } else if (response.range) {
+                        response = response.range._schema.toString();
+                    } else if (response.options_and_range_error) {
+                        response = response.options_and_range_error.toString();
+                    }
+                    ;
+                    this.props.setResponse(response);
                 }
             );
         this.props.setResponse(response);
         this.props.handleAgree();
     };
 
-    componentDidMount () {
+    componentDidMount() {
         if (this.props.isUpdate) {
             let initField = {...this.props.field}
             this.setState({
@@ -144,28 +144,48 @@ class CreateMultiChoice extends Component {
 
     render() {
         return (
-            <div>
-                <TextField label="Enter Field Name:"
-                           type="text"
-                           value={this.state.name || ""}
-                           onChange={this.handleNameChange}
-                />
+            <div className="create-field-windows-content">
+                <div className="create-field-name">
+                    <TextField label="Field name"
+                               placeholder="Enter field name"
+                               type="text"
+                               value={this.state.name || ""}
+                               onChange={this.handleNameChange}
+                               fullWidth
+                               variant="outlined"
+                    />
+                </div>
+                <div>
+                    {[6].includes(this.state.fieldType) && <Typography className='create-field-range-typo'
+                                                                       variant="inherit"
+                                                                       component="p">
+                        Range:
+                    </Typography>
+                    }
+                    {[6].includes(this.state.fieldType) && <Range onChangeMin={this.handleRangeMinChange}
+                                                                  onChangeMax={this.handleRangeMaxChange}
+                                                                  maxValue={this.state.range_max}
+                                                                  minValue={this.state.range_min}
+                    />}
+                </div>
+                <FormGroup>
+                    <Typography className='create-field-range-typo'
+                                variant="inherit"
+                                component="p">
+                        Options:
+                    </Typography>
+                    <ChoiceOptionList setOptions={this.setOptions}
+                                      choiceOptions={this.state.choiceOptions}
+                    />
+                </FormGroup>
 
-                {[6].includes(this.state.fieldType) && <Range onChangeMin={this.handleRangeMinChange}
-                                                              onChangeMax={this.handleRangeMaxChange}
-                                                              maxValue={this.state.range_max}
-                                                              minValue={this.state.range_min}
-                />}
-
-                <ChoiceOptionList setOptions={this.setOptions}
-                                  choiceOptions={this.state.choiceOptions}
-                />
-
-                <CreateOrUpdateActions sendData={this.sendData}
-                                       sendUpdateData={this.sendUpdateData}
-                                       handleClose={this.props.handleClose}
-                                       isUpdate={this.props.isUpdate}
-                />
+                <div className="field-action-btn-container">
+                    <CreateOrUpdateActions sendData={this.sendData}
+                                           sendUpdateData={this.sendUpdateData}
+                                           handleClose={this.props.handleClose}
+                                           isUpdate={this.props.isUpdate}
+                    />
+                </div>
             </div>
 
         );

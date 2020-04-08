@@ -2,12 +2,11 @@ import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {Button} from '@material-ui/core'
 import axios from 'axios'
-
-const LOGOUT_URL = 'http://ngfg.com:8000/api/v1/auth/logout/';
+import {API_URL, API_VERSION} from '../../constants';
 
 class Logout extends Component {
     logout = () => {
-        axios.get(LOGOUT_URL, {
+        axios.get(`${API_URL}/${API_VERSION}/auth/logout/`, {
             withCredentials: true
         }).then(response => {
             this.props.handleLogout();

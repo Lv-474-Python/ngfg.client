@@ -66,7 +66,7 @@ class FormCreationPage extends Component {
 
     handleFieldAddition = (fieldData) => {
         this.setState(prevState => ({
-            addedFields: [...prevState.addedFields, {field: fieldData, question: undefined}]
+            addedFields: [...prevState.addedFields, {field: fieldData, question: ""}]
         }));
     }
 
@@ -109,6 +109,7 @@ class FormCreationPage extends Component {
             <div className="form-creation-main-component">
             <FormCreation addedFields={this.state.addedFields}
                           removeField={this.handleFieldRemoval}
+                          history={this.props.history}
             />
             </div>
         </div>

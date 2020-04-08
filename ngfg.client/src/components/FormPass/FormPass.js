@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 import { Button } from '@material-ui/core';
 
@@ -14,11 +15,14 @@ import './FormPass.scss';
 
 const API_URL = 'http://ngfg.com:8000/api';
 const API_VERSION = 'v1';
+const JAVASCRIPT_TIME_MULTIPLIER = 1000;
+const TEXT_MIN = 0;
+const TEXT_MAX = 255;
 
 
 class FormPass extends Component {
     state = {
-        'form': {
+        form: {
             id: undefined,
             name: undefined,
             title: undefined,
@@ -27,20 +31,90 @@ class FormPass extends Component {
             created: undefined,
             ownerId: undefined
         },
-        'formFields': [],
-        'results': []
+        formFields: [],
+        results: [],
+        isFormAvailable: false,
+        formAvailableError: undefined
     }
 
-    getFormData = () => {
-        let id = this.props.match.params.id;
+    decodeToken = (token) => {
+        const decodedData = jwt_decode(token);
+        console.log(decodedData)
+        return decodedData;
+    }
+
+    verifyTokenFlags = (tokenData) => {
+        let isValid = true;
+
+        if (tokenData['nbf']) {
+            let nbf = new Date(tokenData['nbf'] * JAVASCRIPT_TIME_MULTIPLIER);
+            if (nbf > new Date()) {
+                isValid = false;
+                this.setState({
+                    isFormAvailable: false,
+                    formAvailableError: 'Form is not available yet'
+                })
+            }
+        }
+
+        if (tokenData['exp']) {
+            let exp = new Date(tokenData['exp'] * JAVASCRIPT_TIME_MULTIPLIER);
+            if (exp < new Date()) {
+                isValid = false;
+                this.setState({
+                    isFormAvailable: false,
+                    formAvailableError: 'Form expired'
+                })
+            }
+        }
+
+        return isValid;
+    }
+
+    getFormData = (id) => {
 
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}`, {
             withCredentials: true,
         }).then(res => {
             const form = res.data;
-            this.setState({ form })
+            this.setState({ form },
+                () => this.getFormFieldsData()
+            );
         }).catch(error => {
             console.log(error);
+        })
+    }
+
+    handleToken = () => {
+        let token = String(this.props.match.params.token);
+
+        axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_token`
+        ).then(() => {
+
+            axios.get(`${API_URL}/${API_VERSION}/tokens/${token}/check_user`, {
+                withCredentials: true
+            }).then(() => {
+                let tokenData = this.decodeToken(token);
+
+                let isTokenValid = this.verifyTokenFlags(tokenData);
+                if (isTokenValid) {
+                    this.setState({isFormAvailable: true})
+
+                    const form_id = tokenData.form_id;
+                    this.getFormData(form_id);
+                }
+            })
+            .catch(() => {
+                this.props.history.push(`${this.props.history.location.pathname}/response`);
+            })
+
+        }).catch(error => {
+            console.log(error);
+
+            this.setState({
+                isFormAvailable: false,
+                formAvailableError: "Sorry, requested form doesn't exist"
+            })
         })
     }
 
@@ -61,16 +135,42 @@ class FormPass extends Component {
         this.setState({ results });
     }
 
+    convertFormFieldToProperFormat = (formFields) => {
+        for (let i = 0; i < formFields.length; ++i) {
+            let field = formFields[i].field;
+            let type = field.fieldType;
+            if ( (type === 1 || type === 2) && !field.range) {
+                field['range'] = {}
+            }
+
+            let { range } = field;
+
+            if (type === 2) {
+                if (!range.min) {
+                    range['min'] = TEXT_MIN;
+                }
+                if (!range.max) {
+                    range['max'] = TEXT_MAX;
+                }
+            }
+        }
+
+        return formFields;
+    }
+
     getFormFieldsData = () => {
-        let id = this.props.match.params.id;
+        let id = this.state.form.id;
 
         axios.get(`${API_URL}/${API_VERSION}/forms/${id}/fields/`, {
             withCredentials: true,
         }).then(res => {
             let formFields = res.data.formFields;
             formFields = formFields.sort(this.sortFormFieldsComparer);
-            this.setState({ formFields })
-            this.setResultState(formFields);
+            formFields = this.convertFormFieldToProperFormat(formFields)
+
+            this.setState({ formFields },
+                () => this.setResultState(formFields)
+            );
         }).catch(error => {
             console.log(error);
         })
@@ -86,6 +186,23 @@ class FormPass extends Component {
         let { results } = this.state;
         results[index].isValid = isValid;
         this.setState({ results })
+    }
+
+
+    renderTitle = () => {
+        let title = null;
+
+        if (this.state.isFormAvailable) {
+            title = this.state.form.title;
+        } else {
+            title = this.state.formAvailableError;
+        }
+        
+        return (
+            <div className='form-pass__title'>
+                {title}
+            </div>
+        )
     }
 
     getFieldItemByType = (formField, index) => {
@@ -168,17 +285,16 @@ class FormPass extends Component {
     }
 
     renderFields = () => {
+        if (!this.state.isFormAvailable) {
+            return;
+        }
+
         let formFields = []
         for (let i = 0; i < this.state.formFields.length; ++i) {
             let item = this.getFieldItemByType(this.state.formFields[i], i);
             formFields.push(item);
         }
         return formFields
-    }
-
-    componentDidMount() {
-        this.getFormData();
-        this.getFormFieldsData();
     }
 
     validateResults = () => {
@@ -214,8 +330,9 @@ class FormPass extends Component {
         const isValid = this.validateResults();
         if (isValid) {
             const results = this.getResultsToSubmit();
+            const token = String(this.props.match.params.token);
 
-            axios.post(`${API_URL}/${API_VERSION}/forms/${this.state.form.id}/answers`, {
+            axios.post(`${API_URL}/${API_VERSION}/tokens/${token}/answers`, {
                 answers: results,
             }, {
                 withCredentials: true,
@@ -227,23 +344,35 @@ class FormPass extends Component {
         }
     }
 
+    renderSubmitButton = () => {
+        if (!this.state.isFormAvailable) {
+            return;
+        }
+
+        return (
+            <Button className='form-pass__submit'
+                    onClick={this.submitForm}>
+                Submit
+            </Button>
+        )
+    }
+
+    componentDidMount() {
+        this.handleToken();
+    }
+
     render() {
         return (
             <div className='form-pass'>
 
-                <div className='form-pass__title'>
-                    {this.state.form.title}
-                </div>
+                {this.renderTitle()}
 
                 <div className='form-pass__fields'>
                     {this.renderFields()}
                 </div>
 
                 <div>
-                    <Button className='form-pass__submit'
-                            onClick={this.submitForm}>
-                        Submit
-                    </Button>
+                    {this.renderSubmitButton()}
                 </div>
 
             </div>

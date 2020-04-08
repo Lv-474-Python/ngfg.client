@@ -12,7 +12,7 @@ import './Header.scss';
 import Login from "./Login";
 import Logout from "./Logout";
 
-const API_URL = 'http://ngfg.com:8000';
+import {SERVER_HOST} from '../../constants';
 
 
 class Header extends Component {
@@ -25,14 +25,10 @@ class Header extends Component {
         this.setState({
             page: newValue
         });
-        console.log(this.props);
-        console.log(this.props.history);
         this.props.history.push(`/${newValue}`);
     };
 
     handleLogoClick = () => {
-        console.log('logo click');
-        console.log(this.props.history);
         this.props.history.push('/');
     };
 
@@ -53,7 +49,7 @@ class Header extends Component {
     }
 
     verifyLogin = () => {
-        axios.get(`${API_URL}/verify_login`,
+        axios.get(`${SERVER_HOST}/verify_login`,
             {
                 withCredentials: true
             }).then(response => {
