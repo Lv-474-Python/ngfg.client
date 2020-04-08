@@ -9,3 +9,7 @@
 .form-delete-btn:hover, .form-delete-dialog-btn:hover {
     color: #F9A825 !important;
 }
+
+.form-delete-wrapper {
+    /*margin-left: 1.5vmin !important;*/
+}

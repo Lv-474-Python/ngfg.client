@@ -6,9 +6,8 @@ import Filter from "./AdditionalComponent/Filter";
 import FormItem from './FormItem';
 import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
+import {API_URL, API_VERSION} from '../../constants';
 
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
 
 class FormList extends Component {
     state = {
@@ -27,7 +26,6 @@ class FormList extends Component {
             withCredentials: true,
         })
             .then(res => {
-                console.log(res);
                 const {forms} = res.data;
                 this.setState({forms: forms, filteredForms: forms})
             });

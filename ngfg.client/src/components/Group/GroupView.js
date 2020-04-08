@@ -143,7 +143,7 @@ class GroupView extends Component {
                                         </Table>
                                     </TableContainer>
                                     <TablePagination
-                                        rowsPerPageOptions={[1, 2, 3, 4, 5, 10, 25]}
+                                        rowsPerPageOptions={[5, 10, 25]}
                                         component="div"
                                         count={this.state.users.length}
                                         rowsPerPage={this.state.rowsPerPage}

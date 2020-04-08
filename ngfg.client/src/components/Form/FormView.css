@@ -1,0 +1,15 @@
+.form-container-view {
+    display: flex;
+    flex-direction: column;
+    margin: 3vw 3vw;
+    flex-wrap: wrap;
+    height: 40vw;
+}
+
+.form-view-fields {
+    margin: 0.7vw auto !important;
+    width: 40vw;
+    display: flex;
+}
+
+

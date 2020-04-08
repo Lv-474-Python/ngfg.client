@@ -14,12 +14,13 @@ class FormItem extends Component {
         this.props.history.push(`/forms/${this.props.item.id}`)
     };
 
-    handleShare = () => {
-        console.log("Share")
-    }
-
-    handleDelete = () => {
-        console.log("Delete")
+    handleShareRender = () => {
+        if (this.props.item.isPublished) {
+            return (
+                <ShareFormModal form={this.props.item}
+                                btnClassName="form-item-btn-share"/>
+            )
+        }
     }
 
     render() {
@@ -36,7 +37,7 @@ class FormItem extends Component {
                                 className='form-item-content'>
                         {this.props.item.title}
                     </Typography>
-                    <FormStatus published={this.props.item.isPublished} />
+                    <FormStatus published={this.props.item.isPublished}/>
                 </CardContent>
 
                 <CardActions>
@@ -46,8 +47,11 @@ class FormItem extends Component {
                         endIcon={<VisibilityOutlinedIcon/>}>
                         View
                     </Button>
-                    <ShareFormModal form={this.props.item} btnClassName='form-item-btn-share' />
-                    <DeleteButtonForm form={this.props.item} handleDelete={this.props.handleDelete} />
+                    {this.handleShareRender()}
+                    <DeleteButtonForm deleteBtnClass='form-delete-btn'
+                                      form={this.props.item}
+                                      disableIcon={false}
+                                      handleDelete={this.props.handleDelete}/>
                 </CardActions>
             </Card>
         );
