@@ -5,9 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FormFieldCreationList from "./AdditionalComponent/FormFieldCreationList";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import {API_URL, API_VERSION} from "../../constants";
 
 class FormCreation extends Component {
     state = {
@@ -96,9 +94,13 @@ class FormCreation extends Component {
             .then( res => {
                     this.setState({errors: {}})
                     const formId = res.data.id;
-                    Object.entries(this.state.formFields).map(([key, value]) => (
-                        this.saveFormFields(formId, value, key)
-                    ));
+                    if (this.state.formFields.length !== 0) {
+                        Object.entries(this.state.formFields).map(([key, value]) => (
+                            this.saveFormFields(formId, value, key)
+                        ));
+                    } else {
+                        this.props.history.push(`/forms/${formId}`)
+                    }
                 }
             )
             .catch ( error => {
