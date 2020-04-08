@@ -6,8 +6,7 @@ import EmailList from './AdditionalComponent/EmailList';
 import {FormGroup, TextField, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-import {API_URL, API_VERSION} from '../../constants';
-
+import {API_URL, API_VERSION} from "../../constants"
 
 class GroupCreation extends Component {
     state = {

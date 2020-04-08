@@ -5,8 +5,7 @@ import './Group.css'
 import {Button, Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import axios from "axios";
 
-import {API_URL, API_VERSION} from '../../constants';
-
+import {API_URL, API_VERSION} from "../../constants"
 
 class GroupItem extends Component {
     state = {

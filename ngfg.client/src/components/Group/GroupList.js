@@ -6,7 +6,7 @@ import SearchBar from 'material-ui-search-bar'
 import Sort from "./AdditionalComponent/Sort";
 import GroupItem from "./GroupItem";
 
-import {API_URL, API_VERSION} from '../../constants';
+import {API_URL, API_VERSION} from "../../constants"
 
 class GroupList extends Component {
     state = {
