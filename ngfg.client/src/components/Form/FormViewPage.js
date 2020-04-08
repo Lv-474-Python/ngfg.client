@@ -63,6 +63,10 @@ class FormViewPage extends Component {
         }
     }
 
+    handleEdit = () => {
+        this.props.history.push(`/edit-form/${this.state.form.id}`)
+    }
+
     componentDidMount() {
         this.getFormData();
         this.getFormFields();
@@ -93,7 +97,7 @@ class FormViewPage extends Component {
                                       form={this.state.form}
                                       handleDelete={this.handleDelete} />
 
-                    <Button onClick={this.saveForm}
+                    <Button onClick={this.handleEdit}
                             className="form-btn-view">
                         Edit
                     </ Button>
