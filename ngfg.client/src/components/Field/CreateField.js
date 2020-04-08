@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Field.css'
+import FormGroup from "@material-ui/core/FormGroup";
 
 import CreateNumberOrTextField from './CreateNumberOrTextField'
 import CreateTextArea from './CreateTextArea'
@@ -21,11 +22,14 @@ class CreateField extends Component {
     };
 
     render() {
+
         return (
             <div>
-                <SelectFieldType onChange={this.handleChangeFieldType}
-                                 fieldType={this.state.fieldType || 1}
-                />
+                <div className="create-field-select-type">
+                    <SelectFieldType onChange={this.handleChangeFieldType}
+                                     fieldType={this.state.fieldType || 1}
+                    />
+                </div>
                 {
                     [1].includes(this.state.fieldType) && <CreateNumberOrTextField fieldType={1}
                                                                                    getData={this.props.getData}

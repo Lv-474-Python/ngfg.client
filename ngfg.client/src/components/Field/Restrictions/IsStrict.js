@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import {FormControl, FormControlLabel, Switch} from "@material-ui/core";
 
 
 
@@ -12,8 +10,8 @@ class IsStrict extends Component {
             <FormControl component="fieldset">
                 <FormControlLabel
                     checked={this.props.value || false}
-                    control={<Switch color="primary" />}
-                    label="Is Strict"
+                    control={<Switch color="primary"/>}
+                    label={this.props.strict}
                     labelPlacement="end"
                     onChange={this.props.onChange}
                 />

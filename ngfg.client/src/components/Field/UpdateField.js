@@ -32,10 +32,10 @@ class UpdateField extends Component {
     handleClose = () => {
         this.setState({open: false, openResponse: false},
             () => {
-            this.props.handleUpdated(
-                this.state.response === "Updated successfully"
+                this.props.handleUpdated(
+                    this.state.response === "Updated successfully"
                 );
-        });
+            });
     };
 
     handleAgree = () => {
@@ -63,52 +63,54 @@ class UpdateField extends Component {
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    maxWidth={"sm"}
+                    fullWidth={true}
                 >
                     <DialogTitle
                         id="alert-dialog-title">{`Edit ${this.props.field.name}`}</DialogTitle>
                     <DialogContent>
-                    {
-                        [1, 2].includes(this.props.field.fieldType) && 
-                        <CreateNumberOrTextField fieldType={this.props.field.fieldType} 
-                                                 field={this.props.field}
-                                                 handleUpdated={this.props.handleUpdated}
-                                                 handleClose={this.handleClose}
-                                                 handleAgree={this.handleAgree}
-                                                 setResponse={this.setResponse}
-                                                 isUpdate={true}
-                                                 />
-                    }
-                    {
-                        this.props.field.fieldType === 3 && 
-                        <CreateTextArea field={this.props.field}
-                                        handleUpdated={this.props.handleUpdated}
-                                        handleClose={this.handleClose}
-                                        handleAgree={this.handleAgree}
-                                        setResponse={this.setResponse}
-                                        isUpdate={true}
-                                        />
-                    }
-                    {
-                        [4, 6].includes(this.props.field.fieldType) && 
-                        <CreateMultiChoice fieldType={this.props.field.fieldType} 
-                                           field={this.props.field}
-                                           handleUpdated={this.props.handleUpdated}
-                                           handleClose={this.handleClose}
-                                           handleAgree={this.handleAgree}
-                                           setResponse={this.setResponse}
-                                           isUpdate={true}
-                                           />
-                    }
-                    {
-                        this.props.field.fieldType === 5 && 
-                        <CreateSettingAutocompleteField field={this.props.field}
-                                                        handleUpdated={this.props.handleUpdated}
-                                                        handleClose={this.handleClose}
-                                                        handleAgree={this.handleAgree}
-                                                        setResponse={this.setResponse}
-                                                        isUpdate={true}
-                                                        />
-                    }
+                        {
+                            [1, 2].includes(this.props.field.fieldType) &&
+                            <CreateNumberOrTextField fieldType={this.props.field.fieldType}
+                                                     field={this.props.field}
+                                                     handleUpdated={this.props.handleUpdated}
+                                                     handleClose={this.handleClose}
+                                                     handleAgree={this.handleAgree}
+                                                     setResponse={this.setResponse}
+                                                     isUpdate={true}
+                            />
+                        }
+                        {
+                            this.props.field.fieldType === 3 &&
+                            <CreateTextArea field={this.props.field}
+                                            handleUpdated={this.props.handleUpdated}
+                                            handleClose={this.handleClose}
+                                            handleAgree={this.handleAgree}
+                                            setResponse={this.setResponse}
+                                            isUpdate={true}
+                            />
+                        }
+                        {
+                            [4, 6].includes(this.props.field.fieldType) &&
+                            <CreateMultiChoice fieldType={this.props.field.fieldType}
+                                               field={this.props.field}
+                                               handleUpdated={this.props.handleUpdated}
+                                               handleClose={this.handleClose}
+                                               handleAgree={this.handleAgree}
+                                               setResponse={this.setResponse}
+                                               isUpdate={true}
+                            />
+                        }
+                        {
+                            this.props.field.fieldType === 5 &&
+                            <CreateSettingAutocompleteField field={this.props.field}
+                                                            handleUpdated={this.props.handleUpdated}
+                                                            handleClose={this.handleClose}
+                                                            handleAgree={this.handleAgree}
+                                                            setResponse={this.setResponse}
+                                                            isUpdate={true}
+                            />
+                        }
                     </DialogContent>
                 </Dialog>
                 <Dialog
