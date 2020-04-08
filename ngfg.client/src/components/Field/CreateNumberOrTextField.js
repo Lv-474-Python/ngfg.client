@@ -16,7 +16,9 @@ class CreateNumberOrTextField extends Component {
         "fieldType": this.props.fieldType,
         "isStrict": false,
         "range_min": undefined,
-        "range_max": undefined
+        "range_max": undefined,
+        "nameFieldErrors": false,
+        "isValid": false
     };
 
     handleNameChange = (event) => {
@@ -46,9 +48,37 @@ class CreateNumberOrTextField extends Component {
         this.setState({
             'range_min': event.target.value
         });
-        if (event.target.value === "") {
+        if ('range_min' === "") {
             this.setState({'range_min': undefined});
         }
+    };
+
+    validateValues = (name, range) => {
+        let valid = true;
+        if (name === "" || name === undefined) {
+            valid = false;
+            this.setState({nameFieldErrors: {missed_data: "Missed data"}});
+        }
+        if (this.state.fieldType === 1) {
+            if (range.min > 2147483647 || range.min < -2147483648) {
+                valid = false;
+            }
+            if (range.max > 2147483647 || range.max < -2147483648) {
+                valid = false;
+            }
+        }
+        if (this.state.fieldType === 2) {
+            if (range.min > 255 || range.min < 0) {
+                valid = false;
+            }
+            if (range.max > 255 || range.max < 0) {
+                valid = false;
+            }
+        }
+        if (range.min > range.max) {
+            valid = false;
+        }
+        return valid
     };
 
     sendData = () => {
@@ -58,21 +88,22 @@ class CreateNumberOrTextField extends Component {
             isStrict: this.state.isStrict,
             range: {min: this.state.range_min, max: this.state.range_max}
         };
-        axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
-            .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    alert('Field created');
-                    this.props.getData();
-                    this.props.handleClose();
-                }
-            )
-            .catch(error => {
-                    console.log(error);
-                    alert('Field was not created');
-                    this.props.handleClose();
-                }
-            );
+        let isValid = this.validateValues(field.name, field.range);
+
+        if (isValid === true) {
+            axios.post(`${API_URL}/${API_VERSION}/fields/`, {...field}, {withCredentials: true})
+                .then(res => {
+                        alert('Field created');
+                        this.props.getData();
+                        this.props.handleClose();
+                    }
+                )
+                .catch(error => {
+                        let response = error.response.data.message;
+                        this.setState({nameFieldErrors: {...response}});
+                    }
+                );
+        }
     };
 
     sendUpdateData = () => {
@@ -142,6 +173,16 @@ class CreateNumberOrTextField extends Component {
         if (this.props.fieldType === 2) {
             strict = "Only letters"
         }
+
+        let missedDataName = false;
+        if (this.state.name === undefined || this.state.name === "") {
+            missedDataName = this.state.nameFieldErrors.missed_data;
+        }
+        let isExistError = false;
+        if (this.state.nameFieldErrors.is_exist !== undefined) {
+            isExistError = this.state.nameFieldErrors.is_exist;
+        }
+
         return (
             <div className="create-field-windows-content">
                 <div className="create-field-name">
@@ -150,6 +191,8 @@ class CreateNumberOrTextField extends Component {
                                type="text"
                                value={this.state.name || ""}
                                onChange={this.handleNameChange}
+                               error={missedDataName || isExistError}
+                               helperText={missedDataName || isExistError}
                                fullWidth
                                variant="outlined"
                     />

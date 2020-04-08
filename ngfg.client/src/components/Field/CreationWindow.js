@@ -4,12 +4,6 @@ import React, {Component} from 'react';
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
 
-const styles = {
-    dialogPaper: {
-        minHeight: '80vh',
-        maxHeight: '80vh',
-    },
-};
 
 class FieldCreationWindow extends Component {
 
