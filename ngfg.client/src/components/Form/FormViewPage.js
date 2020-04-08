@@ -6,9 +6,8 @@ import Button from "@material-ui/core/Button";
 import './FormViewPage.css'
 import axios from "axios";
 import DeleteButtonForm from "./AdditionalComponent/DeleteButton";
-
-const API_URL = 'http://ngfg.com:8000/api';
-const API_VERSION = 'v1';
+import ShareFormModal from "../FormShare/ShareFormModal";
+import {API_URL, API_VERSION} from '../../constants';
 
 
 class FormViewPage extends Component {
@@ -73,10 +72,9 @@ class FormViewPage extends Component {
         if (this.state.form.isPublished || this.state.form.isPublished === '') {
             return (
                 <div>
-                    <Button onClick={this.saveForm}
-                            className="form-btn-view">
-                        Share
-                    </Button>
+                    <ShareFormModal form={this.state.form}
+                                btnClassName="form-btn-view"
+                                disableIcon/>
                     <DeleteButtonForm deleteBtnClass='form-btn-view'
                                       disableIcon={true}
                                       form={this.state.form}

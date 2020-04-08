@@ -14,20 +14,11 @@ class FormItem extends Component {
         this.props.history.push(`/forms/${this.props.item.id}`)
     };
 
-    handleShare = () => {
-        console.log("Share")
-    }
-
     handleShareRender = () => {
         if (this.props.item.isPublished) {
             return (
-                <Button
-                    size='medium'
-                    className='form-item-btn'
-                    endIcon={<SendIcon/>}
-                    onClick={this.handleShare}>
-                    Share
-                </Button>
+                <ShareFormModal form={this.props.item}
+                                btnClassName="form-item-btn-share"/>
             )
         }
     }

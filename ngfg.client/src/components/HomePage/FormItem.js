@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {Button, Tooltip} from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
 
 import './FormItem.scss';
 import ShareFormModal from "../FormShare/ShareFormModal";
@@ -31,11 +30,8 @@ class FormItem extends Component {
     handleShareButtonRender = () => {
         if (this.props.item.isPublished) {
             return (
-                <Button className="form-item__buttons__share"
-                        endIcon={<SendIcon>send</SendIcon>}
-                        onClick={this.props.onShareClick}>
-                    Share
-                </Button>
+                 <ShareFormModal form={this.props.item}
+                                 btnClassName="form-item__buttons__share" />
             )
         }
     }
@@ -80,8 +76,6 @@ class FormItem extends Component {
                     </Button>
 
                     {this.handleShareButtonRender()}
-                    <ShareFormModal form={this.props.item}
-                                    btnClassName="form-item__buttons__share" />
                 </div>
             </div>
         );

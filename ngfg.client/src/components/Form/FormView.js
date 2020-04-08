@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
-import FormControl from '@material-ui/core/FormControl';
-import {TextField} from "@material-ui/core";
+import {TextField, FormControl} from "@material-ui/core";
 import FormViewFieldList from "./FormViewFieldList";
 import {withRouter} from "react-router-dom";
 
 import "./FormView.css"
-import Button from "@material-ui/core/Button";
-import Sort from "./AdditionalComponent/Sort";
-import Filter from "./AdditionalComponent/Filter";
 
 
 class FormView extends Component {
