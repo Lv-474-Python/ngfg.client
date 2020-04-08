@@ -15,6 +15,7 @@ import FormCreationPage from "./components/Form/FormCreationPage";
 import GroupList from './components/Group/GroupList'
 import GroupView from "./components/Group/GroupView";
 import Notifications from './components/Notifications/Notifications'
+import FormEditPage from "./components/Form/FormEditPage";
 
 class Routers extends Component {
 
@@ -38,6 +39,10 @@ class Routers extends Component {
 
                     <Route path='/form'
                            component={FormCreationPage}
+                    />
+
+                    <Route path='/edit-form/:id'
+                           component={FormEditPage}
                     />
 
                     <Route path='/fields'
