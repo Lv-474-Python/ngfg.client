@@ -64,7 +64,7 @@ class CreateMultiChoice extends Component {
             if (range.min < 0 || range.max < 0) {
                 valid = false;
             }
-            if (range.min > choiceOptions.length || range.max > choiceOptions.length){
+            if (range.min > choiceOptions.length || range.max > choiceOptions.length) {
                 valid = false;
             }
         }
@@ -224,7 +224,6 @@ class CreateMultiChoice extends Component {
                     />
                 </div>
             </div>
-
         );
     }
 }

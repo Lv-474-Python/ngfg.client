@@ -1,0 +1,13 @@
+.form-control-group {
+    width: 95% !important;
+    display: flex;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chip {
+    margin: 0.3vw;
+}

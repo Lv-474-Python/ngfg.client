@@ -60,7 +60,6 @@ class DeleteButtonForm extends Component {
         return (
             <div className='form-delete-wrapper'>
                 <Button
-                    size="medium"
                     className='form-delete-btn'
                     endIcon={<DeleteIcon/>}
                     onClick={this.handleClickOpen}>

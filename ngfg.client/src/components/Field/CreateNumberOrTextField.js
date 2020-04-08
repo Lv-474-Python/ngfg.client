@@ -184,6 +184,7 @@ class CreateNumberOrTextField extends Component {
         }
 
         return (
+
             <div className="create-field-windows-content">
                 <div className="create-field-name">
                     <TextField label="Field name"
