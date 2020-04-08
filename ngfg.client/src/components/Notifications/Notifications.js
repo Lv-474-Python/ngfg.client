@@ -22,7 +22,8 @@ class Notifications extends Component {
     }
     
     componentDidMount() {
-        socket.on('message', (message) => {
+        socket.on('message', (data) => {
+            let message = data.notification;
             let values = this.state.values;
             values.push(message)
             this.setState({values})
