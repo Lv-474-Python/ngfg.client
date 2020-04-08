@@ -15,11 +15,13 @@ class FormCreation extends Component {
         "title": undefined,
         "resultUrl": undefined,
         "isPublished": false,
-        "formFields": []
+        "formFields": [],
+        "formErrors": [],
+        "fieldErrors": []
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.addedFields != this.props.addedFields) {
+        if (prevProps.addedFields !== this.props.addedFields) {
             this.setState({formFields: this.props.addedFields});
         }
     }
@@ -48,6 +50,18 @@ class FormCreation extends Component {
         }, this.saveForm);
     }
 
+    deleteForm = (formId) => {
+        axios.delete(`${API_URL}/${API_VERSION}/forms/${formId}`, {
+            withCredentials: true
+        })
+            .then(res =>{
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+
     saveFormFields = (formId, formField, position) => {
         axios.post(`${API_URL}/${API_VERSION}/forms/${formId}/fields/`, {
             fieldId: formField.field.id,
@@ -56,16 +70,22 @@ class FormCreation extends Component {
         },
             {withCredentials: true})
             .then ( res => {
-                console.log(res);
-                }
-            )
+                this.props.history.push(`/forms/${formId}`)
+            })
             .catch(error => {
-                console.log(error);
+                let response = error.response.data.message;
+                response.position = parseInt(position);
+                let fieldErrors = this.state.fieldErrors;
+                fieldErrors[position] = response;
+                this.setState({fieldErrors});
+                this.deleteForm(formId);
                 }
             )
     }
 
     saveForm = () => {
+        this.setState({formErrors: {}});
+        this.setState({fieldErrors: []});
         axios.post(`${API_URL}/${API_VERSION}/forms/`, {
                 name: this.state.name,
                 title: this.state.title,
@@ -74,6 +94,7 @@ class FormCreation extends Component {
             },
             {withCredentials: true})
             .then( res => {
+                    this.setState({errors: {}})
                     const formId = res.data.id;
                     Object.entries(this.state.formFields).map(([key, value]) => (
                         this.saveFormFields(formId, value, key)
@@ -81,7 +102,8 @@ class FormCreation extends Component {
                 }
             )
             .catch ( error => {
-                console.log(error);
+                let response = error.response.data.message;
+                this.setState({formErrors: {...response}})
                 }
             );
     }
@@ -113,7 +135,6 @@ class FormCreation extends Component {
     }
 
     render() {
-        console.log(this.state.formFields)
         return(
             <div className="form-container">
                 <FormControl>
@@ -135,26 +156,29 @@ class FormCreation extends Component {
                             id="form-name"
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Enter Form Name"
+                            helperText={this.state.formErrors.name ? this.state.formErrors.name : "Enter Form Name"}
                             type="text"
+                            error={!!this.state.formErrors.name}
                             onChange={this.handleNameChange}
                         />
                         <TextField
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Enter Form Title"
+                            helperText={this.state.formErrors.title ? this.state.formErrors.title : "Enter Form Title"}
                             size="small"
                             margin="dense"
                             type="text"
+                            error={!!this.state.formErrors.title}
                             onChange={this.handleTitleChange}
                         />
                         <TextField
                             className="form-creation-fields"
                             variant="outlined"
-                            helperText="Link Result URL"
+                            helperText={this.state.formErrors.resultUrl ? this.state.formErrors.resultUrl : "Link Result URL"}
                             size="small"
                             margin="dense"
                             type="url"
+                            error={!!this.state.formErrors.resultUrl}
                             onChange={this.handleResultUrlChange}
                         />
                         <div>
@@ -162,7 +186,8 @@ class FormCreation extends Component {
                                                            handleFieldRemoval={this.handleFieldRemoval}
                                                            handleMoveUp={this.handleMoveUpField}
                                                            handleMoveDown={this.handleMoveDownField}
-                                                           fetchQuestion={this.fetchQuestion}/>
+                                                           fetchQuestion={this.fetchQuestion}
+                                                           errors={this.state.fieldErrors}/>
                         </div>
                     </div>
 
