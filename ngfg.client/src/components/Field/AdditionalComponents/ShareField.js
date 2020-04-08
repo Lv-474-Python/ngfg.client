@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import '../../Form/Form.css'
 import './ShareField.css'
+import '../../HomePage/FormItem.scss'
 import {
     Button,
     Dialog,
@@ -107,7 +108,7 @@ class ShareField extends Component {
                     variant="contained"
                     color="secondary"
                     size="small"
-                    className='field-button'
+                    className={!this.props.mainpage ? 'field-button': "field-item__buttons__share"}
                     endIcon={<SendIcon/>}
                     onClick={this.handleClickOpen}>
                     Share
