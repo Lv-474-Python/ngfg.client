@@ -8,3 +8,4 @@ export const CLIENT_HOST = 'http://localhost:3000';
 
 export const REDIRECT_URL = `${CLIENT_HOST}/oauth/redirect`;
 export const MAIN_PAGE_URL = `${CLIENT_HOST}/`;
+
