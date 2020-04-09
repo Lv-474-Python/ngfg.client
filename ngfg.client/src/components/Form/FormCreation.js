@@ -94,9 +94,13 @@ class FormCreation extends Component {
             .then( res => {
                     this.setState({errors: {}})
                     const formId = res.data.id;
-                    Object.entries(this.state.formFields).map(([key, value]) => (
-                        this.saveFormFields(formId, value, key)
-                    ));
+                    if (this.state.formFields.length === 0) {
+                        this.props.history.push(`/forms/${formId}`)
+                    } else {
+                        Object.entries(this.state.formFields).map(([key, value]) => (
+                            this.saveFormFields(formId, value, key)
+                        ));
+                    }
                 }
             )
             .catch ( error => {
